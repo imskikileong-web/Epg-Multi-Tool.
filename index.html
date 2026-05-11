@@ -648,6 +648,8 @@ td:first-child{
 
 
 
+
+
     <div id="mortgagePackageSection" class="section">
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
         <div class="embedded-module-wrap">
@@ -656,50 +658,454 @@ td:first-child{
 &lt;head&gt;
 &lt;meta charset=&quot;UTF-8&quot;&gt;
 &lt;title&gt;Mortgage Package Comparison Pro&lt;/title&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js&quot;&gt;&lt;/script&gt;
+
 &lt;style&gt;
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:&quot;Segoe UI&quot;,Arial,sans-serif;
-  background:linear-gradient(135deg,#eef5ff,#ffffff);
-  color:#1f2937;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:32px;
-}
-.card{
-  max-width:820px;
-  width:100%;
-  background:white;
-  border:1px solid #dbeafe;
-  border-radius:26px;
-  box-shadow:0 18px 45px rgba(15,42,107,.14);
-  padding:42px;
-  text-align:center;
-}
-.icon{font-size:58px;margin-bottom:16px}
-h1{margin:0;color:#0f2a6b;font-size:32px}
-p{color:#64748b;line-height:1.6}
-.badge{
-  display:inline-block;
-  margin-top:18px;
-  padding:10px 16px;
-  border-radius:999px;
-  background:#eff6ff;
-  color:#2563eb;
-  font-weight:800;
-}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef4ff,#fff);color:#1e293b}
+.container{max-width:1280px;margin:auto;padding:22px}
+.hero{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:white;padding:24px;border-radius:22px;margin-bottom:18px}
+.hero h1{margin:0;font-size:28px}.hero p{margin:8px 0 0;color:#dbeafe}
+.card{background:white;border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 12px 28px rgba(15,23,42,.08)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.two-col{display:grid;grid-template-columns:1.25fr .9fr;gap:18px}
+.manual-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+label{display:block;font-size:12px;font-weight:700;color:#64748b;margin-top:6px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid #cbd5e1;border-radius:10px;margin-top:5px;font-size:13px}
+textarea{min-height:260px;resize:vertical}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;margin:3px;font-size:13px}
+.blue{background:#2563eb;color:white}.dark{background:#0f172a;color:white}.gray{background:#e5e7eb}.orange{background:#f97316;color:white}.red{background:#fee2e2;color:#991b1b}.green{background:#16a34a;color:white}
+.package{background:#f8fbff;border:1px solid #dbeafe;border-radius:18px;padding:16px;margin-top:16px}
+.package-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.package-head h3{margin:0;color:#1e40af;font-size:18px}
+.panel{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px}.box small{font-weight:800;color:#64748b}.box h2{margin:6px 0 0;font-size:22px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left;white-space:nowrap;font-size:13px}
+th{background:#f8fafc;color:#334155}
+.best{background:white;font-weight:700}
+.badge{padding:4px 8px;border-radius:999px;background:#111827;color:white;font-size:10px;font-weight:800}
+.internal{background:linear-gradient(135deg,#fff7ed,#fff);border:1px solid #fed7aa}
+.internal-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.internal-box{background:white;border:1px solid #fed7aa;border-radius:16px;padding:16px}
+.internal-box small{display:block;color:#92400e;font-weight:800;margin-bottom:8px}
+.internal-box h2{margin:0;color:#111827;font-size:22px}
+.customerOnly .internal,.customerOnly .inputArea,.customerOnly .actionArea{display:none}
+@media(max-width:900px){.grid,.summary,.two-col,.manual-grid,.internal-summary{grid-template-columns:1fr}.container{padding:12px}}
 &lt;/style&gt;
 &lt;/head&gt;
+
 &lt;body&gt;
-&lt;div class=&quot;card&quot;&gt;
-  &lt;div class=&quot;icon&quot;&gt;📊&lt;/div&gt;
+&lt;div class=&quot;container&quot; id=&quot;pdfArea&quot;&gt;
+
+&lt;div class=&quot;hero&quot;&gt;
   &lt;h1&gt;Mortgage Package Comparison Pro&lt;/h1&gt;
-  &lt;p&gt;This card and section are ready. Paste/upload the child code and this placeholder will be replaced with the full Mortgage Package Comparison Pro module.&lt;/p&gt;
-  &lt;div class=&quot;badge&quot;&gt;Module Slot Ready&lt;/div&gt;
+  &lt;p&gt;Customer comparison + internal profit calculation&lt;/p&gt;
 &lt;/div&gt;
+
+&lt;div class=&quot;card inputArea&quot;&gt;
+  &lt;h2&gt;Proposal Info&lt;/h2&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div&gt;&lt;label&gt;Customer Name&lt;/label&gt;&lt;input id=&quot;customerName&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label&gt;Prepared By&lt;/label&gt;&lt;input id=&quot;preparedBy&quot; value=&quot;Kiki&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;label&gt;Date&lt;/label&gt;&lt;input id=&quot;date&quot; type=&quot;date&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;card inputArea&quot;&gt;
+  &lt;h2&gt;Package Input&lt;/h2&gt;
+  &lt;button class=&quot;dark&quot; onclick=&quot;addPackage()&quot;&gt;+ Add Package Form&lt;/button&gt;
+  &lt;button class=&quot;gray&quot; onclick=&quot;clearAll()&quot;&gt;Clear&lt;/button&gt;
+  &lt;div id=&quot;packageList&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;card actionArea&quot;&gt;
+  &lt;h2&gt;View Control&lt;/h2&gt;
+  &lt;button class=&quot;dark&quot; onclick=&quot;toggleInternal()&quot;&gt;Hide / Show Internal View&lt;/button&gt;
+  &lt;button class=&quot;orange&quot; onclick=&quot;showCustomerOnly()&quot;&gt;Show Customer Only&lt;/button&gt;
+  &lt;button class=&quot;gray&quot; onclick=&quot;showFullView()&quot;&gt;Show Full View&lt;/button&gt;
+  &lt;button class=&quot;blue&quot; onclick=&quot;exportPDF()&quot;&gt;Export PDF&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;card&quot;&gt;
+  &lt;h2&gt;Customer View&lt;/h2&gt;
+  &lt;div class=&quot;summary&quot;&gt;
+    &lt;div class=&quot;box&quot;&gt;&lt;small&gt;Lowest Monthly&lt;/small&gt;&lt;h2 id=&quot;lowestMonthly&quot;&gt;RM 0.00&lt;/h2&gt;&lt;/div&gt;
+    &lt;div class=&quot;box&quot;&gt;&lt;small&gt;Lowest Total Interest&lt;/small&gt;&lt;h2 id=&quot;lowestInterest&quot;&gt;RM 0.00&lt;/h2&gt;&lt;/div&gt;
+    &lt;div class=&quot;box&quot;&gt;&lt;small&gt;Recommended Bank&lt;/small&gt;&lt;h2 id=&quot;bestBank&quot;&gt;-&lt;/h2&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;br&gt;
+  &lt;div style=&quot;overflow-x:auto&quot;&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Bank&lt;/th&gt;&lt;th&gt;Flexi Type&lt;/th&gt;&lt;th&gt;Facility&lt;/th&gt;&lt;th&gt;Total Financing&lt;/th&gt;
+          &lt;th&gt;Rate&lt;/th&gt;&lt;th&gt;Monthly&lt;/th&gt;&lt;th&gt;Tenure&lt;/th&gt;&lt;th&gt;Total Payable&lt;/th&gt;&lt;th&gt;Total Interest&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody id=&quot;customerTable&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;9&quot;&gt;No saved package yet.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;card internal&quot; id=&quot;internalView&quot;&gt;
+  &lt;h2&gt;Internal Overview&lt;/h2&gt;
+
+  &lt;div class=&quot;internal-summary&quot;&gt;
+    &lt;div class=&quot;internal-box&quot;&gt;&lt;small&gt;Total Profit&lt;/small&gt;&lt;h2 id=&quot;sumProfit&quot;&gt;RM 0.00&lt;/h2&gt;&lt;/div&gt;
+    &lt;div class=&quot;internal-box&quot;&gt;&lt;small&gt;Highest Profit Bank&lt;/small&gt;&lt;h2 id=&quot;topProfitBank&quot;&gt;-&lt;/h2&gt;&lt;/div&gt;
+    &lt;div class=&quot;internal-box&quot;&gt;&lt;small&gt;Total Bank Referral&lt;/small&gt;&lt;h2 id=&quot;sumBankReferral&quot;&gt;RM 0.00&lt;/h2&gt;&lt;/div&gt;
+    &lt;div class=&quot;internal-box&quot;&gt;&lt;small&gt;Total Legal Sharing&lt;/small&gt;&lt;h2 id=&quot;sumLegalSharing&quot;&gt;RM 0.00&lt;/h2&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div style=&quot;overflow-x:auto&quot;&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Bank&lt;/th&gt;
+          &lt;th&gt;Loan Agreement Amt&lt;/th&gt;
+          &lt;th&gt;Legal Fee&lt;/th&gt;
+          &lt;th&gt;Legal Sharing %&lt;/th&gt;
+          &lt;th&gt;Legal Sharing Income&lt;/th&gt;
+          &lt;th&gt;Bank Referral %&lt;/th&gt;
+          &lt;th&gt;Bank Referral Income&lt;/th&gt;
+          &lt;th&gt;MRTA / MRTT Income&lt;/th&gt;
+          &lt;th&gt;Other Income&lt;/th&gt;
+          &lt;th&gt;Total Profit&lt;/th&gt;
+          &lt;th&gt;Action&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody id=&quot;internalTable&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;11&quot;&gt;No saved package yet.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+let count = 0;
+let editId = null;
+let savedPackages = [];
+
+document.getElementById(&quot;date&quot;).valueAsDate = new Date();
+
+function rawNum(v){
+  if(!v) return 0;
+  return Number(String(v).replace(/RM|,|%|\s/gi,&quot;&quot;)) || 0;
+}
+function rm(n){
+  return &quot;RM &quot; + Number(n || 0).toLocaleString(&quot;en-MY&quot;,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function whole(n){return Number(n || 0).toLocaleString(&quot;en-MY&quot;,{maximumFractionDigits:0})}
+function pct(n){return Number(n || 0).toFixed(2) + &quot;%&quot;}
+
+function legalFeeOnly(amt){
+  if(amt &lt;= 500000) return amt * 0.0125;
+  return 500000 * 0.0125 + (amt - 500000) * 0.01;
+}
+
+function findValue(text, keywords){
+  for(let key of keywords){
+    let regex = new RegExp(key + &quot;[^0-9]*([0-9,\\.]+)&quot;, &quot;i&quot;);
+    let match = text.match(regex);
+    if(match) return rawNum(match[1]);
+  }
+  return 0;
+}
+
+function findText(text, keywords, fallback=&quot;&quot;){
+  for(let key of keywords){
+    let regex = new RegExp(key + &quot;\\s*[:\\-]?\\s*([^\\n]+)&quot;, &quot;i&quot;);
+    let match = text.match(regex);
+    if(match) return match[1].trim();
+  }
+  return fallback;
+}
+
+function cleanBankName(bank){
+  if(!bank) return &quot;&quot;;
+  return bank.replace(/facility|flexi|rate|monthly|tenure|total|loan|amount|rm/ig,&quot;&quot;).replace(/[:\-]/g,&quot;&quot;).trim();
+}
+
+function findBank(text){
+  let bank = cleanBankName(findText(text, [&quot;Bank Name&quot;,&quot;Bank&quot;], &quot;&quot;));
+  if(bank) return bank;
+
+  const banks = [&quot;Maybank&quot;,&quot;CIMB&quot;,&quot;RHB&quot;,&quot;Public Bank&quot;,&quot;PBB&quot;,&quot;Hong Leong&quot;,&quot;HLB&quot;,&quot;Alliance&quot;,&quot;Ambank&quot;,&quot;AmBank&quot;,&quot;MBSB&quot;,&quot;Bank Islam&quot;,&quot;Bank Rakyat&quot;,&quot;UOB&quot;,&quot;OCBC&quot;,&quot;Affin&quot;,&quot;HSBC&quot;,&quot;BSN&quot;,&quot;Standard Chartered&quot;,&quot;SCB&quot;];
+  for(let b of banks){
+    if(text.toLowerCase().includes(b.toLowerCase())) return b;
+  }
+  return &quot;&quot;;
+}
+
+function findFlexi(text){
+  if(/full\s*flexi/i.test(text)) return &quot;Full Flexi&quot;;
+  if(/semi\s*flexi/i.test(text)) return &quot;Semi Flexi&quot;;
+  if(/non\s*flexi/i.test(text)) return &quot;Non Flexi&quot;;
+  return &quot;Semi Flexi&quot;;
+}
+
+function findRate(text){
+  let plus = findValue(text, [&quot;SBRI\\s*\\+&quot;,&quot;BR\\s*\\+&quot;,&quot;Base Rate\\s*\\+&quot;]);
+  let current = findValue(text, [&quot;Current SBRI&quot;,&quot;Current BR&quot;,&quot;Current Rate&quot;]);
+  let direct = findValue(text, [&quot;Effective Rate&quot;,&quot;Interest Rate&quot;,&quot;Profit Rate&quot;,&quot;Rate&quot;]);
+  if(plus &amp;&amp; current) return plus + current;
+  return direct;
+}
+
+function addPackage(data={}){
+  count++;
+  const div = document.createElement(&quot;div&quot;);
+  div.className = &quot;package&quot;;
+
+  div.innerHTML = `
+    &lt;div class=&quot;package-head&quot;&gt;
+      &lt;h3&gt;${editId ? &quot;Edit Package&quot; : &quot;Bank Package &quot; + count}&lt;/h3&gt;
+      &lt;button class=&quot;red&quot; onclick=&quot;this.closest(&#x27;.package&#x27;).remove()&quot;&gt;Delete Form&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;two-col&quot;&gt;
+      &lt;div class=&quot;panel&quot;&gt;
+        &lt;h4&gt;Manual Input&lt;/h4&gt;
+        &lt;div class=&quot;manual-grid&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Bank&lt;/label&gt;&lt;input class=&quot;bank&quot; value=&quot;${data.bank || &#x27;&#x27;}&quot; placeholder=&quot;Maybank&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Flexi Type&lt;/label&gt;
+            &lt;select class=&quot;flexi&quot;&gt;
+              &lt;option ${data.flexi===&quot;Full Flexi&quot;?&quot;selected&quot;:&quot;&quot;}&gt;Full Flexi&lt;/option&gt;
+              &lt;option ${data.flexi===&quot;Semi Flexi&quot;?&quot;selected&quot;:&quot;&quot;}&gt;Semi Flexi&lt;/option&gt;
+              &lt;option ${data.flexi===&quot;Non Flexi&quot;?&quot;selected&quot;:&quot;&quot;}&gt;Non Flexi&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Facility&lt;/label&gt;&lt;input class=&quot;money facility&quot; value=&quot;${data.facility ? whole(data.facility) : &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Total Financing&lt;/label&gt;&lt;input class=&quot;money totalFinancing&quot; value=&quot;${data.totalFinancing ? whole(data.totalFinancing) : &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Loan Agreement Amt&lt;/label&gt;&lt;input class=&quot;money loanAgreement&quot; value=&quot;${data.loanAgreement ? whole(data.loanAgreement) : &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Rate %&lt;/label&gt;&lt;input class=&quot;rate&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;${data.rate || &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Monthly&lt;/label&gt;&lt;input class=&quot;money monthly&quot; value=&quot;${data.monthly ? whole(data.monthly) : &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Tenure Years&lt;/label&gt;&lt;input class=&quot;tenure&quot; type=&quot;number&quot; value=&quot;${data.tenure || &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Legal Sharing %&lt;/label&gt;&lt;input class=&quot;legalSharingPercent&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;${data.legalSharingPercent || &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Bank Referral %&lt;/label&gt;&lt;input class=&quot;bankReferralPercent&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;${data.bankReferralPercent || &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;MRTA / MRTT Income&lt;/label&gt;&lt;input class=&quot;money mrtaReferral&quot; value=&quot;${data.mrtaReferral ? whole(data.mrtaReferral) : &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Other Income&lt;/label&gt;&lt;input class=&quot;money otherIncome&quot; value=&quot;${data.otherIncome ? whole(data.otherIncome) : &#x27;&#x27;}&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;br&gt;
+        &lt;button class=&quot;green&quot; onclick=&quot;saveThisPackage(this)&quot;&gt;${editId ? &quot;Update Package&quot; : &quot;Save Package&quot;}&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;panel&quot;&gt;
+        &lt;h4&gt;Paste This Bank Package&lt;/h4&gt;
+        &lt;textarea class=&quot;singlePaste&quot; placeholder=&quot;Paste package here...&quot;&gt;&lt;/textarea&gt;
+        &lt;button class=&quot;blue&quot; type=&quot;button&quot; onclick=&quot;autoFillThisPackage(this)&quot;&gt;Auto Fill This Bank&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `;
+
+  document.getElementById(&quot;packageList&quot;).appendChild(div);
+
+  div.querySelectorAll(&quot;.money&quot;).forEach(input=&gt;{
+    input.addEventListener(&quot;blur&quot;,()=&gt;{
+      const v = rawNum(input.value);
+      input.value = v ? whole(v) : &quot;&quot;;
+    });
+  });
+}
+
+function autoFillThisPackage(btn){
+  const pkg = btn.closest(&quot;.package&quot;);
+  const block = pkg.querySelector(&quot;.singlePaste&quot;).value;
+  if(!block.trim()){alert(&quot;Please paste package details.&quot;);return;}
+
+  const data = {
+    bank: findBank(block),
+    flexi: findFlexi(block),
+    facility: findValue(block, [&quot;Facility amount&quot;,&quot;Facility&quot;,&quot;Loan Amount&quot;]),
+    totalFinancing: findValue(block, [&quot;Total Financing&quot;,&quot;Total finance&quot;,&quot;Total Amount&quot;,&quot;Total&quot;]),
+    loanAgreement: findValue(block, [&quot;Loan Agreement Amount&quot;,&quot;Loan Agreement Amt&quot;,&quot;Loan Agreement&quot;,&quot;Legal Fee Base&quot;]),
+    rate: findRate(block),
+    monthly: findValue(block, [&quot;Monthly Instalment&quot;,&quot;Monthly Installment&quot;,&quot;Monthly Repayment&quot;,&quot;Monthly&quot;,&quot;Instalment&quot;,&quot;Installment&quot;]),
+    tenure: findValue(block, [&quot;Tenure&quot;,&quot;Tenor&quot;]),
+    legalSharingPercent: findValue(block, [&quot;Legal Sharing %&quot;,&quot;Legal Sharing&quot;,&quot;Legal Share&quot;]),
+    bankReferralPercent: findValue(block, [&quot;Bank Referral %&quot;,&quot;Bank Referral&quot;]),
+    mrtaReferral: findValue(block, [&quot;MRTA Income&quot;,&quot;MLTA Income&quot;,&quot;MRTT Income&quot;,&quot;MRTA Referral&quot;,&quot;MLTA Referral&quot;,&quot;MRTT Referral&quot;]),
+    otherIncome: findValue(block, [&quot;Other Income&quot;,&quot;Profit&quot;])
+  };
+
+  if(data.bank) pkg.querySelector(&quot;.bank&quot;).value = data.bank;
+  pkg.querySelector(&quot;.flexi&quot;).value = data.flexi || &quot;Semi Flexi&quot;;
+  if(data.facility) pkg.querySelector(&quot;.facility&quot;).value = whole(data.facility);
+  if(data.totalFinancing) pkg.querySelector(&quot;.totalFinancing&quot;).value = whole(data.totalFinancing);
+  if(data.loanAgreement) pkg.querySelector(&quot;.loanAgreement&quot;).value = whole(data.loanAgreement);
+  if(data.rate) pkg.querySelector(&quot;.rate&quot;).value = data.rate;
+  if(data.monthly) pkg.querySelector(&quot;.monthly&quot;).value = whole(data.monthly);
+  if(data.tenure) pkg.querySelector(&quot;.tenure&quot;).value = data.tenure;
+  if(data.legalSharingPercent) pkg.querySelector(&quot;.legalSharingPercent&quot;).value = data.legalSharingPercent;
+  if(data.bankReferralPercent) pkg.querySelector(&quot;.bankReferralPercent&quot;).value = data.bankReferralPercent;
+  if(data.mrtaReferral) pkg.querySelector(&quot;.mrtaReferral&quot;).value = whole(data.mrtaReferral);
+  if(data.otherIncome) pkg.querySelector(&quot;.otherIncome&quot;).value = whole(data.otherIncome);
+}
+
+function readPackage(pkg){
+  const bank = pkg.querySelector(&quot;.bank&quot;).value.trim() || &quot;-&quot;;
+  const flexi = pkg.querySelector(&quot;.flexi&quot;).value;
+  const facility = rawNum(pkg.querySelector(&quot;.facility&quot;).value);
+  const totalFinancing = rawNum(pkg.querySelector(&quot;.totalFinancing&quot;).value);
+  const loanAgreement = rawNum(pkg.querySelector(&quot;.loanAgreement&quot;).value) || totalFinancing;
+  const rate = rawNum(pkg.querySelector(&quot;.rate&quot;).value);
+  const monthly = rawNum(pkg.querySelector(&quot;.monthly&quot;).value);
+  const tenure = rawNum(pkg.querySelector(&quot;.tenure&quot;).value);
+  const legalSharingPercent = rawNum(pkg.querySelector(&quot;.legalSharingPercent&quot;).value);
+  const bankReferralPercent = rawNum(pkg.querySelector(&quot;.bankReferralPercent&quot;).value);
+  const mrtaReferral = rawNum(pkg.querySelector(&quot;.mrtaReferral&quot;).value);
+  const otherIncome = rawNum(pkg.querySelector(&quot;.otherIncome&quot;).value);
+
+  const totalPayable = monthly * tenure * 12;
+  const totalInterest = totalPayable - totalFinancing;
+  const legalFee = legalFeeOnly(loanAgreement);
+  const legalSharingIncome = legalFee * legalSharingPercent / 100;
+  const bankReferralIncome = facility * bankReferralPercent / 100;
+  const totalProfit = legalSharingIncome + bankReferralIncome + mrtaReferral + otherIncome;
+
+  return {
+    id: editId || Date.now() + Math.random(),
+    bank, flexi, facility, totalFinancing, loanAgreement, rate, monthly, tenure,
+    totalPayable, totalInterest, legalFee, legalSharingPercent, legalSharingIncome,
+    bankReferralPercent, bankReferralIncome, mrtaReferral, otherIncome, totalProfit
+  };
+}
+
+function saveThisPackage(btn){
+  const pkg = btn.closest(&quot;.package&quot;);
+  const data = readPackage(pkg);
+
+  if(!data.bank || data.bank === &quot;-&quot;){alert(&quot;Please key in bank name.&quot;);return;}
+
+  if(editId){
+    savedPackages = savedPackages.map(x=&gt;x.id===editId ? data : x);
+    editId = null;
+  }else{
+    savedPackages.push(data);
+  }
+
+  calculateSaved();
+  pkg.remove();
+}
+
+function editSaved(id){
+  const data = savedPackages.find(x=&gt;x.id===id);
+  if(!data) return;
+  editId = id;
+  addPackage(data);
+  window.scrollTo({top:0,behavior:&quot;smooth&quot;});
+}
+
+function deleteSaved(id){
+  savedPackages = savedPackages.filter(x=&gt;x.id !== id);
+  calculateSaved();
+}
+
+function calculateSaved(){
+  const data = savedPackages;
+
+  if(data.length === 0){
+    document.getElementById(&quot;customerTable&quot;).innerHTML = `&lt;tr&gt;&lt;td colspan=&quot;9&quot;&gt;No saved package yet.&lt;/td&gt;&lt;/tr&gt;`;
+    document.getElementById(&quot;internalTable&quot;).innerHTML = `&lt;tr&gt;&lt;td colspan=&quot;11&quot;&gt;No saved package yet.&lt;/td&gt;&lt;/tr&gt;`;
+    document.getElementById(&quot;lowestMonthly&quot;).innerText = &quot;RM 0.00&quot;;
+    document.getElementById(&quot;lowestInterest&quot;).innerText = &quot;RM 0.00&quot;;
+    document.getElementById(&quot;bestBank&quot;).innerText = &quot;-&quot;;
+    document.getElementById(&quot;sumProfit&quot;).innerText = &quot;RM 0.00&quot;;
+    document.getElementById(&quot;topProfitBank&quot;).innerText = &quot;-&quot;;
+    document.getElementById(&quot;sumBankReferral&quot;).innerText = &quot;RM 0.00&quot;;
+    document.getElementById(&quot;sumLegalSharing&quot;).innerText = &quot;RM 0.00&quot;;
+    return;
+  }
+
+  const bestMonthly = [...data].filter(x=&gt;x.monthly&gt;0).sort((a,b)=&gt;a.monthly-b.monthly)[0] || data[0];
+  const bestInterest = [...data].filter(x=&gt;x.totalInterest&gt;0).sort((a,b)=&gt;a.totalInterest-b.totalInterest)[0] || data[0];
+  const topProfit = [...data].sort((a,b)=&gt;b.totalProfit-a.totalProfit)[0];
+
+  const sumProfit = data.reduce((s,x)=&gt;s+x.totalProfit,0);
+  const sumBankReferral = data.reduce((s,x)=&gt;s+x.bankReferralIncome,0);
+  const sumLegalSharing = data.reduce((s,x)=&gt;s+x.legalSharingIncome,0);
+
+  document.getElementById(&quot;lowestMonthly&quot;).innerText = rm(bestMonthly.monthly);
+  document.getElementById(&quot;lowestInterest&quot;).innerText = rm(bestInterest.totalInterest);
+  document.getElementById(&quot;bestBank&quot;).innerText = bestInterest.bank;
+  document.getElementById(&quot;sumProfit&quot;).innerText = rm(sumProfit);
+  document.getElementById(&quot;topProfitBank&quot;).innerText = topProfit.bank;
+  document.getElementById(&quot;sumBankReferral&quot;).innerText = rm(sumBankReferral);
+  document.getElementById(&quot;sumLegalSharing&quot;).innerText = rm(sumLegalSharing);
+
+  document.getElementById(&quot;customerTable&quot;).innerHTML = &quot;&quot;;
+  document.getElementById(&quot;internalTable&quot;).innerHTML = &quot;&quot;;
+
+  data.forEach(x=&gt;{
+    const isBest = x.id === bestInterest.id;
+
+    document.getElementById(&quot;customerTable&quot;).innerHTML += `
+      &lt;tr&gt;
+        &lt;td&gt;${isBest ? &#x27;&lt;span class=&quot;badge&quot;&gt;BEST&lt;/span&gt; &#x27; : &#x27;&#x27;}${x.bank}&lt;/td&gt;
+        &lt;td&gt;${x.flexi}&lt;/td&gt;
+        &lt;td&gt;${rm(x.facility)}&lt;/td&gt;
+        &lt;td&gt;${rm(x.totalFinancing)}&lt;/td&gt;
+        &lt;td&gt;${pct(x.rate)}&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;${rm(x.monthly)}&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;${x.tenure} years&lt;/td&gt;
+        &lt;td&gt;${rm(x.totalPayable)}&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;${rm(x.totalInterest)}&lt;/b&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    `;
+
+    document.getElementById(&quot;internalTable&quot;).innerHTML += `
+      &lt;tr&gt;
+        &lt;td&gt;&lt;b&gt;${x.bank}&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;${rm(x.loanAgreement)}&lt;/td&gt;
+        &lt;td&gt;${rm(x.legalFee)}&lt;/td&gt;
+        &lt;td&gt;${pct(x.legalSharingPercent)}&lt;/td&gt;
+        &lt;td&gt;${rm(x.legalSharingIncome)}&lt;/td&gt;
+        &lt;td&gt;${pct(x.bankReferralPercent)}&lt;/td&gt;
+        &lt;td&gt;${rm(x.bankReferralIncome)}&lt;/td&gt;
+        &lt;td&gt;${rm(x.mrtaReferral)}&lt;/td&gt;
+        &lt;td&gt;${rm(x.otherIncome)}&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;${rm(x.totalProfit)}&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;button class=&quot;blue&quot; onclick=&quot;editSaved(${x.id})&quot;&gt;Edit&lt;/button&gt;
+          &lt;button class=&quot;red&quot; onclick=&quot;deleteSaved(${x.id})&quot;&gt;Delete&lt;/button&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    `;
+  });
+}
+
+function toggleInternal(){
+  const view = document.getElementById(&quot;internalView&quot;);
+  view.style.display = view.style.display === &quot;none&quot; ? &quot;block&quot; : &quot;none&quot;;
+}
+function showCustomerOnly(){
+  document.body.classList.add(&quot;customerOnly&quot;);
+  document.getElementById(&quot;internalView&quot;).style.display = &quot;none&quot;;
+}
+function showFullView(){
+  document.body.classList.remove(&quot;customerOnly&quot;);
+  document.getElementById(&quot;internalView&quot;).style.display = &quot;block&quot;;
+}
+function exportPDF(){
+  showCustomerOnly();
+  html2pdf().set({
+    margin:0.25,
+    filename:&quot;Mortgage-Package-Comparison.pdf&quot;,
+    image:{type:&quot;jpeg&quot;,quality:0.98},
+    html2canvas:{scale:2},
+    jsPDF:{unit:&quot;in&quot;,format:&quot;a4&quot;,orientation:&quot;landscape&quot;}
+  }).from(document.getElementById(&quot;pdfArea&quot;)).save();
+}
+function clearAll(){location.reload()}
+
+addPackage();
+addPackage();
+&lt;/script&gt;
+
 &lt;/body&gt;
 &lt;/html&gt;"></iframe>
         </div>
