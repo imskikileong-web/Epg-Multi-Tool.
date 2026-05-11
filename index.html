@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-<link rel="shortcut icon" href="favicon.png" type="image/png">    
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -694,7 +693,18 @@ th{background:#f8fafc;color:#334155}
 .internal-box small{display:block;color:#92400e;font-weight:800;margin-bottom:8px}
 .internal-box h2{margin:0;color:#111827;font-size:22px}
 .customerOnly .internal,.customerOnly .inputArea,.customerOnly .actionArea{display:none}
-@media(max-width:900px){.grid,.summary,.two-col,.manual-grid,.internal-summary{grid-template-columns:1fr}.container{padding:12px}}
+.customerBackBtn{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:9999;
+  display:none;
+  background:#0f172a;
+  color:#fff;
+  box-shadow:0 12px 28px rgba(15,23,42,.22);
+}
+.customerOnly .customerBackBtn{display:block}
+@media(max-width:900px){.grid,.summary,.two-col,.manual-grid,.internal-summary{grid-template-columns:1fr}.container{padding:12px}.customerBackBtn{right:14px;bottom:14px;width:calc(100% - 28px)}}
 &lt;/style&gt;
 &lt;/head&gt;
 
@@ -784,6 +794,8 @@ th{background:#f8fafc;color:#334155}
 &lt;/div&gt;
 
 &lt;/div&gt;
+
+&lt;button id=&quot;customerBackBtn&quot; class=&quot;customerBackBtn&quot; onclick=&quot;showFullView()&quot;&gt;← Back To Full View&lt;/button&gt;
 
 &lt;script&gt;
 let count = 0;
@@ -1090,8 +1102,10 @@ function showCustomerOnly(){
 function showFullView(){
   document.body.classList.remove(&quot;customerOnly&quot;);
   document.getElementById(&quot;internalView&quot;).style.display = &quot;block&quot;;
+  window.scrollTo({top:0,behavior:&quot;smooth&quot;});
 }
 function exportPDF(){
+  const wasCustomerOnly = document.body.classList.contains(&quot;customerOnly&quot;);
   showCustomerOnly();
   html2pdf().set({
     margin:0.25,
@@ -1099,7 +1113,11 @@ function exportPDF(){
     image:{type:&quot;jpeg&quot;,quality:0.98},
     html2canvas:{scale:2},
     jsPDF:{unit:&quot;in&quot;,format:&quot;a4&quot;,orientation:&quot;landscape&quot;}
-  }).from(document.getElementById(&quot;pdfArea&quot;)).save();
+  }).from(document.getElementById(&quot;pdfArea&quot;)).save().then(()=&gt;{
+    if(!wasCustomerOnly){
+      showFullView();
+    }
+  });
 }
 function clearAll(){location.reload()}
 
