@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
 
@@ -559,7 +558,13 @@ td:first-child{
         <div class="card" onclick="openSection('refinanceSection')">
             <div class="icon">🏠</div>
             <div class="title">Refinance Calculator</div>
-            <div class="desc">Smart refinance comparison</div>
+            <div class="desc">Product On Maintenance</div>
+        </div>
+
+        <div class="card" onclick="openSection('mortgagePackageSection')">
+            <div class="icon">📊</div>
+            <div class="title">Mortgage Package Comparison Pro</div>
+            <div class="desc">Bank package comparison module</div>
         </div>
 
         <div class="card" onclick="openSection('incomeSection')">
@@ -616,90 +621,88 @@ td:first-child{
 
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
 
-        <div class="page-wrap">
-
-            <div class="top-title">
-                <h1>Smart Refinance Calculator</h1>
-                <p>Compact Blue Banking Comparison Version</p>
-            </div>
-
-            <div class="calculator-card">
-                <div class="form-grid">
-
-                    <div class="input-row">
-                        <label>Current Outstanding / Loan Amount</label>
-                        <input type="text" id="currentLoan" value="0">
-                    </div>
-
-                    <div class="input-row">
-                        <label>Current Interest Rate (%)</label>
-                        <input type="number" step="0.01" id="currentRate" value="0">
-                    </div>
-
-                    <div class="input-row">
-                        <label>Current Monthly Instalment</label>
-                        <input type="number" step="0.01" id="currentMonthly" value="0">
-                    </div>
-
-                    <div class="input-row">
-                        <label>Remaining Loan Tenure (Years)</label>
-                        <input type="number" step="0.1" id="currentTenure" value="0">
-                    </div>
-
-                    <div class="input-row">
-                        <label>Legal / Stamp / Valuation Fee</label>
-                        <input type="text" id="legalCost" value="0.00" readonly>
-                    </div>
-
-                    <div class="input-row">
-                        <label>Zero Cost Rate (%)</label>
-                        <input type="number" step="0.01" id="zeroRate" value="3.90">
-                    </div>
-
-                    <div class="input-row">
-                        <label>Cash Package Rate (%)</label>
-                        <input type="number" step="0.01" id="cashRate" value="3.55">
-                    </div>
-
-                    <div class="input-row">
-                        <label>Financed Package Rate (%)</label>
-                        <input type="number" step="0.01" id="financeRate" value="3.55">
-                    </div>
-
-                </div>
-
-                <div class="action-row">
-                    <button onclick="calculateRefinance()">Calculate Comparison</button>
-                    <button class="secondary" onclick="exportPDF()">Export PDF</button>
+        <div class="embedded-module-wrap">
+            <div style="
+                min-height:60vh;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:white;
+                border-radius:24px;
+                box-shadow:0 12px 32px rgba(15,42,107,0.12);
+                border:1px solid #dbeafe;
+                padding:40px;
+                text-align:center;
+            ">
+                <div>
+                    <div style="font-size:58px;margin-bottom:18px;">🛠️</div>
+                    <h1 style="color:#0f2a6b;margin-bottom:10px;">Refinance Calculator</h1>
+                    <p style="font-size:20px;font-weight:800;color:#2563eb;margin-bottom:8px;">Product On Maintenance</p>
+                    <p style="color:#64748b;font-size:14px;">This function is temporarily unavailable while the product is being upgraded.</p>
                 </div>
             </div>
-
-            <div class="report-box" id="pdfArea">
-                <div class="report-header">
-                    <h2>REFINANCE COMPARISON</h2>
-                    <span>Professional Banking Proposal</span>
-                </div>
-
-                <div class="table-scroll">
-                    <table id="resultTable">
-                        <thead>
-                            <tr>
-                                <th style="width:28%">Refinance</th>
-                                <th>Loan Amount</th>
-                                <th>Interest Rate</th>
-                                <th>Monthly Instalment</th>
-                                <th>Loan Tenure</th>
-                                <th>Total Interest</th>
-                                <th>Total Savings</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
 
+    </div>
+
+
+
+
+    <div id="mortgagePackageSection" class="section">
+        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="embedded-module-wrap">
+            <iframe class="embedded-frame" title="Mortgage Package Comparison Pro" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Mortgage Package Comparison Pro&lt;/title&gt;
+&lt;style&gt;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:&quot;Segoe UI&quot;,Arial,sans-serif;
+  background:linear-gradient(135deg,#eef5ff,#ffffff);
+  color:#1f2937;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+.card{
+  max-width:820px;
+  width:100%;
+  background:white;
+  border:1px solid #dbeafe;
+  border-radius:26px;
+  box-shadow:0 18px 45px rgba(15,42,107,.14);
+  padding:42px;
+  text-align:center;
+}
+.icon{font-size:58px;margin-bottom:16px}
+h1{margin:0;color:#0f2a6b;font-size:32px}
+p{color:#64748b;line-height:1.6}
+.badge{
+  display:inline-block;
+  margin-top:18px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:#eff6ff;
+  color:#2563eb;
+  font-weight:800;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;card&quot;&gt;
+  &lt;div class=&quot;icon&quot;&gt;📊&lt;/div&gt;
+  &lt;h1&gt;Mortgage Package Comparison Pro&lt;/h1&gt;
+  &lt;p&gt;This card and section are ready. Paste/upload the child code and this placeholder will be replaced with the full Mortgage Package Comparison Pro module.&lt;/p&gt;
+  &lt;div class=&quot;badge&quot;&gt;Module Slot Ready&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+        </div>
     </div>
 
     <div id="amortizationSection" class="section">
