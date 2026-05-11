@@ -2824,91 +2824,94 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
     <div id="bankPolicySection" class="section">
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
         <div class="embedded-module-wrap">
-            <iframe class="embedded-frame" title="Bank Policy" srcdoc="&lt;!DOCTYPE html&gt;
+            <iframe class="embedded-frame" title="Bank Policy Hub" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;UTF-8&quot; /&gt;
   &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-  &lt;title&gt;Bank Policy Hub v1&lt;/title&gt;
+  &lt;title&gt;Bank Policy Hub - Google Sheet Version&lt;/title&gt;
   &lt;style&gt;
     *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
     body{background:#f4f7fb;color:#172033;padding-bottom:80px}
     header{background:linear-gradient(135deg,#0b4ea2,#0f7ad8);color:white;padding:22px 18px;border-radius:0 0 28px 28px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
     header h1{font-size:24px;margin-bottom:6px}
     header p{font-size:14px;opacity:.9;line-height:1.5}
-    .container{max-width:1100px;margin:auto;padding:16px}
+    .container{max-width:1150px;margin:auto;padding:16px}
     .top-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-    button{border:none;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer;background:#0b63ce;color:white;transition:.2s}
+    button{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;background:#0b63ce;color:white;transition:.2s}
     button:hover{opacity:.9;transform:translateY(-1px)}
-    button.secondary{background:white;color:#0b4ea2;border:1px solid #dbe7f5}
+    button.gray{background:#eef3f9;color:#25324b}
+    button.danger{background:#d93025}
+    button.green{background:#139c5a}
+    button.white{background:white;color:#0b4ea2;border:1px solid #dbe7f5}
+    input,textarea{width:100%;padding:12px 13px;border:1px solid #d9e3ef;border-radius:13px;font-size:14px;outline:none;background:white}
+    textarea{min-height:78px;resize:vertical;line-height:1.45}
+    label{font-size:12px;font-weight:900;color:#5b6b83;margin-bottom:5px;display:block}
     .member-btn{background:white!important;color:#0b4ea2!important;border:1px solid #dbe7f5!important}
     .admin-btn{background:#0b63ce!important;color:white!important;border:1px solid #0b63ce!important}
-    .member-btn.active-view{box-shadow:0 0 0 3px rgba(255,255,255,.35);transform:translateY(-1px)}
-    .admin-btn.active-view{background:#073f8f!important;box-shadow:0 0 0 3px rgba(255,255,255,.28);transform:translateY(-1px)}
-    button.danger{background:#d93025}
-    button.gray{background:#eef3f9;color:#25324b}
+    .active-view{box-shadow:0 0 0 3px rgba(255,255,255,.35);transform:translateY(-1px)}
+    .admin-bar{display:none;background:linear-gradient(135deg,#10213d,#0b4ea2);color:white;padding:12px 16px;border-radius:18px;margin:12px 0;font-weight:800;font-size:13px;box-shadow:0 6px 18px rgba(11,78,162,.18)}
+    .admin-on .admin-bar{display:block}
+    .admin-only{display:none!important}
+    .admin-on .admin-only{display:inline-flex!important}
     .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
     .stat{background:white;border-radius:18px;padding:14px;box-shadow:0 4px 16px rgba(20,45,80,.06)}
-    .stat .num{font-size:23px;font-weight:800;color:#0b4ea2}
+    .stat .num{font-size:23px;font-weight:900;color:#0b4ea2}
     .stat .label{font-size:12px;color:#6a7890;margin-top:4px}
     .search-box{background:white;padding:14px;border-radius:20px;box-shadow:0 4px 16px rgba(20,45,80,.06);margin-bottom:14px}
-    input,select,textarea{width:100%;padding:12px 13px;border:1px solid #d9e3ef;border-radius:13px;font-size:14px;outline:none;background:white}
-    textarea{min-height:90px;resize:vertical}
-    .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-    .bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+    .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
     .card{background:white;border-radius:22px;padding:16px;box-shadow:0 4px 18px rgba(20,45,80,.07);border:1px solid #edf2f7}
     .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
-    .bank-name{font-size:20px;font-weight:800;color:#11223f}
-    .clickable{cursor:pointer}.clickable:hover{color:#0b63ce;text-decoration:underline}
     .bank-title-wrap{display:flex;align-items:center;gap:12px}
     .bank-logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#eaf4ff,#d8eaff);color:#0b4ea2;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;letter-spacing:.3px;flex:0 0 auto;border:1px solid #d9e9fb}
-    .category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-    .category-tab{padding:9px 12px!important;font-size:12px!important}
-    .category-tab.active-cat{background:#0b63ce!important;color:white!important}
-    .policy-category{display:none}.policy-category.active{display:block}
-    .tag{display:inline-block;background:#eef6ff;color:#0b4ea2;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:700;margin:3px 3px 0 0}
-    .row{padding:9px 0;border-top:1px solid #eef2f7;font-size:13px;line-height:1.45}
+    .bank-name{font-size:20px;font-weight:900;color:#11223f}
+    .clickable{cursor:pointer}.clickable:hover{color:#0b63ce;text-decoration:underline}
+    .tag{display:inline-block;background:#eef6ff;color:#0b4ea2;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;margin:4px 3px 0 0}
+   .row{
+  padding:8px 0;
+  border-top:1px solid #eef2f7;
+  font-size:13px;
+  line-height:1.35;
+}
+
+.row div{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
     .row b{color:#344563;display:block;margin-bottom:3px;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
     .card-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
     .card-actions button{padding:9px 12px;border-radius:11px;font-size:12px}
+    .empty{text-align:center;padding:30px;color:#75849a}
+    .status{font-size:12px;color:#6b7b92;margin-top:8px}
+    .loading{background:#fff8e7;color:#9a6500;padding:10px 12px;border-radius:14px;margin-bottom:12px;font-size:13px;font-weight:800;display:none}
+    .loading.active{display:block}
     .modal{position:fixed;inset:0;background:rgba(7,18,38,.55);display:none;align-items:center;justify-content:center;padding:15px;z-index:20}
     .modal.active{display:flex}
-    .modal-box{background:white;width:100%;max-width:760px;max-height:90vh;overflow:auto;border-radius:24px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.25)}
+    .modal-box{background:white;width:100%;max-width:780px;max-height:90vh;overflow:auto;border-radius:24px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.25)}
     .modal-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
     .modal-title h2{font-size:20px;color:#10213d}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .form-full{grid-column:1/-1}
-    label{font-size:12px;font-weight:800;color:#5b6b83;margin-bottom:5px;display:block}
-    .history,.suggestion{border:1px solid #edf2f7;border-radius:16px;padding:12px;margin-bottom:10px;background:#fbfdff;font-size:13px;line-height:1.5}
-    .suggestion.pending{border-left:5px solid #f5a623}
-    .suggestion.approved{border-left:5px solid #20a464}
-    .suggestion.rejected{border-left:5px solid #d93025}
-    .empty{text-align:center;padding:30px;color:#75849a}
-    .admin-bar{display:none;background:linear-gradient(135deg,#10213d,#0b4ea2);color:white;padding:12px 16px;border-radius:18px;margin:12px 0;font-weight:800;font-size:13px;box-shadow:0 6px 18px rgba(11,78,162,.18)}
-    .admin-on .admin-bar{display:block}
-    .admin-only{display:none!important}
-    .admin-on .admin-only{display:inline-block!important}
+    .policy-row-edit{display:grid;grid-template-columns:1fr 1.8fr auto;gap:8px;margin-top:8px;align-items:start}
+    .edit-box{border:1px solid #e3edf8;border-radius:18px;padding:12px;margin-top:10px;background:#fbfdff}
     .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e7edf5;display:flex;justify-content:space-around;padding:9px 5px;z-index:10}
     .bottom-nav button{background:white;color:#5a6a82;font-size:12px;padding:8px 10px;border-radius:12px}
     .bottom-nav button.active{background:#eaf4ff;color:#0b4ea2}
-    .side-overlay{position:fixed;inset:0;background:rgba(7,18,38,.25);display:none;z-index:14}
-    .side-overlay.active{display:block}
-    .side-panel{position:fixed;top:0;right:-380px;width:360px;max-width:88vw;height:100vh;background:white;z-index:15;box-shadow:-12px 0 35px rgba(0,0,0,.18);padding:18px;border-radius:22px 0 0 22px;transition:.25s ease;display:flex;flex-direction:column}
-    .side-panel.active{right:0}
-    .side-panel-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;border-bottom:1px solid #edf2f7;padding-bottom:14px}
-    .side-panel h2{font-size:20px;color:#10213d;margin-bottom:5px}
-    .side-panel p{font-size:13px;color:#6b7b92;line-height:1.45}
     .section{display:none}.section.active{display:block}
     body.admin-lock-blur header, body.admin-lock-blur main, body.admin-lock-blur nav{filter:blur(6px);pointer-events:none;user-select:none}
     @media(max-width:650px){
-      header h1{font-size:21px}.stats{grid-template-columns:1fr 1fr}.form-grid,.filters,.top-actions{grid-template-columns:1fr}.container{padding:12px}.card{border-radius:18px}
+      header h1{font-size:21px}.stats{grid-template-columns:1fr}.form-grid,.filters,.top-actions,.policy-row-edit{grid-template-columns:1fr}.container{padding:12px}.card{border-radius:18px}
     }
   &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
   &lt;header&gt;
     &lt;h1&gt;Bank Policy Hub&lt;/h1&gt;
-    &lt;p&gt;Internal mortgage bank knowledge base. Agent can view and submit suggestion. Admin can add, edit, delete and approve updates.&lt;/p&gt;
+    &lt;p&gt;Central bank policy knowledge base. Member can view only. Admin can add, edit, delete and save to Google Sheet.&lt;/p&gt;
     &lt;div class=&quot;top-actions&quot;&gt;
       &lt;button id=&quot;memberViewBtn&quot; class=&quot;member-btn active-view&quot; onclick=&quot;switchToMemberView()&quot;&gt;Member View&lt;/button&gt;
       &lt;button id=&quot;adminViewBtn&quot; class=&quot;admin-btn&quot; onclick=&quot;openAdminModal()&quot;&gt;Admin Mode&lt;/button&gt;
@@ -2916,107 +2919,98 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
   &lt;/header&gt;
 
   &lt;main class=&quot;container&quot; id=&quot;appRoot&quot;&gt;
-    &lt;div class=&quot;admin-bar&quot;&gt;Admin Dashboard is ON — Add / Edit / Delete tools are unlocked.&lt;/div&gt;
+    &lt;div class=&quot;admin-bar&quot;&gt;Admin Mode ON — Add / Edit / Delete / Save tools are unlocked.&lt;/div&gt;
+    &lt;div id=&quot;loadingBox&quot; class=&quot;loading&quot;&gt;Loading data from Google Sheet...&lt;/div&gt;
 
     &lt;section id=&quot;homeSection&quot; class=&quot;section active&quot;&gt;
       &lt;div class=&quot;stats&quot;&gt;
         &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;totalBanks&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Total Banks&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;pendingCount&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Pending Suggestions&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;historyCount&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Update History&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;totalColumns&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Total Policy Fields&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;syncStatus&quot;&gt;LIVE&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Google Sheet Sync&lt;/div&gt;&lt;/div&gt;
       &lt;/div&gt;
+
       &lt;div class=&quot;search-box&quot;&gt;
         &lt;div class=&quot;filters&quot;&gt;
           &lt;input id=&quot;bankSearchInput&quot; placeholder=&quot;Search bank name: Public Bank, CIMB, Maybank...&quot; oninput=&quot;renderBanks()&quot; /&gt;
-          &lt;input id=&quot;keywordSearchInput&quot; placeholder=&quot;Search keyword: SSM 1 year, high DSR, master title, cash out...&quot; oninput=&quot;renderBanks()&quot; /&gt;
+          &lt;input id=&quot;keywordSearchInput&quot; placeholder=&quot;Search keyword: DSR, SSM, margin, document...&quot; oninput=&quot;renderBanks()&quot; /&gt;
         &lt;/div&gt;
+        &lt;div class=&quot;status&quot; id=&quot;lastLoadedText&quot;&gt;Data source: Google Sheet&lt;/div&gt;
       &lt;/div&gt;
-      &lt;button class=&quot;admin-only&quot; onclick=&quot;openBankModal()&quot; style=&quot;margin-bottom:12px&quot;&gt;+ Add New Bank Policy&lt;/button&gt;
+
+      &lt;div class=&quot;toolbar&quot;&gt;
+        &lt;button class=&quot;admin-only&quot; onclick=&quot;openBankModal()&quot;&gt;+ Add New Bank Policy&lt;/button&gt;
+        &lt;button class=&quot;admin-only green&quot; onclick=&quot;saveAllToGoogleSheet()&quot;&gt;Save All To Google Sheet&lt;/button&gt;
+        &lt;button class=&quot;gray&quot; onclick=&quot;loadBanksFromSheet()&quot;&gt;Refresh Data&lt;/button&gt;
+      &lt;/div&gt;
+
       &lt;div class=&quot;bank-grid&quot; id=&quot;bankGrid&quot;&gt;&lt;/div&gt;
     &lt;/section&gt;
 
     &lt;section id=&quot;bankDetailSection&quot; class=&quot;section&quot;&gt;
       &lt;div id=&quot;bankDetailBox&quot;&gt;&lt;/div&gt;
     &lt;/section&gt;
-
-    &lt;section id=&quot;suggestionSection&quot; class=&quot;section&quot;&gt;
-      &lt;div class=&quot;card&quot;&gt;
-        &lt;div class=&quot;card-head&quot;&gt;&lt;div&gt;&lt;div class=&quot;bank-name&quot;&gt;Agent Suggestions&lt;/div&gt;&lt;p style=&quot;font-size:13px;color:#687993;margin-top:4px&quot;&gt;Rules submitted by agent. Admin can approve or reject.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div id=&quot;suggestionList&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/section&gt;
-
-    &lt;section id=&quot;historySection&quot; class=&quot;section&quot;&gt;
-      &lt;div class=&quot;card&quot;&gt;
-        &lt;div class=&quot;card-head&quot;&gt;&lt;div&gt;&lt;div class=&quot;bank-name&quot;&gt;Update History&lt;/div&gt;&lt;p style=&quot;font-size:13px;color:#687993;margin-top:4px&quot;&gt;Every admin update will be recorded here.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div id=&quot;historyList&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/section&gt;
   &lt;/main&gt;
 
   &lt;nav class=&quot;bottom-nav&quot;&gt;
-    &lt;button class=&quot;active&quot; onclick=&quot;showSection(&#x27;homeSection&#x27;,this)&quot;&gt;Banks&lt;/button&gt;
-    &lt;button onclick=&quot;showSection(&#x27;suggestionSection&#x27;,this)&quot;&gt;Suggestions&lt;/button&gt;
-    &lt;button onclick=&quot;showSection(&#x27;historySection&#x27;,this)&quot;&gt;History&lt;/button&gt;
+    &lt;button class=&quot;active&quot; onclick=&quot;showSection('homeSection',this)&quot;&gt;Banks&lt;/button&gt;
+    &lt;button onclick=&quot;loadBanksFromSheet()&quot;&gt;Refresh&lt;/button&gt;
+    &lt;button onclick=&quot;switchToMemberView()&quot;&gt;Member&lt;/button&gt;
   &lt;/nav&gt;
-
-  &lt;div class=&quot;side-panel&quot; id=&quot;memberPanel&quot;&gt;
-    &lt;div class=&quot;side-panel-head&quot;&gt;
-      &lt;div&gt;
-        &lt;h2&gt;Member View&lt;/h2&gt;
-        &lt;p&gt;Member can view bank policy and submit new rule suggestion.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;button class=&quot;gray&quot; onclick=&quot;closeMemberPanel()&quot;&gt;Close&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;button style=&quot;width:100%;margin-top:14px&quot; onclick=&quot;openSuggestionModal(); closeMemberPanel();&quot;&gt;Submit New Rule&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;side-overlay&quot; id=&quot;sideOverlay&quot; onclick=&quot;closeMemberPanel()&quot;&gt;&lt;/div&gt;
 
   &lt;div class=&quot;modal&quot; id=&quot;adminModal&quot;&gt;
     &lt;div class=&quot;modal-box&quot; style=&quot;max-width:420px&quot;&gt;
-      &lt;div class=&quot;modal-title&quot;&gt;&lt;h2&gt;Admin Password&lt;/h2&gt;&lt;button class=&quot;gray&quot; onclick=&quot;closeModal(&#x27;adminModal&#x27;)&quot;&gt;Close&lt;/button&gt;&lt;/div&gt;
+      &lt;div class=&quot;modal-title&quot;&gt;
+        &lt;h2&gt;Admin Password&lt;/h2&gt;
+        &lt;button class=&quot;gray&quot; onclick=&quot;closeModal('adminModal')&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
       &lt;label&gt;Password&lt;/label&gt;
-      &lt;input type=&quot;password&quot; id=&quot;adminPassword&quot; placeholder=&quot;Enter admin password&quot; /&gt;
+      &lt;input type=&quot;password&quot; id=&quot;adminPassword&quot; placeholder=&quot;Enter admin password&quot; autocomplete=&quot;off&quot; /&gt;
       &lt;button style=&quot;width:100%;margin-top:12px&quot; onclick=&quot;checkAdmin()&quot;&gt;Unlock Admin Mode&lt;/button&gt;
-      &lt;p style=&quot;font-size:12px;color:#77869b;margin-top:10px&quot;&gt;Please enter admin password to continue.&lt;/p&gt;
+      &lt;p style=&quot;font-size:12px;color:#77869b;margin-top:10px&quot;&gt;Only admin can add, edit, delete and save policy.&lt;/p&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class=&quot;modal&quot; id=&quot;bankModal&quot;&gt;
     &lt;div class=&quot;modal-box&quot;&gt;
-      &lt;div class=&quot;modal-title&quot;&gt;&lt;h2 id=&quot;bankModalTitle&quot;&gt;Add Bank Policy&lt;/h2&gt;&lt;button class=&quot;gray&quot; onclick=&quot;closeModal(&#x27;bankModal&#x27;)&quot;&gt;Close&lt;/button&gt;&lt;/div&gt;
+      &lt;div class=&quot;modal-title&quot;&gt;
+        &lt;h2 id=&quot;bankModalTitle&quot;&gt;Add Bank Policy&lt;/h2&gt;
+        &lt;button class=&quot;gray&quot; onclick=&quot;closeModal('bankModal')&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+
       &lt;input type=&quot;hidden&quot; id=&quot;bankId&quot; /&gt;
+
       &lt;div class=&quot;form-grid&quot;&gt;
-        &lt;div&gt;&lt;label&gt;Bank Name&lt;/label&gt;&lt;input id=&quot;bankName&quot; placeholder=&quot;Public Bank&quot; /&gt;&lt;/div&gt;
-        &lt;div&gt;&lt;label&gt;Updated By&lt;/label&gt;&lt;input id=&quot;updatedBy&quot; placeholder=&quot;Kiki&quot; value=&quot;Kiki&quot; /&gt;&lt;/div&gt;
+        &lt;div&gt;
+          &lt;label&gt;Bank Name&lt;/label&gt;
+          &lt;input id=&quot;bankName&quot; placeholder=&quot;Example: Public Bank&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;label&gt;Updated By&lt;/label&gt;
+          &lt;input id=&quot;updatedBy&quot; placeholder=&quot;Example: Kiki&quot; value=&quot;Kiki&quot; /&gt;
+        &lt;/div&gt;
+
         &lt;div class=&quot;form-full&quot;&gt;
-          &lt;label&gt;Product Categories&lt;/label&gt;
-          &lt;p style=&quot;font-size:12px;color:#71839b;margin-bottom:8px&quot;&gt;Example: Subsales, Refinance, SME Loan, Commercial Loan. Each category can add policy rows.&lt;/p&gt;
-          &lt;div id=&quot;policySectionsBox&quot;&gt;&lt;/div&gt;
-          &lt;button type=&quot;button&quot; class=&quot;gray&quot; onclick=&quot;addPolicySection()&quot; style=&quot;margin-top:8px&quot;&gt;+ Add Category&lt;/button&gt;
+          &lt;label&gt;Bank Policy Fields&lt;/label&gt;
+          &lt;p style=&quot;font-size:12px;color:#71839b;margin-bottom:8px&quot;&gt;
+            You can change the field name, add new column, or delete column. Example: DSR, Margin, SSM Requirement, Documents Needed, Remark.
+          &lt;/p&gt;
+          &lt;div id=&quot;policyRowsBox&quot; class=&quot;edit-box&quot;&gt;&lt;/div&gt;
+          &lt;button type=&quot;button&quot; class=&quot;gray&quot; onclick=&quot;addPolicyRow()&quot; style=&quot;margin-top:10px&quot;&gt;+ Add Column&lt;/button&gt;
         &lt;/div&gt;
       &lt;/div&gt;
+
       &lt;button style=&quot;width:100%;margin-top:14px&quot; onclick=&quot;saveBank()&quot;&gt;Save Bank Policy&lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
-  &lt;div class=&quot;modal&quot; id=&quot;suggestionModal&quot;&gt;
-    &lt;div class=&quot;modal-box&quot;&gt;
-      &lt;div class=&quot;modal-title&quot;&gt;&lt;h2&gt;Submit Suggestion&lt;/h2&gt;&lt;button class=&quot;gray&quot; onclick=&quot;closeModal(&#x27;suggestionModal&#x27;)&quot;&gt;Close&lt;/button&gt;&lt;/div&gt;
-      &lt;div class=&quot;form-grid&quot;&gt;
-        &lt;div&gt;&lt;label&gt;Submitter Name&lt;/label&gt;&lt;input id=&quot;sName&quot; placeholder=&quot;Agent name&quot; /&gt;&lt;/div&gt;
-        &lt;div&gt;&lt;label&gt;Bank Name&lt;/label&gt;&lt;input id=&quot;sBank&quot; placeholder=&quot;Public Bank&quot; /&gt;&lt;/div&gt;
-        &lt;div class=&quot;form-full&quot;&gt;&lt;label&gt;What changed?&lt;/label&gt;&lt;textarea id=&quot;sChange&quot; placeholder=&quot;Example: Public Bank can accept SSM less than 2 years if bank statement is strong...&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
-        &lt;div class=&quot;form-full&quot;&gt;&lt;label&gt;Source / Banker Name / Remark&lt;/label&gt;&lt;textarea id=&quot;sSource&quot; placeholder=&quot;Who said this? Any proof or special condition?&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;button style=&quot;width:100%;margin-top:14px&quot; onclick=&quot;saveSuggestion()&quot;&gt;Submit Suggestion&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
 &lt;script&gt;
+const API_URL = &quot;https://script.google.com/macros/s/AKfycbyRKNFnv44lCE0HSBRNRZQWAiSF82nI_iAUZor_YVXq11HPwB5O6T82szC_H0rWg6Yp_A/exec&quot;;
 const ADMIN_PASSWORD = &quot;00000&quot;;
-let adminMode = false;
 
-const BANK_NAMES = [
+let adminMode = false;
+let BANK_DATA = [];
+
+const DEFAULT_BANKS = [
   &quot;Maybank&quot;,
   &quot;CIMB Bank&quot;,
   &quot;Public Bank&quot;,
@@ -3037,376 +3031,460 @@ const BANK_NAMES = [
   &quot;MBSB Bank&quot;
 ];
 
-const defaultBanks = BANK_NAMES.map(name =&gt; ({
-  id: crypto.randomUUID(),
-  bankName: name,
-  policySections: [
-    {category:&#x27;Subsales&#x27;, rows:[
-      {label:&#x27;Case Type&#x27;, value:&#x27;Subsales / Purchase&#x27;},
-      {label:&#x27;SSM Requirement&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;DSR&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Documents Needed&#x27;, value:&#x27;To be updated&#x27;}
-    ]},
-    {category:&#x27;Refinance&#x27;, rows:[
-      {label:&#x27;Cash Out Rule&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Margin&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Tenure&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Remark&#x27;, value:&#x27;To be updated&#x27;}
-    ]},
-    {category:&#x27;SME Loan&#x27;, rows:[
-      {label:&#x27;Business Requirement&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Company Age&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Documents Needed&#x27;, value:&#x27;To be updated&#x27;}
-    ]},
-    {category:&#x27;Commercial Loan&#x27;, rows:[
-      {label:&#x27;Property Type&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Margin&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Remark&#x27;, value:&#x27;To be updated&#x27;}
-    ]},
-    {category:&#x27;Cash Out&#x27;, rows:[
-      {label:&#x27;Allowed / Not Allowed&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Purpose&#x27;, value:&#x27;To be updated&#x27;},
-      {label:&#x27;Special Condition&#x27;, value:&#x27;To be updated&#x27;}
-    ]}
-  ],
-  policyRows: [],
-  tags:&quot;New Bank Policy&quot;,
-  updatedAt:new Date().toISOString(),
-  updatedBy:&quot;Kiki&quot;
-}));
-
-function getData(key, fallback){
-  const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : fallback;
+function createBlankBank(name){
+  return {
+    id: crypto.randomUUID(),
+    bankName: name || &quot;&quot;,
+    updatedBy: &quot;Admin&quot;,
+    updatedAt: new Date().toISOString(),
+    policyRows: [
+      {label:&quot;DSR&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;Margin&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;SSM Requirement&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;Documents Needed&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;Remark&quot;, value:&quot;To be updated&quot;}
+    ]
+  };
 }
-function setData(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
-function banks(){ return getData(&#x27;bph_banks&#x27;, defaultBanks); }
-function suggestions(){ return getData(&#x27;bph_suggestions&#x27;, []); }
-function histories(){ return getData(&#x27;bph_histories&#x27;, []); }
+
 function init(){
-  const version = &#x27;v7_bank_product_categories_password00000&#x27;;
-  if(localStorage.getItem(&#x27;bph_version&#x27;) !== version){
-    setData(&#x27;bph_banks&#x27;, defaultBanks);
-    setData(&#x27;bph_suggestions&#x27;, []);
-    setData(&#x27;bph_histories&#x27;, []);
-    localStorage.setItem(&#x27;bph_version&#x27;, version);
-  }
-  if(!localStorage.getItem(&#x27;bph_banks&#x27;)) setData(&#x27;bph_banks&#x27;, defaultBanks);
+  setLoading(true, &quot;Loading data from Google Sheet...&quot;);
   renderAll();
-  document.getElementById(&#x27;memberViewBtn&#x27;).classList.add(&#x27;active-view&#x27;);
-  document.getElementById(&#x27;adminViewBtn&#x27;).classList.remove(&#x27;active-view&#x27;);
-  document.getElementById(&#x27;appRoot&#x27;).classList.remove(&#x27;admin-on&#x27;);
+  loadBanksFromSheet();
 }
 
-function renderAll(){ renderStats(); renderBanks(); renderSuggestions(); renderHistory(); }
+async function loadBanksFromSheet(){
+  setLoading(true, &quot;Loading data from Google Sheet...&quot;);
+  try{
+    const res = await fetch(API_URL + &quot;?action=getData&amp;ts=&quot; + Date.now());
+    const rows = await res.json();
+
+    if(Array.isArray(rows) &amp;&amp; rows.length){
+      BANK_DATA = convertSheetData(rows);
+    }else{
+      BANK_DATA = DEFAULT_BANKS.map(name =&gt; createBlankBank(name));
+    }
+
+    document.getElementById(&quot;lastLoadedText&quot;).textContent = &quot;Last loaded: &quot; + new Date().toLocaleString();
+    renderAll();
+  }catch(err){
+    console.error(err);
+    document.getElementById(&quot;lastLoadedText&quot;).textContent = &quot;Failed to load from Google Sheet. Please check Apps Script deployment.&quot;;
+    alert(&quot;Failed to load Google Sheet data. Please check your Apps Script Web App URL.&quot;);
+  }finally{
+    setLoading(false);
+  }
+}
+
+function convertSheetData(rows){
+  const grouped = {};
+
+  rows.forEach(r =&gt; {
+    const bankName = (r.bankName || &quot;&quot;).trim();
+    const columnName = (r.columnName || &quot;&quot;).trim();
+    const value = r.value || &quot;&quot;;
+
+    if(!bankName) return;
+
+    if(!grouped[bankName]){
+      grouped[bankName] = {
+        id: crypto.randomUUID(),
+        bankName,
+        updatedBy: &quot;Admin&quot;,
+        updatedAt: new Date().toISOString(),
+        policyRows: []
+      };
+    }
+
+    if(columnName || value){
+      grouped[bankName].policyRows.push({
+        label: columnName || &quot;Untitled Column&quot;,
+        value: value
+      });
+    }
+  });
+
+  return Object.values(grouped);
+}
+
+function convertBankDataToSheetRows(){
+  const finalData = [];
+
+  BANK_DATA.forEach(bank =&gt; {
+    (bank.policyRows || []).forEach(row =&gt; {
+      finalData.push({
+        bankName: bank.bankName || &quot;&quot;,
+        columnName: row.label || &quot;&quot;,
+        value: row.value || &quot;&quot;
+      });
+    });
+  });
+
+  return finalData;
+}
+
+async function saveAllToGoogleSheet(){
+  if(!adminMode) return alert(&quot;Admin password required&quot;);
+
+  setLoading(true, &quot;Saving to Google Sheet...&quot;);
+
+  const finalData = convertBankDataToSheetRows();
+
+  try{
+    await fetch(API_URL, {
+      method: &quot;POST&quot;,
+      mode: &quot;no-cors&quot;,
+      headers: {
+        &quot;Content-Type&quot;: &quot;text/plain;charset=utf-8&quot;
+      },
+      body: JSON.stringify({
+        action: &quot;saveData&quot;,
+        password: ADMIN_PASSWORD,
+        data: finalData
+      })
+    });
+
+    document.getElementById(&quot;lastLoadedText&quot;).textContent = &quot;Last saved: &quot; + new Date().toLocaleString();
+    alert(&quot;Saved to Google Sheet. Refresh after a few seconds if you want to confirm.&quot;);
+  }catch(err){
+    console.error(err);
+    alert(&quot;Save failed. Please check Apps Script permission / deployment.&quot;);
+  }finally{
+    setLoading(false);
+    renderAll();
+  }
+}
+
+function banks(){
+  return BANK_DATA;
+}
+
+function renderAll(){
+  renderStats();
+  renderBanks();
+}
 
 function renderStats(){
-  document.getElementById(&#x27;totalBanks&#x27;).textContent = banks().length;
-  document.getElementById(&#x27;pendingCount&#x27;).textContent = suggestions().filter(s=&gt;s.status===&#x27;Pending&#x27;).length;
-  document.getElementById(&#x27;historyCount&#x27;).textContent = histories().length;
+  document.getElementById(&quot;totalBanks&quot;).textContent = banks().length;
+  const totalFields = banks().reduce((sum,b)=&gt;sum + ((b.policyRows || []).length), 0);
+  document.getElementById(&quot;totalColumns&quot;).textContent = totalFields;
+  document.getElementById(&quot;syncStatus&quot;).textContent = &quot;LIVE&quot;;
 }
 
 function renderBanks(){
-  const grid = document.getElementById(&#x27;bankGrid&#x27;);
-  const bankQ = document.getElementById(&#x27;bankSearchInput&#x27;).value.toLowerCase();
-  const keywordQ = document.getElementById(&#x27;keywordSearchInput&#x27;).value.toLowerCase();
-  let list = banks().filter(b=&gt;{
-    const bankText = (b.bankName || &#x27;&#x27;).toLowerCase();
-    const allText = Object.values(b).join(&#x27; &#x27;).toLowerCase();
+  const grid = document.getElementById(&quot;bankGrid&quot;);
+  const bankQ = (document.getElementById(&quot;bankSearchInput&quot;)?.value || &quot;&quot;).toLowerCase();
+  const keywordQ = (document.getElementById(&quot;keywordSearchInput&quot;)?.value || &quot;&quot;).toLowerCase();
+
+  const list = banks().filter(b =&gt; {
+    const bankText = (b.bankName || &quot;&quot;).toLowerCase();
+    const allText = JSON.stringify(b).toLowerCase();
     return (!bankQ || bankText.includes(bankQ)) &amp;&amp; (!keywordQ || allText.includes(keywordQ));
   });
-  if(!list.length){ grid.innerHTML = &#x27;&lt;div class=&quot;empty card&quot;&gt;No bank policy found.&lt;/div&gt;&#x27;; return; }
-  grid.innerHTML = list.map(b=&gt;`
+
+  if(!list.length){
+    grid.innerHTML = '&lt;div class=&quot;empty card&quot;&gt;No bank policy found.&lt;/div&gt;';
+    return;
+  }
+
+  grid.innerHTML = list.map(b =&gt; `
     &lt;div class=&quot;card&quot;&gt;
       &lt;div class=&quot;card-head&quot;&gt;
         &lt;div class=&quot;bank-title-wrap&quot;&gt;
           &lt;div class=&quot;bank-logo&quot;&gt;${getBankLogoText(b.bankName)}&lt;/div&gt;
           &lt;div&gt;
-            &lt;div class=&quot;bank-name clickable&quot; onclick=&quot;openBankDetail(&#x27;${b.id}&#x27;)&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
-            &lt;div&gt;${b.tags.split(&#x27;,&#x27;).map(t=&gt;`&lt;span class=&quot;tag&quot;&gt;${esc(t.trim())}&lt;/span&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;
+            &lt;div class=&quot;bank-name clickable&quot; onclick=&quot;openBankDetail('${b.id}')&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
+            &lt;div&gt;&lt;span class=&quot;tag&quot;&gt;Bank Policy&lt;/span&gt;&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
+
       ${renderPolicyRows(b)}
-      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &#x27;-&#x27;)}&lt;/div&gt;
+
+      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &quot;-&quot;)}&lt;/div&gt;
+
       &lt;div class=&quot;card-actions admin-only&quot;&gt;
-        &lt;button onclick=&quot;editBank(&#x27;${b.id}&#x27;)&quot;&gt;Edit&lt;/button&gt;
-        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank(&#x27;${b.id}&#x27;)&quot;&gt;Delete&lt;/button&gt;
+        &lt;button onclick=&quot;editBank('${b.id}')&quot;&gt;Edit&lt;/button&gt;
+        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank('${b.id}')&quot;&gt;Delete&lt;/button&gt;
       &lt;/div&gt;
-    &lt;/div&gt;`).join(&#x27;&#x27;);
-}
-function info(label,value){return `&lt;div class=&quot;row&quot;&gt;&lt;b&gt;${label}&lt;/b&gt;${esc(value||&#x27;-&#x27;)}&lt;/div&gt;`}
-function getBankLogoText(name){
-  const map = {
-    &#x27;Maybank&#x27;:&#x27;MBB&#x27;,&#x27;CIMB Bank&#x27;:&#x27;CIMB&#x27;,&#x27;Public Bank&#x27;:&#x27;PBB&#x27;,&#x27;RHB Bank&#x27;:&#x27;RHB&#x27;,&#x27;Hong Leong Bank&#x27;:&#x27;HLB&#x27;,
-    &#x27;Alliance Bank Malaysia&#x27;:&#x27;ABMB&#x27;,&#x27;AmBank&#x27;:&#x27;AMB&#x27;,&#x27;Affin Bank&#x27;:&#x27;AFF&#x27;,&#x27;Bank Islam Malaysia&#x27;:&#x27;BIMB&#x27;,&#x27;Bank Rakyat&#x27;:&#x27;BR&#x27;,
-    &#x27;Bank Muamalat Malaysia&#x27;:&#x27;BMMB&#x27;,&#x27;HSBC Bank Malaysia&#x27;:&#x27;HSBC&#x27;,&#x27;UOB Bank Malaysia&#x27;:&#x27;UOB&#x27;,&#x27;OCBC Bank Malaysia&#x27;:&#x27;OCBC&#x27;,
-    &#x27;Standard Chartered Bank Malaysia&#x27;:&#x27;SCB&#x27;,&#x27;Bank Simpanan Nasional (BSN)&#x27;:&#x27;BSN&#x27;,&#x27;Agrobank&#x27;:&#x27;AGRO&#x27;,&#x27;MBSB Bank&#x27;:&#x27;MBSB&#x27;
-  };
-  return map[name] || String(name || &#x27;BANK&#x27;).split(&#x27; &#x27;).map(w=&gt;w[0]).join(&#x27;&#x27;).slice(0,4).toUpperCase();
-}
-function renderPolicyRows(b){
-  return renderPolicySections(b);
-}
-function normalizePolicySections(b){
-  if(b.policySections &amp;&amp; b.policySections.length) return b.policySections;
-  return [{category:&#x27;General Policy&#x27;, rows: normalizePolicyRows(b)}];
-}
-function renderPolicySections(b){
-  const sections = normalizePolicySections(b);
-  return `&lt;div class=&quot;category-tabs&quot;&gt;${sections.map((s,i)=&gt;`&lt;button class=&quot;gray category-tab ${i===0?&#x27;active-cat&#x27;:&#x27;&#x27;}&quot; onclick=&quot;showPolicyCategory(this,&#x27;cat_${b.id}_${i}&#x27;)&quot;&gt;${esc(s.category)}&lt;/button&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;` +
-    sections.map((s,i)=&gt;`&lt;div class=&quot;policy-category ${i===0?&#x27;active&#x27;:&#x27;&#x27;}&quot; id=&quot;cat_${b.id}_${i}&quot;&gt;
-      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Category&lt;/b&gt;${esc(s.category)}&lt;/div&gt;
-      ${s.rows.map(d=&gt;info(d.label,d.value)).join(&#x27;&#x27;)}
-    &lt;/div&gt;`).join(&#x27;&#x27;);
-}
-function showPolicyCategory(btn,id){
-  const box = btn.closest(&#x27;.card&#x27;);
-  box.querySelectorAll(&#x27;.policy-category&#x27;).forEach(x=&gt;x.classList.remove(&#x27;active&#x27;));
-  box.querySelectorAll(&#x27;.category-tab&#x27;).forEach(x=&gt;x.classList.remove(&#x27;active-cat&#x27;));
-  const target = box.querySelector(&#x27;#&#x27;+CSS.escape(id));
-  if(target) target.classList.add(&#x27;active&#x27;);
-  btn.classList.add(&#x27;active-cat&#x27;);
-}
-function normalizePolicyRows(b){
-  if(b.policyRows &amp;&amp; b.policyRows.length) return b.policyRows;
-  const rows = [];
-  if(b.caseTypes) rows.push({label:&#x27;Case Type&#x27;, value:b.caseTypes});
-  if(b.ssmReq) rows.push({label:&#x27;SSM Requirement&#x27;, value:b.ssmReq});
-  if(b.dsr) rows.push({label:&#x27;DSR&#x27;, value:b.dsr});
-  if(b.incomeCalc) rows.push({label:&#x27;Income Calculation&#x27;, value:b.incomeCalc});
-  if(b.margin) rows.push({label:&#x27;Margin&#x27;, value:b.margin});
-  if(b.creditRule) rows.push({label:&#x27;CCRIS / CTOS Rule&#x27;, value:b.creditRule});
-  if(b.masterTitle) rows.push({label:&#x27;Master Title Rule&#x27;, value:b.masterTitle});
-  if(b.awc) rows.push({label:&#x27;AWC Rule&#x27;, value:b.awc});
-  if(b.docs) rows.push({label:&#x27;Documents Needed&#x27;, value:b.docs});
-  if(b.remark) rows.push({label:&#x27;Internal Remark&#x27;, value:b.remark});
-  if(b.customDetails) rows.push(...b.customDetails);
-  return rows;
-}
-function esc(v){return String(v||&#x27;&#x27;).replace(/[&amp;&lt;&gt;&#x27;&quot;]/g,c=&gt;({&#x27;&amp;&#x27;:&#x27;&amp;amp;&#x27;,&#x27;&lt;&#x27;:&#x27;&amp;lt;&#x27;,&#x27;&gt;&#x27;:&#x27;&amp;gt;&#x27;,&#x27;\&#x27;&#x27;:&#x27;&amp;#39;&#x27;,&#x27;&quot;&#x27;:&#x27;&amp;quot;&#x27;}[c]));}
-function formatDate(v){ if(!v) return &#x27;-&#x27;; const d=new Date(v); return d.toISOString().slice(0,10); }
-
-function openModal(id){ document.getElementById(id).classList.add(&#x27;active&#x27;); }
-function closeModal(id){
-  document.getElementById(id).classList.remove(&#x27;active&#x27;);
-  if(id === &#x27;adminModal&#x27; &amp;&amp; !adminMode) document.body.classList.remove(&#x27;admin-lock-blur&#x27;);
-}
-function switchToMemberView(){
-  adminMode = false;
-  document.getElementById(&#x27;appRoot&#x27;).classList.remove(&#x27;admin-on&#x27;);
-  document.getElementById(&#x27;memberViewBtn&#x27;).classList.add(&#x27;active-view&#x27;);
-  document.getElementById(&#x27;adminViewBtn&#x27;).classList.remove(&#x27;active-view&#x27;);
-  showSectionById(&#x27;homeSection&#x27;);
-  openMemberPanel();
-}
-function openMemberPanel(){
-  document.getElementById(&#x27;memberPanel&#x27;).classList.add(&#x27;active&#x27;);
-  document.getElementById(&#x27;sideOverlay&#x27;).classList.add(&#x27;active&#x27;);
-}
-function closeMemberPanel(){
-  document.getElementById(&#x27;memberPanel&#x27;).classList.remove(&#x27;active&#x27;);
-  document.getElementById(&#x27;sideOverlay&#x27;).classList.remove(&#x27;active&#x27;);
-}
-function openAdminModal(){
-  closeMemberPanel();
-  document.body.classList.add(&#x27;admin-lock-blur&#x27;);
-  openModal(&#x27;adminModal&#x27;);
-}
-function checkAdmin(){
-  if(document.getElementById(&#x27;adminPassword&#x27;).value === ADMIN_PASSWORD){
-    adminMode = true;
-    document.body.classList.remove(&#x27;admin-lock-blur&#x27;);
-    document.getElementById(&#x27;appRoot&#x27;).classList.add(&#x27;admin-on&#x27;);
-    document.getElementById(&#x27;memberViewBtn&#x27;).classList.remove(&#x27;active-view&#x27;);
-    document.getElementById(&#x27;adminViewBtn&#x27;).classList.add(&#x27;active-view&#x27;);
-    closeModal(&#x27;adminModal&#x27;);
-    renderAll();
-    alert(&#x27;Admin Mode ON&#x27;);
-  } else alert(&#x27;Wrong password&#x27;);
-}
-
-function openBankModal(){
-  document.getElementById(&#x27;bankModalTitle&#x27;).textContent = &#x27;Add Bank Policy&#x27;;
-  document.getElementById(&#x27;bankId&#x27;).value=&#x27;&#x27;;
-  document.getElementById(&#x27;bankName&#x27;).value=&#x27;&#x27;;
-  document.getElementById(&#x27;updatedBy&#x27;).value=&#x27;Kiki&#x27;;
-  document.getElementById(&#x27;policySectionsBox&#x27;).innerHTML = &#x27;&#x27;;
-  [&#x27;Subsales&#x27;,&#x27;Refinance&#x27;,&#x27;SME Loan&#x27;,&#x27;Commercial Loan&#x27;,&#x27;Cash Out&#x27;].forEach(category=&gt;addPolicySection(category));
-  openModal(&#x27;bankModal&#x27;);
-}
-function editBank(id){
-  const b = banks().find(x=&gt;x.id===id); if(!b) return;
-  document.getElementById(&#x27;bankModalTitle&#x27;).textContent = &#x27;Edit Bank Policy&#x27;;
-  document.getElementById(&#x27;bankId&#x27;).value = b.id;
-  document.getElementById(&#x27;bankName&#x27;).value = b.bankName || &#x27;&#x27;;
-  document.getElementById(&#x27;updatedBy&#x27;).value = b.updatedBy || &#x27;Kiki&#x27;;
-  renderPolicySectionsForm(normalizePolicySections(b));
-  openModal(&#x27;bankModal&#x27;);
-}
-function saveBank(){
-  if(!adminMode) return alert(&#x27;Admin password required&#x27;);
-  const id = document.getElementById(&#x27;bankId&#x27;).value || crypto.randomUUID();
-  const old = banks().find(b=&gt;b.id===id);
-  const item = {
-    id,
-    bankName:val(&#x27;bankName&#x27;),
-    policySections:getPolicySectionsFromForm(),
-    policyRows:[],
-    tags:&#x27;Bank Policy&#x27;,
-    updatedBy:val(&#x27;updatedBy&#x27;) || &#x27;Admin&#x27;,
-    updatedAt:new Date().toISOString()
-  };
-  let list = banks();
-  if(old) list = list.map(b=&gt;b.id===id?item:b); else list.unshift(item);
-  setData(&#x27;bph_banks&#x27;, list);
-  addHistory(`${formatDate(new Date())} ${item.updatedBy} ${old?&#x27;updated&#x27;:&#x27;added&#x27;} ${item.bankName} policy`);
-  closeModal(&#x27;bankModal&#x27;); renderAll();
-}
-function val(id){return document.getElementById(id).value.trim();}
-function addPolicySection(category=&#x27;&#x27;, rows=[]){
-  const box = document.getElementById(&#x27;policySectionsBox&#x27;);
-  const section = document.createElement(&#x27;div&#x27;);
-  section.className = &#x27;policy-section-edit&#x27;;
-  section.style.border = &#x27;1px solid #e3edf8&#x27;;
-  section.style.borderRadius = &#x27;18px&#x27;;
-  section.style.padding = &#x27;12px&#x27;;
-  section.style.marginTop = &#x27;10px&#x27;;
-  section.innerHTML = `
-    &lt;div style=&quot;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center&quot;&gt;
-      &lt;input class=&quot;section-category&quot; placeholder=&quot;Category e.g. Subsales / SME Loan&quot; value=&quot;${esc(category)}&quot;&gt;
-      &lt;button type=&quot;button&quot; class=&quot;danger&quot; onclick=&quot;this.closest(&#x27;.policy-section-edit&#x27;).remove()&quot;&gt;Delete Category&lt;/button&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;section-rows&quot;&gt;&lt;/div&gt;
-    &lt;button type=&quot;button&quot; class=&quot;gray&quot; onclick=&quot;addPolicyRowToSection(this.closest(&#x27;.policy-section-edit&#x27;))&quot; style=&quot;margin-top:8px&quot;&gt;+ Add Row&lt;/button&gt;
-  `;
-  box.appendChild(section);
-  if(rows &amp;&amp; rows.length){ rows.forEach(r=&gt;addPolicyRowToSection(section,r.label,r.value)); }
-  else { addPolicyRowToSection(section,&#x27;&#x27;,&#x27;&#x27;); }
-}
-function addPolicyRowToSection(section,label=&#x27;&#x27;, value=&#x27;&#x27;){
-  const rowsBox = section.querySelector(&#x27;.section-rows&#x27;);
-  const row = document.createElement(&#x27;div&#x27;);
-  row.style.display = &#x27;grid&#x27;;
-  row.style.gridTemplateColumns = &#x27;1fr 1.8fr auto&#x27;;
-  row.style.gap = &#x27;8px&#x27;;
-  row.style.marginTop = &#x27;8px&#x27;;
-  row.className = &#x27;policy-row-edit&#x27;;
-  row.innerHTML = `&lt;input class=&quot;policy-label&quot; placeholder=&quot;Column name e.g. SSM Requirement&quot; value=&quot;${esc(label)}&quot;&gt;&lt;input class=&quot;policy-value&quot; placeholder=&quot;Policy detail&quot; value=&quot;${esc(value)}&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;danger&quot; onclick=&quot;this.parentElement.remove()&quot;&gt;Delete&lt;/button&gt;`;
-  rowsBox.appendChild(row);
-}
-function renderPolicySectionsForm(sections){
-  document.getElementById(&#x27;policySectionsBox&#x27;).innerHTML = &#x27;&#x27;;
-  (sections || []).forEach(s =&gt; addPolicySection(s.category, s.rows));
-}
-function getPolicySectionsFromForm(){
-  return [...document.querySelectorAll(&#x27;.policy-section-edit&#x27;)].map(section=&gt;({
-    category: section.querySelector(&#x27;.section-category&#x27;).value.trim(),
-    rows: [...section.querySelectorAll(&#x27;.policy-row-edit&#x27;)].map(row=&gt;({
-      label: row.querySelector(&#x27;.policy-label&#x27;).value.trim(),
-      value: row.querySelector(&#x27;.policy-value&#x27;).value.trim()
-    })).filter(d=&gt;d.label || d.value)
-  })).filter(s=&gt;s.category || s.rows.length);
-}
-function deleteBank(id){
-  if(!adminMode) return alert(&#x27;Admin password required&#x27;);
-  const b = banks().find(x=&gt;x.id===id); if(!b) return;
-  if(confirm(`Delete ${b.bankName}?`)){
-    setData(&#x27;bph_banks&#x27;, banks().filter(x=&gt;x.id!==id));
-    addHistory(`${formatDate(new Date())} Admin deleted ${b.bankName} policy`);
-    renderAll();
-  }
-}
-function addHistory(text){
-  const h = histories();
-  h.unshift({id:crypto.randomUUID(), text, createdAt:new Date().toISOString()});
-  setData(&#x27;bph_histories&#x27;, h);
+  `).join(&quot;&quot;);
 }
 
-function openSuggestionModal(){ openModal(&#x27;suggestionModal&#x27;); }
-function saveSuggestion(){
-  const s = {id:crypto.randomUUID(), submitter:val(&#x27;sName&#x27;), bank:val(&#x27;sBank&#x27;), change:val(&#x27;sChange&#x27;), source:val(&#x27;sSource&#x27;), status:&#x27;Pending&#x27;, createdAt:new Date().toISOString()};
-  if(!s.bank || !s.change) return alert(&#x27;Please fill bank name and changed rule.&#x27;);
-  const list = suggestions(); list.unshift(s); setData(&#x27;bph_suggestions&#x27;, list);
-  [&#x27;sName&#x27;,&#x27;sBank&#x27;,&#x27;sChange&#x27;,&#x27;sSource&#x27;].forEach(id=&gt;document.getElementById(id).value=&#x27;&#x27;);
-  closeModal(&#x27;suggestionModal&#x27;); renderAll(); alert(&#x27;Suggestion submitted. Pending admin approval.&#x27;);
+function renderPolicyRows(bank){
+  const rows = bank.policyRows || [];
+  if(!rows.length) return '&lt;div class=&quot;row&quot;&gt;&lt;b&gt;No Policy&lt;/b&gt;&lt;div&gt;No policy field yet.&lt;/div&gt;&lt;/div&gt;';
+
+  return rows.map(row =&gt; `
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;b&gt;${esc(row.label || &quot;Untitled Column&quot;)}&lt;/b&gt;
+      &lt;div&gt;${esc(row.value || &quot;-&quot;)}&lt;/div&gt;
+    &lt;/div&gt;
+  `).join(&quot;&quot;);
 }
-function renderSuggestions(){
-  const box = document.getElementById(&#x27;suggestionList&#x27;); const list = suggestions();
-  if(!list.length){ box.innerHTML=&#x27;&lt;div class=&quot;empty&quot;&gt;No suggestion yet.&lt;/div&gt;&#x27;; return; }
-  box.innerHTML = list.map(s=&gt;`
-    &lt;div class=&quot;suggestion ${s.status.toLowerCase()}&quot;&gt;
-      &lt;b&gt;${esc(s.bank)}&lt;/b&gt; &lt;span class=&quot;tag&quot;&gt;${esc(s.status)}&lt;/span&gt;&lt;br&gt;
-      &lt;b&gt;Submitter:&lt;/b&gt; ${esc(s.submitter||&#x27;-&#x27;)}&lt;br&gt;
-      &lt;b&gt;Change:&lt;/b&gt; ${esc(s.change)}&lt;br&gt;
-      &lt;b&gt;Source:&lt;/b&gt; ${esc(s.source||&#x27;-&#x27;)}&lt;br&gt;
-      &lt;b&gt;Date:&lt;/b&gt; ${formatDate(s.createdAt)}
-      &lt;div class=&quot;card-actions admin-only&quot;&gt;
-        &lt;button onclick=&quot;approveSuggestion(&#x27;${s.id}&#x27;)&quot;&gt;Approve&lt;/button&gt;
-        &lt;button class=&quot;danger&quot; onclick=&quot;rejectSuggestion(&#x27;${s.id}&#x27;)&quot;&gt;Reject&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;`).join(&#x27;&#x27;);
-}
-function approveSuggestion(id){ updateSuggestionStatus(id,&#x27;Approved&#x27;); }
-function rejectSuggestion(id){ updateSuggestionStatus(id,&#x27;Rejected&#x27;); }
-function updateSuggestionStatus(id,status){
-  if(!adminMode) return alert(&#x27;Admin password required&#x27;);
-  let list = suggestions(); const s = list.find(x=&gt;x.id===id); if(!s) return;
-  list = list.map(x=&gt;x.id===id?{...x,status}:x); setData(&#x27;bph_suggestions&#x27;, list);
-  addHistory(`${formatDate(new Date())} Admin ${status.toLowerCase()} suggestion for ${s.bank}`);
-  renderAll();
-}
+
 function openBankDetail(id){
-  const b = banks().find(x=&gt;x.id===id); if(!b) return;
-  const box = document.getElementById(&#x27;bankDetailBox&#x27;);
-  box.innerHTML = `
+  const b = banks().find(x =&gt; x.id === id);
+  if(!b) return;
+
+  document.getElementById(&quot;bankDetailBox&quot;).innerHTML = `
     &lt;div class=&quot;card&quot;&gt;
-      &lt;button class=&quot;gray&quot; onclick=&quot;showSectionById(&#x27;homeSection&#x27;)&quot; style=&quot;margin-bottom:14px&quot;&gt;← Back to Bank List&lt;/button&gt;
+      &lt;button class=&quot;gray&quot; onclick=&quot;showSectionById('homeSection')&quot; style=&quot;margin-bottom:14px&quot;&gt;← Back to Bank List&lt;/button&gt;
+
       &lt;div class=&quot;card-head&quot;&gt;
         &lt;div class=&quot;bank-title-wrap&quot;&gt;
           &lt;div class=&quot;bank-logo&quot;&gt;${getBankLogoText(b.bankName)}&lt;/div&gt;
           &lt;div&gt;
             &lt;div class=&quot;bank-name&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
-            &lt;div&gt;${b.tags.split(&#x27;,&#x27;).map(t=&gt;`&lt;span class=&quot;tag&quot;&gt;${esc(t.trim())}&lt;/span&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;
+            &lt;div&gt;&lt;span class=&quot;tag&quot;&gt;Bank Policy&lt;/span&gt;&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
+
       ${renderPolicyRows(b)}
-      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &#x27;-&#x27;)}&lt;/div&gt;
+
+      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &quot;-&quot;)}&lt;/div&gt;
+
       &lt;div class=&quot;card-actions admin-only&quot;&gt;
-        &lt;button onclick=&quot;editBank(&#x27;${b.id}&#x27;)&quot;&gt;Edit This Bank&lt;/button&gt;
-        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank(&#x27;${b.id}&#x27;); showSectionById(&#x27;homeSection&#x27;)&quot;&gt;Delete This Bank&lt;/button&gt;
+        &lt;button onclick=&quot;editBank('${b.id}')&quot;&gt;Edit This Bank&lt;/button&gt;
+        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank('${b.id}'); showSectionById('homeSection')&quot;&gt;Delete This Bank&lt;/button&gt;
       &lt;/div&gt;
-    &lt;/div&gt;`;
-  showSectionById(&#x27;bankDetailSection&#x27;);
+    &lt;/div&gt;
+  `;
+
+  showSectionById(&quot;bankDetailSection&quot;);
 }
+
+function openBankModal(){
+  document.getElementById(&quot;bankModalTitle&quot;).textContent = &quot;Add Bank Policy&quot;;
+  document.getElementById(&quot;bankId&quot;).value = &quot;&quot;;
+  document.getElementById(&quot;bankName&quot;).value = &quot;&quot;;
+  document.getElementById(&quot;updatedBy&quot;).value = &quot;Kiki&quot;;
+  document.getElementById(&quot;policyRowsBox&quot;).innerHTML = &quot;&quot;;
+
+  addPolicyRow(&quot;DSR&quot;, &quot;&quot;);
+  addPolicyRow(&quot;Margin&quot;, &quot;&quot;);
+  addPolicyRow(&quot;SSM Requirement&quot;, &quot;&quot;);
+  addPolicyRow(&quot;Documents Needed&quot;, &quot;&quot;);
+  addPolicyRow(&quot;Remark&quot;, &quot;&quot;);
+
+  openModal(&quot;bankModal&quot;);
+}
+
+function editBank(id){
+  const b = banks().find(x =&gt; x.id === id);
+  if(!b) return;
+
+  document.getElementById(&quot;bankModalTitle&quot;).textContent = &quot;Edit Bank Policy&quot;;
+  document.getElementById(&quot;bankId&quot;).value = b.id;
+  document.getElementById(&quot;bankName&quot;).value = b.bankName || &quot;&quot;;
+  document.getElementById(&quot;updatedBy&quot;).value = b.updatedBy || &quot;Kiki&quot;;
+  document.getElementById(&quot;policyRowsBox&quot;).innerHTML = &quot;&quot;;
+
+  (b.policyRows || []).forEach(row =&gt; addPolicyRow(row.label, row.value));
+
+  if(!(b.policyRows || []).length){
+    addPolicyRow(&quot;&quot;, &quot;&quot;);
+  }
+
+  openModal(&quot;bankModal&quot;);
+}
+
+function saveBank(){
+  if(!adminMode) return alert(&quot;Admin password required&quot;);
+
+  const id = document.getElementById(&quot;bankId&quot;).value || crypto.randomUUID();
+  const bankName = val(&quot;bankName&quot;);
+
+  if(!bankName) return alert(&quot;Please fill in bank name.&quot;);
+
+  const item = {
+    id,
+    bankName,
+    updatedBy: val(&quot;updatedBy&quot;) || &quot;Admin&quot;,
+    updatedAt: new Date().toISOString(),
+    policyRows: getPolicyRowsFromForm()
+  };
+
+  const existing = BANK_DATA.find(b =&gt; b.id === id);
+
+  if(existing){
+    BANK_DATA = BANK_DATA.map(b =&gt; b.id === id ? item : b);
+  }else{
+    BANK_DATA.unshift(item);
+  }
+
+  closeModal(&quot;bankModal&quot;);
+  renderAll();
+
+  const shouldSave = confirm(&quot;Bank policy updated on website. Save to Google Sheet now?&quot;);
+  if(shouldSave) saveAllToGoogleSheet();
+}
+
+function getPolicyRowsFromForm(){
+  return [...document.querySelectorAll(&quot;.policy-row-edit&quot;)].map(row =&gt; ({
+    label: row.querySelector(&quot;.policy-label&quot;).value.trim(),
+    value: row.querySelector(&quot;.policy-value&quot;).value.trim()
+  })).filter(row =&gt; row.label || row.value);
+}
+
+function addPolicyRow(label = &quot;&quot;, value = &quot;&quot;){
+  const box = document.getElementById(&quot;policyRowsBox&quot;);
+  const row = document.createElement(&quot;div&quot;);
+  row.className = &quot;policy-row-edit&quot;;
+  row.innerHTML = `
+    &lt;input class=&quot;policy-label&quot; placeholder=&quot;Column name e.g. DSR / Margin / Remark&quot; value=&quot;${escAttr(label)}&quot;&gt;
+    &lt;textarea class=&quot;policy-value&quot; placeholder=&quot;Policy detail&quot;&gt;${esc(value)}&lt;/textarea&gt;
+    &lt;button type=&quot;button&quot; class=&quot;danger&quot; onclick=&quot;this.parentElement.remove()&quot;&gt;Delete&lt;/button&gt;
+  `;
+  box.appendChild(row);
+}
+
+function deleteBank(id){
+  if(!adminMode) return alert(&quot;Admin password required&quot;);
+
+  const b = banks().find(x =&gt; x.id === id);
+  if(!b) return;
+
+  if(confirm(&quot;Delete &quot; + b.bankName + &quot;?&quot;)){
+    BANK_DATA = BANK_DATA.filter(x =&gt; x.id !== id);
+    renderAll();
+
+    const shouldSave = confirm(&quot;Deleted on website. Save deletion to Google Sheet now?&quot;);
+    if(shouldSave) saveAllToGoogleSheet();
+  }
+}
+
+function checkAdmin(){
+  if(document.getElementById(&quot;adminPassword&quot;).value === ADMIN_PASSWORD){
+    adminMode = true;
+    document.body.classList.remove(&quot;admin-lock-blur&quot;);
+    document.getElementById(&quot;appRoot&quot;).classList.add(&quot;admin-on&quot;);
+    document.getElementById(&quot;memberViewBtn&quot;).classList.remove(&quot;active-view&quot;);
+    document.getElementById(&quot;adminViewBtn&quot;).classList.add(&quot;active-view&quot;);
+    document.getElementById(&quot;adminPassword&quot;).value = &quot;&quot;;
+    closeModal(&quot;adminModal&quot;);
+    renderAll();
+    alert(&quot;Admin Mode ON&quot;);
+  }else{
+    alert(&quot;Wrong password&quot;);
+  }
+}
+
+function switchToMemberView(){
+  adminMode = false;
+  document.getElementById(&quot;appRoot&quot;).classList.remove(&quot;admin-on&quot;);
+  document.getElementById(&quot;memberViewBtn&quot;).classList.add(&quot;active-view&quot;);
+  document.getElementById(&quot;adminViewBtn&quot;).classList.remove(&quot;active-view&quot;);
+  showSectionById(&quot;homeSection&quot;);
+  renderAll();
+}
+
+function openAdminModal(){
+  document.body.classList.add(&quot;admin-lock-blur&quot;);
+  openModal(&quot;adminModal&quot;);
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add(&quot;active&quot;);
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove(&quot;active&quot;);
+  if(id === &quot;adminModal&quot; &amp;&amp; !adminMode){
+    document.body.classList.remove(&quot;admin-lock-blur&quot;);
+  }
+}
+
 function showSectionById(id){
-  document.querySelectorAll(&#x27;.section&#x27;).forEach(s=&gt;s.classList.remove(&#x27;active&#x27;));
-  document.getElementById(id).classList.add(&#x27;active&#x27;);
-  document.querySelectorAll(&#x27;.bottom-nav button&#x27;).forEach(b=&gt;b.classList.remove(&#x27;active&#x27;));
-  if(id === &#x27;homeSection&#x27;) document.querySelector(&#x27;.bottom-nav button&#x27;).classList.add(&#x27;active&#x27;);
+  document.querySelectorAll(&quot;.section&quot;).forEach(s =&gt; s.classList.remove(&quot;active&quot;));
+  document.getElementById(id).classList.add(&quot;active&quot;);
+
+  document.querySelectorAll(&quot;.bottom-nav button&quot;).forEach(b =&gt; b.classList.remove(&quot;active&quot;));
+  if(id === &quot;homeSection&quot;){
+    document.querySelector(&quot;.bottom-nav button&quot;).classList.add(&quot;active&quot;);
+  }
+
   renderAll();
 }
-function renderHistory(){ 
-  const box = document.getElementById(&#x27;historyList&#x27;); const list = histories();
-  if(!list.length){ box.innerHTML=&#x27;&lt;div class=&quot;empty&quot;&gt;No update history yet.&lt;/div&gt;&#x27;; return; }
-  box.innerHTML = list.map(h=&gt;`&lt;div class=&quot;history&quot;&gt;${esc(h.text)}&lt;br&gt;&lt;span style=&quot;color:#71839b;font-size:12px&quot;&gt;${new Date(h.createdAt).toLocaleString()}&lt;/span&gt;&lt;/div&gt;`).join(&#x27;&#x27;);
-}
-function showSection(id,btn){
-  document.querySelectorAll(&#x27;.section&#x27;).forEach(s=&gt;s.classList.remove(&#x27;active&#x27;));
-  document.getElementById(id).classList.add(&#x27;active&#x27;);
-  document.querySelectorAll(&#x27;.bottom-nav button&#x27;).forEach(b=&gt;b.classList.remove(&#x27;active&#x27;));
-  btn.classList.add(&#x27;active&#x27;);
+
+function showSection(id, btn){
+  document.querySelectorAll(&quot;.section&quot;).forEach(s =&gt; s.classList.remove(&quot;active&quot;));
+  document.getElementById(id).classList.add(&quot;active&quot;);
+
+  document.querySelectorAll(&quot;.bottom-nav button&quot;).forEach(b =&gt; b.classList.remove(&quot;active&quot;));
+  btn.classList.add(&quot;active&quot;);
+
   renderAll();
 }
+
+function setLoading(show, text){
+  const box = document.getElementById(&quot;loadingBox&quot;);
+  if(text) box.textContent = text;
+  box.classList.toggle(&quot;active&quot;, !!show);
+}
+
+function getBankLogoText(name){
+  const map = {
+    &quot;Maybank&quot;:&quot;MBB&quot;,
+    &quot;CIMB Bank&quot;:&quot;CIMB&quot;,
+    &quot;Public Bank&quot;:&quot;PBB&quot;,
+    &quot;RHB Bank&quot;:&quot;RHB&quot;,
+    &quot;Hong Leong Bank&quot;:&quot;HLB&quot;,
+    &quot;Alliance Bank Malaysia&quot;:&quot;ABMB&quot;,
+    &quot;AmBank&quot;:&quot;AMB&quot;,
+    &quot;Affin Bank&quot;:&quot;AFF&quot;,
+    &quot;Bank Islam Malaysia&quot;:&quot;BIMB&quot;,
+    &quot;Bank Rakyat&quot;:&quot;BR&quot;,
+    &quot;Bank Muamalat Malaysia&quot;:&quot;BMMB&quot;,
+    &quot;HSBC Bank Malaysia&quot;:&quot;HSBC&quot;,
+    &quot;UOB Bank Malaysia&quot;:&quot;UOB&quot;,
+    &quot;OCBC Bank Malaysia&quot;:&quot;OCBC&quot;,
+    &quot;Standard Chartered Bank Malaysia&quot;:&quot;SCB&quot;,
+    &quot;Bank Simpanan Nasional (BSN)&quot;:&quot;BSN&quot;,
+    &quot;Agrobank&quot;:&quot;AGRO&quot;,
+    &quot;MBSB Bank&quot;:&quot;MBSB&quot;
+  };
+  return map[name] || String(name || &quot;BANK&quot;).split(&quot; &quot;).map(w =&gt; w[0]).join(&quot;&quot;).slice(0,4).toUpperCase();
+}
+
+function formatDate(v){
+  if(!v) return &quot;-&quot;;
+  const d = new Date(v);
+  if(isNaN(d.getTime())) return &quot;-&quot;;
+  return d.toISOString().slice(0,10);
+}
+
+function val(id){
+  return document.getElementById(id).value.trim();
+}
+
+function esc(v){
+  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;'&quot;]/g, c =&gt; ({
+    &quot;&amp;&quot;:&quot;&amp;amp;&quot;,
+    &quot;&lt;&quot;:&quot;&amp;lt;&quot;,
+    &quot;&gt;&quot;:&quot;&amp;gt;&quot;,
+    &quot;'&quot;:&quot;&amp;#39;&quot;,
+    '&quot;':&quot;&amp;quot;&quot;
+  }[c]));
+}
+
+function escAttr(v){
+  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;&quot;']/g, c =&gt; ({
+    &quot;&amp;&quot;:&quot;&amp;amp;&quot;,
+    &quot;&lt;&quot;:&quot;&amp;lt;&quot;,
+    &quot;&gt;&quot;:&quot;&amp;gt;&quot;,
+    '&quot;':&quot;&amp;quot;&quot;,
+    &quot;'&quot;:&quot;&amp;#39;&quot;
+  }[c]));
+}
+
 init();
 &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-"></iframe>
+&lt;/html&gt;"></iframe>
         </div>
     </div>
-
 
     <div id="eligibilitySection" class="section">
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
