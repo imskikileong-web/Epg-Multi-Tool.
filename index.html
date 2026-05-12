@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-<link rel="icon" type="image/png" href="favicon.png">    
+    <link rel="icon" type="image/png" href="favicon.png">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -542,6 +542,46 @@ td:first-child{
         flex-direction:column;
     }
 }
+
+/* Bank Policy Fullscreen Member View */
+.bank-policy-fullscreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#f4f7fb;
+    padding:0;
+    margin:0;
+}
+.bank-policy-full-frame{
+    width:100%;
+    height:100vh;
+    border:0;
+    display:block;
+    background:#f4f7fb;
+}
+.bank-policy-back-btn{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:10000;
+    border:none;
+    border-radius:14px;
+    padding:12px 18px;
+    background:linear-gradient(135deg,#0f172a,#334155);
+    color:white;
+    cursor:pointer;
+    font-weight:900;
+    box-shadow:0 10px 25px rgba(15,23,42,.22);
+}
+@media(max-width:650px){
+    .bank-policy-back-btn{
+        top:12px;
+        right:12px;
+        padding:10px 14px;
+        font-size:12px;
+    }
+}
+
 </style>
 </head>
 
@@ -2830,6 +2870,1188 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
 
 
     <div id="newBankerKnowledgeSection" class="section">
+        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="embedded-module-wrap">
+            <iframe class="embedded-frame" title="New Banker Knowledge Hub" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+&lt;title&gt;New Banker Knowledge Hub&lt;/title&gt;
+
+&lt;style&gt;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7ff;color:#1f2937}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:#0f172a;color:white;padding:22px;position:fixed;height:100vh}
+.logo{font-size:22px;font-weight:800;margin-bottom:6px}
+.sub{font-size:13px;color:#cbd5e1;margin-bottom:24px}
+.nav button{width:100%;border:0;background:transparent;color:#cbd5e1;padding:13px 14px;border-radius:14px;text-align:left;cursor:pointer;font-weight:700;margin-bottom:8px}
+.nav button.active,.nav button:hover{background:#2563eb;color:white}
+.main{margin-left:260px;width:calc(100% - 260px);padding:24px}
+.topbar{background:white;border-radius:22px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.06);margin-bottom:20px}
+.topbar h1{margin:0;color:#0f172a}
+.topbar p{margin:8px 0 0;color:#6b7280}
+.notice{background:#fff7ed;color:#92400e;padding:14px;border-radius:16px;margin-bottom:18px;border:1px solid #fed7aa}
+.controls{display:grid;grid-template-columns:1fr 180px 180px;gap:12px;margin-bottom:20px}
+input,select{padding:13px;border:1px solid #d1d5db;border-radius:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;border-radius:20px;padding:18px}
+.stat h2{margin:0;font-size:30px}
+.stat p{margin:6px 0 0;color:#dbeafe}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:white;border-radius:22px;padding:18px;box-shadow:0 10px 25px rgba(0,0,0,.06);cursor:pointer;border:1px solid #e5e7eb}
+.card:hover{transform:translateY(-3px);transition:.2s;border-color:#2563eb}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:12px;font-weight:700;margin-right:5px;margin-bottom:5px}
+.card h3{color:#1d4ed8;margin:10px 0}
+.card p{line-height:1.5;color:#374151}
+.empty{background:white;padding:30px;border-radius:20px;text-align:center;color:#6b7280}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}
+.modal-box{background:white;width:100%;max-width:760px;border-radius:26px;padding:24px;max-height:85vh;overflow:auto}
+.close{float:right;border:0;background:#ef4444;color:white;padding:8px 12px;border-radius:10px;cursor:pointer}
+.detail-row{margin-top:16px;padding:14px;background:#f8fafc;border-radius:16px}
+.detail-row b{color:#0f172a}
+.copy-btn{border:0;background:#2563eb;color:white;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;margin-top:16px}
+@media(max-width:800px){
+  .sidebar{position:relative;width:100%;height:auto}
+  .app{display:block}
+  .main{margin-left:0;width:100%}
+  .controls{grid-template-columns:1fr}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div class=&quot;app&quot;&gt;
+
+&lt;aside class=&quot;sidebar&quot;&gt;
+  &lt;div class=&quot;logo&quot;&gt;🏦 Banker Hub&lt;/div&gt;
+  &lt;div class=&quot;sub&quot;&gt;Google Sheet API Version&lt;/div&gt;
+
+  &lt;div class=&quot;nav&quot;&gt;
+    &lt;button class=&quot;active&quot; onclick=&quot;setType(&#x27;&#x27;,this)&quot;&gt;📊 All Notes&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Terms&#x27;,this)&quot;&gt;📘 房贷俗语&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Checklist&#x27;,this)&quot;&gt;📄 Checklist&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;FAQ&#x27;,this)&quot;&gt;❓ FAQ&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Scripts&#x27;,this)&quot;&gt;💬 Scripts&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Workflow&#x27;,this)&quot;&gt;🔁 Workflow&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;
+
+&lt;main class=&quot;main&quot;&gt;
+
+  &lt;div class=&quot;topbar&quot;&gt;
+    &lt;h1&gt;New Banker Knowledge Hub&lt;/h1&gt;
+    &lt;p&gt;资料全部从 Google Sheet API 读取。新人只可以 View / Search / Copy。&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;notice&quot;&gt;
+    资料要修改，直接去 Google Sheet 改。Web refresh 后会读取最新资料。
+  &lt;/div&gt;
+
+  &lt;div class=&quot;stats&quot;&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalNotes&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Total Notes&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalTerms&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Terms&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalChecklist&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Checklist&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalScripts&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Scripts&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;controls&quot;&gt;
+    &lt;input id=&quot;searchInput&quot; placeholder=&quot;Search SPA, LO, CCRIS, DSR...&quot; oninput=&quot;renderCards()&quot;&gt;
+    &lt;select id=&quot;categoryFilter&quot; onchange=&quot;renderCards()&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;All Category&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;select id=&quot;tagFilter&quot; onchange=&quot;renderCards()&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;All Tags&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;cards&quot; class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;empty&quot;&gt;Loading Google Sheet API...&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/main&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;modal&quot; id=&quot;detailModal&quot;&gt;
+  &lt;div class=&quot;modal-box&quot;&gt;
+    &lt;button class=&quot;close&quot; onclick=&quot;closeModal()&quot;&gt;Close&lt;/button&gt;
+    &lt;div id=&quot;modalContent&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const SHEET_API_URL = &quot;https://script.google.com/macros/s/AKfycbyE1cmfDA5mpw1XIo_u-Kaa7Y7ohpoSTP4OGku6yAUTYxOWFRIkYwpZXbCRwHBRHMt6/exec&quot;;
+
+let allData = [];
+let currentType = &quot;&quot;;
+
+async function loadSheet(){
+  if(!SHEET_API_URL || SHEET_API_URL.includes(&quot;PASTE&quot;)){
+    document.getElementById(&quot;cards&quot;).innerHTML = `
+      &lt;div class=&quot;empty&quot;&gt;
+        Please paste your Apps Script /exec link inside SHEET_API_URL.
+      &lt;/div&gt;
+    `;
+    return;
+  }
+
+  try{
+    const res = await fetch(SHEET_API_URL);
+    const data = await res.json();
+
+    allData = data.filter(x =&gt; x.Title);
+
+    if(allData.length === 0){
+      throw new Error(&quot;No data found. Please check Google Sheet rows and headers.&quot;);
+    }
+
+    buildFilters();
+    renderStats();
+    renderCards();
+
+  }catch(e){
+    document.getElementById(&quot;cards&quot;).innerHTML = `
+      &lt;div class=&quot;empty&quot;&gt;
+        Cannot load Google Sheet API.&lt;br&gt;&lt;br&gt;
+        Please check:&lt;br&gt;
+        1. Apps Script deployed as Web App&lt;br&gt;
+        2. Execute as: Me&lt;br&gt;
+        3. Who has access: Anyone&lt;br&gt;
+        4. SHEET_API_URL is the /exec link&lt;br&gt;
+        5. Sheet tab name is correct in Apps Script
+      &lt;/div&gt;
+    `;
+    console.error(e);
+  }
+}
+
+function setType(type,btn){
+  currentType = type;
+  document.querySelectorAll(&quot;.nav button&quot;).forEach(b=&gt;b.classList.remove(&quot;active&quot;));
+  btn.classList.add(&quot;active&quot;);
+  renderCards();
+}
+
+function buildFilters(){
+  const categories = [...new Set(allData.map(x=&gt;x.Category).filter(Boolean))];
+  const tags = [...new Set(allData.flatMap(x=&gt;(x.Tags || &quot;&quot;).split(&quot;,&quot;).map(t=&gt;t.trim()).filter(Boolean)))];
+
+  document.getElementById(&quot;categoryFilter&quot;).innerHTML =
+    `&lt;option value=&quot;&quot;&gt;All Category&lt;/option&gt;` +
+    categories.map(c=&gt;`&lt;option value=&quot;${escapeHtml(c)}&quot;&gt;${escapeHtml(c)}&lt;/option&gt;`).join(&quot;&quot;);
+
+  document.getElementById(&quot;tagFilter&quot;).innerHTML =
+    `&lt;option value=&quot;&quot;&gt;All Tags&lt;/option&gt;` +
+    tags.map(t=&gt;`&lt;option value=&quot;${escapeHtml(t)}&quot;&gt;${escapeHtml(t)}&lt;/option&gt;`).join(&quot;&quot;);
+}
+
+function renderStats(){
+  document.getElementById(&quot;totalNotes&quot;).innerText = allData.length;
+  document.getElementById(&quot;totalTerms&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Terms&quot;).length;
+  document.getElementById(&quot;totalChecklist&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Checklist&quot;).length;
+  document.getElementById(&quot;totalScripts&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Scripts&quot;).length;
+}
+
+function renderCards(){
+  const keyword = document.getElementById(&quot;searchInput&quot;).value.toLowerCase();
+  const cat = document.getElementById(&quot;categoryFilter&quot;).value;
+  const tag = document.getElementById(&quot;tagFilter&quot;).value;
+
+  const data = allData.filter(x=&gt;{
+    const fullText = Object.values(x).join(&quot; &quot;).toLowerCase();
+    const tags = x.Tags || &quot;&quot;;
+
+    return (!currentType || x.Type === currentType)
+      &amp;&amp; (!cat || x.Category === cat)
+      &amp;&amp; (!tag || tags.includes(tag))
+      &amp;&amp; (!keyword || fullText.includes(keyword));
+  });
+
+  const box = document.getElementById(&quot;cards&quot;);
+
+  if(data.length === 0){
+    box.innerHTML = `&lt;div class=&quot;empty&quot;&gt;No result found.&lt;/div&gt;`;
+    return;
+  }
+
+  box.innerHTML = data.map(x=&gt;{
+    const realIndex = allData.indexOf(x);
+    return `
+      &lt;div class=&quot;card&quot; onclick=&quot;openDetail(${realIndex})&quot;&gt;
+        &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Type || &quot;Note&quot;)}&lt;/span&gt;
+        &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Category || &quot;General&quot;)}&lt;/span&gt;
+        &lt;h3&gt;${escapeHtml(x.Title || &quot;&quot;)}&lt;/h3&gt;
+        &lt;p&gt;${escapeHtml(x.ShortDesc || x.FullDesc || &quot;&quot;)}&lt;/p&gt;
+        &lt;small style=&quot;color:#6b7280;&quot;&gt;Click to view details&lt;/small&gt;
+      &lt;/div&gt;
+    `;
+  }).join(&quot;&quot;);
+}
+
+function openDetail(index){
+  const x = allData[index];
+
+  document.getElementById(&quot;modalContent&quot;).innerHTML = `
+    &lt;h2&gt;${escapeHtml(x.Title || &quot;&quot;)}&lt;/h2&gt;
+    &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Type || &quot;&quot;)}&lt;/span&gt;
+    &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Category || &quot;&quot;)}&lt;/span&gt;
+
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Short Description&lt;/b&gt;&lt;p&gt;${escapeHtml(x.ShortDesc || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Full Explanation&lt;/b&gt;&lt;p&gt;${escapeHtml(x.FullDesc || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Example&lt;/b&gt;&lt;p&gt;${escapeHtml(x.Example || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Tags&lt;/b&gt;&lt;p&gt;${escapeHtml(x.Tags || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Updated&lt;/b&gt;&lt;p&gt;${escapeHtml(x.UpdatedBy || &quot;-&quot;)} ${x.UpdatedDate ? &quot; | &quot; + escapeHtml(x.UpdatedDate) : &quot;&quot;}&lt;/p&gt;&lt;/div&gt;
+
+    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyDetail(${index})&quot;&gt;Copy This Note&lt;/button&gt;
+  `;
+
+  document.getElementById(&quot;detailModal&quot;).style.display = &quot;flex&quot;;
+}
+
+function closeModal(){
+  document.getElementById(&quot;detailModal&quot;).style.display = &quot;none&quot;;
+}
+
+function copyDetail(index){
+  const x = allData[index];
+
+  const text = `
+${x.Title || &quot;&quot;}
+
+${x.ShortDesc || &quot;&quot;}
+
+${x.FullDesc || &quot;&quot;}
+
+Example:
+${x.Example || &quot;&quot;}
+  `.trim();
+
+  navigator.clipboard.writeText(text);
+  alert(&quot;Copied.&quot;);
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll(&quot;&amp;&quot;,&quot;&amp;amp;&quot;)
+    .replaceAll(&quot;&lt;&quot;,&quot;&amp;lt;&quot;)
+    .replaceAll(&quot;&gt;&quot;,&quot;&amp;gt;&quot;)
+    .replaceAll(&#x27;&quot;&#x27;,&quot;&amp;quot;&quot;)
+    .replaceAll(&quot;&#x27;&quot;,&quot;&amp;#039;&quot;);
+}
+
+loadSheet();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+        </div>
+    </div>
+
+    
+
+<div id="bankPolicySection" class="section bank-policy-fullscreen">
+    <button class="bank-policy-back-btn" onclick="goBack()">← Back To Menu</button>
+    <iframe class="bank-policy-full-frame" title="Bank Policy Hub Member View" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+  &lt;title&gt;Bank Policy Hub - Google Sheet Version&lt;/title&gt;
+  &lt;style&gt;
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+    body{background:#f4f7fb;color:#172033;padding-bottom:80px}
+    header{background:linear-gradient(135deg,#0b4ea2,#0f7ad8);color:white;padding:22px 18px;border-radius:0 0 28px 28px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+    header h1{font-size:24px;margin-bottom:6px}
+    header p{font-size:14px;opacity:.9;line-height:1.5}
+    .container{max-width:1150px;margin:auto;padding:16px}
+    .top-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    button{border:none;border-radius:14px;padding:12px 14px;font-weight:800;cursor:pointer;background:#0b63ce;color:white;transition:.2s}
+    button:hover{opacity:.9;transform:translateY(-1px)}
+    button.gray{background:#eef3f9;color:#25324b}
+    button.danger{background:#d93025}
+    button.green{background:#139c5a}
+    button.white{background:white;color:#0b4ea2;border:1px solid #dbe7f5}
+    input,textarea{width:100%;padding:12px 13px;border:1px solid #d9e3ef;border-radius:13px;font-size:14px;outline:none;background:white}
+    textarea{min-height:78px;resize:vertical;line-height:1.45}
+    label{font-size:12px;font-weight:900;color:#5b6b83;margin-bottom:5px;display:block}
+    .member-btn{background:white!important;color:#0b4ea2!important;border:1px solid #dbe7f5!important}
+    .admin-btn{background:#0b63ce!important;color:white!important;border:1px solid #0b63ce!important}
+    .active-view{box-shadow:0 0 0 3px rgba(255,255,255,.35);transform:translateY(-1px)}
+    .admin-bar{display:none;background:linear-gradient(135deg,#10213d,#0b4ea2);color:white;padding:12px 16px;border-radius:18px;margin:12px 0;font-weight:800;font-size:13px;box-shadow:0 6px 18px rgba(11,78,162,.18)}
+    .admin-on .admin-bar{display:block}
+    .admin-only{display:none!important}
+    .admin-on .admin-only{display:none!important}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+    .stat{background:white;border-radius:18px;padding:14px;box-shadow:0 4px 16px rgba(20,45,80,.06)}
+    .stat .num{font-size:23px;font-weight:900;color:#0b4ea2}
+    .stat .label{font-size:12px;color:#6a7890;margin-top:4px}
+    .search-box{background:white;padding:14px;border-radius:20px;box-shadow:0 4px 16px rgba(20,45,80,.06);margin-bottom:14px}
+    .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+    .card{background:white;border-radius:22px;padding:16px;box-shadow:0 4px 18px rgba(20,45,80,.07);border:1px solid #edf2f7}
+    .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+    .bank-title-wrap{display:flex;align-items:center;gap:12px}
+    .bank-logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#eaf4ff,#d8eaff);color:#0b4ea2;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;letter-spacing:.3px;flex:0 0 auto;border:1px solid #d9e9fb}
+    .bank-name{font-size:20px;font-weight:900;color:#11223f}
+    .clickable{cursor:pointer}.clickable:hover{color:#0b63ce;text-decoration:underline}
+    .tag{display:inline-block;background:#eef6ff;color:#0b4ea2;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;margin:4px 3px 0 0}
+   .row{
+  padding:8px 0;
+  border-top:1px solid #eef2f7;
+  font-size:13px;
+  line-height:1.35;
+}
+
+.row div{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+    .row b{color:#344563;display:block;margin-bottom:3px;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
+    .card-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+    .card-actions button{padding:9px 12px;border-radius:11px;font-size:12px}
+    .empty{text-align:center;padding:30px;color:#75849a}
+    .status{font-size:12px;color:#6b7b92;margin-top:8px}
+    .loading{background:#fff8e7;color:#9a6500;padding:10px 12px;border-radius:14px;margin-bottom:12px;font-size:13px;font-weight:800;display:none}
+    .loading.active{display:block}
+    .modal{position:fixed;inset:0;background:rgba(7,18,38,.55);display:none;align-items:center;justify-content:center;padding:15px;z-index:20}
+    .modal.active{display:flex}
+    .modal-box{background:white;width:100%;max-width:780px;max-height:90vh;overflow:auto;border-radius:24px;padding:18px;box-shadow:0 18px 60px rgba(0,0,0,.25)}
+    .modal-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+    .modal-title h2{font-size:20px;color:#10213d}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-full{grid-column:1/-1}
+    .policy-row-edit{display:grid;grid-template-columns:1fr 1.8fr auto;gap:8px;margin-top:8px;align-items:start}
+    .edit-box{border:1px solid #e3edf8;border-radius:18px;padding:12px;margin-top:10px;background:#fbfdff}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e7edf5;display:flex;justify-content:space-around;padding:9px 5px;z-index:10}
+    .bottom-nav button{background:white;color:#5a6a82;font-size:12px;padding:8px 10px;border-radius:12px}
+    .bottom-nav button.active{background:#eaf4ff;color:#0b4ea2}
+    .section{display:none}.section.active{display:block}
+    body.admin-lock-blur header, body.admin-lock-blur main, body.admin-lock-blur nav{filter:blur(6px);pointer-events:none;user-select:none}
+    @media(max-width:650px){
+      header h1{font-size:21px}.stats{grid-template-columns:1fr}.form-grid,.filters,.top-actions,.policy-row-edit{grid-template-columns:1fr}.container{padding:12px}.card{border-radius:18px}
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Bank Policy Hub&lt;/h1&gt;
+    &lt;p&gt;Central bank policy knowledge base. Data is managed from Google Sheet.&lt;/p&gt;
+    &lt;/header&gt;
+
+  &lt;main class=&quot;container&quot; id=&quot;appRoot&quot;&gt;
+    &lt;div id=&quot;loadingBox&quot; class=&quot;loading&quot;&gt;Loading data from Google Sheet...&lt;/div&gt;
+
+    &lt;section id=&quot;homeSection&quot; class=&quot;section active&quot;&gt;
+      &lt;div class=&quot;stats&quot;&gt;
+        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;totalBanks&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Total Banks&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;totalColumns&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Total Policy Fields&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;num&quot; id=&quot;syncStatus&quot;&gt;LIVE&lt;/div&gt;&lt;div class=&quot;label&quot;&gt;Google Sheet Sync&lt;/div&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;search-box&quot;&gt;
+        &lt;div class=&quot;filters&quot;&gt;
+          &lt;input id=&quot;bankSearchInput&quot; placeholder=&quot;Search bank name: Public Bank, CIMB, Maybank...&quot; oninput=&quot;renderBanks()&quot; /&gt;
+          &lt;input id=&quot;keywordSearchInput&quot; placeholder=&quot;Search keyword: DSR, SSM, margin, document...&quot; oninput=&quot;renderBanks()&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;status&quot; id=&quot;lastLoadedText&quot;&gt;Data source: Google Sheet&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;toolbar&quot;&gt;&lt;button class=&quot;gray&quot; onclick=&quot;loadBanksFromSheet()&quot;&gt;Refresh Data&lt;/button&gt;&lt;/div&gt;
+
+      &lt;div class=&quot;bank-grid&quot; id=&quot;bankGrid&quot;&gt;&lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id=&quot;bankDetailSection&quot; class=&quot;section&quot;&gt;
+      &lt;div id=&quot;bankDetailBox&quot;&gt;&lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  
+  &lt;nav class=&quot;bottom-nav&quot;&gt;
+    &lt;button class=&quot;active&quot; onclick=&quot;showSection(&#x27;homeSection&#x27;,this)&quot;&gt;Banks&lt;/button&gt;
+    &lt;button onclick=&quot;loadBanksFromSheet()&quot;&gt;Refresh&lt;/button&gt;
+  &lt;/nav&gt;
+&lt;script&gt;
+const API_URL = &quot;https://script.google.com/macros/s/AKfycbyRKNFnv44lCE0HSBRNRZQWAiSF82nI_iAUZor_YVXq11HPwB5O6T82szC_H0rWg6Yp_A/exec&quot;;
+const ADMIN_PASSWORD = &quot;&quot;; // Admin removed: member view only
+
+let adminMode = false; // locked as member view only
+let BANK_DATA = [];
+
+const DEFAULT_BANKS = [
+  &quot;Maybank&quot;,
+  &quot;CIMB Bank&quot;,
+  &quot;Public Bank&quot;,
+  &quot;RHB Bank&quot;,
+  &quot;Hong Leong Bank&quot;,
+  &quot;Alliance Bank Malaysia&quot;,
+  &quot;AmBank&quot;,
+  &quot;Affin Bank&quot;,
+  &quot;Bank Islam Malaysia&quot;,
+  &quot;Bank Rakyat&quot;,
+  &quot;Bank Muamalat Malaysia&quot;,
+  &quot;HSBC Bank Malaysia&quot;,
+  &quot;UOB Bank Malaysia&quot;,
+  &quot;OCBC Bank Malaysia&quot;,
+  &quot;Standard Chartered Bank Malaysia&quot;,
+  &quot;Bank Simpanan Nasional (BSN)&quot;,
+  &quot;Agrobank&quot;,
+  &quot;MBSB Bank&quot;
+];
+
+function createBlankBank(name){
+  return {
+    id: crypto.randomUUID(),
+    bankName: name || &quot;&quot;,
+    updatedBy: &quot;Admin&quot;,
+    updatedAt: new Date().toISOString(),
+    policyRows: [
+      {label:&quot;DSR&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;Margin&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;SSM Requirement&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;Documents Needed&quot;, value:&quot;To be updated&quot;},
+      {label:&quot;Remark&quot;, value:&quot;To be updated&quot;}
+    ]
+  };
+}
+
+function init(){
+  setLoading(true, &quot;Loading data from Google Sheet...&quot;);
+  renderAll();
+  loadBanksFromSheet();
+}
+
+async function loadBanksFromSheet(){
+  setLoading(true, &quot;Loading data from Google Sheet...&quot;);
+  try{
+    const res = await fetch(API_URL + &quot;?action=getData&amp;ts=&quot; + Date.now());
+    const rows = await res.json();
+
+    if(Array.isArray(rows) &amp;&amp; rows.length){
+      BANK_DATA = convertSheetData(rows);
+    }else{
+      BANK_DATA = DEFAULT_BANKS.map(name =&gt; createBlankBank(name));
+    }
+
+    document.getElementById(&quot;lastLoadedText&quot;).textContent = &quot;Last loaded: &quot; + new Date().toLocaleString();
+    renderAll();
+  }catch(err){
+    console.error(err);
+    document.getElementById(&quot;lastLoadedText&quot;).textContent = &quot;Failed to load from Google Sheet. Please check Apps Script deployment.&quot;;
+    alert(&quot;Failed to load Google Sheet data. Please check your Apps Script Web App URL.&quot;);
+  }finally{
+    setLoading(false);
+  }
+}
+
+function convertSheetData(rows){
+  const grouped = {};
+
+  rows.forEach(r =&gt; {
+    const bankName = (r.bankName || &quot;&quot;).trim();
+    const columnName = (r.columnName || &quot;&quot;).trim();
+    const value = r.value || &quot;&quot;;
+
+    if(!bankName) return;
+
+    if(!grouped[bankName]){
+      grouped[bankName] = {
+        id: crypto.randomUUID(),
+        bankName,
+        updatedBy: &quot;Admin&quot;,
+        updatedAt: new Date().toISOString(),
+        policyRows: []
+      };
+    }
+
+    if(columnName || value){
+      grouped[bankName].policyRows.push({
+        label: columnName || &quot;Untitled Column&quot;,
+        value: value
+      });
+    }
+  });
+
+  return Object.values(grouped);
+}
+
+function convertBankDataToSheetRows(){
+  const finalData = [];
+
+  BANK_DATA.forEach(bank =&gt; {
+    (bank.policyRows || []).forEach(row =&gt; {
+      finalData.push({
+        bankName: bank.bankName || &quot;&quot;,
+        columnName: row.label || &quot;&quot;,
+        value: row.value || &quot;&quot;
+      });
+    });
+  });
+
+  return finalData;
+}
+
+async function saveAllToGoogleSheet(){
+  if(!adminMode) return alert(&quot;Admin password required&quot;);
+
+  setLoading(true, &quot;Saving to Google Sheet...&quot;);
+
+  const finalData = convertBankDataToSheetRows();
+
+  try{
+    await fetch(API_URL, {
+      method: &quot;POST&quot;,
+      mode: &quot;no-cors&quot;,
+      headers: {
+        &quot;Content-Type&quot;: &quot;text/plain;charset=utf-8&quot;
+      },
+      body: JSON.stringify({
+        action: &quot;saveData&quot;,
+        password: ADMIN_PASSWORD,
+        data: finalData
+      })
+    });
+
+    document.getElementById(&quot;lastLoadedText&quot;).textContent = &quot;Last saved: &quot; + new Date().toLocaleString();
+    alert(&quot;Saved to Google Sheet. Refresh after a few seconds if you want to confirm.&quot;);
+  }catch(err){
+    console.error(err);
+    alert(&quot;Save failed. Please check Apps Script permission / deployment.&quot;);
+  }finally{
+    setLoading(false);
+    renderAll();
+  }
+}
+
+function banks(){
+  return BANK_DATA;
+}
+
+function renderAll(){
+  renderStats();
+  renderBanks();
+}
+
+function renderStats(){
+  document.getElementById(&quot;totalBanks&quot;).textContent = banks().length;
+  const totalFields = banks().reduce((sum,b)=&gt;sum + ((b.policyRows || []).length), 0);
+  document.getElementById(&quot;totalColumns&quot;).textContent = totalFields;
+  document.getElementById(&quot;syncStatus&quot;).textContent = &quot;LIVE&quot;;
+}
+
+function renderBanks(){
+  const grid = document.getElementById(&quot;bankGrid&quot;);
+  const bankQ = (document.getElementById(&quot;bankSearchInput&quot;)?.value || &quot;&quot;).toLowerCase();
+  const keywordQ = (document.getElementById(&quot;keywordSearchInput&quot;)?.value || &quot;&quot;).toLowerCase();
+
+  const list = banks().filter(b =&gt; {
+    const bankText = (b.bankName || &quot;&quot;).toLowerCase();
+    const allText = JSON.stringify(b).toLowerCase();
+    return (!bankQ || bankText.includes(bankQ)) &amp;&amp; (!keywordQ || allText.includes(keywordQ));
+  });
+
+  if(!list.length){
+    grid.innerHTML = &#x27;&lt;div class=&quot;empty card&quot;&gt;No bank policy found.&lt;/div&gt;&#x27;;
+    return;
+  }
+
+  grid.innerHTML = list.map(b =&gt; `
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-head&quot;&gt;
+        &lt;div class=&quot;bank-title-wrap&quot;&gt;
+          &lt;div class=&quot;bank-logo&quot;&gt;${getBankLogoText(b.bankName)}&lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;bank-name clickable&quot; onclick=&quot;openBankDetail(&#x27;${b.id}&#x27;)&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
+            &lt;div&gt;&lt;span class=&quot;tag&quot;&gt;Bank Policy&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      ${renderPolicyRows(b)}
+
+      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &quot;-&quot;)}&lt;/div&gt;
+
+      &lt;div class=&quot;card-actions admin-only&quot;&gt;
+        &lt;button onclick=&quot;editBank(&#x27;${b.id}&#x27;)&quot;&gt;Edit&lt;/button&gt;
+        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank(&#x27;${b.id}&#x27;)&quot;&gt;Delete&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `).join(&quot;&quot;);
+}
+
+function renderPolicyRows(bank){
+  const rows = bank.policyRows || [];
+  if(!rows.length) return &#x27;&lt;div class=&quot;row&quot;&gt;&lt;b&gt;No Policy&lt;/b&gt;&lt;div&gt;No policy field yet.&lt;/div&gt;&lt;/div&gt;&#x27;;
+
+  return rows.map(row =&gt; `
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;b&gt;${esc(row.label || &quot;Untitled Column&quot;)}&lt;/b&gt;
+      &lt;div&gt;${esc(row.value || &quot;-&quot;)}&lt;/div&gt;
+    &lt;/div&gt;
+  `).join(&quot;&quot;);
+}
+
+function openBankDetail(id){
+  const b = banks().find(x =&gt; x.id === id);
+  if(!b) return;
+
+  document.getElementById(&quot;bankDetailBox&quot;).innerHTML = `
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;button class=&quot;gray&quot; onclick=&quot;showSectionById(&#x27;homeSection&#x27;)&quot; style=&quot;margin-bottom:14px&quot;&gt;← Back to Bank List&lt;/button&gt;
+
+      &lt;div class=&quot;card-head&quot;&gt;
+        &lt;div class=&quot;bank-title-wrap&quot;&gt;
+          &lt;div class=&quot;bank-logo&quot;&gt;${getBankLogoText(b.bankName)}&lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;bank-name&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
+            &lt;div&gt;&lt;span class=&quot;tag&quot;&gt;Bank Policy&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      ${renderPolicyRows(b)}
+
+      &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &quot;-&quot;)}&lt;/div&gt;
+
+      &lt;div class=&quot;card-actions admin-only&quot;&gt;
+        &lt;button onclick=&quot;editBank(&#x27;${b.id}&#x27;)&quot;&gt;Edit This Bank&lt;/button&gt;
+        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank(&#x27;${b.id}&#x27;); showSectionById(&#x27;homeSection&#x27;)&quot;&gt;Delete This Bank&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `;
+
+  showSectionById(&quot;bankDetailSection&quot;);
+}
+
+function openBankModal(){
+  document.getElementById(&quot;bankModalTitle&quot;).textContent = &quot;Add Bank Policy&quot;;
+  document.getElementById(&quot;bankId&quot;).value = &quot;&quot;;
+  document.getElementById(&quot;bankName&quot;).value = &quot;&quot;;
+  document.getElementById(&quot;updatedBy&quot;).value = &quot;Kiki&quot;;
+  document.getElementById(&quot;policyRowsBox&quot;).innerHTML = &quot;&quot;;
+
+  addPolicyRow(&quot;DSR&quot;, &quot;&quot;);
+  addPolicyRow(&quot;Margin&quot;, &quot;&quot;);
+  addPolicyRow(&quot;SSM Requirement&quot;, &quot;&quot;);
+  addPolicyRow(&quot;Documents Needed&quot;, &quot;&quot;);
+  addPolicyRow(&quot;Remark&quot;, &quot;&quot;);
+
+  openModal(&quot;bankModal&quot;);
+}
+
+function editBank(id){
+  const b = banks().find(x =&gt; x.id === id);
+  if(!b) return;
+
+  document.getElementById(&quot;bankModalTitle&quot;).textContent = &quot;Edit Bank Policy&quot;;
+  document.getElementById(&quot;bankId&quot;).value = b.id;
+  document.getElementById(&quot;bankName&quot;).value = b.bankName || &quot;&quot;;
+  document.getElementById(&quot;updatedBy&quot;).value = b.updatedBy || &quot;Kiki&quot;;
+  document.getElementById(&quot;policyRowsBox&quot;).innerHTML = &quot;&quot;;
+
+  (b.policyRows || []).forEach(row =&gt; addPolicyRow(row.label, row.value));
+
+  if(!(b.policyRows || []).length){
+    addPolicyRow(&quot;&quot;, &quot;&quot;);
+  }
+
+  openModal(&quot;bankModal&quot;);
+}
+
+function saveBank(){
+  if(!adminMode) return alert(&quot;Admin password required&quot;);
+
+  const id = document.getElementById(&quot;bankId&quot;).value || crypto.randomUUID();
+  const bankName = val(&quot;bankName&quot;);
+
+  if(!bankName) return alert(&quot;Please fill in bank name.&quot;);
+
+  const item = {
+    id,
+    bankName,
+    updatedBy: val(&quot;updatedBy&quot;) || &quot;Admin&quot;,
+    updatedAt: new Date().toISOString(),
+    policyRows: getPolicyRowsFromForm()
+  };
+
+  const existing = BANK_DATA.find(b =&gt; b.id === id);
+
+  if(existing){
+    BANK_DATA = BANK_DATA.map(b =&gt; b.id === id ? item : b);
+  }else{
+    BANK_DATA.unshift(item);
+  }
+
+  closeModal(&quot;bankModal&quot;);
+  renderAll();
+
+  const shouldSave = confirm(&quot;Bank policy updated on website. Save to Google Sheet now?&quot;);
+  if(shouldSave) saveAllToGoogleSheet();
+}
+
+function getPolicyRowsFromForm(){
+  return [...document.querySelectorAll(&quot;.policy-row-edit&quot;)].map(row =&gt; ({
+    label: row.querySelector(&quot;.policy-label&quot;).value.trim(),
+    value: row.querySelector(&quot;.policy-value&quot;).value.trim()
+  })).filter(row =&gt; row.label || row.value);
+}
+
+function addPolicyRow(label = &quot;&quot;, value = &quot;&quot;){
+  const box = document.getElementById(&quot;policyRowsBox&quot;);
+  const row = document.createElement(&quot;div&quot;);
+  row.className = &quot;policy-row-edit&quot;;
+  row.innerHTML = `
+    &lt;input class=&quot;policy-label&quot; placeholder=&quot;Column name e.g. DSR / Margin / Remark&quot; value=&quot;${escAttr(label)}&quot;&gt;
+    &lt;textarea class=&quot;policy-value&quot; placeholder=&quot;Policy detail&quot;&gt;${esc(value)}&lt;/textarea&gt;
+    &lt;button type=&quot;button&quot; class=&quot;danger&quot; onclick=&quot;this.parentElement.remove()&quot;&gt;Delete&lt;/button&gt;
+  `;
+  box.appendChild(row);
+}
+
+function deleteBank(id){
+  if(!adminMode) return alert(&quot;Admin password required&quot;);
+
+  const b = banks().find(x =&gt; x.id === id);
+  if(!b) return;
+
+  if(confirm(&quot;Delete &quot; + b.bankName + &quot;?&quot;)){
+    BANK_DATA = BANK_DATA.filter(x =&gt; x.id !== id);
+    renderAll();
+
+    const shouldSave = confirm(&quot;Deleted on website. Save deletion to Google Sheet now?&quot;);
+    if(shouldSave) saveAllToGoogleSheet();
+  }
+}
+
+function checkAdmin(){
+  if(document.getElementById(&quot;adminPassword&quot;).value === ADMIN_PASSWORD){
+    adminMode = true;
+    document.body.classList.remove(&quot;admin-lock-blur&quot;);
+    document.getElementById(&quot;appRoot&quot;).classList.add(&quot;admin-on&quot;);
+    document.getElementById(&quot;memberViewBtn&quot;).classList.remove(&quot;active-view&quot;);
+    document.getElementById(&quot;adminViewBtn&quot;).classList.add(&quot;active-view&quot;);
+    document.getElementById(&quot;adminPassword&quot;).value = &quot;&quot;;
+    closeModal(&quot;adminModal&quot;);
+    renderAll();
+    alert(&quot;Admin Mode ON&quot;);
+  }else{
+    alert(&quot;Wrong password&quot;);
+  }
+}
+
+function switchToMemberView(){
+  adminMode = false;
+  document.getElementById(&quot;appRoot&quot;).classList.remove(&quot;admin-on&quot;);
+  document.getElementById(&quot;memberViewBtn&quot;).classList.add(&quot;active-view&quot;);
+  document.getElementById(&quot;adminViewBtn&quot;).classList.remove(&quot;active-view&quot;);
+  showSectionById(&quot;homeSection&quot;);
+  renderAll();
+}
+
+function openAdminModal(){
+  document.body.classList.add(&quot;admin-lock-blur&quot;);
+  openModal(&quot;adminModal&quot;);
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add(&quot;active&quot;);
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove(&quot;active&quot;);
+  if(id === &quot;adminModal&quot; &amp;&amp; !adminMode){
+    document.body.classList.remove(&quot;admin-lock-blur&quot;);
+  }
+}
+
+function showSectionById(id){
+  document.querySelectorAll(&quot;.section&quot;).forEach(s =&gt; s.classList.remove(&quot;active&quot;));
+  document.getElementById(id).classList.add(&quot;active&quot;);
+
+  document.querySelectorAll(&quot;.bottom-nav button&quot;).forEach(b =&gt; b.classList.remove(&quot;active&quot;));
+  if(id === &quot;homeSection&quot;){
+    document.querySelector(&quot;.bottom-nav button&quot;).classList.add(&quot;active&quot;);
+  }
+
+  renderAll();
+}
+
+function showSection(id, btn){
+  document.querySelectorAll(&quot;.section&quot;).forEach(s =&gt; s.classList.remove(&quot;active&quot;));
+  document.getElementById(id).classList.add(&quot;active&quot;);
+
+  document.querySelectorAll(&quot;.bottom-nav button&quot;).forEach(b =&gt; b.classList.remove(&quot;active&quot;));
+  btn.classList.add(&quot;active&quot;);
+
+  renderAll();
+}
+
+function setLoading(show, text){
+  const box = document.getElementById(&quot;loadingBox&quot;);
+  if(text) box.textContent = text;
+  box.classList.toggle(&quot;active&quot;, !!show);
+}
+
+function getBankLogoText(name){
+  const map = {
+    &quot;Maybank&quot;:&quot;MBB&quot;,
+    &quot;CIMB Bank&quot;:&quot;CIMB&quot;,
+    &quot;Public Bank&quot;:&quot;PBB&quot;,
+    &quot;RHB Bank&quot;:&quot;RHB&quot;,
+    &quot;Hong Leong Bank&quot;:&quot;HLB&quot;,
+    &quot;Alliance Bank Malaysia&quot;:&quot;ABMB&quot;,
+    &quot;AmBank&quot;:&quot;AMB&quot;,
+    &quot;Affin Bank&quot;:&quot;AFF&quot;,
+    &quot;Bank Islam Malaysia&quot;:&quot;BIMB&quot;,
+    &quot;Bank Rakyat&quot;:&quot;BR&quot;,
+    &quot;Bank Muamalat Malaysia&quot;:&quot;BMMB&quot;,
+    &quot;HSBC Bank Malaysia&quot;:&quot;HSBC&quot;,
+    &quot;UOB Bank Malaysia&quot;:&quot;UOB&quot;,
+    &quot;OCBC Bank Malaysia&quot;:&quot;OCBC&quot;,
+    &quot;Standard Chartered Bank Malaysia&quot;:&quot;SCB&quot;,
+    &quot;Bank Simpanan Nasional (BSN)&quot;:&quot;BSN&quot;,
+    &quot;Agrobank&quot;:&quot;AGRO&quot;,
+    &quot;MBSB Bank&quot;:&quot;MBSB&quot;
+  };
+  return map[name] || String(name || &quot;BANK&quot;).split(&quot; &quot;).map(w =&gt; w[0]).join(&quot;&quot;).slice(0,4).toUpperCase();
+}
+
+function formatDate(v){
+  if(!v) return &quot;-&quot;;
+  const d = new Date(v);
+  if(isNaN(d.getTime())) return &quot;-&quot;;
+  return d.toISOString().slice(0,10);
+}
+
+function val(id){
+  return document.getElementById(id).value.trim();
+}
+
+function esc(v){
+  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;&#x27;&quot;]/g, c =&gt; ({
+    &quot;&amp;&quot;:&quot;&amp;amp;&quot;,
+    &quot;&lt;&quot;:&quot;&amp;lt;&quot;,
+    &quot;&gt;&quot;:&quot;&amp;gt;&quot;,
+    &quot;&#x27;&quot;:&quot;&amp;#39;&quot;,
+    &#x27;&quot;&#x27;:&quot;&amp;quot;&quot;
+  }[c]));
+}
+
+function escAttr(v){
+  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;&quot;&#x27;]/g, c =&gt; ({
+    &quot;&amp;&quot;:&quot;&amp;amp;&quot;,
+    &quot;&lt;&quot;:&quot;&amp;lt;&quot;,
+    &quot;&gt;&quot;:&quot;&amp;gt;&quot;,
+    &#x27;&quot;&#x27;:&quot;&amp;quot;&quot;,
+    &quot;&#x27;&quot;:&quot;&amp;#39;&quot;
+  }[c]));
+}
+
+init();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</div>
+
+<div id="newBankerKnowledgeSection" class="section">
+        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="embedded-module-wrap">
+            <iframe class="embedded-frame" title="New Banker Knowledge Hub" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+&lt;title&gt;New Banker Knowledge Hub&lt;/title&gt;
+
+&lt;style&gt;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7ff;color:#1f2937}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:#0f172a;color:white;padding:22px;position:fixed;height:100vh}
+.logo{font-size:22px;font-weight:800;margin-bottom:6px}
+.sub{font-size:13px;color:#cbd5e1;margin-bottom:24px}
+.nav button{width:100%;border:0;background:transparent;color:#cbd5e1;padding:13px 14px;border-radius:14px;text-align:left;cursor:pointer;font-weight:700;margin-bottom:8px}
+.nav button.active,.nav button:hover{background:#2563eb;color:white}
+.main{margin-left:260px;width:calc(100% - 260px);padding:24px}
+.topbar{background:white;border-radius:22px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.06);margin-bottom:20px}
+.topbar h1{margin:0;color:#0f172a}
+.topbar p{margin:8px 0 0;color:#6b7280}
+.notice{background:#fff7ed;color:#92400e;padding:14px;border-radius:16px;margin-bottom:18px;border:1px solid #fed7aa}
+.controls{display:grid;grid-template-columns:1fr 180px 180px;gap:12px;margin-bottom:20px}
+input,select{padding:13px;border:1px solid #d1d5db;border-radius:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;border-radius:20px;padding:18px}
+.stat h2{margin:0;font-size:30px}
+.stat p{margin:6px 0 0;color:#dbeafe}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:white;border-radius:22px;padding:18px;box-shadow:0 10px 25px rgba(0,0,0,.06);cursor:pointer;border:1px solid #e5e7eb}
+.card:hover{transform:translateY(-3px);transition:.2s;border-color:#2563eb}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:12px;font-weight:700;margin-right:5px;margin-bottom:5px}
+.card h3{color:#1d4ed8;margin:10px 0}
+.card p{line-height:1.5;color:#374151}
+.empty{background:white;padding:30px;border-radius:20px;text-align:center;color:#6b7280}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}
+.modal-box{background:white;width:100%;max-width:760px;border-radius:26px;padding:24px;max-height:85vh;overflow:auto}
+.close{float:right;border:0;background:#ef4444;color:white;padding:8px 12px;border-radius:10px;cursor:pointer}
+.detail-row{margin-top:16px;padding:14px;background:#f8fafc;border-radius:16px}
+.detail-row b{color:#0f172a}
+.copy-btn{border:0;background:#2563eb;color:white;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;margin-top:16px}
+@media(max-width:800px){
+  .sidebar{position:relative;width:100%;height:auto}
+  .app{display:block}
+  .main{margin-left:0;width:100%}
+  .controls{grid-template-columns:1fr}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div class=&quot;app&quot;&gt;
+
+&lt;aside class=&quot;sidebar&quot;&gt;
+  &lt;div class=&quot;logo&quot;&gt;🏦 Banker Hub&lt;/div&gt;
+  &lt;div class=&quot;sub&quot;&gt;Google Sheet API Version&lt;/div&gt;
+
+  &lt;div class=&quot;nav&quot;&gt;
+    &lt;button class=&quot;active&quot; onclick=&quot;setType(&#x27;&#x27;,this)&quot;&gt;📊 All Notes&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Terms&#x27;,this)&quot;&gt;📘 房贷俗语&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Checklist&#x27;,this)&quot;&gt;📄 Checklist&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;FAQ&#x27;,this)&quot;&gt;❓ FAQ&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Scripts&#x27;,this)&quot;&gt;💬 Scripts&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Workflow&#x27;,this)&quot;&gt;🔁 Workflow&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;
+
+&lt;main class=&quot;main&quot;&gt;
+
+  &lt;div class=&quot;topbar&quot;&gt;
+    &lt;h1&gt;New Banker Knowledge Hub&lt;/h1&gt;
+    &lt;p&gt;资料全部从 Google Sheet API 读取。新人只可以 View / Search / Copy。&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;notice&quot;&gt;
+    资料要修改，直接去 Google Sheet 改。Web refresh 后会读取最新资料。
+  &lt;/div&gt;
+
+  &lt;div class=&quot;stats&quot;&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalNotes&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Total Notes&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalTerms&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Terms&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalChecklist&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Checklist&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalScripts&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Scripts&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;controls&quot;&gt;
+    &lt;input id=&quot;searchInput&quot; placeholder=&quot;Search SPA, LO, CCRIS, DSR...&quot; oninput=&quot;renderCards()&quot;&gt;
+    &lt;select id=&quot;categoryFilter&quot; onchange=&quot;renderCards()&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;All Category&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;select id=&quot;tagFilter&quot; onchange=&quot;renderCards()&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;All Tags&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;cards&quot; class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;empty&quot;&gt;Loading Google Sheet API...&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/main&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;modal&quot; id=&quot;detailModal&quot;&gt;
+  &lt;div class=&quot;modal-box&quot;&gt;
+    &lt;button class=&quot;close&quot; onclick=&quot;closeModal()&quot;&gt;Close&lt;/button&gt;
+    &lt;div id=&quot;modalContent&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const SHEET_API_URL = &quot;https://script.google.com/macros/s/AKfycbyE1cmfDA5mpw1XIo_u-Kaa7Y7ohpoSTP4OGku6yAUTYxOWFRIkYwpZXbCRwHBRHMt6/exec&quot;;
+
+let allData = [];
+let currentType = &quot;&quot;;
+
+async function loadSheet(){
+  if(!SHEET_API_URL || SHEET_API_URL.includes(&quot;PASTE&quot;)){
+    document.getElementById(&quot;cards&quot;).innerHTML = `
+      &lt;div class=&quot;empty&quot;&gt;
+        Please paste your Apps Script /exec link inside SHEET_API_URL.
+      &lt;/div&gt;
+    `;
+    return;
+  }
+
+  try{
+    const res = await fetch(SHEET_API_URL);
+    const data = await res.json();
+
+    allData = data.filter(x =&gt; x.Title);
+
+    if(allData.length === 0){
+      throw new Error(&quot;No data found. Please check Google Sheet rows and headers.&quot;);
+    }
+
+    buildFilters();
+    renderStats();
+    renderCards();
+
+  }catch(e){
+    document.getElementById(&quot;cards&quot;).innerHTML = `
+      &lt;div class=&quot;empty&quot;&gt;
+        Cannot load Google Sheet API.&lt;br&gt;&lt;br&gt;
+        Please check:&lt;br&gt;
+        1. Apps Script deployed as Web App&lt;br&gt;
+        2. Execute as: Me&lt;br&gt;
+        3. Who has access: Anyone&lt;br&gt;
+        4. SHEET_API_URL is the /exec link&lt;br&gt;
+        5. Sheet tab name is correct in Apps Script
+      &lt;/div&gt;
+    `;
+    console.error(e);
+  }
+}
+
+function setType(type,btn){
+  currentType = type;
+  document.querySelectorAll(&quot;.nav button&quot;).forEach(b=&gt;b.classList.remove(&quot;active&quot;));
+  btn.classList.add(&quot;active&quot;);
+  renderCards();
+}
+
+function buildFilters(){
+  const categories = [...new Set(allData.map(x=&gt;x.Category).filter(Boolean))];
+  const tags = [...new Set(allData.flatMap(x=&gt;(x.Tags || &quot;&quot;).split(&quot;,&quot;).map(t=&gt;t.trim()).filter(Boolean)))];
+
+  document.getElementById(&quot;categoryFilter&quot;).innerHTML =
+    `&lt;option value=&quot;&quot;&gt;All Category&lt;/option&gt;` +
+    categories.map(c=&gt;`&lt;option value=&quot;${escapeHtml(c)}&quot;&gt;${escapeHtml(c)}&lt;/option&gt;`).join(&quot;&quot;);
+
+  document.getElementById(&quot;tagFilter&quot;).innerHTML =
+    `&lt;option value=&quot;&quot;&gt;All Tags&lt;/option&gt;` +
+    tags.map(t=&gt;`&lt;option value=&quot;${escapeHtml(t)}&quot;&gt;${escapeHtml(t)}&lt;/option&gt;`).join(&quot;&quot;);
+}
+
+function renderStats(){
+  document.getElementById(&quot;totalNotes&quot;).innerText = allData.length;
+  document.getElementById(&quot;totalTerms&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Terms&quot;).length;
+  document.getElementById(&quot;totalChecklist&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Checklist&quot;).length;
+  document.getElementById(&quot;totalScripts&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Scripts&quot;).length;
+}
+
+function renderCards(){
+  const keyword = document.getElementById(&quot;searchInput&quot;).value.toLowerCase();
+  const cat = document.getElementById(&quot;categoryFilter&quot;).value;
+  const tag = document.getElementById(&quot;tagFilter&quot;).value;
+
+  const data = allData.filter(x=&gt;{
+    const fullText = Object.values(x).join(&quot; &quot;).toLowerCase();
+    const tags = x.Tags || &quot;&quot;;
+
+    return (!currentType || x.Type === currentType)
+      &amp;&amp; (!cat || x.Category === cat)
+      &amp;&amp; (!tag || tags.includes(tag))
+      &amp;&amp; (!keyword || fullText.includes(keyword));
+  });
+
+  const box = document.getElementById(&quot;cards&quot;);
+
+  if(data.length === 0){
+    box.innerHTML = `&lt;div class=&quot;empty&quot;&gt;No result found.&lt;/div&gt;`;
+    return;
+  }
+
+  box.innerHTML = data.map(x=&gt;{
+    const realIndex = allData.indexOf(x);
+    return `
+      &lt;div class=&quot;card&quot; onclick=&quot;openDetail(${realIndex})&quot;&gt;
+        &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Type || &quot;Note&quot;)}&lt;/span&gt;
+        &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Category || &quot;General&quot;)}&lt;/span&gt;
+        &lt;h3&gt;${escapeHtml(x.Title || &quot;&quot;)}&lt;/h3&gt;
+        &lt;p&gt;${escapeHtml(x.ShortDesc || x.FullDesc || &quot;&quot;)}&lt;/p&gt;
+        &lt;small style=&quot;color:#6b7280;&quot;&gt;Click to view details&lt;/small&gt;
+      &lt;/div&gt;
+    `;
+  }).join(&quot;&quot;);
+}
+
+function openDetail(index){
+  const x = allData[index];
+
+  document.getElementById(&quot;modalContent&quot;).innerHTML = `
+    &lt;h2&gt;${escapeHtml(x.Title || &quot;&quot;)}&lt;/h2&gt;
+    &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Type || &quot;&quot;)}&lt;/span&gt;
+    &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Category || &quot;&quot;)}&lt;/span&gt;
+
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Short Description&lt;/b&gt;&lt;p&gt;${escapeHtml(x.ShortDesc || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Full Explanation&lt;/b&gt;&lt;p&gt;${escapeHtml(x.FullDesc || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Example&lt;/b&gt;&lt;p&gt;${escapeHtml(x.Example || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Tags&lt;/b&gt;&lt;p&gt;${escapeHtml(x.Tags || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Updated&lt;/b&gt;&lt;p&gt;${escapeHtml(x.UpdatedBy || &quot;-&quot;)} ${x.UpdatedDate ? &quot; | &quot; + escapeHtml(x.UpdatedDate) : &quot;&quot;}&lt;/p&gt;&lt;/div&gt;
+
+    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyDetail(${index})&quot;&gt;Copy This Note&lt;/button&gt;
+  `;
+
+  document.getElementById(&quot;detailModal&quot;).style.display = &quot;flex&quot;;
+}
+
+function closeModal(){
+  document.getElementById(&quot;detailModal&quot;).style.display = &quot;none&quot;;
+}
+
+function copyDetail(index){
+  const x = allData[index];
+
+  const text = `
+${x.Title || &quot;&quot;}
+
+${x.ShortDesc || &quot;&quot;}
+
+${x.FullDesc || &quot;&quot;}
+
+Example:
+${x.Example || &quot;&quot;}
+  `.trim();
+
+  navigator.clipboard.writeText(text);
+  alert(&quot;Copied.&quot;);
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll(&quot;&amp;&quot;,&quot;&amp;amp;&quot;)
+    .replaceAll(&quot;&lt;&quot;,&quot;&amp;lt;&quot;)
+    .replaceAll(&quot;&gt;&quot;,&quot;&amp;gt;&quot;)
+    .replaceAll(&#x27;&quot;&#x27;,&quot;&amp;quot;&quot;)
+    .replaceAll(&quot;&#x27;&quot;,&quot;&amp;#039;&quot;);
+}
+
+loadSheet();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+        </div>
+    </div>
+
+    
+<div id="bankPolicySection" class="section">
+    <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+
+    <div style="
+        min-height:50vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    ">
+    </div>
+</div>
+
+<div id="newBankerKnowledgeSection" class="section">
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="New Banker Knowledge Hub" srcdoc="&lt;!DOCTYPE html&gt;
