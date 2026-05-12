@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-
+<link rel="icon" type="image/png" href="favicon.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -582,6 +581,290 @@ td:first-child{
     }
 }
 
+
+/* UX Polish: smoother module entry + mobile improvement */
+.section{
+    animation: sectionFadeIn .22s ease;
+}
+@keyframes sectionFadeIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+.back-btn{
+    position:sticky;
+    top:14px;
+    z-index:50;
+    box-shadow:0 10px 24px rgba(15,23,42,.18);
+}
+.embedded-module-wrap,
+.amort-app,
+.page-wrap{
+    background:rgba(255,255,255,.62);
+    border:1px solid rgba(191,219,254,.75);
+    border-radius:28px;
+    padding:18px;
+    box-shadow:0 16px 44px rgba(15,42,107,.10);
+}
+.card{
+    position:relative;
+    overflow:hidden;
+}
+.card:after{
+    content:"";
+    position:absolute;
+    inset:auto 18px 14px 18px;
+    height:3px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#2563eb,transparent);
+    opacity:.18;
+}
+.card:active{
+    transform:scale(.985);
+}
+
+/* Make Bank Policy less abrupt */
+.bank-policy-fullscreen{
+    background:
+        radial-gradient(circle at top left, rgba(37,99,235,.16), transparent 34%),
+        linear-gradient(180deg,#eef5ff,#ffffff 55%,#f8fbff)!important;
+    padding:18px!important;
+}
+.bank-policy-full-frame{
+    border-radius:26px!important;
+    box-shadow:0 16px 44px rgba(15,42,107,.13)!important;
+    border:1px solid rgba(191,219,254,.8)!important;
+    height:calc(100vh - 36px)!important;
+}
+.bank-policy-back-btn{
+    left:32px!important;
+    right:auto!important;
+}
+
+/* Mobile view polish */
+@media(max-width:768px){
+    .header{
+        padding:22px 18px 26px;
+        border-radius:0 0 22px 22px;
+    }
+    .header h1{font-size:23px;}
+    .header p{font-size:13px;}
+    .container{padding:14px;}
+    .menu{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+        gap:12px;
+    }
+    .card{
+        min-height:118px;
+        padding:16px;
+        border-radius:20px;
+    }
+    .icon{
+        width:46px;
+        height:46px;
+        font-size:27px;
+        border-radius:15px;
+        margin-bottom:10px;
+    }
+    .title{font-size:14px;line-height:1.25;}
+    .desc{font-size:11px;line-height:1.35;}
+    .back-btn{
+        width:100%;
+        margin-bottom:12px;
+        border-radius:16px;
+        padding:12px 14px;
+    }
+    .embedded-module-wrap,
+    .amort-app,
+    .page-wrap{
+        padding:10px;
+        border-radius:20px;
+    }
+    .embedded-frame{
+        min-height:calc(100vh - 155px);
+        border-radius:18px;
+    }
+    .bank-policy-fullscreen{
+        padding:10px!important;
+    }
+    .bank-policy-full-frame{
+        height:calc(100vh - 20px)!important;
+        border-radius:20px!important;
+    }
+    .bank-policy-back-btn{
+        top:14px!important;
+        left:14px!important;
+        right:auto!important;
+        padding:10px 13px!important;
+        font-size:12px!important;
+    }
+}
+@media(max-width:430px){
+    .menu{
+        grid-template-columns:1fr 1fr;
+    }
+    .card{
+        padding:14px 12px;
+    }
+}
+
+
+/* ===== Visible SaaS Dashboard Upgrade ===== */
+.header{
+    position:relative;
+    overflow:hidden;
+    border-radius:0 0 34px 34px;
+}
+.header:before{
+    content:"";
+    position:absolute;
+    width:360px;
+    height:360px;
+    right:-110px;
+    top:-160px;
+    background:rgba(255,255,255,.12);
+    border-radius:50%;
+}
+.header:after{
+    content:"EPG OS";
+    position:absolute;
+    right:34px;
+    bottom:22px;
+    font-size:54px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:rgba(255,255,255,.08);
+}
+.header h1,.header p{position:relative;z-index:1}
+.container{margin-top:-14px}
+.menu{
+    gap:20px;
+}
+.card{
+    min-height:160px;
+    border-radius:28px;
+    background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(248,251,255,.9));
+    border:1px solid rgba(147,197,253,.8);
+}
+.card:hover{
+    transform:translateY(-8px) scale(1.012);
+}
+.card .icon{
+    background:linear-gradient(135deg,#dbeafe,#eff6ff);
+    box-shadow:inset 0 0 0 1px rgba(37,99,235,.08);
+}
+.card .title{
+    font-size:17px;
+}
+.card .desc{
+    padding-right:34px;
+}
+.module-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:12px;
+    padding:5px 9px;
+    border-radius:999px;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+}
+.badge-live{background:#dcfce7;color:#166534}
+.badge-maintenance{background:#fef3c7;color:#92400e}
+.badge-coming{background:#e0e7ff;color:#3730a3}
+.badge-tool{background:#dbeafe;color:#1d4ed8}
+
+.section{
+    animation:bigPanelIn .28s ease;
+}
+@keyframes bigPanelIn{
+    from{opacity:0;transform:translateY(18px) scale(.985)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+.module-shell{
+    background:rgba(255,255,255,.74);
+    border:1px solid rgba(147,197,253,.82);
+    border-radius:30px;
+    padding:16px;
+    box-shadow:0 20px 55px rgba(15,42,107,.14);
+}
+.module-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    background:linear-gradient(135deg,#061b4a,#0f2a6b 55%,#2563eb);
+    color:white;
+    padding:18px 20px;
+    border-radius:24px;
+    margin-bottom:16px;
+    box-shadow:0 12px 28px rgba(15,42,107,.20);
+}
+.module-topbar h2{
+    margin:0;
+    font-size:20px;
+}
+.module-topbar p{
+    margin:5px 0 0;
+    color:#dbeafe;
+    font-size:12px;
+}
+.back-btn{
+    background:white!important;
+    color:#0f2a6b!important;
+    margin:0!important;
+    box-shadow:0 8px 20px rgba(15,23,42,.18)!important;
+}
+.esc-hint{
+    font-size:11px;
+    opacity:.85;
+    white-space:nowrap;
+}
+.embedded-module-wrap,
+.amort-app,
+.page-wrap{
+    border-radius:0!important;
+    padding:0!important;
+    box-shadow:none!important;
+    background:transparent!important;
+    border:0!important;
+}
+.embedded-frame{
+    border-radius:24px!important;
+    border:1px solid rgba(191,219,254,.9)!important;
+}
+
+/* Bank Policy fullscreen improved */
+.bank-policy-back-btn{
+    background:white!important;
+    color:#0f2a6b!important;
+}
+.bank-policy-fullscreen:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at top left, rgba(37,99,235,.18), transparent 35%),
+        linear-gradient(180deg,#eef5ff,#ffffff);
+    z-index:-1;
+}
+@media(max-width:768px){
+    .container{margin-top:0}
+    .header:after{font-size:34px;right:18px;bottom:18px}
+    .menu{gap:13px}
+    .card{min-height:145px;border-radius:22px}
+    .module-shell{padding:10px;border-radius:22px}
+    .module-topbar{
+        flex-direction:column;
+        align-items:stretch;
+        border-radius:20px;
+        padding:15px;
+    }
+    .back-btn{width:100%}
+    .esc-hint{display:none}
+}
+
 </style>
 </head>
 
@@ -600,73 +883,94 @@ td:first-child{
             <div class="icon">🏠</div>
             <div class="title">Refinance Calculator</div>
             <div class="desc">Product On Maintenance</div>
+            <div class="module-badge badge-maintenance">MAINTENANCE</div>
         </div>
 
         <div class="card" onclick="openSection('mortgagePackageSection')">
             <div class="icon">📊</div>
             <div class="title">Mortgage Package Comparison Pro</div>
             <div class="desc">Bank package comparison module</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('incomeSection')">
             <div class="icon">💼</div>
             <div class="title">Income Calculation</div>
             <div class="desc">Income tracking and commission calculation</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('bookingSection')">
             <div class="icon">📝</div>
             <div class="title">Booking Form Maker</div>
             <div class="desc">Auto-fill booking form and export PDF</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('insuranceSection')">
             <div class="icon">🛡️</div>
             <div class="title">Insurance Compare</div>
             <div class="desc">One-page insurance proposal comparison</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('amortizationSection')">
             <div class="icon">📊</div>
             <div class="title">Amortization Calculator</div>
             <div class="desc">Monthly / yearly loan schedule</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('bankPolicySection')">
             <div class="icon">🏦</div>
             <div class="title">Bank Policy</div>
             <div class="desc">Bank policy hub and internal notes</div>
+            <div class="module-badge badge-live">SHEET LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('newBankerKnowledgeSection')">
             <div class="icon">🎓</div>
             <div class="title">New Banker Knowledge Hub</div>
             <div class="desc">房贷俗语 / Checklist / FAQ / Scripts / Workflow</div>
+            <div class="module-badge badge-live">SHEET LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('eligibilitySection')">
             <div class="icon">✅</div>
             <div class="title">Check Eligibility</div>
             <div class="desc">Single / joint loan eligibility checker</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('propertyCostSection')">
             <div class="icon">🧾</div>
             <div class="title">Property Cost Estimator</div>
             <div class="desc">Subsale / refinance legal cost estimator</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
         <div class="card" onclick="openSection('bankFilterSection')">
             <div class="icon">🏛️</div>
             <div class="title">Bank Filter Form</div>
             <div class="desc">Filter case / bank strategy board</div>
+            <div class="module-badge badge-live">LIVE</div>
         </div>
 
     </div>
 
     <div id="refinanceSection" class="section">
 
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>🏠 Refinance Calculator</h2>
+                <p>Product currently under maintenance</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
 
         <div class="embedded-module-wrap">
             <div style="
@@ -691,6 +995,8 @@ td:first-child{
         </div>
 
     </div>
+        </div>
+
 
 
 
@@ -698,7 +1004,17 @@ td:first-child{
 
 
     <div id="mortgagePackageSection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>📊 Mortgage Package Comparison Pro</h2>
+                <p>Compare bank packages in one clean workspace</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Mortgage Package Comparison Pro" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -1177,9 +1493,21 @@ addPackage();
         </div>
     </div>
 
+        </div>
+
     <div id="amortizationSection" class="section">
 
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>📊 Amortization Calculator</h2>
+                <p>Monthly / yearly loan schedule with cleaner workspace</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
 
         <div class="amort-app">
 
@@ -1321,9 +1649,21 @@ addPackage();
 
     </div>
 
+        </div>
+
 
     <div id="incomeSection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>💼 Income Calculation</h2>
+                <p>Track income, legal sharing and insurance commission</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Income Calculation" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -1827,8 +2167,20 @@ window.onload=function(){
     </div>
 
 
+        </div>
+
     <div id="bookingSection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>📝 Booking Form Maker</h2>
+                <p>Create booking form and export PDF</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Booking Form Maker" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -2330,8 +2682,20 @@ function downloadPDF(){
     </div>
 
 
+        </div>
+
     <div id="insuranceSection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>🛡️ Insurance Compare</h2>
+                <p>One-page insurance proposal comparison</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Insurance Compare" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -2869,6 +3233,8 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
 
 
 
+        </div>
+
     <div id="newBankerKnowledgeSection" class="section">
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
         <div class="embedded-module-wrap">
@@ -3152,7 +3518,7 @@ loadSheet();
     
 
 <div id="bankPolicySection" class="section bank-policy-fullscreen">
-    <button class="bank-policy-back-btn" onclick="goBack()">← Back To Menu</button>
+    <button class="bank-policy-back-btn" onclick="goBack()">← Back</button>
     <iframe class="bank-policy-full-frame" title="Bank Policy Hub Member View" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -4997,7 +5363,17 @@ init();
     </div>
 
     <div id="eligibilitySection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>✅ Check Eligibility</h2>
+                <p>Single / joint loan eligibility checker</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Check Eligibility" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -6252,8 +6628,20 @@ calculateJoint();
     </div>
 
 
+        </div>
+
     <div id="propertyCostSection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>🧾 Property Cost Estimator</h2>
+                <p>Subsale / refinance legal cost estimator</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Property Cost Estimator" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -6653,8 +7041,20 @@ toggleCase();toggleBuyer2();calculate();
     </div>
 
 
+        </div>
+
     <div id="bankFilterSection" class="section">
-        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="module-shell">
+        <div class="module-topbar">
+            <div>
+                <h2>🏛️ Bank Filter Form</h2>
+                <p>Filter case and bank strategy board</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span class="esc-hint">Press ESC to return</span>
+                <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+            </div>
+        </div>
         <div class="embedded-module-wrap">
             <iframe class="embedded-frame" title="Bank Filter Form" srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -7880,6 +8280,71 @@ function showToast(message){
 calculateRefinance();
 setDefaultDate();
 switchView('month');
+</script>
+
+
+<script>
+/* Clear temporary tool records on refresh / reopen.
+   Keep Google Sheet data untouched. */
+(function(){
+    const CLEAR_PREFIXES = [
+        "mortgagePackage",
+        "packageComparison",
+        "bankFilter",
+        "bookingForm",
+        "insuranceCompare",
+        "amortization",
+        "eligibility",
+        "propertyCost",
+        "refinance",
+        "incomeTracking"
+    ];
+
+    const CLEAR_KEYS = [
+        "savedPackages",
+        "packages",
+        "records",
+        "casesData",
+        "bankFilterData",
+        "bookingFormData",
+        "insuranceData",
+        "eligibilityData",
+        "propertyCostData"
+    ];
+
+    function clearTemporaryRecords(){
+        try{
+            Object.keys(localStorage).forEach(function(key){
+                const lower = key.toLowerCase();
+                const matchPrefix = CLEAR_PREFIXES.some(function(prefix){
+                    return lower.includes(prefix.toLowerCase());
+                });
+                const matchKey = CLEAR_KEYS.some(function(k){
+                    return lower === k.toLowerCase() || lower.includes(k.toLowerCase());
+                });
+                if(matchPrefix || matchKey){
+                    localStorage.removeItem(key);
+                }
+            });
+        }catch(e){}
+    }
+
+    clearTemporaryRecords();
+    window.addEventListener("pagehide", clearTemporaryRecords);
+})();
+</script>
+
+
+<script>
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        const menu = document.getElementById("menu");
+        const isMenuVisible = menu && menu.style.display !== "none";
+        if(!isMenuVisible && typeof goBack === "function"){
+            goBack();
+        }
+    }
+});
 </script>
 
 </body>
