@@ -598,6 +598,12 @@ td:first-child{
             <div class="desc">Bank policy hub and internal notes</div>
         </div>
 
+        <div class="card" onclick="openSection('newBankerKnowledgeSection')">
+            <div class="icon">🎓</div>
+            <div class="title">New Banker Knowledge Hub</div>
+            <div class="desc">房贷俗语 / Checklist / FAQ / Scripts / Workflow</div>
+        </div>
+
         <div class="card" onclick="openSection('eligibilitySection')">
             <div class="icon">✅</div>
             <div class="title">Check Eligibility</div>
@@ -2821,6 +2827,288 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
     </div>
 
 
+
+
+    <div id="newBankerKnowledgeSection" class="section">
+        <button class="back-btn" onclick="goBack()">← Back To Menu</button>
+        <div class="embedded-module-wrap">
+            <iframe class="embedded-frame" title="New Banker Knowledge Hub" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+&lt;title&gt;New Banker Knowledge Hub&lt;/title&gt;
+
+&lt;style&gt;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7ff;color:#1f2937}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:#0f172a;color:white;padding:22px;position:fixed;height:100vh}
+.logo{font-size:22px;font-weight:800;margin-bottom:6px}
+.sub{font-size:13px;color:#cbd5e1;margin-bottom:24px}
+.nav button{width:100%;border:0;background:transparent;color:#cbd5e1;padding:13px 14px;border-radius:14px;text-align:left;cursor:pointer;font-weight:700;margin-bottom:8px}
+.nav button.active,.nav button:hover{background:#2563eb;color:white}
+.main{margin-left:260px;width:calc(100% - 260px);padding:24px}
+.topbar{background:white;border-radius:22px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.06);margin-bottom:20px}
+.topbar h1{margin:0;color:#0f172a}
+.topbar p{margin:8px 0 0;color:#6b7280}
+.notice{background:#fff7ed;color:#92400e;padding:14px;border-radius:16px;margin-bottom:18px;border:1px solid #fed7aa}
+.controls{display:grid;grid-template-columns:1fr 180px 180px;gap:12px;margin-bottom:20px}
+input,select{padding:13px;border:1px solid #d1d5db;border-radius:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;border-radius:20px;padding:18px}
+.stat h2{margin:0;font-size:30px}
+.stat p{margin:6px 0 0;color:#dbeafe}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:white;border-radius:22px;padding:18px;box-shadow:0 10px 25px rgba(0,0,0,.06);cursor:pointer;border:1px solid #e5e7eb}
+.card:hover{transform:translateY(-3px);transition:.2s;border-color:#2563eb}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-size:12px;font-weight:700;margin-right:5px;margin-bottom:5px}
+.card h3{color:#1d4ed8;margin:10px 0}
+.card p{line-height:1.5;color:#374151}
+.empty{background:white;padding:30px;border-radius:20px;text-align:center;color:#6b7280}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}
+.modal-box{background:white;width:100%;max-width:760px;border-radius:26px;padding:24px;max-height:85vh;overflow:auto}
+.close{float:right;border:0;background:#ef4444;color:white;padding:8px 12px;border-radius:10px;cursor:pointer}
+.detail-row{margin-top:16px;padding:14px;background:#f8fafc;border-radius:16px}
+.detail-row b{color:#0f172a}
+.copy-btn{border:0;background:#2563eb;color:white;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;margin-top:16px}
+@media(max-width:800px){
+  .sidebar{position:relative;width:100%;height:auto}
+  .app{display:block}
+  .main{margin-left:0;width:100%}
+  .controls{grid-template-columns:1fr}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div class=&quot;app&quot;&gt;
+
+&lt;aside class=&quot;sidebar&quot;&gt;
+  &lt;div class=&quot;logo&quot;&gt;🏦 Banker Hub&lt;/div&gt;
+  &lt;div class=&quot;sub&quot;&gt;Google Sheet API Version&lt;/div&gt;
+
+  &lt;div class=&quot;nav&quot;&gt;
+    &lt;button class=&quot;active&quot; onclick=&quot;setType(&#x27;&#x27;,this)&quot;&gt;📊 All Notes&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Terms&#x27;,this)&quot;&gt;📘 房贷俗语&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Checklist&#x27;,this)&quot;&gt;📄 Checklist&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;FAQ&#x27;,this)&quot;&gt;❓ FAQ&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Scripts&#x27;,this)&quot;&gt;💬 Scripts&lt;/button&gt;
+    &lt;button onclick=&quot;setType(&#x27;Workflow&#x27;,this)&quot;&gt;🔁 Workflow&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;
+
+&lt;main class=&quot;main&quot;&gt;
+
+  &lt;div class=&quot;topbar&quot;&gt;
+    &lt;h1&gt;New Banker Knowledge Hub&lt;/h1&gt;
+    &lt;p&gt;资料全部从 Google Sheet API 读取。新人只可以 View / Search / Copy。&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;notice&quot;&gt;
+    资料要修改，直接去 Google Sheet 改。Web refresh 后会读取最新资料。
+  &lt;/div&gt;
+
+  &lt;div class=&quot;stats&quot;&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalNotes&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Total Notes&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalTerms&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Terms&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalChecklist&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Checklist&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;h2 id=&quot;totalScripts&quot;&gt;0&lt;/h2&gt;&lt;p&gt;Scripts&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;controls&quot;&gt;
+    &lt;input id=&quot;searchInput&quot; placeholder=&quot;Search SPA, LO, CCRIS, DSR...&quot; oninput=&quot;renderCards()&quot;&gt;
+    &lt;select id=&quot;categoryFilter&quot; onchange=&quot;renderCards()&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;All Category&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;select id=&quot;tagFilter&quot; onchange=&quot;renderCards()&quot;&gt;
+      &lt;option value=&quot;&quot;&gt;All Tags&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;div id=&quot;cards&quot; class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;empty&quot;&gt;Loading Google Sheet API...&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/main&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;modal&quot; id=&quot;detailModal&quot;&gt;
+  &lt;div class=&quot;modal-box&quot;&gt;
+    &lt;button class=&quot;close&quot; onclick=&quot;closeModal()&quot;&gt;Close&lt;/button&gt;
+    &lt;div id=&quot;modalContent&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const SHEET_API_URL = &quot;https://script.google.com/macros/s/AKfycbyE1cmfDA5mpw1XIo_u-Kaa7Y7ohpoSTP4OGku6yAUTYxOWFRIkYwpZXbCRwHBRHMt6/exec&quot;;
+
+let allData = [];
+let currentType = &quot;&quot;;
+
+async function loadSheet(){
+  if(!SHEET_API_URL || SHEET_API_URL.includes(&quot;PASTE&quot;)){
+    document.getElementById(&quot;cards&quot;).innerHTML = `
+      &lt;div class=&quot;empty&quot;&gt;
+        Please paste your Apps Script /exec link inside SHEET_API_URL.
+      &lt;/div&gt;
+    `;
+    return;
+  }
+
+  try{
+    const res = await fetch(SHEET_API_URL);
+    const data = await res.json();
+
+    allData = data.filter(x =&gt; x.Title);
+
+    if(allData.length === 0){
+      throw new Error(&quot;No data found. Please check Google Sheet rows and headers.&quot;);
+    }
+
+    buildFilters();
+    renderStats();
+    renderCards();
+
+  }catch(e){
+    document.getElementById(&quot;cards&quot;).innerHTML = `
+      &lt;div class=&quot;empty&quot;&gt;
+        Cannot load Google Sheet API.&lt;br&gt;&lt;br&gt;
+        Please check:&lt;br&gt;
+        1. Apps Script deployed as Web App&lt;br&gt;
+        2. Execute as: Me&lt;br&gt;
+        3. Who has access: Anyone&lt;br&gt;
+        4. SHEET_API_URL is the /exec link&lt;br&gt;
+        5. Sheet tab name is correct in Apps Script
+      &lt;/div&gt;
+    `;
+    console.error(e);
+  }
+}
+
+function setType(type,btn){
+  currentType = type;
+  document.querySelectorAll(&quot;.nav button&quot;).forEach(b=&gt;b.classList.remove(&quot;active&quot;));
+  btn.classList.add(&quot;active&quot;);
+  renderCards();
+}
+
+function buildFilters(){
+  const categories = [...new Set(allData.map(x=&gt;x.Category).filter(Boolean))];
+  const tags = [...new Set(allData.flatMap(x=&gt;(x.Tags || &quot;&quot;).split(&quot;,&quot;).map(t=&gt;t.trim()).filter(Boolean)))];
+
+  document.getElementById(&quot;categoryFilter&quot;).innerHTML =
+    `&lt;option value=&quot;&quot;&gt;All Category&lt;/option&gt;` +
+    categories.map(c=&gt;`&lt;option value=&quot;${escapeHtml(c)}&quot;&gt;${escapeHtml(c)}&lt;/option&gt;`).join(&quot;&quot;);
+
+  document.getElementById(&quot;tagFilter&quot;).innerHTML =
+    `&lt;option value=&quot;&quot;&gt;All Tags&lt;/option&gt;` +
+    tags.map(t=&gt;`&lt;option value=&quot;${escapeHtml(t)}&quot;&gt;${escapeHtml(t)}&lt;/option&gt;`).join(&quot;&quot;);
+}
+
+function renderStats(){
+  document.getElementById(&quot;totalNotes&quot;).innerText = allData.length;
+  document.getElementById(&quot;totalTerms&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Terms&quot;).length;
+  document.getElementById(&quot;totalChecklist&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Checklist&quot;).length;
+  document.getElementById(&quot;totalScripts&quot;).innerText = allData.filter(x=&gt;x.Type===&quot;Scripts&quot;).length;
+}
+
+function renderCards(){
+  const keyword = document.getElementById(&quot;searchInput&quot;).value.toLowerCase();
+  const cat = document.getElementById(&quot;categoryFilter&quot;).value;
+  const tag = document.getElementById(&quot;tagFilter&quot;).value;
+
+  const data = allData.filter(x=&gt;{
+    const fullText = Object.values(x).join(&quot; &quot;).toLowerCase();
+    const tags = x.Tags || &quot;&quot;;
+
+    return (!currentType || x.Type === currentType)
+      &amp;&amp; (!cat || x.Category === cat)
+      &amp;&amp; (!tag || tags.includes(tag))
+      &amp;&amp; (!keyword || fullText.includes(keyword));
+  });
+
+  const box = document.getElementById(&quot;cards&quot;);
+
+  if(data.length === 0){
+    box.innerHTML = `&lt;div class=&quot;empty&quot;&gt;No result found.&lt;/div&gt;`;
+    return;
+  }
+
+  box.innerHTML = data.map(x=&gt;{
+    const realIndex = allData.indexOf(x);
+    return `
+      &lt;div class=&quot;card&quot; onclick=&quot;openDetail(${realIndex})&quot;&gt;
+        &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Type || &quot;Note&quot;)}&lt;/span&gt;
+        &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Category || &quot;General&quot;)}&lt;/span&gt;
+        &lt;h3&gt;${escapeHtml(x.Title || &quot;&quot;)}&lt;/h3&gt;
+        &lt;p&gt;${escapeHtml(x.ShortDesc || x.FullDesc || &quot;&quot;)}&lt;/p&gt;
+        &lt;small style=&quot;color:#6b7280;&quot;&gt;Click to view details&lt;/small&gt;
+      &lt;/div&gt;
+    `;
+  }).join(&quot;&quot;);
+}
+
+function openDetail(index){
+  const x = allData[index];
+
+  document.getElementById(&quot;modalContent&quot;).innerHTML = `
+    &lt;h2&gt;${escapeHtml(x.Title || &quot;&quot;)}&lt;/h2&gt;
+    &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Type || &quot;&quot;)}&lt;/span&gt;
+    &lt;span class=&quot;badge&quot;&gt;${escapeHtml(x.Category || &quot;&quot;)}&lt;/span&gt;
+
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Short Description&lt;/b&gt;&lt;p&gt;${escapeHtml(x.ShortDesc || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Full Explanation&lt;/b&gt;&lt;p&gt;${escapeHtml(x.FullDesc || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Example&lt;/b&gt;&lt;p&gt;${escapeHtml(x.Example || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Tags&lt;/b&gt;&lt;p&gt;${escapeHtml(x.Tags || &quot;-&quot;)}&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;detail-row&quot;&gt;&lt;b&gt;Updated&lt;/b&gt;&lt;p&gt;${escapeHtml(x.UpdatedBy || &quot;-&quot;)} ${x.UpdatedDate ? &quot; | &quot; + escapeHtml(x.UpdatedDate) : &quot;&quot;}&lt;/p&gt;&lt;/div&gt;
+
+    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyDetail(${index})&quot;&gt;Copy This Note&lt;/button&gt;
+  `;
+
+  document.getElementById(&quot;detailModal&quot;).style.display = &quot;flex&quot;;
+}
+
+function closeModal(){
+  document.getElementById(&quot;detailModal&quot;).style.display = &quot;none&quot;;
+}
+
+function copyDetail(index){
+  const x = allData[index];
+
+  const text = `
+${x.Title || &quot;&quot;}
+
+${x.ShortDesc || &quot;&quot;}
+
+${x.FullDesc || &quot;&quot;}
+
+Example:
+${x.Example || &quot;&quot;}
+  `.trim();
+
+  navigator.clipboard.writeText(text);
+  alert(&quot;Copied.&quot;);
+}
+
+function escapeHtml(text){
+  return String(text)
+    .replaceAll(&quot;&amp;&quot;,&quot;&amp;amp;&quot;)
+    .replaceAll(&quot;&lt;&quot;,&quot;&amp;lt;&quot;)
+    .replaceAll(&quot;&gt;&quot;,&quot;&amp;gt;&quot;)
+    .replaceAll(&#x27;&quot;&#x27;,&quot;&amp;quot;&quot;)
+    .replaceAll(&quot;&#x27;&quot;,&quot;&amp;#039;&quot;);
+}
+
+loadSheet();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+        </div>
+    </div>
+
     <div id="bankPolicySection" class="section">
         <button class="back-btn" onclick="goBack()">← Back To Menu</button>
         <div class="embedded-module-wrap">
@@ -2952,7 +3240,7 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
   &lt;/main&gt;
 
   &lt;nav class=&quot;bottom-nav&quot;&gt;
-    &lt;button class=&quot;active&quot; onclick=&quot;showSection('homeSection',this)&quot;&gt;Banks&lt;/button&gt;
+    &lt;button class=&quot;active&quot; onclick=&quot;showSection(&#x27;homeSection&#x27;,this)&quot;&gt;Banks&lt;/button&gt;
     &lt;button onclick=&quot;loadBanksFromSheet()&quot;&gt;Refresh&lt;/button&gt;
     &lt;button onclick=&quot;switchToMemberView()&quot;&gt;Member&lt;/button&gt;
   &lt;/nav&gt;
@@ -2961,7 +3249,7 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
     &lt;div class=&quot;modal-box&quot; style=&quot;max-width:420px&quot;&gt;
       &lt;div class=&quot;modal-title&quot;&gt;
         &lt;h2&gt;Admin Password&lt;/h2&gt;
-        &lt;button class=&quot;gray&quot; onclick=&quot;closeModal('adminModal')&quot;&gt;Close&lt;/button&gt;
+        &lt;button class=&quot;gray&quot; onclick=&quot;closeModal(&#x27;adminModal&#x27;)&quot;&gt;Close&lt;/button&gt;
       &lt;/div&gt;
       &lt;label&gt;Password&lt;/label&gt;
       &lt;input type=&quot;password&quot; id=&quot;adminPassword&quot; placeholder=&quot;Enter admin password&quot; autocomplete=&quot;off&quot; /&gt;
@@ -2974,7 +3262,7 @@ document.querySelectorAll(&quot;.moneyInput&quot;).forEach(input=&gt;{
     &lt;div class=&quot;modal-box&quot;&gt;
       &lt;div class=&quot;modal-title&quot;&gt;
         &lt;h2 id=&quot;bankModalTitle&quot;&gt;Add Bank Policy&lt;/h2&gt;
-        &lt;button class=&quot;gray&quot; onclick=&quot;closeModal('bankModal')&quot;&gt;Close&lt;/button&gt;
+        &lt;button class=&quot;gray&quot; onclick=&quot;closeModal(&#x27;bankModal&#x27;)&quot;&gt;Close&lt;/button&gt;
       &lt;/div&gt;
 
       &lt;input type=&quot;hidden&quot; id=&quot;bankId&quot; /&gt;
@@ -3183,7 +3471,7 @@ function renderBanks(){
   });
 
   if(!list.length){
-    grid.innerHTML = '&lt;div class=&quot;empty card&quot;&gt;No bank policy found.&lt;/div&gt;';
+    grid.innerHTML = &#x27;&lt;div class=&quot;empty card&quot;&gt;No bank policy found.&lt;/div&gt;&#x27;;
     return;
   }
 
@@ -3193,7 +3481,7 @@ function renderBanks(){
         &lt;div class=&quot;bank-title-wrap&quot;&gt;
           &lt;div class=&quot;bank-logo&quot;&gt;${getBankLogoText(b.bankName)}&lt;/div&gt;
           &lt;div&gt;
-            &lt;div class=&quot;bank-name clickable&quot; onclick=&quot;openBankDetail('${b.id}')&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
+            &lt;div class=&quot;bank-name clickable&quot; onclick=&quot;openBankDetail(&#x27;${b.id}&#x27;)&quot;&gt;${esc(b.bankName)}&lt;/div&gt;
             &lt;div&gt;&lt;span class=&quot;tag&quot;&gt;Bank Policy&lt;/span&gt;&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
@@ -3204,8 +3492,8 @@ function renderBanks(){
       &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &quot;-&quot;)}&lt;/div&gt;
 
       &lt;div class=&quot;card-actions admin-only&quot;&gt;
-        &lt;button onclick=&quot;editBank('${b.id}')&quot;&gt;Edit&lt;/button&gt;
-        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank('${b.id}')&quot;&gt;Delete&lt;/button&gt;
+        &lt;button onclick=&quot;editBank(&#x27;${b.id}&#x27;)&quot;&gt;Edit&lt;/button&gt;
+        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank(&#x27;${b.id}&#x27;)&quot;&gt;Delete&lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   `).join(&quot;&quot;);
@@ -3213,7 +3501,7 @@ function renderBanks(){
 
 function renderPolicyRows(bank){
   const rows = bank.policyRows || [];
-  if(!rows.length) return '&lt;div class=&quot;row&quot;&gt;&lt;b&gt;No Policy&lt;/b&gt;&lt;div&gt;No policy field yet.&lt;/div&gt;&lt;/div&gt;';
+  if(!rows.length) return &#x27;&lt;div class=&quot;row&quot;&gt;&lt;b&gt;No Policy&lt;/b&gt;&lt;div&gt;No policy field yet.&lt;/div&gt;&lt;/div&gt;&#x27;;
 
   return rows.map(row =&gt; `
     &lt;div class=&quot;row&quot;&gt;
@@ -3229,7 +3517,7 @@ function openBankDetail(id){
 
   document.getElementById(&quot;bankDetailBox&quot;).innerHTML = `
     &lt;div class=&quot;card&quot;&gt;
-      &lt;button class=&quot;gray&quot; onclick=&quot;showSectionById('homeSection')&quot; style=&quot;margin-bottom:14px&quot;&gt;← Back to Bank List&lt;/button&gt;
+      &lt;button class=&quot;gray&quot; onclick=&quot;showSectionById(&#x27;homeSection&#x27;)&quot; style=&quot;margin-bottom:14px&quot;&gt;← Back to Bank List&lt;/button&gt;
 
       &lt;div class=&quot;card-head&quot;&gt;
         &lt;div class=&quot;bank-title-wrap&quot;&gt;
@@ -3246,8 +3534,8 @@ function openBankDetail(id){
       &lt;div class=&quot;row&quot;&gt;&lt;b&gt;Last Updated&lt;/b&gt;${formatDate(b.updatedAt)} by ${esc(b.updatedBy || &quot;-&quot;)}&lt;/div&gt;
 
       &lt;div class=&quot;card-actions admin-only&quot;&gt;
-        &lt;button onclick=&quot;editBank('${b.id}')&quot;&gt;Edit This Bank&lt;/button&gt;
-        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank('${b.id}'); showSectionById('homeSection')&quot;&gt;Delete This Bank&lt;/button&gt;
+        &lt;button onclick=&quot;editBank(&#x27;${b.id}&#x27;)&quot;&gt;Edit This Bank&lt;/button&gt;
+        &lt;button class=&quot;danger&quot; onclick=&quot;deleteBank(&#x27;${b.id}&#x27;); showSectionById(&#x27;homeSection&#x27;)&quot;&gt;Delete This Bank&lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   `;
@@ -3460,22 +3748,22 @@ function val(id){
 }
 
 function esc(v){
-  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;'&quot;]/g, c =&gt; ({
+  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;&#x27;&quot;]/g, c =&gt; ({
     &quot;&amp;&quot;:&quot;&amp;amp;&quot;,
     &quot;&lt;&quot;:&quot;&amp;lt;&quot;,
     &quot;&gt;&quot;:&quot;&amp;gt;&quot;,
-    &quot;'&quot;:&quot;&amp;#39;&quot;,
-    '&quot;':&quot;&amp;quot;&quot;
+    &quot;&#x27;&quot;:&quot;&amp;#39;&quot;,
+    &#x27;&quot;&#x27;:&quot;&amp;quot;&quot;
   }[c]));
 }
 
 function escAttr(v){
-  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;&quot;']/g, c =&gt; ({
+  return String(v ?? &quot;&quot;).replace(/[&amp;&lt;&gt;&quot;&#x27;]/g, c =&gt; ({
     &quot;&amp;&quot;:&quot;&amp;amp;&quot;,
     &quot;&lt;&quot;:&quot;&amp;lt;&quot;,
     &quot;&gt;&quot;:&quot;&amp;gt;&quot;,
-    '&quot;':&quot;&amp;quot;&quot;,
-    &quot;'&quot;:&quot;&amp;#39;&quot;
+    &#x27;&quot;&#x27;:&quot;&amp;quot;&quot;,
+    &quot;&#x27;&quot;:&quot;&amp;#39;&quot;
   }[c]));
 }
 
@@ -5792,6 +6080,43 @@ function goBack(){
         sec.style.display='none';
     });
 }
+
+/* Reset view/data on refresh or reopen: always start from menu and do not keep browser-restored form values */
+(function(){
+    try{
+        if(window.history && window.history.scrollRestoration){
+            window.history.scrollRestoration = 'manual';
+        }
+    }catch(e){}
+
+    function resetMainView(){
+        const menu = document.getElementById('menu');
+        if(menu) menu.style.display = 'grid';
+        document.querySelectorAll('.section').forEach(sec=>{
+            sec.style.display = 'none';
+        });
+        window.scrollTo(0,0);
+    }
+
+    function clearBrowserRestoredInputs(){
+        document.querySelectorAll('form').forEach(f=>f.setAttribute('autocomplete','off'));
+        document.querySelectorAll('input, textarea, select').forEach(el=>{
+            el.setAttribute('autocomplete','off');
+            if(el.type === 'date') return;
+            if(el.tagName === 'SELECT') el.selectedIndex = 0;
+            else if(!el.readOnly) el.value = '';
+        });
+    }
+
+    window.addEventListener('load', function(){
+        resetMainView();
+        setTimeout(clearBrowserRestoredInputs, 50);
+    });
+    window.addEventListener('pageshow', function(){
+        resetMainView();
+        setTimeout(clearBrowserRestoredInputs, 50);
+    });
+})();
 
 /* refinance JS */
 const loanInput = document.getElementById('currentLoan');
