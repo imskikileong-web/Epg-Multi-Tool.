@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-    <link rel="icon" type="image/png" href="favicon.png">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -1437,7 +1436,7 @@ body.tool-open .container{
 }
 .partner-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:14px;
 }
 .partner-card{
@@ -1948,6 +1947,25 @@ body.tool-open .card,body.tool-open .panel,body.tool-open .box,body.tool-open .c
   .epg-lion-medal{display:none!important;}
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <style id="chatgpt-mrta-and-hub-layout-patch">
@@ -2305,6 +2323,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -2756,6 +2793,25 @@ button:hover,
     color:#111 !important;
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 
@@ -2810,6 +2866,25 @@ button:hover,
 @media(max-width:900px){
   .epg-lion-medal{display:none!important;}
 }
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 
@@ -2943,6 +3018,25 @@ body.tool-open .btn:hover{
 body:not(.tool-open) .epg-topnav,
 body:not(.tool-open) .epg-hero{
     color:white!important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -8495,7 +8589,23 @@ body{
 }
 
 .bank.used{
-  opacity:.35;
+  opacity:1;
+  background:linear-gradient(135deg,#fff8df,#f6d36c)!important;
+  border-color:#d4af37!important;
+  border-left-color:#16a34a!important;
+  box-shadow:0 8px 18px rgba(212,175,55,.18);
+  position:relative;
+}
+.bank.used::after{
+  content:&quot;USED&quot;;
+  margin-left:auto;
+  font-size:9px;
+  font-weight:900;
+  color:#166534;
+  background:#dcfce7;
+  border:1px solid #86efac;
+  border-radius:999px;
+  padding:3px 6px;
 }
 
 .bank-logo{
@@ -8640,16 +8750,7 @@ button{
   font-weight:800;
 }
 
-.note{
-  width:100%;
-  border:1.5px solid #dbe7ff;
-  border-radius:12px;
-  padding:8px;
-  font-size:11px;
-  resize:none;
-  min-height:42px;
-  margin-bottom:8px;
-}
+.note{display:none!important;}
 
 .dropzone{
   min-height:52px;
@@ -8668,16 +8769,30 @@ button{
 }
 
 .tag{
-  background:linear-gradient(135deg,#0057ff,#2d7bff);
-  color:#fff;
+  background:#ffffff!important;
+  color:#0f172a!important;
+  border:1px solid #dbe7ff!important;
+  border-left:4px solid #d4af37!important;
   border-radius:999px;
-  padding:6px 10px;
+  padding:5px 9px 5px 5px;
   font-size:10px;
-  font-weight:700;
+  font-weight:800;
   display:flex;
   align-items:center;
-  gap:5px;
+  gap:6px;
   cursor:grab;
+  box-shadow:0 6px 14px rgba(15,42,107,.08);
+}
+.tag .bank-logo{
+  width:26px;
+  height:26px;
+  border-radius:9px;
+  font-size:8px;
+  flex:0 0 auto;
+}
+.tag .tag-bank-name{
+  color:#0f172a!important;
+  white-space:nowrap;
 }
 
 .tag span{
@@ -9021,6 +9136,33 @@ const LOGOS = {
   &quot;Al Rajhi&quot;:&quot;AR&quot;
 };
 
+const LOGO_COLORS = {
+  &quot;Maybank&quot;:&quot;background:#ffc600;color:#111827;border:1px solid #d4a000;&quot;,
+  &quot;RHB Bank&quot;:&quot;background:#005baa;color:#ffffff;border:1px solid #004780;&quot;,
+  &quot;CIMB Bank&quot;:&quot;background:#b11226;color:#ffffff;border:1px solid #8d0e1f;&quot;,
+  &quot;Public Bank&quot;:&quot;background:#e11d2e;color:#ffffff;border:1px solid #b91c1c;&quot;,
+  &quot;Hong Leong Bank&quot;:&quot;background:#003a70;color:#ffffff;border:1px solid #002b52;&quot;,
+  &quot;Alliance Bank&quot;:&quot;background:#f97316;color:#ffffff;border:1px solid #ea580c;&quot;,
+  &quot;Ambank&quot;:&quot;background:#ef4444;color:#ffffff;border:1px solid #b91c1c;&quot;,
+  &quot;Bank Islam&quot;:&quot;background:#0f766e;color:#ffffff;border:1px solid #115e59;&quot;,
+  &quot;Affin Bank&quot;:&quot;background:#0ea5e9;color:#ffffff;border:1px solid #0284c7;&quot;,
+  &quot;OCBC&quot;:&quot;background:#dc2626;color:#ffffff;border:1px solid #991b1b;&quot;,
+  &quot;UOB&quot;:&quot;background:#1d4ed8;color:#ffffff;border:1px solid #1e40af;&quot;,
+  &quot;HSBC&quot;:&quot;background:#db0011;color:#ffffff;border:1px solid #a8000d;&quot;,
+  &quot;BSN&quot;:&quot;background:#16a34a;color:#ffffff;border:1px solid #15803d;&quot;,
+  &quot;MBSB&quot;:&quot;background:#7c3aed;color:#ffffff;border:1px solid #6d28d9;&quot;,
+  &quot;Bank Rakyat&quot;:&quot;background:#047857;color:#ffffff;border:1px solid #065f46;&quot;,
+  &quot;Agrobank&quot;:&quot;background:#65a30d;color:#ffffff;border:1px solid #4d7c0f;&quot;,
+  &quot;Standard Chartered&quot;:&quot;background:#2563eb;color:#ffffff;border:1px solid #1d4ed8;&quot;,
+  &quot;Bank Muamalat&quot;:&quot;background:#0891b2;color:#ffffff;border:1px solid #0e7490;&quot;,
+  &quot;Bank of China&quot;:&quot;background:#991b1b;color:#ffffff;border:1px solid #7f1d1d;&quot;,
+  &quot;Al Rajhi&quot;:&quot;background:#15803d;color:#ffffff;border:1px solid #166534;&quot;
+};
+
+function logoStyle(bank){
+  return LOGO_COLORS[bank] || &quot;background:#0f5fff;color:#ffffff;border:1px solid #0b46bd;&quot;;
+}
+
 let draggedBank = null;
 
 let state = {
@@ -9078,7 +9220,7 @@ function renderBankList(){
       div.draggable = true;
 
       div.innerHTML = `
-        &lt;div class=&quot;bank-logo&quot;&gt;${LOGOS[bank] || bank.substring(0,3)}&lt;/div&gt;
+        &lt;div class=&quot;bank-logo&quot; style=&quot;${logoStyle(bank)}&quot;&gt;${LOGOS[bank] || bank.substring(0,3)}&lt;/div&gt;
         &lt;div class=&quot;bank-name&quot;&gt;${bank}&lt;/div&gt;
       `;
 
@@ -9113,17 +9255,13 @@ function renderCategories(){
         &lt;/button&gt;
       &lt;/div&gt;
 
-      &lt;textarea
-        class=&quot;note&quot;
-        onchange=&quot;updateNote(${index},this.value)&quot;
-      &gt;${cat.note}&lt;/textarea&gt;
-
       &lt;div class=&quot;dropzone&quot; data-index=&quot;${index}&quot;&gt;
         ${
           cat.banks.length
           ? cat.banks.map(bank =&gt; `
             &lt;div class=&quot;tag&quot; draggable=&quot;true&quot; ondragstart=&quot;draggedBank=&#x27;${bank}&#x27;&quot;&gt;
-              ${bank}
+              &lt;div class=&quot;bank-logo&quot; style=&quot;${logoStyle(bank)}&quot;&gt;${LOGOS[bank] || bank.substring(0,3)}&lt;/div&gt;
+              &lt;div class=&quot;tag-bank-name&quot;&gt;${bank}&lt;/div&gt;
               &lt;span onclick=&quot;removeBank(&#x27;${bank}&#x27;)&quot;&gt;×&lt;/span&gt;
             &lt;/div&gt;
           `).join(&quot;&quot;)
@@ -9207,12 +9345,12 @@ function resetAll(){
   if(confirm(&quot;Reset all data?&quot;)){
     state = {
       categories:[
-        {title:&quot;DSR Friendly&quot;,note:&quot;Suitable for high commitment customer.&quot;,banks:[]},
-        {title:&quot;Fast Approval&quot;,note:&quot;Good for urgent cases.&quot;,banks:[]},
-        {title:&quot;High Margin&quot;,note:&quot;High margin / finance legal fee.&quot;,banks:[]},
-        {title:&quot;CTOS Friendly&quot;,note:&quot;CTOS special cases.&quot;,banks:[]},
-        {title:&quot;Refinance Friendly&quot;,note:&quot;Suitable for refinance / cash out.&quot;,banks:[]},
-        {title:&quot;Sdn Bhd Friendly&quot;,note:&quot;Business owner / company director.&quot;,banks:[]}
+        {title:&quot;DSR Friendly&quot;,note:&quot;&quot;,banks:[]},
+        {title:&quot;Fast Approval&quot;,note:&quot;&quot;,banks:[]},
+        {title:&quot;High Margin&quot;,note:&quot;&quot;,banks:[]},
+        {title:&quot;CTOS Friendly&quot;,note:&quot;&quot;,banks:[]},
+        {title:&quot;Refinance Friendly&quot;,note:&quot;&quot;,banks:[]},
+        {title:&quot;Sdn Bhd Friendly&quot;,note:&quot;&quot;,banks:[]}
       ]
     };
 
@@ -9836,7 +9974,7 @@ function ksOptions(items,label){ return `<option value="">${label}</option>` + i
 function ksToolbar(id, extra1, extra2){ return `<div class="ks-toolbar"><input class="ks-input" id="${id}-search" placeholder="Search keyword...">${extra1||'<select class="ks-select" id="'+id+'-filter1"><option value="">All Categories</option></select>'}${extra2||'<select class="ks-select" id="'+id+'-filter2"><option value="">All Status</option></select>'}</div>`; }
 function ksError(el,e){
   const old = el.querySelector('.ks-empty'); if(old) old.remove();
-  el.innerHTML += `<div class="ks-error"><b>Cannot load Master Sheet yet.</b><br>${ksEscape(e.message)}<br><br>Please check Apps Script deployment: Execute as Me, access Anyone, then redeploy new version.</div>`;
+  el.innerHTML += `<div class="ks-error"><b>Data temporarily unavailable.</b><br>${ksEscape(e.message)}<br><br>Please refresh the page or check the Google Sheet connection.</div>`;
 }
 function ksReadyMessage(el, msg){ const empty=el.querySelector('.ks-empty'); if(empty) empty.innerHTML=msg; }
 
@@ -10437,6 +10575,25 @@ button:hover,
     color:#111 !important;
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <script id="chatgpt-final-optimization-patch-script">
@@ -10822,6 +10979,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -11286,6 +11462,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -11805,6 +12000,25 @@ button:hover,
     color:#111 !important;
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 
@@ -12062,6 +12276,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -12330,6 +12563,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -12706,6 +12958,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -13166,6 +13437,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -13646,6 +13936,25 @@ button:hover,
     color:#111 !important;
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <script id="epg-os-hotfix-v2-frame-readability">
@@ -13820,6 +14129,25 @@ body.tool-open .section:not(#menu) .report-box th{
   opacity:1 !important;
   text-shadow:none !important;
 }
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <script id="final-force-gold-script-v7">
@@ -13914,6 +14242,25 @@ body.tool-open .section h4{
 }
 /* keep homepage/cover unchanged */
 #menu, #menu *{ }
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 <script>
 (function(){
@@ -14149,6 +14496,25 @@ body.tool-open .section.active-section iframe{
   border:1px solid var(--wg-border)!important;
   box-shadow:var(--wg-shadow)!important;
 }
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <script id="kiki-all-tools-white-gold-final-v8-script">
@@ -14407,6 +14773,218 @@ label{color:#0f172a!important;font-weight:800!important;}
 })();
 </script>
 
+
+<style>
+/* === FINAL Lawyer Details ABC License Patch === */
+#ks-lawyer-details .partner-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:18px!important;
+  align-items:stretch!important;
+}
+
+#ks-lawyer-details .partner-card{
+  min-height:260px!important;
+  border-radius:24px!important;
+}
+
+#ks-lawyer-details .partner-tags{
+  display:grid!important;
+  gap:10px!important;
+  margin-top:14px!important;
+}
+
+#ks-lawyer-details .license-block{
+  background:#ffffff!important;
+  border:1px solid #e5e7eb!important;
+  border-radius:16px!important;
+  padding:10px!important;
+}
+
+#ks-lawyer-details .license-label{
+  font-size:11px!important;
+  font-weight:950!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  margin-bottom:8px!important;
+  color:#0f2a6b!important;
+}
+
+#ks-lawyer-details .license-bank-list{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+}
+
+#ks-lawyer-details .partner-tag{
+  border-radius:999px!important;
+  padding:6px 10px!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  color:#111827!important;
+  line-height:1!important;
+}
+
+#ks-lawyer-details .license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+#ks-lawyer-details .license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+#ks-lawyer-details .license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+@media(max-width:900px){
+  #ks-lawyer-details .partner-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+</style>
+
+<script>
+/* === FINAL Lawyer Details render override: supports Google Sheet columns License A / License B / License C === */
+(function(){
+  function splitBanks(v){
+    return String(v || '')
+      .split(/[,，\n|/]+/)
+      .map(x => x.trim())
+      .filter(Boolean);
+  }
+
+  function renderLicenseBlock(title, banks, cls){
+    if(!banks.length) return '';
+    return `
+      <div class="license-block">
+        <div class="license-label">${title}</div>
+        <div class="license-bank-list">
+          ${banks.map(x => `<span class="partner-tag ${cls}">${ksEscape(x)}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  window.renderLawyers = async function(){
+    const el=document.getElementById('ks-lawyer-details'); 
+    if(!el) return;
+
+    el.innerHTML = ksToolbar('ld') + '<div class="ks-empty">Loading lawyer details...</div>';
+
+    try{
+      const data=await ksLoad(KS_TABS.lawyerDetails);
+      if(!data.length){ ksReadyMessage(el,'No Lawyer Details data found yet.'); return; }
+
+      el.querySelector('#ld-filter1').innerHTML=ksOptions(ksUnique(data,['Area']),'All Areas');
+      el.querySelector('#ld-filter2').innerHTML=ksOptions(ksUnique(data,['Specialty','Service','License A','License B','License C','Panel Banks','Panel Bank']),'All Services');
+
+      const draw=()=>{
+        const q=el.querySelector('#ld-search').value;
+        const a=el.querySelector('#ld-filter1').value;
+        const s=el.querySelector('#ld-filter2').value;
+
+        const rows=data.filter(r=>{
+          const licenseText=[
+            ksGet(r,['License A']),
+            ksGet(r,['License B']),
+            ksGet(r,['License C']),
+            ksGet(r,['Panel Banks','Panel Bank']),
+            ksGet(r,['Specialty']),
+            ksGet(r,['Service'])
+          ].join(' ');
+          return ksMatch(r,q) &&
+            (!a || ksGet(r,['Area'])===a) &&
+            (!s || licenseText.includes(s));
+        });
+
+        const cards=rows.map(r=>{
+          const firm=ksGet(r,['Firm','Law Firm','Company'])||'Law Firm';
+          const pic=ksGet(r,['PIC Name','PIC','Lawyer Name'])||'-';
+          const area=ksGet(r,['Area'])||'-';
+          const phone=ksGet(r,['Phone','Contact','Whatsapp'])||'';
+          const speed=ksGet(r,['Speed','Process Speed'])||'-';
+          const service=ksGet(r,['Specialty','Service'])||'Legal Partner';
+          const status=ksGet(r,['Status'])||'Active';
+          const remark=ksGet(r,['Remark','Remarks','Fee Notes'])||'';
+
+          const licenseA=splitBanks(ksGet(r,['Full Panel']));
+          const licenseB=splitBanks(ksGet(r,['Semi Panel']));
+          const licenseC=splitBanks(ksGet(r,['Adhoc Panel']));
+          const oldPanel=splitBanks(ksGet(r,['Panel Banks','Panel Bank']));
+
+          let licenseHTML =
+            renderLicenseBlock('Full Panel', licenseA, 'license-a') +
+            renderLicenseBlock('Semi Panel', licenseB, 'license-b') +
+            renderLicenseBlock('Adhoc Panel', licenseC, 'license-c');
+
+          if(!licenseHTML && oldPanel.length){
+            licenseHTML = renderLicenseBlock('Panel Banks', oldPanel, 'license-a');
+          }
+          if(!licenseHTML){
+            licenseHTML = '<span class="partner-tag license-a">Legal Partner</span>';
+          }
+
+          const cleanPhone=String(phone).replace(/\D/g,'').replace(/^6/,'');
+          return `
+            <div class="partner-card">
+              <div class="partner-cover"></div>
+              <div class="partner-body">
+                <div class="partner-avatar big">⚖</div>
+                <div class="partner-main-row">
+                  <div>
+                    <h3 class="partner-name">${ksEscape(firm)}</h3>
+                    <div class="partner-sub">${ksEscape(pic)} · ${ksEscape(area)}</div>
+                  </div>
+                  <span class="partner-status ${ksStatusClass(status)}">${ksEscape(status)}</span>
+                </div>
+
+                <div class="partner-info-grid">
+                  <div class="partner-info"><span>PIC</span><b>${ksEscape(pic)}</b></div>
+                  <div class="partner-info"><span>Area</span><b>${ksEscape(area)}</b></div>
+                  <div class="partner-info"><span>Speed</span><b>${ksEscape(speed)}</b></div>
+                  <div class="partner-info"><span>Service</span><b>${ksEscape(service)}</b></div>
+                </div>
+
+                <div class="partner-tags">${licenseHTML}</div>
+                ${remark?`<div class="partner-note">${ksEscape(remark)}</div>`:''}
+
+                <div class="partner-actions">
+                  ${phone?`<button class="partner-btn primary" onclick="window.open('https://wa.me/6${cleanPhone}','_blank')">💬 WhatsApp</button><button class="partner-btn secondary" onclick="copyTextSafe('${ksEscape(phone)}')">📋 Copy Number</button>`:''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        el.querySelector('.ks-empty')?.remove();
+        let grid=el.querySelector('.partner-grid'); 
+        if(!grid){
+          grid=document.createElement('div');
+          grid.className='partner-grid';
+          el.appendChild(grid);
+        }
+        grid.innerHTML=cards||'<div class="ks-empty">No matching lawyer found.</div>';
+      };
+
+      ['ld-search','ld-filter1','ld-filter2'].forEach(id=>{
+        const input=el.querySelector('#'+id);
+        if(input) input.addEventListener('input',draw);
+      });
+      draw();
+    }catch(e){
+      ksError(el,e);
+    }
+  };
+})();
+</script>
+
 </body>
 </html>
 <!-- Final fix: keep floating Banking logo visible but move it above top cards -->
@@ -14585,6 +15163,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -15254,6 +15851,25 @@ button:hover,
     color:#111 !important;
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <script id="epg-os-tool-workspace-js">
@@ -15639,6 +16255,25 @@ button:hover,
     color:#111 !important;
 }
 
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
 </style>
 
 <script id="epg-final-requested-frame-color-fix-v3">
@@ -15973,6 +16608,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
@@ -16510,6 +17164,25 @@ button:hover,
 #mortgagePackageSection h1,
 #mortgagePackageSection h2{
     color:#111 !important;
+}
+
+
+.license-a{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-b{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
+}
+
+.license-c{
+  background:linear-gradient(135deg,#fff7d1,#f6c443)!important;
+  border:1px solid #e0a800!important;
+  color:#111827!important;
 }
 
 </style>
