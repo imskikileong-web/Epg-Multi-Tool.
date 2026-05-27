@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-    <title>EPG Multi Tool - Full Integrated</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -14985,6 +14984,62 @@ label{color:#0f172a!important;font-weight:800!important;}
   };
 })();
 </script>
+
+
+
+<!-- EPG Visitor Tracking - added by ChatGPT -->
+<script>
+(function(){
+  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbyHmLoRa1TMVfOykgb-6dHxINO7QIlOiXX-phe72GtxXYZbiRYVFPOJqYi8Wc8TlfDT/exec";
+
+  function getVisitorId(){
+    let id = localStorage.getItem("epg_visitor_id");
+    if(!id){
+      id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ("epg_" + Date.now() + "_" + Math.random().toString(16).slice(2));
+      localStorage.setItem("epg_visitor_id", id);
+    }
+    return id;
+  }
+
+  function getDeviceType(){
+    const ua = navigator.userAgent || "";
+    if(/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+    if(/Android/i.test(ua)) return "Android";
+    if(/Mac/i.test(navigator.platform || ua)) return "Mac";
+    if(/Win/i.test(navigator.platform || ua)) return "Windows";
+    return navigator.platform || "Unknown";
+  }
+
+  function sendVisitorLog(){
+    const params = new URLSearchParams(window.location.search);
+    const payload = {
+      visitorId: getVisitorId(),
+      ref: params.get("ref") || params.get("utm_source") || "direct",
+      device: getDeviceType(),
+      browser: navigator.userAgent,
+      page: document.title || "EPG Multi Tool",
+      url: window.location.href,
+      time: new Date().toISOString()
+    };
+
+    fetch(TRACKING_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).catch(function(err){
+      console.warn("EPG visitor tracking failed", err);
+    });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", sendVisitorLog);
+  }else{
+    sendVisitorLog();
+  }
+})();
+</script>
+<!-- End EPG Visitor Tracking -->
 
 </body>
 </html>
