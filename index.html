@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-
+<link rel="icon" type="image/png" href="favicon.png">
+    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -1966,6 +1967,20 @@ body.tool-open .card,body.tool-open .panel,body.tool-open .box,body.tool-open .c
   color:#111827!important;
 }
 
+
+/* Refinance son-code iframe integration */
+.refinance-son-frame{
+  width:100%!important;
+  min-height:1850px!important;
+  border:0!important;
+  border-radius:24px!important;
+  background:#fbf7ef!important;
+}
+.refinance-son-wrap{
+  background:transparent!important;
+}
+@media(max-width:1180px){.refinance-son-frame{min-height:2350px!important;}}
+@media(max-width:760px){.refinance-son-frame{min-height:3150px!important;border-radius:18px!important;}}
 </style>
 
 <style id="chatgpt-mrta-and-hub-layout-patch">
@@ -3106,7 +3121,7 @@ body:not(.tool-open) .epg-hero{
           <div class="epg-tools-panel">
             <div class="epg-panel-head"><div class="epg-panel-title">All Tools</div><div class="epg-view-all" onclick="clearEpgSearch()">View All Tools <span>→</span></div></div>
             <div class="epg-tools-grid" id="epgToolsGrid">
-              <div class="epg-tool" data-name="refinance calculator mortgage maintenance" data-open-section="refinanceSection" onclick="openSection('refinanceSection')"><div class="epg-tool-icon gold">🧮</div><div><h4>Refinance Calculator</h4><p>Product on maintenance</p></div><div class="epg-arrow">›</div></div>
+              <div class="epg-tool" data-name="refinance calculator mortgage package a b" data-open-section="refinanceSection" onclick="openSection('refinanceSection')"><div class="epg-tool-icon gold">🧮</div><div><h4>Refinance Calculator</h4><p>Package A / B refinance proposal</p></div><div class="epg-arrow">›</div></div>
               <div class="epg-tool" data-name="mortgage package comparison bank package" data-open-section="mortgagePackageSection" onclick="openSection('mortgagePackageSection')"><div class="epg-tool-icon blue">📘</div><div><h4>Mortgage Package Comparison</h4><p>Bank package comparison</p></div><div class="epg-arrow">›</div></div>
               <div class="epg-tool" data-name="income calculators income irr commitment" data-open-section="incomeSection" onclick="openSection('incomeSection')"><div class="epg-tool-icon green">💵</div><div><h4>Income Calculators</h4><p>Income, IRR, commitment</p></div><div class="epg-arrow">›</div></div>
               <div class="epg-tool" data-name="booking forms generate booking forms" data-open-section="bookingSection" onclick="openSection('bookingSection')"><div class="epg-tool-icon teal">📋</div><div><h4>Booking Forms</h4><p>Generate booking forms</p></div><div class="epg-arrow">›</div></div>
@@ -3125,45 +3140,577 @@ body:not(.tool-open) .epg-hero{
     </div>
 
     <div id="refinanceSection" class="section">
-
         <div class="module-shell">
-        <div class="module-topbar">
-            <div>
-                <h2>🏠 Refinance Calculator</h2>
-                <p>Product currently under maintenance</p>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-                <span class="esc-hint">Press ESC to return</span>
-                <button class="back-btn" onclick="goBack()">← Back</button>
-            </div>
-        </div>
-
-        <div class="embedded-module-wrap">
-            <div style="
-                min-height:60vh;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                background:white;
-                border-radius:24px;
-                box-shadow:0 12px 32px rgba(15,42,107,0.12);
-                border:1px solid #dbeafe;
-                padding:40px;
-                text-align:center;
-            ">
+            <div class="module-topbar">
                 <div>
-                    <div style="font-size:58px;margin-bottom:18px;">🛠️</div>
-                    <h1 style="color:#0f2a6b;margin-bottom:10px;">Refinance Calculator</h1>
-                    <p style="font-size:20px;font-weight:800;color:#2563eb;margin-bottom:8px;">Product On Maintenance</p>
-                    <p style="color:#64748b;font-size:14px;">This function is temporarily unavailable while the product is being upgraded.</p>
+                    <h2>🏠 Refinance Calculator</h2>
+                    <p>Refinance proposal calculator with Package A / B comparison</p>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <span class="esc-hint">Press ESC to return</span>
+                    <button class="back-btn" onclick="goBack()">← Back</button>
                 </div>
             </div>
-        </div>
 
+            <div class="embedded-module-wrap refinance-son-wrap">
+                <iframe
+                    id="refinanceSonFrame"
+                    class="embedded-frame refinance-son-frame"
+                    title="EPG Refinance Calculator"
+                    srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+  &lt;title&gt;EPG Refinance Proposal - Premium Current Loan UI&lt;/title&gt;
+  &lt;style&gt;
+    :root{
+      --bg:#fbf7ef;
+      --paper:#fffaf0;
+      --card:#ffffff;
+      --gold:#c99b2e;
+      --gold2:#f7df9c;
+      --deep:#8f6716;
+      --dark:#17130a;
+      --line:#ead7a1;
+      --soft-line:#f1e3bc;
+      --text:#101828;
+      --muted:#667085;
+      --green:#0f7a32;
+      --green-bg:#ecf8ee;
+      --orange:#b96d00;
+      --red:#b42318;
+      --shadow:0 26px 70px rgba(143,103,22,.14);
+      --soft-shadow:0 14px 38px rgba(143,103,22,.09);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media screen and (min-width:900px){body{zoom:.9}}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%,rgba(245,217,144,.48),transparent 26%),
+        radial-gradient(circle at 90% 12%,rgba(201,155,46,.22),transparent 24%),
+        linear-gradient(135deg,#fffdf8,#fbf7ef 48%,#f6ecd8);
+      color:var(--text);
+      padding:18px;
+    }
+    .page{
+      max-width:1580px;
+      margin:auto;
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(234,215,161,.9);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+    }
+    .top{
+      padding:22px 26px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,247,219,.95) 54%,rgba(238,191,70,.72)),
+        radial-gradient(circle at 80% 0%,rgba(255,255,255,.9),transparent 32%);
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+    .top:after{
+      content:&quot;&quot;;position:absolute;left:26px;right:26px;bottom:-1px;height:1px;
+      background:linear-gradient(90deg,transparent,#c99b2e,transparent);
+    }
+    .brand{display:flex;align-items:center;gap:16px}
+    .logo{
+      width:58px;height:58px;border-radius:18px;display:grid;place-items:center;
+      background:linear-gradient(160deg,#fff8dc,#f2ca59 58%,#b98516);
+      border:1px solid #e2ba4b;font-size:28px;box-shadow:0 12px 30px rgba(201,155,46,.22)
+    }
+    h1{margin:0;font-size:30px;letter-spacing:-.8px;line-height:1.05;color:#16120a}
+    .sub{margin-top:7px;color:#475467;font-weight:750;font-size:14px}
+    .back{
+      border:1px solid #dfbd62;background:rgba(255,250,235,.85);color:#7f5a0e;
+      border-radius:999px;padding:12px 19px;font-weight:950;cursor:pointer;
+      box-shadow:0 8px 22px rgba(143,103,22,.08)
+    }
+    .content{padding:22px}.layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+    .card,.package,.mini,.cost-pay-card{
+      background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,253,248,.98));
+      border:1px solid var(--soft-line);border-radius:22px;box-shadow:var(--soft-shadow)
+    }
+    .card{padding:20px}.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:16px}
+    .step{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:50%;background:linear-gradient(180deg,#f7df9c,#c99b2e);color:#fff;font-weight:950;margin-right:9px;box-shadow:0 8px 16px rgba(201,155,46,.24)}
+    h2{font-size:19px;margin:0 0 10px;letter-spacing:-.25px} h3{font-size:15px;margin:12px 0 8px;color:#8f6716}
+    label{font-size:12.5px;font-weight:850;color:#344054;display:block;margin:12px 0 7px;text-transform:uppercase;letter-spacing:.25px}
+    input{
+      width:100%;
+      height:50px;
+      border:1px solid #ead7a1;
+      border-radius:14px;
+      background:#fff;
+      padding:0 15px;
+      font-size:17px;
+      color:#101828;
+      outline:none;
+      font-weight:750;
+      box-shadow:none;
+    }
+    input:focus{border-color:#c99b2e;box-shadow:0 0 0 4px rgba(201,155,46,.14)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hint{margin:0 0 8px;color:#667085;font-weight:650;font-size:13px;line-height:1.5}
+    .actions{display:flex;gap:10px;margin-top:14px}button{cursor:pointer;border-radius:14px;font-weight:950;padding:13px 15px;transition:.18s ease}.primary{border:0;background:linear-gradient(180deg,#f7df9c,#c99b2e);color:#1f1604;flex:1;box-shadow:0 14px 26px rgba(201,155,46,.2)}.primary:hover,.back:hover{transform:translateY(-1px)}.ghost{background:#fff;border:1px solid var(--line);color:var(--deep)}
+    .current-panel{
+      display:grid;grid-template-columns:78px 1fr;align-items:center;gap:16px;padding:17px 20px;margin-bottom:14px;border-radius:24px;border:1px solid var(--line);
+      background:
+        radial-gradient(circle at 6% 16%,rgba(247,223,156,.9),transparent 22%),
+        linear-gradient(135deg,#fff,#fffaf0 52%,#fff);
+      box-shadow:var(--soft-shadow);position:relative;overflow:hidden
+    }
+    .current-panel:before{content:&quot;&quot;;position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.55),transparent 38%,rgba(201,155,46,.08));pointer-events:none}
+    .trophy{width:66px;height:66px;border-radius:20px;border:1px solid #e3bd57;display:grid;place-items:center;font-size:32px;background:linear-gradient(180deg,#fffefa,#fff2c6);box-shadow:0 14px 28px rgba(201,155,46,.18);position:relative;z-index:1}
+    .best-main{display:grid;grid-template-columns:1.05fr repeat(6,1fr);gap:11px;align-items:stretch;position:relative;z-index:1}
+    .best-title{padding-right:8px}.best-title small{display:block;font-weight:950;color:#8f6716;margin-bottom:5px;text-transform:uppercase;letter-spacing:.45px;font-size:12px}.best-title strong{font-size:20px;line-height:1.12;display:block}.best-title em{display:block;margin-top:6px;font-style:normal;font-size:12px;font-weight:800;color:#667085}
+    .kpi{border:1px solid rgba(234,215,161,.72);background:rgba(255,255,255,.75);border-radius:15px;padding:11px 12px;min-height:94px}.kpi span{font-size:11.2px;color:#667085;font-weight:800;text-transform:uppercase;letter-spacing:.25px}.kpi b{display:block;margin-top:7px;font-size:15.5px;line-height:1.15}.green{color:var(--green)}.orange{color:var(--orange)}.red{color:var(--red)}
+    .packages{display:grid;grid-template-columns:repeat(3, minmax(280px,1fr));gap:17px}.package{padding:17px;position:relative;overflow:hidden;transition:.18s ease}.package:before{content:&quot;&quot;;position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#f7df9c,#c99b2e,#8f6716);opacity:.7}.package:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(143,103,22,.13)}.package.best-pkg{border-color:#c99b2e;box-shadow:0 0 0 2px rgba(201,155,46,.2),0 22px 50px rgba(143,103,22,.14)}
+    .best-ribbon{position:absolute;top:12px;right:12px;background:linear-gradient(180deg,#c99b2e,#8f6716);color:#fff;padding:8px 13px;border-radius:999px;font-weight:950;font-size:12px;box-shadow:0 10px 22px rgba(143,103,22,.22)}
+    .pkg-title{font-size:18px;font-weight:950;margin:6px 102px 7px 0;display:flex;align-items:center;gap:10px;letter-spacing:-.25px}.pkg-title:before{content:&quot;🏦&quot;;width:34px;height:34px;border-radius:12px;background:#fff8e2;border:1px solid var(--line);display:grid;place-items:center;font-size:17px}
+    .pkg-sub{font-size:12.5px;color:#667085;font-weight:750;margin-bottom:14px;min-height:36px;line-height:1.45}
+    .line{display:flex;justify-content:space-between;gap:12px;font-size:13px;margin:10px 0;color:#475467}.line b{font-size:14px;text-align:right;color:#101828}.result{border:1px solid var(--soft-line);background:linear-gradient(180deg,#fffdf8,#fff7e5);border-radius:10px;padding:11px 12px;margin-top:13px}.result .line{margin:9px 0}.result .line b{font-size:16px}
+    .status{
+      margin-top:13px;
+      width:100%;
+      height:40px;
+      border-radius:13px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#fffdf7,#fff6df);
+      color:#8f6716;
+      font-weight:950;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      letter-spacing:.15px;
+    }.status.best-choice{background:linear-gradient(180deg,#5fbe38,#238b19);border:0;color:#fff;font-size:15px;box-shadow:0 12px 22px rgba(15,122,50,.16)}
+    .breakdown{margin-top:16px;display:grid;grid-template-columns:repeat(3, minmax(280px,1fr));gap:16px}.side-breakdown{grid-template-columns:1fr;gap:10px;margin-top:4px}.mini{padding:14px}.mini-title{font-weight:950;color:#8f6716;margin-bottom:10px}.total{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:15px}
+    .bottom-note{margin-top:18px;border:1px solid var(--line);border-radius:10px;background:rgba(255,248,232,.88);padding:15px 18px;color:#475467;font-size:13px;font-weight:700;box-shadow:0 12px 26px rgba(143,103,22,.06)}
+    .loan-panel{padding:0;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,252,244,.98));}
+    .loan-head{padding:18px 18px 14px;border-bottom:1px solid rgba(234,215,161,.72);background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,248,225,.84));}
+    .loan-head h2{margin:0;font-size:19px;letter-spacing:-.35px;display:flex;align-items:center}.loan-head .hint{margin:8px 0 0;font-size:12.5px;font-weight:700;color:#667085;line-height:1.45}
+    .loan-body{padding:16px 18px 18px}.loan-section-title{display:flex;align-items:center;justify-content:space-between;margin:2px 0 11px;font-size:12px;font-weight:950;color:#8f6716;text-transform:uppercase;letter-spacing:.6px}.loan-section-title:after{content:&quot;&quot;;height:1px;flex:1;margin-left:10px;background:linear-gradient(90deg,#ead7a1,transparent)}
+    .input-card{border:1px solid rgba(234,215,161,.78);border-radius:17px;background:rgba(255,255,255,.82);padding:12px 12px 13px;margin-bottom:10px;box-shadow:0 8px 20px rgba(143,103,22,.045)}
+    .input-card label{margin:0 0 7px;font-size:11.4px;color:#667085;letter-spacing:.45px}.input-card input{
+      width:100%;
+      height:50px;
+      border:1px solid #ead7a1;
+      border-radius:14px;
+      background:#fff;
+      padding:0 15px;
+      font-size:17px;
+      color:#101828;
+      outline:none;
+      font-weight:750;
+      box-shadow:none;
+    }
+    .monthly-hero{margin:14px 0;border:1px solid #dfbd62;border-radius:20px;padding:15px;background:radial-gradient(circle at 88% 8%,rgba(247,223,156,.85),transparent 31%),linear-gradient(135deg,#fffdf8,#fff4d6);box-shadow:0 16px 34px rgba(143,103,22,.11)}
+    .monthly-hero .eyebrow{font-size:11.6px;font-weight:950;text-transform:uppercase;letter-spacing:.6px;color:#8f6716}.monthly-row{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.monthly-hero input{
+      width:100%;
+      height:50px;
+      border:1px solid #ead7a1;
+      border-radius:14px;
+      background:#fff;
+      padding:0 15px;
+      font-size:17px;
+      color:#101828;
+      outline:none;
+      font-weight:750;
+      box-shadow:none;
+    }.monthly-hero .micro{margin-top:8px;font-size:12px;color:#667085;font-weight:750}
+    .actions{display:flex;gap:10px;margin-top:14px}button{cursor:pointer;border-radius:14px;font-weight:950;padding:13px 15px;transition:.18s ease}.primary{border:0;background:linear-gradient(180deg,#f7df9c,#c99b2e);color:#1f1604;flex:1;box-shadow:0 14px 26px rgba(201,155,46,.2)}.primary:hover,.back:hover{transform:translateY(-1px)}.ghost{background:#fff;border:1px solid var(--line);color:var(--deep)}
+    .cost-pay-card{margin-top:14px;padding:18px;border-radius:22px;position:relative;overflow:hidden;background:radial-gradient(circle at 88% 0%,rgba(247,223,156,.82),transparent 34%),linear-gradient(160deg,#fff,#fff8e6 60%,#fff)}.cost-pay-card:before{content:&quot;&quot;;position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#f7df9c,#c99b2e,#8f6716)}.cost-head{font-size:15px;font-weight:950;margin-bottom:7px;color:#101828;letter-spacing:-.2px;display:flex;align-items:center;gap:8px}.cost-icon{width:35px;height:35px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(180deg,#f7df9c,#c99b2e);box-shadow:0 10px 22px rgba(201,155,46,.22)}
+    .cost-main-amount{font-size:32px;font-weight:950;letter-spacing:-.9px;color:#17130a;margin-top:8px}.cost-desc{font-size:12.5px;line-height:1.45;color:#667085;font-weight:750;margin-top:5px}.cost-tag{display:inline-flex;margin-top:12px;padding:7px 10px;border-radius:999px;border:1px solid rgba(201,155,46,.32);background:rgba(255,255,255,.72);color:#8f6716;font-size:11.3px;font-weight:950;text-transform:uppercase;letter-spacing:.38px} 
+    @media(max-width:1180px){.layout{grid-template-columns:1fr}.side{position:relative;top:auto}.packages{grid-template-columns:1fr 1fr}.best-main{grid-template-columns:1fr 1fr 1fr}}
+    @media(max-width:760px){body{padding:8px}.page{border-radius:22px}.content{padding:12px}.top{padding:16px;align-items:flex-start;gap:10px;flex-direction:column}.packages,.breakdown{grid-template-columns:1fr}.current-panel{grid-template-columns:1fr}.best-main{grid-template-columns:1fr}.kpi{padding:12px}.trophy{width:66px;height:66px;border-radius:18px}h1{font-size:25px}}
+    @media print{body{padding:0;background:#fff}.page{box-shadow:none;border:0}.back,.actions{display:none}.side{position:relative}.package:hover{transform:none}.content{padding:12px}.layout{grid-template-columns:330px 1fr;gap:12px}.packages{grid-template-columns:repeat(3, minmax(280px,1fr));gap:10px}.package{box-shadow:none}.current-panel{box-shadow:none}.cost-pay-card,.card{box-shadow:none}}
+
+.package-group{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+
+.view-details{
+  cursor:pointer;
+}
+.view-details:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px rgba(143,103,22,.12);
+}
+
+.notice-box{
+  display:none;
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:14px;
+  border:1px solid rgba(180,35,24,.24);
+  background:#fff4f3;
+  color:#b42318;
+  font-size:12.5px;
+  font-weight:850;
+  line-height:1.35;
+}
+.notice-box.show{display:block;}
+
+    body{padding:0!important;}
+    .page{max-width:1580px!important;}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;page&quot;&gt;
+  &lt;div class=&quot;top&quot;&gt;
+    &lt;div class=&quot;brand&quot;&gt;&lt;div class=&quot;logo&quot;&gt;🏦&lt;/div&gt;&lt;div&gt;&lt;h1&gt;EPG Refinance Proposal&lt;/h1&gt;&lt;div class=&quot;sub&quot;&gt;White Gold Mortgage Proposal · 3 Packages / 6 Options&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;button class=&quot;back&quot; onclick=&quot;if(parent &amp;&amp; parent.goBack){parent.goBack()}else{history.back()}&quot;&gt;← Back&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;div class=&quot;layout&quot;&gt;
+      &lt;aside class=&quot;card side loan-panel&quot;&gt;
+        &lt;div class=&quot;loan-head&quot;&gt;
+          &lt;h2&gt;&lt;span class=&quot;step&quot;&gt;1&lt;/span&gt;Current Loan&lt;/h2&gt;
+          &lt;p class=&quot;hint&quot;&gt;Key in existing loan details. Amount will auto format like 500,000.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;loan-body&quot;&gt;
+          &lt;div class=&quot;loan-section-title&quot;&gt;Existing Loan Details&lt;/div&gt;
+
+          &lt;div class=&quot;input-card&quot;&gt;
+            &lt;label&gt;Outstanding Balance (RM)&lt;/label&gt;
+            &lt;input id=&quot;outstanding&quot; placeholder=&quot;e.g. 700,000&quot; oninput=&quot;formatInput(this)&quot; /&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;grid2&quot;&gt;
+            &lt;div class=&quot;input-card&quot;&gt;
+              &lt;label&gt;Interest Rate (%)&lt;/label&gt;
+              &lt;input id=&quot;currentRate&quot; placeholder=&quot;e.g. 4.30&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;input-card&quot;&gt;
+              &lt;label&gt;Balance Tenure (Years)&lt;/label&gt;
+              &lt;input id=&quot;remainingYears&quot; placeholder=&quot;e.g. 25&quot; /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;monthly-hero&quot;&gt;
+            &lt;div class=&quot;eyebrow&quot;&gt;Current Monthly Commitment&lt;/div&gt;
+            &lt;div class=&quot;monthly-row&quot;&gt;
+              &lt;input id=&quot;currentMonthly&quot; placeholder=&quot;e.g. 2,573&quot; oninput=&quot;formatInput(this)&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;micro&quot;&gt;This amount is used to calculate total repayment over the remaining tenure.&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;actions&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;calculateBtn&quot; type=&quot;button&quot;&gt;Calculate&lt;/button&gt;&lt;button class=&quot;ghost&quot; id=&quot;pdfBtn&quot; type=&quot;button&quot;&gt;PDF&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;notice-box&quot; id=&quot;noticeBox&quot;&gt;&lt;/div&gt;
+
+          &lt;section class=&quot;cost-pay-card&quot;&gt;
+            &lt;div class=&quot;cost-head&quot;&gt;&lt;span class=&quot;cost-icon&quot;&gt;💎&lt;/span&gt; Refinance Cost Summary&lt;/div&gt;
+            &lt;div class=&quot;cost-main-amount&quot; id=&quot;refiCostSummary&quot;&gt;RM0.00&lt;/div&gt;
+            &lt;div class=&quot;cost-desc&quot;&gt;Estimated Legal Fees, Stamp Duty &amp; Valuation Fees&lt;/div&gt;
+            &lt;div class=&quot;cost-tag&quot;&gt;Auto calculated from outstanding balance&lt;/div&gt;
+          &lt;/section&gt;
+        &lt;/div&gt;
+      &lt;/aside&gt;
+
+      &lt;main&gt;
+        &lt;section class=&quot;best current-panel&quot;&gt;
+          &lt;div class=&quot;trophy&quot;&gt;🏦&lt;/div&gt;
+          &lt;div class=&quot;best-main&quot;&gt;
+            &lt;div class=&quot;best-title&quot;&gt;&lt;small&gt;Current Bank Package&lt;/small&gt;&lt;strong&gt;Existing Loan&lt;/strong&gt;&lt;em&gt;Base comparison before refinance&lt;/em&gt;&lt;/div&gt;
+            &lt;div class=&quot;kpi&quot;&gt;&lt;span&gt;Loan Amount&lt;/span&gt;&lt;b id=&quot;curLoan&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+            &lt;div class=&quot;kpi&quot;&gt;&lt;span&gt;Interest Rate&lt;/span&gt;&lt;b id=&quot;curRate&quot;&gt;0.00%&lt;/b&gt;&lt;/div&gt;
+            &lt;div class=&quot;kpi&quot;&gt;&lt;span&gt;Monthly Instalment&lt;/span&gt;&lt;b id=&quot;curMonthly&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+            &lt;div class=&quot;kpi&quot;&gt;&lt;span&gt;Loan Tenure&lt;/span&gt;&lt;b id=&quot;curTenure&quot;&gt;0 years&lt;/b&gt;&lt;/div&gt;
+            &lt;div class=&quot;kpi&quot;&gt;&lt;span&gt;Estimated Total Repayment&lt;/span&gt;&lt;b class=&quot;orange&quot; id=&quot;curTotalPaid&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+            &lt;div class=&quot;kpi&quot;&gt;&lt;span&gt;Total Interest Will Pay&lt;/span&gt;&lt;b class=&quot;red&quot; id=&quot;curTotalInterest&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+
+        
+&lt;section class=&quot;packages&quot;&gt;
+  &lt;div class=&quot;package-group&quot; id=&quot;group-1&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;package-group&quot; id=&quot;group-2&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;package-group&quot; id=&quot;group-3&quot;&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+
+        &lt;div class=&quot;bottom-note&quot;&gt;ⓘ Legal fees, stamp duty and valuation cost are auto-calculated from the outstanding loan amount. Package 1 is zero moving cost, Package 2 pays cost by cash, Package 3 finances the cost into the loan.&lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const packages = [
+  { name:&#x27;Package 1A&#x27;, type:&#x27;Zero Moving Cost&#x27;, rate:3.90, mode:&#x27;zero&#x27;, plan:&#x27;A&#x27; },
+  { name:&#x27;Package 1B&#x27;, type:&#x27;Zero Moving Cost&#x27;, rate:3.90, mode:&#x27;zero&#x27;, plan:&#x27;B&#x27; },
+  { name:&#x27;Package 2A&#x27;, type:&#x27;Legal Fees, Stamp Duty &amp; Valuation fees to be paid by CASH&#x27;, rate:3.55, mode:&#x27;cash&#x27;, plan:&#x27;A&#x27; },
+  { name:&#x27;Package 2B&#x27;, type:&#x27;Legal Fees, Stamp Duty &amp; Valuation fees to be paid by CASH&#x27;, rate:3.55, mode:&#x27;cash&#x27;, plan:&#x27;B&#x27; },
+  { name:&#x27;Package 3A&#x27;, type:&#x27;Legal Fees, Stamp Duty &amp; Valuation fees to be financed into the loan&#x27;, rate:3.55, mode:&#x27;finance&#x27;, plan:&#x27;A&#x27; },
+  { name:&#x27;Package 3B&#x27;, type:&#x27;Legal Fees, Stamp Duty &amp; Valuation fees to be financed into the loan&#x27;, rate:3.55, mode:&#x27;finance&#x27;, plan:&#x27;B&#x27; }
+];
+
+const $ = id =&gt; document.getElementById(id);
+const raw = v =&gt; Number(String(v||&#x27;&#x27;).replace(/,/g,&#x27;&#x27;)) || 0;
+const val = id =&gt; raw($(id)?.value);
+const fixed = { legalFirstRate:1.25, legalAfterRate:1.00, stampRate:0.50, legalDisb:4500, valFirstRate:0.25, valAfterRate:0.20, valDisb:250, sstRate:8 };
+const rateVal = id =&gt; ($(id) ? val(id) : fixed[id]);
+const money = n =&gt; &#x27;RM&#x27; + Number(n||0).toLocaleString(&#x27;en-MY&#x27;,{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct = id =&gt; raw($(id).value)/100;
+
+function formatInput(el){
+  const cursorEnd = el.selectionStart === el.value.length;
+  const n = raw(el.value);
+  el.value = n ? n.toLocaleString(&#x27;en-MY&#x27;) : &#x27;&#x27;;
+  if(cursorEnd) el.setSelectionRange(el.value.length, el.value.length);
+}
+
+function pmt(principal, annualRate, years){
+  const months = years * 12;
+  const r = annualRate / 100 / 12;
+  if(!principal || !months) return 0;
+  if(r === 0) return principal / months;
+  return principal * r * Math.pow(1+r,months) / (Math.pow(1+r,months)-1);
+}
+
+function totalInterest(principal, annualRate, years){
+  return pmt(principal, annualRate, years) * years * 12 - principal;
+}
+
+function monthsToFullySettle(principal, annualRate, monthlyPayment){
+  const r = annualRate / 100 / 12;
+  if(!principal || !monthlyPayment) return 0;
+  if(r === 0) return Math.ceil(principal / monthlyPayment);
+  if(monthlyPayment &lt;= principal * r) return Infinity;
+  return Math.ceil(-Math.log(1 - (principal * r / monthlyPayment)) / Math.log(1 + r));
+}
+
+function formatTenureFromMonths(months){
+  if(!isFinite(months)) return &#x27;Not enough payment&#x27;;
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  if(y &amp;&amp; m) return y + &#x27; yrs &#x27; + m + &#x27; mths&#x27;;
+  if(y) return y + &#x27; yrs&#x27;;
+  return m + &#x27; mths&#x27;;
+}
+
+function calcCost(baseLoan){
+  const sst = rateVal(&#x27;sstRate&#x27;)/100;
+  const legalFirst = Math.min(baseLoan,500000) * rateVal(&#x27;legalFirstRate&#x27;)/100;
+  const legalAfter = Math.max(baseLoan-500000,0) * rateVal(&#x27;legalAfterRate&#x27;)/100;
+  const legalFee = legalFirst + legalAfter;
+  const stampDuty = baseLoan * rateVal(&#x27;stampRate&#x27;)/100;
+  const legalDisb = rateVal(&#x27;legalDisb&#x27;);
+  const legalSST = (legalFee + stampDuty + legalDisb) * sst;
+  const legalTotal = legalFee + stampDuty + legalDisb + legalSST;
+
+  const valFirst = Math.min(baseLoan,100000) * rateVal(&#x27;valFirstRate&#x27;)/100;
+  const valAfter = Math.max(baseLoan-100000,0) * rateVal(&#x27;valAfterRate&#x27;)/100;
+  const valFee = valFirst + valAfter;
+  const valDisb = rateVal(&#x27;valDisb&#x27;);
+  const valSST = (valFee + valDisb) * sst;
+  const valTotal = valFee + valDisb + valSST;
+
+  return {baseLoan, legalFirst, legalAfter, legalFee, stampDuty, legalDisb, legalSST, legalTotal, valFirst, valAfter, valFee, valDisb, valSST, valTotal, totalCost: legalTotal + valTotal};
+}
+
+
+function build(){
+  const groups = {
+    1: [],
+    2: [],
+    3: []
+  };
+
+  packages.forEach((p,i)=&gt;{
+    const card = `
+    &lt;div class=&quot;package&quot; id=&quot;pkg-${i}&quot;&gt;
+      &lt;div class=&quot;pkg-title&quot;&gt;${p.name}&lt;/div&gt;
+      &lt;div class=&quot;pkg-sub&quot;&gt;${p.type} · Plan ${p.plan}&lt;/div&gt;
+
+      &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Interest Rate&lt;/span&gt;&lt;b&gt;${p.rate.toFixed(2)}%&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Loan Amount Used&lt;/span&gt;&lt;b id=&quot;loan-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Cost Treatment&lt;/span&gt;&lt;b id=&quot;treat-${i}&quot;&gt;-&lt;/b&gt;&lt;/div&gt;
+
+      &lt;div class=&quot;result&quot;&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span id=&quot;monthlyLabel-${i}&quot;&gt;New Monthly Instalment&lt;/span&gt;&lt;b id=&quot;monthly-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span id=&quot;savingLabel-${i}&quot;&gt;Monthly Saving&lt;/span&gt;&lt;b class=&quot;green&quot; id=&quot;saving-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Cash Need to Pay&lt;/span&gt;&lt;b class=&quot;orange&quot; id=&quot;cash-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span id=&quot;tenureLabel-${i}&quot;&gt;New Tenure&lt;/span&gt;&lt;b id=&quot;newTenure-${i}&quot;&gt;0 years&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span id=&quot;tenureSaveLabel-${i}&quot;&gt;Tenure Saved&lt;/span&gt;&lt;b class=&quot;green&quot; id=&quot;tenureSave-${i}&quot;&gt;0 years&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Total Interest&lt;/span&gt;&lt;b id=&quot;interest-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Total Interest Saved&lt;/span&gt;&lt;b class=&quot;green&quot; id=&quot;interestSave-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;status&quot; id=&quot;status-${i}&quot;&gt;View Details&lt;/div&gt;
+    &lt;/div&gt;
+    `;
+
+    if(p.name.includes(&#x27;1&#x27;)) groups[1].push(card);
+    if(p.name.includes(&#x27;2&#x27;)) groups[2].push(card);
+    if(p.name.includes(&#x27;3&#x27;)) groups[3].push(card);
+  });
+
+  document.getElementById(&#x27;group-1&#x27;).innerHTML = groups[1].join(&#x27;&#x27;);
+  document.getElementById(&#x27;group-2&#x27;).innerHTML = groups[2].join(&#x27;&#x27;);
+  document.getElementById(&#x27;group-3&#x27;).innerHTML = groups[3].join(&#x27;&#x27;);
+}
+
+function renderBreakdown(c){
+  if($(&#x27;cashNeedPay&#x27;)) $(&#x27;cashNeedPay&#x27;).textContent = money(c.totalCost);
+}
+
+function showNotice(message){
+  const box = $(&#x27;noticeBox&#x27;);
+  if(!box) return;
+  if(!message){
+    box.textContent = &#x27;&#x27;;
+    box.classList.remove(&#x27;show&#x27;);
+    return;
+  }
+  box.textContent = message;
+  box.classList.add(&#x27;show&#x27;);
+}
+
+function calculate(){
+  try{
+    showNotice(&#x27;&#x27;);
+
+    const outstanding = val(&#x27;outstanding&#x27;);
+    const currentMonthly = val(&#x27;currentMonthly&#x27;);
+    const currentRate = raw($(&#x27;currentRate&#x27;)?.value);
+    const years = val(&#x27;remainingYears&#x27;);
+
+    if(!outstanding || !currentMonthly || !years){
+      showNotice(&#x27;Please fill in Outstanding Balance, Current Monthly Commitment and Balance Tenure first.&#x27;);
+      return;
+    }
+
+    const cost = calcCost(outstanding);
+    renderBreakdown(cost);
+
+    if($(&#x27;refiCostSummary&#x27;)) $(&#x27;refiCostSummary&#x27;).textContent = money(cost.totalCost);
+    $(&#x27;curLoan&#x27;).textContent = money(outstanding);
+    $(&#x27;curRate&#x27;).textContent = (currentRate || 0).toFixed(2) + &#x27;%&#x27;;
+    $(&#x27;curMonthly&#x27;).textContent = money(currentMonthly);
+    $(&#x27;curTenure&#x27;).textContent = years + &#x27; years&#x27;;
+    const currentTotalPaid = currentMonthly * 12 * years;
+    const currentTotalInterest = Math.max(currentTotalPaid - outstanding, 0);
+    $(&#x27;curTotalPaid&#x27;).textContent = money(currentTotalPaid);
+    if($(&#x27;curTotalInterest&#x27;)) $(&#x27;curTotalInterest&#x27;).textContent = money(currentTotalInterest);
+
+    let bestIndex = -1;
+    let bestInterestSaved = -Infinity;
+
+    packages.forEach((p,i)=&gt;{
+      const loanUsed = p.mode === &#x27;finance&#x27; ? outstanding + cost.totalCost : outstanding;
+      const cash = p.mode === &#x27;cash&#x27; ? cost.totalCost : 0;
+      const standardMonthly = pmt(loanUsed,p.rate,years);
+      const treatment = p.mode === &#x27;zero&#x27; ? &#x27;Zero Moving Cost&#x27; : p.mode === &#x27;cash&#x27; ? &#x27;Pay By Cash&#x27; : &#x27;Finance Into Loan&#x27;;
+
+      let displayMonthly = standardMonthly;
+      let saving = currentMonthly - standardMonthly;
+      let interest = totalInterest(loanUsed,p.rate,years);
+      let newMonths = years * 12;
+      let tenureSavedMonths = 0;
+
+      if(p.plan === &#x27;B&#x27;){
+        displayMonthly = currentMonthly;
+        saving = 0;
+        newMonths = monthsToFullySettle(loanUsed,p.rate,currentMonthly);
+        tenureSavedMonths = isFinite(newMonths) ? Math.max((years * 12) - newMonths, 0) : 0;
+        interest = isFinite(newMonths) ? Math.max((currentMonthly * newMonths) - loanUsed, 0) : 0;
+      }
+
+      const interestSaved = currentTotalInterest - interest;
+
+      if(interestSaved &gt; bestInterestSaved){
+        bestInterestSaved = interestSaved;
+        bestIndex = i;
+      }
+
+      if($(`monthlyLabel-${i}`)) $(`monthlyLabel-${i}`).textContent = p.plan === &#x27;B&#x27; ? &#x27;Maintain Monthly Payment&#x27; : &#x27;New Monthly Instalment&#x27;;
+      if($(`savingLabel-${i}`)) $(`savingLabel-${i}`).textContent = p.plan === &#x27;B&#x27; ? &#x27;Monthly Saving Used To Pay Extra&#x27; : &#x27;Monthly Saving&#x27;;
+      if($(`loan-${i}`)) $(`loan-${i}`).textContent = money(loanUsed);
+      if($(`treat-${i}`)) $(`treat-${i}`).textContent = treatment;
+      if($(`monthly-${i}`)) $(`monthly-${i}`).textContent = money(displayMonthly);
+      if($(`saving-${i}`)) $(`saving-${i}`).textContent = p.plan === &#x27;B&#x27; ? money(Math.max(currentMonthly - standardMonthly, 0)) : money(saving);
+      if($(`cash-${i}`)) $(`cash-${i}`).textContent = money(cash);
+      if($(`newTenure-${i}`)) $(`newTenure-${i}`).textContent = p.plan === &#x27;B&#x27; ? formatTenureFromMonths(newMonths) : years + &#x27; years&#x27;;
+      if($(`tenureSave-${i}`)) $(`tenureSave-${i}`).textContent = p.plan === &#x27;B&#x27; ? formatTenureFromMonths(tenureSavedMonths) : &#x27;0 years&#x27;;
+      if($(`interest-${i}`)) $(`interest-${i}`).textContent = money(interest);
+      if($(`interestSave-${i}`)) $(`interestSave-${i}`).textContent = money(interestSaved);
+      if($(`pkg-${i}`)) $(`pkg-${i}`).classList.remove(&#x27;best-pkg&#x27;);
+
+      if($(`status-${i}`)){
+        $(`status-${i}`).textContent = &#x27;View Details&#x27;;
+        $(`status-${i}`).className = &#x27;status view-details&#x27;;
+      }
+    });
+
+    if(bestIndex &gt;= 0 &amp;&amp; $(`pkg-${bestIndex}`)){
+      $(`pkg-${bestIndex}`).classList.add(&#x27;best-pkg&#x27;);
+    }
+  }catch(err){
+    console.error(err);
+    showNotice(&#x27;Calculation error: &#x27; + (err &amp;&amp; err.message ? err.message : &#x27;Please check the input value.&#x27;));
+  }
+}
+
+function resetResults(){
+  const zeroMoney = &#x27;RM0.00&#x27;;
+
+  [&#x27;curLoan&#x27;,&#x27;curMonthly&#x27;,&#x27;curTotalPaid&#x27;,&#x27;curTotalInterest&#x27;,&#x27;cashNeedPay&#x27;,&#x27;refiCostSummary&#x27;].forEach(id=&gt;{
+    if($(id)) $(id).textContent = zeroMoney;
+  });
+
+  if($(&#x27;curRate&#x27;)) $(&#x27;curRate&#x27;).textContent = &#x27;0.00%&#x27;;
+  if($(&#x27;curTenure&#x27;)) $(&#x27;curTenure&#x27;).textContent = &#x27;0 years&#x27;;
+
+  packages.forEach((p,i)=&gt;{
+    [&#x27;loan&#x27;,&#x27;monthly&#x27;,&#x27;saving&#x27;,&#x27;cash&#x27;,&#x27;interest&#x27;,&#x27;interestSave&#x27;].forEach(prefix=&gt;{
+      if($(`${prefix}-${i}`)) $(`${prefix}-${i}`).textContent = zeroMoney;
+    });
+    [&#x27;newTenure&#x27;,&#x27;tenureSave&#x27;].forEach(prefix=&gt;{
+      if($(`${prefix}-${i}`)) $(`${prefix}-${i}`).textContent = &#x27;0 years&#x27;;
+    });
+    if($(`monthlyLabel-${i}`)) $(`monthlyLabel-${i}`).textContent = &#x27;New Monthly Instalment&#x27;;
+    if($(`savingLabel-${i}`)) $(`savingLabel-${i}`).textContent = &#x27;Monthly Saving&#x27;;
+    if($(`treat-${i}`)) $(`treat-${i}`).textContent = &#x27;-&#x27;;
+    if($(`status-${i}`)){
+      $(`status-${i}`).textContent = &#x27;View Details&#x27;;
+      $(`status-${i}`).className = &#x27;status view-details&#x27;;
+    }
+    if($(`pkg-${i}`)) $(`pkg-${i}`).classList.remove(&#x27;best-pkg&#x27;);
+  });
+}
+
+function initApp(){
+  build();
+  resetResults();
+  showNotice(&#x27;&#x27;);
+
+  const calcBtn = $(&#x27;calculateBtn&#x27;);
+  if(calcBtn) calcBtn.addEventListener(&#x27;click&#x27;, calculate);
+
+  const pdfBtn = $(&#x27;pdfBtn&#x27;);
+  if(pdfBtn) pdfBtn.addEventListener(&#x27;click&#x27;, () =&gt; window.print());
+
+  document.addEventListener(&#x27;keydown&#x27;,e=&gt;{ if(e.key===&#x27;Escape&#x27;){ if(parent &amp;&amp; parent.goBack){parent.goBack()}else{history.back()} } });
+}
+
+document.addEventListener(&#x27;DOMContentLoaded&#x27;, initApp);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+            </div>
+        </div>
     </div>
-        </div>
-
-
 
 
 
@@ -3455,6 +4002,68 @@ label{color:#0f172a!important;font-weight:800!important;}
   body *{color:#0f172a!important;text-shadow:none!important;}
   .watermark{display:none!important;}
 }
+
+/* === Kiki Refinance White-Gold Final Override === */
+.top{
+  background:
+    radial-gradient(circle at 88% 0%,rgba(247,223,156,.72),transparent 34%),
+    linear-gradient(135deg,#ffffff 0%,#fffaf0 58%,#f7df9c 100%)!important;
+  border-bottom:1px solid #e6bf4d!important;
+  box-shadow:0 14px 34px rgba(143,103,22,.10)!important;
+}
+.top:after{
+  background:linear-gradient(90deg,transparent,#c99b2e,transparent)!important;
+}
+.top h1,.top .sub,.top .brand,.top *{
+  color:#0f172a!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+.logo,.pkg-title:before,.trophy,.cost-icon,.step{
+  background:linear-gradient(160deg,#fff8dc,#f7df9c 58%,#c99b2e)!important;
+  border-color:#d4af37!important;
+  color:#1f1604!important;
+  box-shadow:0 10px 24px rgba(201,155,46,.18)!important;
+}
+.package,.current-panel,.card,.cost-pay-card,.result{
+  background:linear-gradient(180deg,#ffffff 0%,#fffdf7 100%)!important;
+  border-color:#ead7a1!important;
+}
+.package:before,.cost-pay-card:before{
+  background:linear-gradient(90deg,#fff4c7,#c99b2e,#8f6716)!important;
+}
+.best-ribbon,.status.best-choice{
+  background:linear-gradient(135deg,#f7df9c,#c99b2e)!important;
+  color:#1f1604!important;
+  border:1px solid #d4af37!important;
+  box-shadow:0 10px 22px rgba(201,155,46,.18)!important;
+}
+.result .line b[id^='saving-'],
+.result .line b[id^='tenureSave-'],
+.result .line b[id^='interestSave-']{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:92px!important;
+  padding:3px 8px!important;
+  border-radius:7px!important;
+  border:1px solid #d4af37!important;
+  background:linear-gradient(180deg,#fffdf7 0%,#fff4c7 100%)!important;
+  color:#8f6716!important;
+  box-shadow:0 4px 10px rgba(201,155,46,.12)!important;
+  font-size:15px!important;
+  font-weight:950!important;
+  line-height:1.15!important;
+  text-align:center!important;
+}
+.result .line b[id^='saving-'].negative,
+.result .line b[id^='tenureSave-'].negative,
+.result .line b[id^='interestSave-'].negative{
+  background:#fff4f3!important;
+  color:#b42318!important;
+  border-color:#f4b4ad!important;
+}
+
 &lt;/style&gt;&lt;/head&gt;
 
 &lt;body&gt;
@@ -13040,7 +13649,7 @@ button:hover,
     td{background:#ffffff!important;color:var(--epg-text)!important;border-color:var(--epg-line)!important;}
     tr:hover td{background:#f8fbff!important;}
     .header,.top,.topbar,.report-header,.amort-header,.hero:not(:empty){
-      background:linear-gradient(135deg,#050915,var(--epg-navy) 58%,#07101f)!important;
+      background:linear-gradient(135deg,#ffffff 0%,#fff2c6 52%,#f3d37a 100%)!important;
       color:#ffffff!important;
       border:1px solid rgba(212,175,55,.16)!important;
       box-shadow:0 18px 48px rgba(0,0,0,.24)!important;
@@ -14656,9 +15265,6 @@ td{color:#0f172a!important;border-color:#f1d58a!important;}
 /* Buttons */
 button, .btn, .button, input[type='button'], input[type='submit'], .small-btn, .btn-primary, .btn-secondary,
 .green, .secondary, .clear, .clear-btn, .actions button, .table-actions button{
-  background:linear-gradient(135deg,#ffffff 0%,#fff1b8 52%,#f6c94c 100%)!important;
-  color:#0f172a!important;
-  border:1px solid #d4af37!important;
   box-shadow:0 8px 20px rgba(212,175,55,.18)!important;
   opacity:1!important;
   filter:none!important;
