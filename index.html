@@ -1981,6 +1981,508 @@ body.tool-open .card,body.tool-open .panel,body.tool-open .box,body.tool-open .c
 }
 @media(max-width:1180px){.refinance-son-frame{min-height:2350px!important;}}
 @media(max-width:760px){.refinance-son-frame{min-height:3150px!important;border-radius:18px!important;}}
+
+
+/* =========================================================
+   FINAL CLEAN OVERRIDE v2
+   Goal:
+   1) Homepage = EPG Black Gold Dashboard
+   2) Tool pages = White Gold Refinance Style
+   3) Mobile optimized
+   4) Cleaner final layer to stop old patch conflicts
+   ========================================================= */
+:root{
+  --epg-black:#05070d;
+  --epg-charcoal:#0b1020;
+  --epg-gold:#d4af37;
+  --epg-gold-2:#f6d36c;
+  --epg-white:#ffffff;
+  --epg-cream:#fffaf0;
+  --epg-soft:#f7f8fc;
+  --epg-line:#ead28a;
+  --epg-text:#111827;
+  --epg-muted:#64748b;
+}
+
+html,body{max-width:100%;overflow-x:hidden!important;}
+body{
+  font-family:"Segoe UI",Arial,sans-serif!important;
+  background:#f7f8fc!important;
+  color:var(--epg-text)!important;
+}
+
+/* ---------- HOME: BLACK GOLD DASHBOARD ---------- */
+body:not(.tool-open) .container{
+  max-width:none!important;
+  width:100%!important;
+  padding:14px 22px 28px!important;
+  margin:0!important;
+}
+body:not(.tool-open) #menu{display:block!important;}
+body:not(.tool-open) .epg-home,
+body:not(.tool-open) .epg-dashboard{
+  background:#f7f8fc!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+}
+body:not(.tool-open) .epg-topnav{
+  background:linear-gradient(135deg,#05070d,#0b1020 58%,#090b12)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-bottom:0!important;
+}
+body:not(.tool-open) .epg-brand-title,
+body:not(.tool-open) .epg-user-name,
+body:not(.tool-open) .epg-topnav span,
+body:not(.tool-open) .epg-nav-icon{
+  color:#fff!important;
+}
+body:not(.tool-open) .epg-brand-sub,
+body:not(.tool-open) .epg-logo,
+body:not(.tool-open) .epg-avatar{
+  color:var(--epg-gold)!important;
+  border-color:var(--epg-gold)!important;
+}
+body:not(.tool-open) .epg-search{
+  background:linear-gradient(180deg,rgba(20,31,52,.96),rgba(12,19,34,.96))!important;
+  border:1px solid rgba(212,175,55,.28)!important;
+  color:#fff!important;
+}
+body:not(.tool-open) .epg-search input{color:#fff!important;text-align:left!important;}
+body:not(.tool-open) .epg-hero{
+  background:
+    radial-gradient(circle at 64% 42%,rgba(212,175,55,.24),transparent 22%),
+    radial-gradient(circle at 55% 28%,rgba(37,99,235,.16),transparent 30%),
+    linear-gradient(135deg,#070b14,#111827 56%,#05070d)!important;
+  color:#fff!important;
+  border:1px solid rgba(212,175,55,.14)!important;
+}
+body:not(.tool-open) .epg-hero h1,
+body:not(.tool-open) .epg-hero p,
+body:not(.tool-open) .epg-feature b,
+body:not(.tool-open) .epg-feature span,
+body:not(.tool-open) .epg-float,
+body:not(.tool-open) .epg-team-pill{
+  color:#fff!important;
+}
+body:not(.tool-open) .epg-hero h1 b,
+body:not(.tool-open) .epg-team-pill,
+body:not(.tool-open) .epg-gold-line{color:var(--epg-gold-2)!important;}
+body:not(.tool-open) .epg-category-card,
+body:not(.tool-open) .epg-tools-panel,
+body:not(.tool-open) .epg-tool{
+  background:#fff!important;
+  color:#111827!important;
+  border:1px solid #e8edf5!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.07)!important;
+}
+body:not(.tool-open) .epg-category-card:hover,
+body:not(.tool-open) .epg-tool:hover{
+  transform:translateY(-3px)!important;
+  border-color:var(--epg-gold)!important;
+  box-shadow:0 18px 36px rgba(15,23,42,.12)!important;
+}
+body:not(.tool-open) .epg-cat-icon{
+  background:#07101f!important;
+  color:var(--epg-gold-2)!important;
+}
+
+/* ---------- TOOL PAGES: WHITE GOLD REFINANCE STYLE ---------- */
+body.tool-open{
+  background:
+    radial-gradient(circle at top left,rgba(212,175,55,.13),transparent 30%),
+    linear-gradient(180deg,#fffaf0 0%,#ffffff 45%,#f7f8fc 100%)!important;
+}
+body.tool-open .container{
+  max-width:1480px!important;
+  width:100%!important;
+  margin:0 auto!important;
+  padding:16px 18px 28px!important;
+}
+body.tool-open .section.active-section{
+  display:block!important;
+  min-height:calc(100vh - 32px)!important;
+}
+body.tool-open .module-shell,
+body.tool-open .calculator-card,
+body.tool-open .report-box,
+body.tool-open .amort-card,
+body.tool-open .sheet-off-card,
+body.tool-open .embedded-frame,
+body.tool-open .ks-wrap,
+body.tool-open .partner-card,
+body.tool-open .compact-bank-card{
+  background:linear-gradient(180deg,#ffffff,#fffdf7)!important;
+  border:1px solid var(--epg-line)!important;
+  box-shadow:0 14px 34px rgba(111,78,14,.10)!important;
+  color:#111827!important;
+}
+body.tool-open .module-shell{
+  border-radius:26px!important;
+  padding:18px!important;
+}
+body.tool-open .module-topbar{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  background:linear-gradient(135deg,#fff7d6,#ffffff)!important;
+  border:1px solid var(--epg-line)!important;
+  border-radius:22px!important;
+  padding:14px 16px!important;
+  margin:0 0 16px!important;
+  box-shadow:0 10px 24px rgba(212,175,55,.13)!important;
+}
+body.tool-open .module-topbar h2,
+body.tool-open .top-title h1,
+body.tool-open .amort-card h2,
+body.tool-open .ks-title,
+body.tool-open h1,
+body.tool-open h2,
+body.tool-open h3{
+  color:#111827!important;
+}
+body.tool-open .module-topbar p,
+body.tool-open .top-title p,
+body.tool-open .desc,
+body.tool-open .hint,
+body.tool-open .note,
+body.tool-open .ks-sub,
+body.tool-open .ks-item p{
+  color:#64748b!important;
+}
+body.tool-open .back-btn,
+body.tool-open button,
+body.tool-open .btn-primary,
+body.tool-open .btn-secondary,
+body.tool-open .small-btn,
+body.tool-open .ks-btn,
+body.tool-open .ks-view-more{
+  background:linear-gradient(135deg,#fffdf7,#f3d37a)!important;
+  color:#111827!important;
+  border:1px solid #d4af37!important;
+  border-radius:999px!important;
+  font-weight:900!important;
+  box-shadow:0 8px 18px rgba(212,175,55,.16)!important;
+}
+body.tool-open input,
+body.tool-open select,
+body.tool-open textarea,
+body.tool-open .ks-input,
+body.tool-open .ks-select{
+  background:#fff!important;
+  color:#111827!important;
+  border:1px solid #d4af37!important;
+  border-radius:12px!important;
+  box-shadow:0 6px 16px rgba(212,175,55,.07)!important;
+}
+body.tool-open input:focus,
+body.tool-open select:focus,
+body.tool-open textarea:focus{
+  outline:none!important;
+  border-color:#b78a16!important;
+  box-shadow:0 0 0 3px rgba(212,175,55,.18)!important;
+}
+body.tool-open th,
+body.tool-open .amort-table th{
+  background:linear-gradient(135deg,#fff7d6,#f3d37a)!important;
+  color:#111827!important;
+  border:1px solid #d4af37!important;
+}
+body.tool-open td,
+body.tool-open .amort-table td{
+  color:#111827!important;
+  border-color:#ead28a!important;
+}
+body.tool-open .report-header,
+body.tool-open .amort-header{
+  background:linear-gradient(135deg,#fff7d6,#ffffff)!important;
+  color:#111827!important;
+  border:1px solid var(--epg-line)!important;
+}
+body.tool-open .summary-card{
+  background:#fffdf7!important;
+  border:1px solid var(--epg-line)!important;
+}
+body.tool-open .summary-card .value{color:#111827!important;}
+body.tool-open .embedded-frame{border-radius:22px!important;}
+
+/* ---------- MOBILE OPTIMIZATION ---------- */
+@media(max-width:900px){
+  body:not(.tool-open) .container{padding:0!important;}
+  body:not(.tool-open) .epg-home,
+  body:not(.tool-open) .epg-dashboard{border-radius:0!important;}
+  body:not(.tool-open) .epg-topnav{
+    grid-template-columns:1fr!important;
+    height:auto!important;
+    padding:14px!important;
+    border-radius:0!important;
+    gap:12px!important;
+  }
+  body:not(.tool-open) .epg-brand{justify-content:flex-start!important;}
+  body:not(.tool-open) .epg-search{width:100%!important;max-width:none!important;height:44px!important;}
+  body:not(.tool-open) .epg-userbar{display:none!important;}
+  body:not(.tool-open) .epg-hero{margin:0!important;border-radius:0!important;min-height:auto!important;}
+  body:not(.tool-open) .epg-hero-content{padding:26px 18px 105px!important;}
+  body:not(.tool-open) .epg-hero h1{font-size:32px!important;line-height:1.08!important;}
+  body:not(.tool-open) .epg-hero p{font-size:14px!important;line-height:1.5!important;}
+  body:not(.tool-open) .epg-main-content{margin:-78px auto 0!important;padding:0 12px 20px!important;}
+  body:not(.tool-open) .epg-category-row{grid-template-columns:1fr!important;gap:10px!important;}
+  body:not(.tool-open) .epg-category-card{height:auto!important;min-height:82px!important;padding:14px!important;}
+  body:not(.tool-open) .epg-tools-grid{grid-template-columns:1fr!important;}
+  body:not(.tool-open) .epg-tool{height:auto!important;min-height:76px!important;}
+
+  body.tool-open .container{padding:10px!important;}
+  body.tool-open .module-shell{padding:10px!important;border-radius:18px!important;}
+  body.tool-open .module-topbar{
+    position:sticky!important;
+    top:8px!important;
+    z-index:80!important;
+    border-radius:18px!important;
+    padding:12px!important;
+    align-items:flex-start!important;
+  }
+  body.tool-open .module-topbar h2{font-size:17px!important;line-height:1.2!important;}
+  body.tool-open .module-topbar p{font-size:11.5px!important;line-height:1.35!important;}
+  body.tool-open .back-btn{padding:8px 12px!important;font-size:12px!important;white-space:nowrap!important;}
+  body.tool-open .form-grid{grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  body.tool-open .input-row input{height:36px!important;font-size:13px!important;}
+  body.tool-open .action-row{justify-content:stretch!important;}
+  body.tool-open .action-row button{flex:1 1 140px!important;padding:10px!important;}
+  body.tool-open .amort-layout{grid-template-columns:1fr!important;}
+  body.tool-open .summary-grid{grid-template-columns:1fr 1fr!important;gap:10px!important;}
+  body.tool-open .table-scroll,
+  body.tool-open .amort-table-wrap{overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;}
+  body.tool-open table{min-width:760px!important;}
+  body.tool-open .ks-toolbar{grid-template-columns:1fr!important;}
+  body.tool-open .ks-grid,
+  body.tool-open .partner-grid{grid-template-columns:1fr!important;}
+}
+@media(max-width:520px){
+  body:not(.tool-open) .epg-brand-title{font-size:22px!important;}
+  body:not(.tool-open) .epg-logo{width:46px!important;height:46px!important;}
+  body:not(.tool-open) .epg-hero h1{font-size:28px!important;}
+  body:not(.tool-open) .epg-features{grid-template-columns:1fr!important;gap:12px!important;}
+  body.tool-open .form-grid{grid-template-columns:1fr!important;}
+  body.tool-open .summary-grid{grid-template-columns:1fr!important;}
+  body.tool-open .module-topbar{gap:8px!important;}
+  body.tool-open .module-topbar > div:first-child{min-width:0!important;}
+}
+
+
+/* === ChatGPT Add-on: Debt Conso + Bank Matching White Gold Tool Pages === */
+.epg-priority-tool{border-color:#f6b82d!important;box-shadow:0 12px 30px rgba(201,155,46,.12)!important;}
+.whitegold-page{background:linear-gradient(180deg,#fffaf0,#ffffff 55%,#fffdf7);border:1px solid #ead7a1;border-radius:24px;padding:18px;box-shadow:0 18px 48px rgba(143,103,22,.10);}
+.wg-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;background:linear-gradient(135deg,#fff7d6,#ffffff);border:1px solid #f6b82d;border-radius:22px;padding:18px;margin-bottom:16px;}
+.wg-hero h1{margin:0;color:#17130a;font-size:24px;letter-spacing:-.03em}.wg-hero p{margin:6px 0 0;color:#667085;font-size:13px}.wg-pill{background:#17130a;color:#f6d36c;border:1px solid #d4af37;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:900;white-space:nowrap}
+.wg-grid{display:grid;grid-template-columns:420px 1fr;gap:16px}.wg-card{background:#fff;border:1px solid #ead7a1;border-radius:20px;padding:16px;box-shadow:0 12px 30px rgba(143,103,22,.07)}.wg-card h3{margin:0 0 12px;color:#17130a;font-size:17px}.wg-form{display:grid;gap:10px}.wg-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wg-field label{display:block;font-size:12px;font-weight:900;color:#8f6716;margin-bottom:5px}.wg-field input,.wg-field select{width:100%;border:1px solid #ead7a1;border-radius:12px;padding:10px 11px;font-size:14px;text-align:right;background:#fffdf7;outline:none}.wg-field input:focus,.wg-field select:focus{border-color:#c99b2e;box-shadow:0 0 0 3px rgba(201,155,46,.12)}.wg-btn{border:1px solid #d4af37!important;background:linear-gradient(135deg,#fffdf7,#f3d37a)!important;color:#17130a!important;border-radius:14px!important;padding:11px 14px!important;font-weight:950!important;cursor:pointer!important}.wg-btn-dark{background:linear-gradient(135deg,#17130a,#3b2a08)!important;color:#f6d36c!important}.wg-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.wg-metric{background:linear-gradient(180deg,#ffffff,#fffaf0);border:1px solid #ead7a1;border-radius:16px;padding:13px}.wg-metric span{display:block;color:#8f6716;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}.wg-metric b{display:block;color:#17130a;font-size:22px;margin-top:5px}.wg-note{margin-top:12px;border:1px dashed #d4af37;background:#fffdf7;border-radius:16px;padding:12px;color:#667085;font-size:13px;line-height:1.55}.bm-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.bm-check{display:flex;align-items:center;gap:8px;border:1px solid #ead7a1;background:#fffdf7;border-radius:14px;padding:10px;font-size:13px;font-weight:800;color:#17130a}.bm-check input{width:16px;height:16px}.bm-result{display:grid;gap:10px}.bm-bank-list{display:flex;flex-wrap:wrap;gap:8px}.bm-bank{background:#17130a;color:#f6d36c;border:1px solid #d4af37;border-radius:999px;padding:8px 12px;font-weight:950;text-transform:lowercase}.bm-avoid{background:#fee2e2;color:#991b1b;border-color:#fecaca}.bm-reason{background:#fffdf7;border-bottom:1px solid #ead7a1;padding:9px 0;color:#475569;font-size:13px}.bm-reason b{color:#17130a}
+@media(max-width:950px){.wg-grid{grid-template-columns:1fr}.wg-summary{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.whitegold-page{padding:12px;border-radius:18px}.wg-hero{flex-direction:column;padding:14px;border-radius:18px}.wg-hero h1{font-size:20px}.wg-row,.wg-summary,.bm-checks{grid-template-columns:1fr}.wg-card{padding:13px;border-radius:17px}.wg-metric b{font-size:20px}}
+
+
+/* === ChatGPT Patch: Maintenance First for Debt Conso + Bank Matching === */
+.wg-maintenance-box{
+  max-width:760px!important;
+  width:100%!important;
+  margin:0 auto!important;
+  text-align:center!important;
+  padding:42px 28px!important;
+  border:1px solid #d4af37!important;
+  background:
+    radial-gradient(circle at top left, rgba(246,211,108,.24), transparent 34%),
+    linear-gradient(180deg,#ffffff,#fffaf0)!important;
+  box-shadow:0 24px 60px rgba(15,42,107,.14)!important;
+}
+.wg-maintenance-icon{
+  width:82px!important;
+  height:82px!important;
+  margin:0 auto 16px!important;
+  border-radius:26px!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:42px!important;
+  background:linear-gradient(135deg,#fffdf7,#f3d37a)!important;
+  border:1px solid #d4af37!important;
+  box-shadow:0 12px 30px rgba(212,175,55,.22)!important;
+}
+.wg-maintenance-box h1{
+  margin:16px 0 10px!important;
+  color:#0f172a!important;
+  font-size:34px!important;
+  letter-spacing:-.03em!important;
+}
+.wg-maintenance-box p{
+  max-width:560px!important;
+  margin:0 auto 18px!important;
+  color:#64748b!important;
+  line-height:1.65!important;
+  font-size:15px!important;
+}
+.wg-maintenance-status{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:4px auto 22px!important;
+  padding:9px 14px!important;
+  border-radius:999px!important;
+  background:#fef3c7!important;
+  color:#92400e!important;
+  border:1px solid #f6b82d!important;
+  font-size:12px!important;
+  font-weight:950!important;
+  letter-spacing:.08em!important;
+}
+@media(max-width:720px){
+  .tool-maintenance-card{min-height:calc(100vh - 28px)!important;padding:16px!important;}
+  .wg-maintenance-box{padding:30px 18px!important;border-radius:22px!important;}
+  .wg-maintenance-box h1{font-size:26px!important;}
+  .wg-maintenance-box p{font-size:13px!important;}
+  .wg-maintenance-icon{width:68px!important;height:68px!important;font-size:34px!important;border-radius:22px!important;}
+}
+
+
+
+/* ===== ChatGPT Patch: Login Cover Sharp v5 (only login page) ===== */
+#epgPasswordGate{
+  background:
+    linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px),
+    radial-gradient(circle at 16% 18%, rgba(37,99,235,.42), transparent 25%),
+    radial-gradient(circle at 78% 26%, rgba(246,184,45,.20), transparent 24%),
+    radial-gradient(circle at 74% 88%, rgba(59,130,246,.18), transparent 31%),
+    linear-gradient(135deg,#020617 0%,#07152f 46%,#030712 100%)!important;
+  background-size:64px 64px,64px 64px,auto,auto,auto,auto!important;
+  color:#fff!important;
+}
+#epgPasswordGate .epg-lock-shell{
+  filter:none!important;
+}
+#epgPasswordGate .epg-lock-brand-panel,
+#epgPasswordGate .epg-lock-card{
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  background:linear-gradient(135deg,rgba(4,10,24,.94),rgba(9,16,32,.88))!important;
+  border:1px solid rgba(246,184,45,.50)!important;
+  box-shadow:0 24px 62px rgba(0,0,0,.56), inset 0 0 0 1px rgba(255,255,255,.08)!important;
+}
+#epgPasswordGate .epg-lock-brand-panel{
+  background:
+    linear-gradient(118deg,transparent 0 55%,rgba(246,184,45,.15) 55.15%,rgba(246,184,45,.035) 55.55%,transparent 56% 100%),
+    linear-gradient(135deg,rgba(9,24,56,.96),rgba(4,9,20,.92))!important;
+}
+#epgPasswordGate .epg-lock-card{
+  background:
+    radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 30%),
+    linear-gradient(180deg,rgba(5,12,28,.97),rgba(4,7,16,.93))!important;
+}
+#epgPasswordGate .epg-lock-brand-title h1,
+#epgPasswordGate .epg-lock-card h1,
+#epgPasswordGate .epg-lock-mini b{
+  color:#ffffff!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.08),0 8px 22px rgba(0,0,0,.42)!important;
+}
+#epgPasswordGate .epg-lock-brand-title h1{
+  letter-spacing:-.055em!important;
+}
+#epgPasswordGate .epg-lock-brand-title h1 span,
+#epgPasswordGate .epg-lock-logo{
+  color:#f8d56b!important;
+}
+#epgPasswordGate .epg-lock-brand-title p,
+#epgPasswordGate .epg-lock-card p,
+#epgPasswordGate .epg-lock-mini span,
+#epgPasswordGate .epg-lock-hint,
+#epgPasswordGate .epg-lock-footer,
+#epgPasswordGate .epg-lock-footer span{
+  color:#eaf2ff!important;
+  opacity:1!important;
+}
+#epgPasswordGate .epg-lock-badge,
+#epgPasswordGate .epg-lock-topline{
+  color:#f8d56b!important;
+  background:rgba(246,184,45,.10)!important;
+  border-color:rgba(246,184,45,.58)!important;
+  letter-spacing:.16em!important;
+  text-shadow:0 1px 10px rgba(0,0,0,.28)!important;
+}
+#epgPasswordGate .epg-lock-mini,
+#epgPasswordGate .epg-lock-footer span{
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)!important;
+}
+#epgPasswordGate .epg-lock-logo{
+  background:linear-gradient(135deg,rgba(246,184,45,.13),rgba(37,99,235,.10))!important;
+  border:1px solid rgba(246,184,45,.72)!important;
+  box-shadow:0 0 18px rgba(246,184,45,.14), inset 0 0 0 1px rgba(255,255,255,.06)!important;
+}
+#epgPasswordGate .epg-lock-input{
+  background:#ffffff!important;
+  color:#0b1220!important;
+  border:2px solid #f6d36c!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.34),0 0 0 3px rgba(246,184,45,.08)!important;
+  font-weight:800!important;
+}
+#epgPasswordGate .epg-lock-input:focus{
+  border-color:#ffe08a!important;
+  box-shadow:0 12px 26px rgba(0,0,0,.36),0 0 0 4px rgba(246,184,45,.18)!important;
+}
+#epgPasswordGate .epg-lock-input::placeholder{
+  color:#64748b!important;
+  font-weight:700!important;
+}
+#epgPasswordGate .epg-lock-btn{
+  background:linear-gradient(135deg,#2f6df6 0%,#1d4ed8 54%,#0b1f55 100%)!important;
+  color:#ffffff!important;
+  border:1px solid rgba(246,184,45,.50)!important;
+  box-shadow:0 14px 30px rgba(29,78,216,.36), inset 0 1px 0 rgba(255,255,255,.18)!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.48)!important;
+}
+#epgPasswordGate .epg-lock-btn:hover{
+  transform:translateY(-2px)!important;
+  box-shadow:0 18px 38px rgba(29,78,216,.42), inset 0 1px 0 rgba(255,255,255,.20)!important;
+}
+#epgPasswordGate .epg-lock-error{
+  color:#fecaca!important;
+  font-weight:800!important;
+}
+
+
+/* === ChatGPT Patch v2: Debt Conso native workspace + remove embedded feeling === */
+#debtConsoSection .module-shell{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+#debtConsoSection .module-topbar{
+  display:none!important;
+}
+#debtConsoSection .embedded-module-wrap.debtconso-wrap{
+  max-width:1360px!important;
+  width:100%!important;
+  margin:0 auto!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#debtConsoSection .debtconso-frame{
+  width:100%!important;
+  min-height:1480px!important;
+  height:1480px;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  display:block!important;
+}
+body.tool-open:has(#debtConsoSection[style*="block"]) .container{
+  padding-top:12px!important;
+}
+@media(max-width:768px){
+  #debtConsoSection .debtconso-frame{min-height:1900px!important;height:1900px!important;}
+}
 </style>
 
 <style id="chatgpt-mrta-and-hub-layout-patch">
@@ -3055,9 +3557,457 @@ body:not(.tool-open) .epg-hero{
 }
 
 </style>
+
+<style>
+/* ===== EPG Password Gate Patch - Luxury Fintech Split Cover v3 ===== */
+body.epg-locked{
+  overflow:hidden!important;
+}
+body.epg-locked > .container,
+body.epg-locked > .section,
+body.epg-locked .bank-policy-fullscreen{
+  display:none!important;
+}
+#epgPasswordGate{
+  position:fixed;
+  inset:0;
+  z-index:2147483647;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:34px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(37,99,235,.24), transparent 30%),
+    radial-gradient(circle at 82% 28%, rgba(246,184,45,.18), transparent 28%),
+    radial-gradient(circle at 72% 84%, rgba(212,175,55,.16), transparent 34%),
+    linear-gradient(135deg,#020617 0%,#07101f 48%,#111827 100%);
+  color:#fff!important;
+  font-family:"Segoe UI",Arial,sans-serif;
+  overflow:hidden;
+}
+#epgPasswordGate.hidden{display:none!important;}
+#epgPasswordGate *{box-sizing:border-box;}
+#epgPasswordGate:before{
+  content:"";
+  position:absolute;
+  width:760px;
+  height:760px;
+  right:-260px;
+  top:-260px;
+  border-radius:50%;
+  border:1px solid rgba(246,184,45,.22);
+  box-shadow:0 0 0 56px rgba(246,184,45,.032),0 0 0 112px rgba(37,99,235,.025);
+  pointer-events:none;
+}
+#epgPasswordGate:after{
+  content:"EPG OS";
+  position:absolute;
+  left:5vw;
+  bottom:-34px;
+  font-size:132px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.06em;
+  color:rgba(255,255,255,.035);
+  pointer-events:none;
+}
+.epg-lock-shell{
+  position:relative;
+  z-index:2;
+  width:min(1120px,96vw);
+  min-height:610px;
+  display:grid;
+  grid-template-columns:1.1fr 430px;
+  gap:28px;
+  align-items:stretch;
+}
+.epg-lock-brand-panel{
+  position:relative;
+  overflow:hidden;
+  border-radius:36px;
+  padding:44px;
+  background:linear-gradient(135deg,rgba(255,255,255,.095),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 34px 90px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.04);
+  backdrop-filter:blur(18px);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  color:#fff!important;
+}
+.epg-lock-brand-panel:before{
+  content:"";
+  position:absolute;
+  width:410px;
+  height:410px;
+  right:-130px;
+  top:60px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(246,184,45,.20),transparent 60%);
+  filter:blur(4px);
+}
+.epg-lock-brand-panel:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(118deg,transparent 0 55%,rgba(246,184,45,.13) 55.2%,transparent 55.8% 100%);
+  pointer-events:none;
+}
+.epg-lock-badge{
+  width:max-content;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(246,184,45,.10);
+  border:1px solid rgba(246,184,45,.34);
+  color:#f6d36c!important;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.epg-lock-brand-title{
+  position:relative;
+  z-index:1;
+  margin-top:72px;
+  max-width:650px;
+}
+.epg-lock-brand-title h1{
+  margin:0;
+  font-size:68px;
+  line-height:.98;
+  letter-spacing:-.07em;
+  font-weight:950;
+  color:#fff!important;
+}
+.epg-lock-brand-title h1 span{
+  color:#f6d36c!important;
+  text-shadow:0 0 28px rgba(246,184,45,.26);
+}
+.epg-lock-brand-title p{
+  margin:22px 0 0;
+  max-width:540px;
+  color:#dbeafe!important;
+  font-size:17px;
+  line-height:1.7;
+}
+.epg-lock-mini-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:28px;
+}
+.epg-lock-mini{
+  min-height:84px;
+  border-radius:20px;
+  padding:14px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  color:#fff!important;
+}
+.epg-lock-mini b{
+  display:block;
+  color:#fff!important;
+  font-size:13px;
+  margin-bottom:6px;
+}
+.epg-lock-mini span{
+  display:block;
+  color:#cbd5e1!important;
+  font-size:11px;
+  line-height:1.35;
+}
+.epg-lock-card{
+  position:relative;
+  z-index:2;
+  border-radius:36px;
+  padding:38px 34px 30px;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.07));
+  border:1px solid rgba(246,184,45,.32);
+  box-shadow:0 34px 100px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.07);
+  backdrop-filter:blur(22px);
+  text-align:left;
+  color:#fff!important;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.epg-lock-topline{
+  display:inline-flex;
+  width:max-content;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(96,165,250,.30);
+  background:rgba(37,99,235,.13);
+  color:#bfdbfe!important;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+.epg-lock-logo{
+  width:82px;
+  height:82px;
+  border-radius:24px;
+  margin:0 0 22px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(246,184,45,.55);
+  color:#f6d36c!important;
+  font-size:26px;
+  font-weight:950;
+  letter-spacing:-.04em;
+  background:linear-gradient(135deg,rgba(246,184,45,.18),rgba(37,99,235,.10));
+  box-shadow:0 0 36px rgba(246,184,45,.16), inset 0 0 22px rgba(255,255,255,.06);
+}
+.epg-lock-card h1{
+  margin:0;
+  font-size:32px;
+  line-height:1.08;
+  letter-spacing:-.04em;
+  color:#fff!important;
+}
+.epg-lock-card p{
+  margin:11px 0 26px;
+  color:#cbd5e1!important;
+  font-size:13px;
+  line-height:1.65;
+  max-width:330px;
+}
+.epg-lock-input-wrap{
+  position:relative;
+}
+.epg-lock-input-wrap:before{
+  content:"🔒";
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:15px;
+  opacity:.82;
+}
+.epg-lock-input{
+  width:100%;
+  height:56px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(2,6,23,.56);
+  color:#fff!important;
+  outline:0;
+  padding:0 18px 0 46px;
+  font-size:18px;
+  text-align:left;
+  letter-spacing:.12em;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 12px 30px rgba(0,0,0,.16);
+}
+.epg-lock-input:focus{
+  border-color:#f6d36c;
+  box-shadow:0 0 0 4px rgba(246,184,45,.13), inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.epg-lock-input::placeholder{color:#94a3b8!important;letter-spacing:normal;}
+.epg-lock-btn{
+  width:100%;
+  height:56px;
+  border-radius:18px;
+  margin-top:15px;
+  border:1px solid rgba(246,184,45,.45)!important;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8 58%,#0f172a)!important;
+  color:#fff!important;
+  font-weight:950;
+  cursor:pointer;
+  font-size:15px;
+  box-shadow:0 16px 34px rgba(37,99,235,.26);
+  transition:.18s ease;
+}
+.epg-lock-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 20px 44px rgba(37,99,235,.34)!important;
+}
+.epg-lock-error{
+  min-height:20px;
+  margin-top:12px;
+  font-size:13px;
+  color:#fecaca!important;
+  font-weight:800;
+}
+.epg-lock-hint{
+  margin-top:12px;
+  font-size:11px;
+  color:#94a3b8!important;
+}
+.epg-lock-footer{
+  margin-top:20px;
+  padding-top:17px;
+  border-top:1px solid rgba(255,255,255,.10);
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  color:#cbd5e1!important;
+  font-size:11px;
+  font-weight:800;
+}
+.epg-lock-footer span{
+  border:1px solid rgba(255,255,255,.11);
+  background:rgba(255,255,255,.055);
+  color:#dbeafe!important;
+  border-radius:999px;
+  padding:6px 10px;
+}
+@media(max-width:900px){
+  #epgPasswordGate{padding:18px;}
+  #epgPasswordGate:after{font-size:92px;left:50%;transform:translateX(-50%);}
+  .epg-lock-shell{grid-template-columns:1fr;min-height:auto;gap:16px;}
+  .epg-lock-brand-panel{padding:28px;border-radius:28px;}
+  .epg-lock-brand-title{margin-top:34px;}
+  .epg-lock-brand-title h1{font-size:46px;}
+  .epg-lock-brand-title p{font-size:14px;}
+  .epg-lock-mini-grid{grid-template-columns:1fr;}
+  .epg-lock-card{border-radius:28px;padding:28px 22px;}
+}
+@media(max-width:520px){
+  .epg-lock-brand-panel{display:none;}
+  .epg-lock-logo{width:76px;height:76px;border-radius:22px;}
+  .epg-lock-card h1{font-size:27px;}
+}
+</style>
+
+
+
+<style>
+/* ===== ChatGPT Patch: Login Cover High Contrast v4 (only login page) ===== */
+#epgPasswordGate{
+  background:
+    radial-gradient(circle at 18% 18%, rgba(37,99,235,.34), transparent 30%),
+    radial-gradient(circle at 76% 30%, rgba(246,184,45,.24), transparent 28%),
+    radial-gradient(circle at 70% 88%, rgba(59,130,246,.20), transparent 36%),
+    linear-gradient(135deg,#020617 0%,#06142c 48%,#05070f 100%)!important;
+  color:#ffffff!important;
+}
+#epgPasswordGate .epg-lock-brand-panel,
+#epgPasswordGate .epg-lock-card{
+  background:linear-gradient(135deg,rgba(6,13,31,.92),rgba(15,23,42,.76))!important;
+  border-color:rgba(246,184,45,.42)!important;
+  box-shadow:0 34px 100px rgba(0,0,0,.58), inset 0 0 0 1px rgba(255,255,255,.08)!important;
+}
+#epgPasswordGate .epg-lock-brand-panel{
+  background:
+    linear-gradient(118deg,transparent 0 55%,rgba(246,184,45,.12) 55.2%,transparent 55.8% 100%),
+    linear-gradient(135deg,rgba(9,22,52,.96),rgba(7,12,24,.86))!important;
+}
+#epgPasswordGate .epg-lock-card{
+  background:
+    radial-gradient(circle at top left,rgba(37,99,235,.18),transparent 38%),
+    linear-gradient(180deg,rgba(9,18,40,.96),rgba(7,10,20,.88))!important;
+}
+#epgPasswordGate .epg-lock-badge,
+#epgPasswordGate .epg-lock-topline{
+  color:#f6d36c!important;
+  background:rgba(246,184,45,.12)!important;
+  border-color:rgba(246,184,45,.46)!important;
+  text-shadow:none!important;
+}
+#epgPasswordGate .epg-lock-brand-title h1,
+#epgPasswordGate .epg-lock-card h1,
+#epgPasswordGate .epg-lock-mini b{
+  color:#ffffff!important;
+  text-shadow:0 3px 18px rgba(0,0,0,.45)!important;
+}
+#epgPasswordGate .epg-lock-brand-title h1 span,
+#epgPasswordGate .epg-lock-logo{
+  color:#f6d36c!important;
+}
+#epgPasswordGate .epg-lock-brand-title p,
+#epgPasswordGate .epg-lock-card p,
+#epgPasswordGate .epg-lock-mini span,
+#epgPasswordGate .epg-lock-hint,
+#epgPasswordGate .epg-lock-footer,
+#epgPasswordGate .epg-lock-footer span{
+  color:#dbeafe!important;
+}
+#epgPasswordGate .epg-lock-mini,
+#epgPasswordGate .epg-lock-footer span{
+  background:rgba(255,255,255,.075)!important;
+  border-color:rgba(255,255,255,.18)!important;
+}
+#epgPasswordGate .epg-lock-logo{
+  background:linear-gradient(135deg,rgba(246,184,45,.18),rgba(37,99,235,.18))!important;
+  border-color:rgba(246,184,45,.62)!important;
+}
+#epgPasswordGate .epg-lock-input{
+  background:#ffffff!important;
+  color:#0f172a!important;
+  border:2px solid rgba(246,184,45,.88)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.28)!important;
+  letter-spacing:normal!important;
+  font-weight:700!important;
+}
+#epgPasswordGate .epg-lock-input::placeholder{
+  color:#64748b!important;
+  font-weight:650!important;
+}
+#epgPasswordGate .epg-lock-input-wrap:before{
+  color:#0f172a!important;
+  opacity:1!important;
+}
+#epgPasswordGate .epg-lock-btn{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8 62%,#0b1b45)!important;
+  color:#ffffff!important;
+  border:1px solid rgba(246,184,45,.55)!important;
+  box-shadow:0 16px 34px rgba(37,99,235,.34),0 0 0 1px rgba(255,255,255,.08) inset!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.45)!important;
+}
+#epgPasswordGate .epg-lock-error{
+  color:#fecaca!important;
+}
+</style>
+
 </head>
 
-<body>
+<body class="epg-locked">
+
+<div id="epgPasswordGate" aria-modal="true" role="dialog">
+  <div class="epg-lock-shell">
+    <div class="epg-lock-brand-panel">
+      <div>
+        <div class="epg-lock-badge">Premium Financial System</div>
+        <div class="epg-lock-brand-title">
+          <h1>EPG <span>OS</span></h1>
+          <p>Mortgage, refinance, bank policy and financial tools in one private dashboard.</p>
+        </div>
+      </div>
+      <div class="epg-lock-mini-grid">
+        <div class="epg-lock-mini"><b>Mortgage Tools</b><span>Package comparison and calculation suite.</span></div>
+        <div class="epg-lock-mini"><b>Bank Policy</b><span>Fast access to internal banking knowledge.</span></div>
+        <div class="epg-lock-mini"><b>Financial Hub</b><span>Built for premium partner workflow.</span></div>
+      </div>
+    </div>
+
+    <div class="epg-lock-card">
+      <div class="epg-lock-topline">Secure Access</div>
+      <div class="epg-lock-logo">EPG</div>
+      <h1>Access Your Dashboard</h1>
+      <p>Enter password to continue into the EPG mortgage tools system.</p>
+      <div class="epg-lock-input-wrap">
+        <input id="epgPasswordInput" class="epg-lock-input" type="password" inputmode="numeric" autocomplete="new-password" placeholder="Enter password">
+      </div>
+      <button id="epgPasswordBtn" class="epg-lock-btn" type="button">Unlock Dashboard</button>
+      <div id="epgPasswordError" class="epg-lock-error"></div>
+      <div class="epg-lock-hint">Password required every time this file is opened.</div>
+      <div class="epg-lock-footer">
+        <span>Private Access</span>
+        <span>EPG System</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <div class="container">
@@ -3121,6 +4071,7 @@ body:not(.tool-open) .epg-hero{
           <div class="epg-tools-panel">
             <div class="epg-panel-head"><div class="epg-panel-title">All Tools</div><div class="epg-view-all" onclick="clearEpgSearch()">View All Tools <span>→</span></div></div>
             <div class="epg-tools-grid" id="epgToolsGrid">
+              <div class="epg-tool epg-priority-tool" data-name="debt consolidation debt conso reduce monthly commitment refinance cashout" data-open-section="debtConsoSection" onclick="openSection('debtConsoSection')"><div class="epg-tool-icon gold">🔄</div><div><h4>Debt Consolidation</h4><p>Reduce monthly commitments</p></div><div class="epg-arrow">›</div></div>
               <div class="epg-tool" data-name="refinance calculator mortgage package a b" data-open-section="refinanceSection" onclick="openSection('refinanceSection')"><div class="epg-tool-icon gold">🧮</div><div><h4>Refinance Calculator</h4><p>Package A / B refinance proposal</p></div><div class="epg-arrow">›</div></div>
               <div class="epg-tool" data-name="mortgage package comparison bank package" data-open-section="mortgagePackageSection" onclick="openSection('mortgagePackageSection')"><div class="epg-tool-icon blue">📘</div><div><h4>Mortgage Package Comparison</h4><p>Bank package comparison</p></div><div class="epg-arrow">›</div></div>
               <div class="epg-tool" data-name="income calculators income irr commitment" data-open-section="incomeSection" onclick="openSection('incomeSection')"><div class="epg-tool-icon green">💵</div><div><h4>Income Calculators</h4><p>Income, IRR, commitment</p></div><div class="epg-arrow">›</div></div>
@@ -3137,6 +4088,539 @@ body:not(.tool-open) .epg-hero{
           </div>
         </div>
       </div>
+    </div>
+
+
+    <div id="debtConsoSection" class="section">
+        <div class="module-shell">
+            <div class="module-topbar">
+                <div>
+                    <h2>🔄 Debt Consolidation Tool</h2>
+                    <p>White Gold debt consolidation analysis calculator</p>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <button class="back-btn" onclick="goBack()">← Back</button>
+                </div>
+            </div>
+
+            <div class="embedded-module-wrap debtconso-wrap">
+                <iframe
+                    id="debtConsoFrame"
+                    onload="resizeDebtConsoFrame()"
+                    class="embedded-frame debtconso-frame"
+                    title="EPG Debt Consolidation"
+                    srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+&lt;title&gt;Debt Consolidation Analysis&lt;/title&gt;
+&lt;style&gt;
+:root{
+  --gold:#d6ad2f;
+  --gold2:#ffe59a;
+  --gold3:#fff7dc;
+  --line:#e6c35c;
+  --text:#101828;
+  --muted:#667085;
+  --green:#15803d;
+  --bg:#fffdf7;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(135deg,#fffdf7,#fff7df,#fff);
+  color:var(--text);
+}
+.app{
+  max-width:1360px;
+  margin:0 auto;
+  padding:16px;
+}
+.top-shell{
+  border:1.5px solid var(--line);
+  border-radius:22px;
+  padding:14px;
+  background:rgba(255,255,255,.75);
+}
+.topbar{
+  min-height:76px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(100deg,#fffdf5 0%,#fff4c8 55%,#f6d45d 100%);
+  padding:16px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 10px 25px rgba(214,173,47,.16);
+}
+.titleBlock{
+  border-left:5px solid var(--gold);
+  padding-left:16px;
+}
+.titleBlock h1{
+  margin:0;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+.titleBlock p{
+  margin:6px 0 0;
+  font-size:13px;
+  color:#344054;
+}
+.backBtn{
+  min-width:96px;
+  border:1px solid #d0a629;
+  background:linear-gradient(135deg,#fff4c9,#f8c843);
+  color:#111827;
+  border-radius:999px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+}
+.kpis{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.kpi{
+  background:#fff;
+  border:1px solid #ead7a4;
+  border-radius:16px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  box-shadow:0 8px 22px rgba(214,173,47,.10);
+}
+.kpi.main{
+  background:linear-gradient(135deg,#fffdf8,#fff2c5);
+  border-color:#d6ad2f;
+}
+.ico{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#fff7db,#f0cc58);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  flex-shrink:0;
+}
+.kpi small{
+  display:block;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  color:#475467;
+}
+.kpi h2{
+  margin:4px 0 0;
+  font-size:23px;
+  color:#b88716;
+}
+.green{color:var(--green)!important}
+.layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:14px;
+}
+.card{
+  background:#fff;
+  border:1px solid #ead7a4;
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(214,173,47,.09);
+  overflow:hidden;
+}
+.cardHead{
+  padding:13px 18px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(135deg,#fffdf8,#fff0bd);
+  border-bottom:1px solid #ead7a4;
+}
+.step{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#c49011;
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+.cardBody{padding:14px 16px}
+.quick{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:12px;
+}
+button{
+  border:1px solid #d9bd70;
+  background:#fff;
+  color:#8a6500;
+  border-radius:9px;
+  padding:9px 13px;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+}
+button.primary{
+  background:linear-gradient(135deg,#b88716,#f0cc58);
+  color:white;
+}
+button:hover{box-shadow:0 6px 14px rgba(214,173,47,.18)}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+th{
+  background:#f7e8b5;
+  color:#5f4700;
+  padding:9px;
+  text-transform:uppercase;
+  font-size:11px;
+}
+td{
+  border:1px solid #ead7a4;
+  padding:7px;
+  text-align:center;
+}
+tfoot td{
+  background:#fff8e6;
+  color:#8a6500;
+  font-weight:900;
+}
+input,select{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #dfc474;
+  border-radius:9px;
+  text-align:center;
+  font-size:13px;
+  background:#fff;
+}
+input:focus,select:focus{
+  outline:none;
+  border-color:#b88716;
+  box-shadow:0 0 0 3px rgba(184,136,22,.12);
+}
+.formgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+.field label{
+  display:block;
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:900;
+  color:#344054;
+  margin-bottom:5px;
+}
+.resultbox{
+  margin-top:12px;
+  border:1px solid #ead7a4;
+  border-radius:15px;
+  background:linear-gradient(135deg,#fff8e6,#fff);
+  padding:14px;
+  text-align:center;
+}
+.resultbox small{
+  color:#8a6500;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.resultbox h2{
+  margin:6px 0 0;
+  font-size:27px;
+  color:#b88716;
+}
+.summary{margin-top:14px}
+.summaryGrid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+  padding:14px;
+}
+.sum{
+  min-height:82px;
+  border:1px solid #ead7a4;
+  border-radius:14px;
+  background:#fffefb;
+  padding:11px;
+}
+.sum small{
+  display:block;
+  font-size:10px;
+  text-transform:uppercase;
+  color:#344054;
+  font-weight:800;
+  line-height:1.25;
+}
+.sum h3{
+  margin:8px 0 0;
+  font-size:18px;
+  color:#b88716;
+}
+.conclusion{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:1fr 250px;
+  gap:12px;
+  align-items:center;
+  padding:14px;
+}
+.textbox{
+  border:1px solid #ead7a4;
+  background:#fff8e6;
+  border-radius:13px;
+  padding:14px;
+  font-size:13px;
+  line-height:1.55;
+}
+.disclaimer{
+  font-size:10.5px;
+  color:#667085;
+  line-height:1.4;
+}
+.removeBtn{
+  padding:6px 9px;
+  border-color:#f2c7c7;
+  color:#b42318;
+}
+@media(max-width:1050px){
+  .layout,.kpis,.summaryGrid,.conclusion,.formgrid{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:A4 landscape;margin:8mm}
+  body{background:white;color:#101828}
+  .backBtn,.quick,.removeBtn,.printBtns{display:none!important}
+  .app{padding:0;max-width:100%}
+  .top-shell{padding:6px;border-radius:10px;margin-bottom:6px}
+  .topbar{min-height:auto;padding:10px 14px;border-radius:10px;box-shadow:none}
+  .titleBlock h1{font-size:18px}
+  .titleBlock p{font-size:10px;margin-top:2px}
+  .kpis{gap:6px;margin:6px 0}
+  .kpi{padding:6px 8px;border-radius:10px;box-shadow:none;gap:8px}
+  .ico{width:34px;height:34px;font-size:16px;border-radius:9px}
+  .kpi small{font-size:8px}
+  .kpi h2{font-size:15px;margin-top:2px}
+  .layout{gap:8px;grid-template-columns:1fr 1fr}
+  .card{border-radius:10px;box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  .cardHead{padding:7px 10px;font-size:11px}
+  .step{width:18px;height:18px;font-size:10px}
+  .cardBody{padding:8px}
+  table{font-size:10px}
+  th{padding:5px;font-size:8px}
+  td{padding:4px}
+  th:nth-child(4),td:nth-child(4){display:none}
+  input,select{padding:5px;font-size:10px;border-radius:6px}
+  .formgrid{gap:6px}
+  .field label{font-size:8px;margin-bottom:3px}
+  .resultbox{margin-top:6px;padding:8px;border-radius:8px}
+  .resultbox small{font-size:8px}
+  .resultbox h2{font-size:18px;margin-top:3px}
+  .summary{margin-top:8px}
+  .summaryGrid{grid-template-columns:repeat(5,1fr);gap:6px;padding:8px}
+  .sum{min-height:auto;padding:7px;border-radius:8px}
+  .sum small{font-size:7.5px;line-height:1.1}
+  .sum h3{font-size:13px;margin-top:4px}
+  .conclusion{margin-top:8px;padding:8px;display:block}
+  .textbox{padding:8px;font-size:10px;line-height:1.35;border-radius:8px}
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;app&quot;&gt;
+  &lt;div class=&quot;top-shell&quot;&gt;
+    &lt;div class=&quot;topbar&quot;&gt;
+      &lt;div class=&quot;titleBlock&quot;&gt;
+        &lt;h1&gt;🏦 Debt Consolidation Analysis&lt;/h1&gt;
+        &lt;p&gt;White Gold Customer Cash Flow Comparison Tool&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;button class=&quot;backBtn&quot; onclick=&quot;parent.goBack()&quot;&gt;← Back&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;section class=&quot;kpis&quot;&gt;
+    &lt;div class=&quot;kpi&quot;&gt;
+      &lt;div class=&quot;ico&quot;&gt;💳&lt;/div&gt;
+      &lt;div&gt;&lt;small&gt;Monthly Before&lt;/small&gt;&lt;h2 id=&quot;topBefore&quot;&gt;RM 0&lt;/h2&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;kpi main&quot;&gt;
+      &lt;div class=&quot;ico&quot;&gt;📈&lt;/div&gt;
+      &lt;div&gt;&lt;small&gt;Monthly Saving&lt;/small&gt;&lt;h2 class=&quot;green&quot; id=&quot;topSaving&quot;&gt;RM 0&lt;/h2&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;kpi&quot;&gt;
+      &lt;div class=&quot;ico&quot;&gt;🏦&lt;/div&gt;
+      &lt;div&gt;&lt;small&gt;Monthly After&lt;/small&gt;&lt;h2 id=&quot;topAfter&quot;&gt;RM 0&lt;/h2&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;layout&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;cardHead&quot;&gt;&lt;span class=&quot;step&quot;&gt;1&lt;/span&gt; Existing Debts Input&lt;/div&gt;
+      &lt;div class=&quot;cardBody&quot;&gt;
+        &lt;div class=&quot;quick&quot;&gt;
+          &lt;button onclick=&quot;addDebt(&#x27;Credit Card&#x27;)&quot;&gt;+ Credit Card&lt;/button&gt;
+          &lt;button onclick=&quot;addDebt(&#x27;Personal Loan&#x27;)&quot;&gt;+ Personal Loan&lt;/button&gt;
+          &lt;button onclick=&quot;addDebt(&#x27;Housing Loan&#x27;)&quot;&gt;+ Housing Loan&lt;/button&gt;
+          &lt;button onclick=&quot;addDebt(&#x27;Car Loan&#x27;)&quot;&gt;+ Car Loan&lt;/button&gt;
+          &lt;button onclick=&quot;addDebt(&#x27;Other Debt&#x27;)&quot;&gt;+ Other Debt&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;&lt;th&gt;Debt Type&lt;/th&gt;&lt;th&gt;Outstanding Amount&lt;/th&gt;&lt;th&gt;Monthly Installment&lt;/th&gt;&lt;th&gt;Action&lt;/th&gt;&lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody id=&quot;debtBody&quot;&gt;&lt;/tbody&gt;
+          &lt;tfoot&gt;
+            &lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td id=&quot;totalOutstanding&quot;&gt;RM 0&lt;/td&gt;&lt;td id=&quot;totalMonthly&quot;&gt;RM 0&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;/tfoot&gt;
+        &lt;/table&gt;
+        &lt;br&gt;
+        &lt;button onclick=&quot;clearDebts()&quot;&gt;Clear All&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;cardHead&quot;&gt;&lt;span class=&quot;step&quot;&gt;2&lt;/span&gt; Consolidation Setup&lt;/div&gt;
+      &lt;div class=&quot;cardBody&quot;&gt;
+        &lt;div class=&quot;formgrid&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Customer Age&lt;/label&gt;&lt;input type=&quot;number&quot; id=&quot;age&quot; value=&quot;40&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Housing Tenure Mode&lt;/label&gt;&lt;select id=&quot;tenureMode&quot;&gt;&lt;option value=&quot;auto&quot;&gt;Auto Max Tenure&lt;/option&gt;&lt;option value=&quot;manual&quot;&gt;Manual Select&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Housing Loan Tenure&lt;/label&gt;&lt;input type=&quot;number&quot; id=&quot;housingTenure&quot; value=&quot;30&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Other Commitment Tenure&lt;/label&gt;&lt;input value=&quot;10 Years Fixed&quot; disabled&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Interest Rate % p.a.&lt;/label&gt;&lt;input type=&quot;number&quot; id=&quot;rate&quot; value=&quot;4.5&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Property Margin&lt;/label&gt;&lt;select id=&quot;margin&quot;&gt;&lt;option value=&quot;0.9&quot;&gt;90%&lt;/option&gt;&lt;option value=&quot;0.85&quot;&gt;85%&lt;/option&gt;&lt;option value=&quot;0.8&quot;&gt;80%&lt;/option&gt;&lt;option value=&quot;0.7&quot;&gt;70%&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;        &lt;/div&gt;
+        &lt;div class=&quot;resultbox&quot;&gt;&lt;small&gt;New Monthly Commitment&lt;/small&gt;&lt;h2 id=&quot;newMonthly&quot;&gt;RM 0&lt;/h2&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;card summary&quot;&gt;
+    &lt;div class=&quot;cardHead&quot;&gt;&lt;span class=&quot;step&quot;&gt;3&lt;/span&gt; Comparison Summary&lt;/div&gt;
+    &lt;div class=&quot;summaryGrid&quot;&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Total Debt Consolidated&lt;/small&gt;&lt;h3 id=&quot;sumDebt&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Value Need&lt;/small&gt;&lt;h3 id=&quot;sumValue&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Monthly Before&lt;/small&gt;&lt;h3 id=&quot;sumBefore&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Housing Loan Monthly&lt;/small&gt;&lt;h3 id=&quot;sumHousingMonthly&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Other Debts Monthly&lt;br&gt;10 Years&lt;/small&gt;&lt;h3 id=&quot;sumOtherMonthly&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Monthly After&lt;/small&gt;&lt;h3 id=&quot;sumAfter&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Monthly Saving&lt;/small&gt;&lt;h3 class=&quot;green&quot; id=&quot;sumSaving&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Yearly Saving&lt;/small&gt;&lt;h3 class=&quot;green&quot; id=&quot;sumYearly&quot;&gt;RM 0&lt;/h3&gt;&lt;/div&gt;
+      
+      
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Housing Max Tenure&lt;/small&gt;&lt;h3 id=&quot;sumMaxTenure&quot;&gt;0 Yrs&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;sum&quot;&gt;&lt;small&gt;Other Debt Tenure&lt;/small&gt;&lt;h3&gt;10 Yrs&lt;/h3&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;card conclusion&quot;&gt;
+    &lt;div class=&quot;textbox&quot; id=&quot;conclusionText&quot;&gt;Fill in customer debts to generate cash flow summary.&lt;/div&gt;
+    &lt;div class=&quot;printBtns&quot;&gt;
+      &lt;button onclick=&quot;window.print()&quot;&gt;🖨 Print / Save PDF&lt;/button&gt;
+      &lt;p class=&quot;disclaimer&quot;&gt;Disclaimer: This analysis is for illustration only. Final approval is subject to bank policy, CCRIS, income verification and customer profile.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const otherDebtTenure = 10;
+function cleanNum(v){ return Number(String(v || &quot;&quot;).replace(/,/g,&quot;&quot;)) || 0; }
+function rm(n){ return &quot;RM &quot; + Number(n || 0).toLocaleString(&quot;en-MY&quot;,{maximumFractionDigits:0}); }
+function monthlyPayment(amount, annualRate, years){
+  let r = annualRate / 100 / 12, m = years * 12;
+  if(amount &lt;= 0 || r &lt;= 0 || m &lt;= 0) return 0;
+  return amount * r * Math.pow(1+r,m) / (Math.pow(1+r,m)-1);
+}
+function addDebt(type){
+  const tbody = document.getElementById(&quot;debtBody&quot;);
+  const row = document.createElement(&quot;tr&quot;);
+  row.dataset.type = type;
+  row.innerHTML = `&lt;td&gt;${type}&lt;/td&gt;&lt;td&gt;&lt;input class=&quot;money outstanding&quot; placeholder=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input class=&quot;money monthly&quot; placeholder=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;removeBtn&quot; onclick=&quot;removeDebt(this)&quot;&gt;🗑&lt;/button&gt;&lt;/td&gt;`;
+  tbody.appendChild(row);
+  row.querySelectorAll(&quot;input&quot;).forEach(i=&gt;{
+    i.addEventListener(&quot;input&quot;,()=&gt;{
+      if(row.dataset.type === &quot;Credit Card&quot; &amp;&amp; i.classList.contains(&quot;outstanding&quot;)){
+        const outstanding = cleanNum(i.value);
+        const autoMonthly = outstanding * 0.05;
+        const monthlyInput = row.querySelector(&quot;.monthly&quot;);
+        monthlyInput.value = autoMonthly ? autoMonthly.toLocaleString(&quot;en-MY&quot;,{maximumFractionDigits:0}) : &quot;&quot;;
+      }
+      calculate();
+    });
+    i.addEventListener(&quot;blur&quot;,()=&gt;formatInput(i));
+  });
+  calculate();
+}
+function formatInput(input){ let num = cleanNum(input.value); input.value = num ? num.toLocaleString(&quot;en-MY&quot;) : &quot;&quot;; }
+function removeDebt(btn){ btn.closest(&quot;tr&quot;).remove(); calculate(); }
+function clearDebts(){ document.getElementById(&quot;debtBody&quot;).innerHTML = &quot;&quot;; calculate(); }
+function calculate(){
+  let totalOutstanding=0,totalMonthlyBefore=0,housingOutstanding=0,otherOutstanding=0;
+  document.querySelectorAll(&quot;#debtBody tr&quot;).forEach(row=&gt;{
+    const outstanding=cleanNum(row.querySelector(&quot;.outstanding&quot;).value);
+    const monthly=cleanNum(row.querySelector(&quot;.monthly&quot;).value);
+    totalOutstanding += outstanding; totalMonthlyBefore += monthly;
+    if(row.dataset.type === &quot;Housing Loan&quot;) housingOutstanding += outstanding; else otherOutstanding += outstanding;
+  });
+  const age=cleanNum(document.getElementById(&quot;age&quot;).value);
+  let maxHousingTenure=Math.min(35,Math.max(0,70-age));
+  const tenureMode=document.getElementById(&quot;tenureMode&quot;).value;
+  const housingTenureInput=document.getElementById(&quot;housingTenure&quot;);
+  if(tenureMode === &quot;auto&quot;) housingTenureInput.value=maxHousingTenure;
+  let selectedHousingTenure=cleanNum(housingTenureInput.value);
+  if(selectedHousingTenure &gt; maxHousingTenure){ selectedHousingTenure=maxHousingTenure; housingTenureInput.value=maxHousingTenure; }
+  const rate=cleanNum(document.getElementById(&quot;rate&quot;).value);
+  const margin=cleanNum(document.getElementById(&quot;margin&quot;).value)||0.9;  const housingNewMonthly=monthlyPayment(housingOutstanding,rate,selectedHousingTenure);
+  const otherNewMonthly=monthlyPayment(otherOutstanding,rate,otherDebtTenure);
+  const newMonthly=housingNewMonthly+otherNewMonthly;
+  const monthlySaving=totalMonthlyBefore-newMonthly;
+  const yearlySaving=monthlySaving*12;
+  const valueNeed=totalOutstanding*1.15;  document.getElementById(&quot;totalOutstanding&quot;).innerText=rm(totalOutstanding);
+  document.getElementById(&quot;totalMonthly&quot;).innerText=rm(totalMonthlyBefore);
+  document.getElementById(&quot;topBefore&quot;).innerText=rm(totalMonthlyBefore);
+  document.getElementById(&quot;topAfter&quot;).innerText=rm(newMonthly);
+  document.getElementById(&quot;topSaving&quot;).innerText=rm(monthlySaving);
+  document.getElementById(&quot;newMonthly&quot;).innerText=rm(newMonthly);
+  document.getElementById(&quot;sumBefore&quot;).innerText=rm(totalMonthlyBefore);
+  document.getElementById(&quot;sumHousingMonthly&quot;).innerText=rm(housingNewMonthly);
+  document.getElementById(&quot;sumOtherMonthly&quot;).innerText=rm(otherNewMonthly);
+  document.getElementById(&quot;sumAfter&quot;).innerText=rm(newMonthly);
+  document.getElementById(&quot;sumSaving&quot;).innerText=rm(monthlySaving);
+  document.getElementById(&quot;sumYearly&quot;).innerText=rm(yearlySaving);
+  document.getElementById(&quot;sumDebt&quot;).innerText=rm(totalOutstanding);
+  document.getElementById(&quot;sumValue&quot;).innerText=rm(valueNeed);
+
+  document.getElementById(&quot;sumMaxTenure&quot;).innerText=maxHousingTenure+&quot; Yrs&quot;;
+  const conclusion=document.getElementById(&quot;conclusionText&quot;);
+  if(totalOutstanding&lt;=0) conclusion.innerHTML=&quot;Fill in customer debts to generate cash flow summary.&quot;;
+  else if(monthlySaving&gt;0) conclusion.innerHTML=`Customer may reduce monthly commitment by &lt;b style=&quot;color:#16843a&quot;&gt;${rm(monthlySaving)}&lt;/b&gt; per month. Housing loan monthly is &lt;b&gt;${rm(housingNewMonthly)}&lt;/b&gt;, other debts 10 years monthly is &lt;b&gt;${rm(otherNewMonthly)}&lt;/b&gt;. Total debt to consolidate is &lt;b&gt;${rm(totalOutstanding)}&lt;/b&gt;. Estimated property value needed is around &lt;b&gt;${rm(valueNeed)}&lt;/b&gt;.`;
+  else conclusion.innerHTML=`This structure may not reduce monthly commitment. Review debt amount, tenure, interest rate or customer age.`;
+}
+[&quot;age&quot;,&quot;tenureMode&quot;,&quot;housingTenure&quot;,&quot;rate&quot;,&quot;margin&quot;].forEach(id=&gt;{
+  document.getElementById(id).addEventListener(&quot;input&quot;,calculate);
+  document.getElementById(id).addEventListener(&quot;change&quot;,calculate);
+});
+addDebt(&quot;Credit Card&quot;); addDebt(&quot;Personal Loan&quot;); addDebt(&quot;Housing Loan&quot;); addDebt(&quot;Car Loan&quot;); calculate();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+">
+                </iframe>
+            </div>
+        </div>
     </div>
 
     <div id="refinanceSection" class="section">
@@ -3789,6 +5273,9 @@ border:1px solid #d4af37;
   box-shadow:0 12px 28px rgba(15,23,42,.22);
 }
 .customerOnly .customerBackBtn{display:block}
+.exporting .editAction{display:none!important}
+.editAction{white-space:nowrap;text-align:center!important}
+.editAction button{padding:7px 10px!important;font-size:12px!important;margin:2px!important;border-radius:10px!important}
 @media(max-width:900px){.grid,.summary,.two-col,.manual-grid,.internal-summary{grid-template-columns:1fr}.container{padding:12px}.customerBackBtn{right:14px;bottom:14px;width:calc(100% - 28px)}}
 
 
@@ -4111,10 +5598,10 @@ label{color:#0f172a!important;font-weight:800!important;}
       &lt;thead&gt;
         &lt;tr&gt;
           &lt;th&gt;Bank&lt;/th&gt;&lt;th&gt;Flexi Type&lt;/th&gt;&lt;th&gt;Facility&lt;/th&gt;&lt;th&gt;Total Financing&lt;/th&gt;
-          &lt;th&gt;Rate&lt;/th&gt;&lt;th&gt;Monthly&lt;/th&gt;&lt;th&gt;Tenure&lt;/th&gt;&lt;th&gt;Total Payable&lt;/th&gt;&lt;th&gt;Total Interest&lt;/th&gt;
+          &lt;th&gt;Rate&lt;/th&gt;&lt;th&gt;Monthly&lt;/th&gt;&lt;th&gt;Tenure&lt;/th&gt;&lt;th&gt;Total Payable&lt;/th&gt;&lt;th&gt;Total Interest&lt;/th&gt;&lt;th class=&quot;editAction&quot;&gt;Action&lt;/th&gt;
         &lt;/tr&gt;
       &lt;/thead&gt;
-      &lt;tbody id=&quot;customerTable&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;9&quot;&gt;No saved package yet.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+      &lt;tbody id=&quot;customerTable&quot;&gt;&lt;tr&gt;&lt;td colspan=&quot;10&quot;&gt;No saved package yet.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
     &lt;/table&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -4351,7 +5838,7 @@ function readPackage(pkg){
   const totalProfit = legalSharingIncome + bankReferralIncome + mrtaReferral + otherIncome;
 
   return {
-    id: editId || Date.now() + Math.random(),
+    id: editId || (&quot;pkg_&quot; + Date.now() + &quot;_&quot; + Math.random().toString(36).slice(2,8)),
     bank, flexi, facility, totalFinancing, loanAgreement, rate, monthly, tenure,
     totalPayable, totalInterest, legalFee, legalSharingPercent, legalSharingIncome,
     bankReferralPercent, bankReferralIncome, mrtaReferral, otherIncome, totalProfit
@@ -4365,26 +5852,31 @@ function saveThisPackage(btn){
   if(!data.bank || data.bank === &quot;-&quot;){alert(&quot;Please key in bank name.&quot;);return;}
 
   if(editId){
-    savedPackages = savedPackages.map(x=&gt;x.id===editId ? data : x);
+    savedPackages = savedPackages.map(x=&gt;String(x.id)===String(editId) ? data : x);
     editId = null;
   }else{
     savedPackages.push(data);
   }
 
+  editId = null;
   calculateSaved();
   pkg.remove();
 }
 
 function editSaved(id){
-  const data = savedPackages.find(x=&gt;x.id===id);
+  const data = savedPackages.find(x=&gt;String(x.id)===String(id));
   if(!data) return;
-  editId = id;
+  editId = String(id);
+  const oldForm = document.querySelector(&quot;.package.editing-form&quot;);
+  if(oldForm) oldForm.remove();
   addPackage(data);
-  window.scrollTo({top:0,behavior:&quot;smooth&quot;});
+  const forms = document.querySelectorAll(&quot;#packageList .package&quot;);
+  const form = forms[forms.length - 1];
+  if(form){ form.classList.add(&quot;editing-form&quot;); form.scrollIntoView({behavior:&quot;smooth&quot;, block:&quot;start&quot;}); }
 }
 
 function deleteSaved(id){
-  savedPackages = savedPackages.filter(x=&gt;x.id !== id);
+  savedPackages = savedPackages.filter(x=&gt;String(x.id) !== String(id));
   calculateSaved();
 }
 
@@ -4424,7 +5916,7 @@ function calculateSaved(){
   document.getElementById(&quot;internalTable&quot;).innerHTML = &quot;&quot;;
 
   data.forEach(x=&gt;{
-    const isBest = x.id === bestInterest.id;
+    const isBest = String(x.id) === String(bestInterest.id);
 
     document.getElementById(&quot;customerTable&quot;).innerHTML += `
       &lt;tr&gt;
@@ -4437,6 +5929,10 @@ function calculateSaved(){
         &lt;td&gt;${x.tenure} years&lt;/td&gt;
         &lt;td&gt;${rm(x.totalPayable)}&lt;/td&gt;
         &lt;td&gt;&lt;b&gt;${rm(x.totalInterest)}&lt;/b&gt;&lt;/td&gt;
+        &lt;td class=&quot;editAction&quot;&gt;
+          &lt;button class=&quot;blue&quot; type=&quot;button&quot; onclick='editSaved(${JSON.stringify(x.id)})'&gt;Edit&lt;/button&gt;
+          &lt;button class=&quot;red&quot; type=&quot;button&quot; onclick='deleteSaved(${JSON.stringify(x.id)})'&gt;Delete&lt;/button&gt;
+        &lt;/td&gt;
       &lt;/tr&gt;
     `;
 
@@ -4453,8 +5949,8 @@ function calculateSaved(){
         &lt;td&gt;${rm(x.otherIncome)}&lt;/td&gt;
         &lt;td&gt;&lt;b&gt;${rm(x.totalProfit)}&lt;/b&gt;&lt;/td&gt;
         &lt;td&gt;
-          &lt;button class=&quot;blue&quot; onclick=&quot;editSaved(${x.id})&quot;&gt;Edit&lt;/button&gt;
-          &lt;button class=&quot;red&quot; onclick=&quot;deleteSaved(${x.id})&quot;&gt;Delete&lt;/button&gt;
+          &lt;button class=&quot;blue&quot; type=&quot;button&quot; onclick='editSaved(${JSON.stringify(x.id)})'&gt;Edit&lt;/button&gt;
+          &lt;button class=&quot;red&quot; type=&quot;button&quot; onclick='deleteSaved(${JSON.stringify(x.id)})'&gt;Delete&lt;/button&gt;
         &lt;/td&gt;
       &lt;/tr&gt;
     `;
@@ -4477,6 +5973,7 @@ function showFullView(){
 function exportPDF(){
   const wasCustomerOnly = document.body.classList.contains(&quot;customerOnly&quot;);
   showCustomerOnly();
+  document.body.classList.add(&quot;exporting&quot;);
   html2pdf().set({
     margin:0.25,
     filename:&quot;Mortgage-Package-Comparison.pdf&quot;,
@@ -4484,6 +5981,7 @@ function exportPDF(){
     html2canvas:{scale:2},
     jsPDF:{unit:&quot;in&quot;,format:&quot;a4&quot;,orientation:&quot;landscape&quot;}
   }).from(document.getElementById(&quot;pdfArea&quot;)).save().then(()=&gt;{
+    document.body.classList.remove(&quot;exporting&quot;);
     if(!wasCustomerOnly){
       showFullView();
     }
@@ -11208,6 +12706,7 @@ button:hover,
 <script id="chatgpt-final-optimization-patch-script">
 (function(){
   const TOOL_META = {
+    debtConsoSection: ['🔄','Debt Consolidation','Reduce monthly commitments and estimate refinance amount.'],
     refinanceSection: ['🏦','Refinance Calculation','Compare refinance cost, instalment and savings.'],
     amortizationSection: ['📊','Amortization Schedule','View monthly loan breakdown and balance movement.'],
     mrtaSection: ['🛡️','MRTA Calculation','Estimate MRTA premium and financed monthly impact.'],
@@ -15647,6 +17146,132 @@ label{color:#0f172a!important;font-weight:800!important;}
 </script>
 <!-- End EPG Visitor Tracking -->
 
+
+<script id="chatgpt-debtconso-bankmatching-script">
+function dcNum(id){const el=document.getElementById(id);return Number(String(el&&el.value||'').replace(/,/g,''))||0;}
+function dcMoney(n){return 'RM '+Math.round(n||0).toLocaleString('en-MY');}
+function calculateDebtConso(){
+  const age=dcNum('dcAge'), value=dcNum('dcPropertyValue'), rate=dcNum('dcRate')/100/12;
+  let tenure=dcNum('dcTenure')||35;
+  if(age>0) tenure=Math.min(tenure, Math.max(1,70-age));
+  const months=tenure*12;
+  const totalOut=dcNum('dcHousingOut')+dcNum('dcCcOut')+dcNum('dcPlOut')+dcNum('dcCarOut');
+  const currentInst=dcNum('dcHousingInst')+dcNum('dcCcInst')+dcNum('dcPlInst')+dcNum('dcCarInst');
+  const mrta=totalOut*0.01;
+  const legalFee=totalOut*0.01;
+  const valuationFee=value*0.0025;
+  const loanAgreement=totalOut*0.005;
+  const cost=mrta+legalFee+valuationFee+loanAgreement;
+  const newLoan=totalOut+cost;
+  const newInst=rate>0 ? newLoan*rate*Math.pow(1+rate,months)/(Math.pow(1+rate,months)-1) : newLoan/months;
+  const saving=currentInst-newInst;
+  document.getElementById('dcTotalOut').textContent=dcMoney(totalOut);
+  document.getElementById('dcNewLoan').textContent=dcMoney(newLoan);
+  document.getElementById('dcNewInst').textContent=dcMoney(newInst);
+  document.getElementById('dcSaving').textContent=dcMoney(saving);
+  document.getElementById('dcMrta').textContent=dcMoney(mrta);
+  document.getElementById('dcCost').textContent=dcMoney(cost);
+  document.getElementById('dcNote').textContent='Estimated tenure: '+tenure+' years. Cost includes rough Legal Fee, Valuation Fee, Loan Agreement Fee and MRTA 1%.';
+}
+['dcAge','dcPropertyValue','dcHousingOut','dcHousingInst','dcCcOut','dcCcInst','dcPlOut','dcPlInst','dcCarOut','dcCarInst','dcRate','dcTenure'].forEach(id=>{
+  document.addEventListener('input',e=>{ if(e.target && e.target.id===id) calculateDebtConso(); });
+});
+function runBankMatching(){
+  const selected=[...document.querySelectorAll('#bmChecks input:checked')].map(x=>x.value);
+  let rec=['pbb','rhb','cimb'], avoid=[]; let reasons=[];
+  if(selected.includes('selfEmployed')){rec=['rhb','cimb','amb','pbb'];reasons.push('Self-employed profile: prioritize banks with stronger income flexibility.');}
+  if(selected.includes('highDsr')){rec=['rhb','cimb','amb'];avoid.push('mbb');reasons.push('High DSR: focus on banks with more workable DSR direction.');}
+  if(selected.includes('ccUtil')){avoid.push('hlbb','mbb');reasons.push('High credit card usage: reduce utilization before submission where possible.');}
+  if(selected.includes('ccris1')){rec=['pbb','cimb','rhb'];reasons.push('CCRIS 1: still possible, but sequence and latest conduct matter.');}
+  if(selected.includes('ccris2')){avoid.push('pbb','mbb');reasons.push('CCRIS 2: need stronger justification or wait for cleaner CCRIS.');}
+  if(selected.includes('ptptn')){reasons.push('PTPTN issue: check outstanding/status before choosing bank.');}
+  if(selected.includes('akpk')){avoid=['pbb','mbb','hlbb','cimb'];rec=['manual review needed'];reasons.push('AKPK: usually high-risk; check settlement/discharge first.');}
+  if(selected.includes('noEpf')){rec=['rhb','amb','cimb'];reasons.push('No EPF: rely more on bank statement and declared income strength.');}
+  if(selected.includes('lowSaving')){reasons.push('Low saving: prepare saving proof or reduce cash requirement.');}
+  if(selected.includes('secondHouse')){reasons.push('Second house: margin and DSR must be checked carefully.');}
+  rec=[...new Set(rec)]; avoid=[...new Set(avoid.filter(x=>!rec.includes(x)))];
+  document.getElementById('bmRecommended').innerHTML=rec.map(x=>`<span class="bm-bank">${x}</span>`).join('');
+  document.getElementById('bmAvoid').innerHTML=(avoid.length?avoid:['case by case']).map(x=>`<span class="bm-bank bm-avoid">${x}</span>`).join('');
+  document.getElementById('bmReasons').innerHTML=(reasons.length?reasons:['No major issue selected. Start with pbb / rhb / cimb and compare package.']).map(r=>`<div class="bm-reason"><b>✓</b> ${r}</div>`).join('');
+}
+function clearBankMatching(){document.querySelectorAll('#bmChecks input').forEach(x=>x.checked=false);runBankMatching();}
+setTimeout(()=>{try{calculateDebtConso();runBankMatching();}catch(e){}},400);
+</script>
+
+
+<script>
+/* ===== EPG Password Gate Patch =====
+   To change the password, edit this line only:
+   const EPG_SITE_PASSWORD = "000000";
+*/
+(function(){
+  const EPG_SITE_PASSWORD = "000000";
+
+  function lockPage(){
+    document.body.classList.add("epg-locked");
+    const gate = document.getElementById("epgPasswordGate");
+    if(gate) gate.classList.remove("hidden");
+  }
+
+  function unlockPage(){
+    document.body.classList.remove("epg-locked");
+    const gate = document.getElementById("epgPasswordGate");
+    if(gate) gate.classList.add("hidden");
+  }
+
+  function checkPassword(){
+    const input = document.getElementById("epgPasswordInput");
+    const error = document.getElementById("epgPasswordError");
+    const value = (input && input.value ? input.value : "").trim();
+
+    if(value === EPG_SITE_PASSWORD){
+      unlockPage();
+      return;
+    }
+
+    if(error) error.textContent = "Wrong password. Please try again.";
+    if(input){
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    // Always lock on every new open / refresh. No sessionStorage, no localStorage.
+    lockPage();
+
+    const btn = document.getElementById("epgPasswordBtn");
+    const input = document.getElementById("epgPasswordInput");
+
+    if(btn) btn.addEventListener("click", checkPassword);
+    if(input){
+      setTimeout(()=>input.focus(), 100);
+      input.addEventListener("keydown", function(e){
+        if(e.key === "Enter") checkPassword();
+      });
+    }
+  });
+})();
+</script>
+
+
+<script>
+function resizeDebtConsoFrame(){
+  const frame=document.getElementById('debtConsoFrame');
+  if(!frame) return;
+  try{
+    const doc=frame.contentDocument || frame.contentWindow.document;
+    const resize=()=>{
+      const h=Math.max(900, doc.documentElement.scrollHeight, doc.body.scrollHeight);
+      frame.style.height=(h+8)+'px';
+    };
+    resize();
+    setTimeout(resize,200);
+    setTimeout(resize,800);
+    frame.contentWindow.addEventListener('resize',resize);
+  }catch(e){}
+}
+</script>
 </body>
 </html>
 <!-- Final fix: keep floating Banking logo visible but move it above top cards -->
