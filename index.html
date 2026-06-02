@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+      <link rel="icon" type="image/png" href="favicon.png">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -17272,6 +17272,194 @@ function resizeDebtConsoFrame(){
   }catch(e){}
 }
 </script>
+
+<div id="propertyEstimatorSection" class="section">
+  <div class="module-shell">
+    <div class="module-topbar">
+      <div>
+        <h2>Property Cost Estimator</h2>
+        <p>Malaysia Subsale / Refinance Cost Estimator</p>
+      </div>
+      <button class="back-btn" onclick="goHome()">← Back</button>
+    </div>
+
+    <div class="embedded-module-wrap">
+      <iframe class="embedded-frame"
+        srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+&lt;title&gt;EPG Property Cost Estimator&lt;/title&gt;
+&lt;style&gt;
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f8f4ea;color:#2f2410}.container{max-width:1250px;margin:auto;padding:24px}.header{background:linear-gradient(135deg,#d4af37,#8c6a16);color:white;padding:28px;border-radius:22px;margin-bottom:22px}.header h1{margin:0;font-size:30px}.header p{margin:8px 0 0;opacity:.9}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.card{background:white;border-radius:20px;padding:22px;box-shadow:0 10px 25px rgba(30,60,120,.1)}h2{margin:0 0 14px;color:#b68b1f;font-size:20px}label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px;color:#5b4a1f}input,select{width:100%;padding:13px;border:1px solid #e7d7a8;border-radius:12px;font-size:15px;background:white}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.box{background:#fffaf0;padding:16px;border-radius:16px;margin-top:16px;border:1px solid #ead9a0}.resultRow{display:flex;justify-content:space-between;gap:15px;border-bottom:1px dashed #d9e2f3;padding:10px 0;font-size:14px}.resultRow strong{color:#b68b1f;white-space:nowrap}.muted{color:#667085;font-size:12px;line-height:1.5}.total{margin-top:18px;background:linear-gradient(135deg,#d4af37,#8c6a16);color:white;padding:18px;border-radius:18px;display:flex;justify-content:space-between;font-size:22px;font-weight:800}.note{margin-top:16px;background:#fff6dd;color:#7a5b12;padding:14px;border-radius:14px;font-size:13px;line-height:1.5}.success{background:#fff8df;color:#8c6a16}.btn{margin-top:18px;width:100%;padding:14px;border:0;border-radius:14px;background:#d4af37;color:white;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(.95)}.badge{display:inline-block;padding:6px 10px;background:#fff3cf;color:#b68b1f;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:10px}.hide{display:none!important}@media(max-width:900px){.grid,.row,.row3{grid-template-columns:1fr}}@media print{body{background:white}.btn{display:none}.card,.header{box-shadow:none}.container{padding:0}.grid{gap:12px}.card{padding:16px}}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;header&quot;&gt;
+    &lt;h1&gt;EPG Property Cost Estimator&lt;/h1&gt;
+    &lt;p&gt;Malaysia Subsale / Refinance Legal Cost + Government First Home Stamp Duty Waiver Estimate&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;h2&gt;Input Details&lt;/h2&gt;
+      &lt;label&gt;Case Type&lt;/label&gt;
+      &lt;select id=&quot;caseType&quot; onchange=&quot;toggleCase();calculate()&quot;&gt;
+        &lt;option value=&quot;subsale&quot;&gt;Subsale Purchase&lt;/option&gt;
+        &lt;option value=&quot;refinance&quot;&gt;Refinance / Loan Only&lt;/option&gt;
+      &lt;/select&gt;
+
+      &lt;div class=&quot;box&quot;&gt;
+        &lt;h2&gt;Property / Loan Info&lt;/h2&gt;
+        &lt;label id=&quot;propertyLabel&quot;&gt;Property Price&lt;/label&gt;
+        &lt;input id=&quot;propertyPrice&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;
+        &lt;div id=&quot;subsaleLoanBox&quot; class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Loan Margin (%)&lt;/label&gt;&lt;input id=&quot;loanMargin&quot; placeholder=&quot;90&quot; oninput=&quot;calculate()&quot; /&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Auto Loan Amount&lt;/label&gt;&lt;input id=&quot;loanAmountDisplay&quot; placeholder=&quot;0&quot; readonly /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;refinanceLoanBox&quot; class=&quot;hide&quot;&gt;&lt;label&gt;Loan Amount&lt;/label&gt;&lt;input id=&quot;manualLoanAmount&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;box&quot; id=&quot;firstHomeBox&quot;&gt;
+        &lt;h2&gt;Government First Home Stamp Duty Exemption&lt;/h2&gt;
+        &lt;label&gt;Purchaser Count&lt;/label&gt;
+        &lt;select id=&quot;purchaserCount&quot; onchange=&quot;togglePurchaser2();calculate()&quot;&gt;
+          &lt;option value=&quot;1&quot;&gt;1 Purchaser&lt;/option&gt;
+          &lt;option value=&quot;2&quot;&gt;2 Purchasers&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Purchaser 1 Malaysian?&lt;/label&gt;&lt;select id=&quot;p1Malaysian&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;&lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Purchaser 1 First Home?&lt;/label&gt;&lt;select id=&quot;p1FirstHome&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;&lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row hide&quot; id=&quot;purchaser2Box&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Purchaser 2 Malaysian?&lt;/label&gt;&lt;select id=&quot;p2Malaysian&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;&lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Purchaser 2 First Home?&lt;/label&gt;&lt;select id=&quot;p2FirstHome&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;&lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;label&gt;Property Type&lt;/label&gt;
+        &lt;select id=&quot;propertyType&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;residential&quot;&gt;Residential&lt;/option&gt;&lt;option value=&quot;nonresidential&quot;&gt;Non-Residential / Commercial&lt;/option&gt;&lt;/select&gt;
+        &lt;p class=&quot;muted&quot;&gt;For waiver calculation, all purchasers must be Malaysian + first home, residential property, and property price RM500,000 or below. If one purchaser is not eligible, the calculator will not auto-waive. You may use Extra Charges / Discount if lawyer confirms a special partial treatment.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;box&quot;&gt;
+        &lt;h2&gt;Property Title Info&lt;/h2&gt;
+        &lt;div class=&quot;row3&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Tenure&lt;/label&gt;&lt;select id=&quot;tenureType&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;freehold&quot;&gt;Freehold&lt;/option&gt;&lt;option value=&quot;leasehold&quot;&gt;Leasehold&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Title Status&lt;/label&gt;&lt;select id=&quot;titleStatus&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;individual&quot;&gt;Individual / Strata Title&lt;/option&gt;&lt;option value=&quot;master&quot;&gt;Master Title&lt;/option&gt;&lt;option value=&quot;assignment&quot;&gt;Assignment / No Title&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Consent Needed?&lt;/label&gt;&lt;select id=&quot;consentNeeded&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;&lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;box&quot; id=&quot;spaSection&quot;&gt;
+        &lt;h2&gt;SPA Section&lt;/h2&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;SPA Add-On / CKHT / LOA&lt;/label&gt;&lt;input id=&quot;spaAddonInput&quot; placeholder=&quot;1000&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;SPA Disbursement&lt;/label&gt;&lt;input id=&quot;spaDisbInput&quot; placeholder=&quot;1450&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;SPA Other Disbursement&lt;/label&gt;&lt;input id=&quot;spaOtherInput&quot; placeholder=&quot;750&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;SPA Nominal Stamping&lt;/label&gt;&lt;input id=&quot;spaNominalInput&quot; placeholder=&quot;50&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;box&quot;&gt;
+        &lt;h2&gt;Loan Section&lt;/h2&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Loan Applicant Count&lt;/label&gt;&lt;select id=&quot;loanApplicantCount&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;1&quot;&gt;Loan 1 Person&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;Loan 2 Persons&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;2nd Loan Applicant Add-On&lt;/label&gt;&lt;input id=&quot;loanApplicantAddon&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Loan Add-On / Caveat / SD&lt;/label&gt;&lt;input id=&quot;loanAddonInput&quot; placeholder=&quot;1150&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Loan Disbursement&lt;/label&gt;&lt;input id=&quot;loanDisbInput&quot; placeholder=&quot;1360&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Loan Other Disbursement&lt;/label&gt;&lt;input id=&quot;loanOtherInput&quot; placeholder=&quot;750&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Loan Nominal Stamping&lt;/label&gt;&lt;input id=&quot;loanNominalInput&quot; placeholder=&quot;110&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;box&quot;&gt;
+        &lt;h2&gt;Valuation / Adjustment&lt;/h2&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Valuation Mode&lt;/label&gt;&lt;select id=&quot;valuationMode&quot; onchange=&quot;calculate()&quot;&gt;&lt;option value=&quot;auto&quot;&gt;Auto Calculate&lt;/option&gt;&lt;option value=&quot;manual&quot;&gt;Manual Override&lt;/option&gt;&lt;option value=&quot;none&quot;&gt;No Valuation Fee&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Manual Valuation Fee&lt;/label&gt;&lt;input id=&quot;valuationManual&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;div&gt;&lt;label&gt;Extra Charges&lt;/label&gt;&lt;input id=&quot;extraCharges&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;&lt;/div&gt;
+          &lt;div&gt;&lt;label&gt;Discount (%)&lt;/label&gt;&lt;input id=&quot;discountPercent&quot; placeholder=&quot;0&quot; oninput=&quot;calculate()&quot; /&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;button class=&quot;btn&quot; onclick=&quot;window.print()&quot;&gt;Print / Save PDF&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;span class=&quot;badge&quot; id=&quot;caseBadge&quot;&gt;Subsale Estimate&lt;/span&gt;
+      &lt;h2&gt;Estimated Cost Summary&lt;/h2&gt;
+      &lt;div id=&quot;emptyNote&quot; class=&quot;note&quot;&gt;Enter property price / loan amount to generate estimate.&lt;/div&gt;
+      &lt;div id=&quot;resultWrap&quot;&gt;
+        &lt;div id=&quot;waiverNote&quot; class=&quot;note success hide&quot;&gt;✓ First Home Stamp Duty Exemption Applied: all purchasers eligible, MOT Stamp Duty waived + Loan Agreement Stamp Duty 0.5% waived.&lt;/div&gt;
+        &lt;div id=&quot;spaResultBlock&quot;&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Legal Fee&lt;/span&gt;&lt;strong id=&quot;spaLegal&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Add-On / CKHT / LOA&lt;/span&gt;&lt;strong id=&quot;spaAddon&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA SST 8%&lt;/span&gt;&lt;strong id=&quot;spaSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;MOT Stamp Duty&lt;/span&gt;&lt;strong id=&quot;motStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Nominal Stamping&lt;/span&gt;&lt;strong id=&quot;nominalStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Disbursement&lt;/span&gt;&lt;strong id=&quot;spaDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Other Disbursement&lt;/span&gt;&lt;strong id=&quot;spaOtherDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+          &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SST on SPA Other Disbursement&lt;/span&gt;&lt;strong id=&quot;spaOtherSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;&lt;br /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Legal Fee&lt;/span&gt;&lt;strong id=&quot;loanLegal&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Add-On / Caveat / SD&lt;/span&gt;&lt;strong id=&quot;loanAddon&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Applicant Add-On&lt;/span&gt;&lt;strong id=&quot;applicantAddonResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan SST 8%&lt;/span&gt;&lt;strong id=&quot;loanSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Agreement Stamp Duty 0.5%&lt;/span&gt;&lt;strong id=&quot;loanStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Nominal Stamping&lt;/span&gt;&lt;strong id=&quot;loanNominalStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Disbursement&lt;/span&gt;&lt;strong id=&quot;loanDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Other Disbursement&lt;/span&gt;&lt;strong id=&quot;loanOtherDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SST on Loan Other Disbursement&lt;/span&gt;&lt;strong id=&quot;loanOtherSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;&lt;br /&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Title / Consent Extra Estimate&lt;/span&gt;&lt;strong id=&quot;titleExtraResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Valuation Fee&lt;/span&gt;&lt;strong id=&quot;valuationResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Extra Charges&lt;/span&gt;&lt;strong id=&quot;extraResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Discount&lt;/span&gt;&lt;strong id=&quot;discountResult&quot;&gt;- RM0.00&lt;/strong&gt;&lt;/div&gt;
+        &lt;div class=&quot;total&quot;&gt;&lt;span&gt;Total Estimate&lt;/span&gt;&lt;span id=&quot;totalCost&quot;&gt;RM0.00&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;note&quot; id=&quot;logicNote&quot;&gt;Estimate only. Final amount depends on lawyer quotation, bank package, property title, tenure, consent, SST, disbursement and stamp office / LHDN assessment.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+function cleanNum(v){return parseFloat(String(v).replace(/,/g,'').replace(/[^\d.]/g,''))||0}
+function fmt(n){return 'RM'+Number(n||0).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function formatInput(el){let raw=el.value.replace(/,/g,'').replace(/[^\d.]/g,'');if(raw===''){el.value='';return}let p=raw.split('.');p[0]=Number(p[0]||0).toLocaleString('en-MY');el.value=p.join('.')}
+function getInput(id,def){let v=cleanNum(document.getElementById(id).value);return v&gt;0?v:def}
+function legalFee(amount){if(amount&lt;=0)return 0;let fee=0,b=amount,t=Math.min(b,500000);fee+=t*.0125;b-=t;if(b&gt;0){t=Math.min(b,2000000);fee+=t*.01;b-=t}if(b&gt;0){t=Math.min(b,5000000);fee+=t*.0075;b-=t}if(b&gt;0)fee+=b*.005;return fee}
+function stampDuty(price){if(price&lt;=0)return 0;let d=0,b=price,t=Math.min(b,100000);d+=t*.01;b-=t;if(b&gt;0){t=Math.min(b,400000);d+=t*.02;b-=t}if(b&gt;0){t=Math.min(b,500000);d+=t*.03;b-=t}if(b&gt;0)d+=b*.04;return d}
+function valuationAuto(v){if(v&lt;=0)return 0;if(v&lt;=100000)return 300;if(v&lt;=500000)return Math.max(500,v*.0025);if(v&lt;=1000000)return 1250+(v-500000)*.002;return 2250+(v-1000000)*.0015}
+function titleExtra(){let extra=0;if(document.getElementById('tenureType').value==='leasehold')extra+=500;if(document.getElementById('titleStatus').value==='master')extra+=500;if(document.getElementById('titleStatus').value==='assignment')extra+=700;if(document.getElementById('consentNeeded').value==='yes')extra+=500;return extra}
+function togglePurchaser2(){let two=document.getElementById('purchaserCount').value==='2';document.getElementById('purchaser2Box').classList.toggle('hide',!two)}
+function allPurchasersEligible(){let count=document.getElementById('purchaserCount').value;let p1=document.getElementById('p1Malaysian').value==='yes'&amp;&amp;document.getElementById('p1FirstHome').value==='yes';let p2=true;if(count==='2')p2=document.getElementById('p2Malaysian').value==='yes'&amp;&amp;document.getElementById('p2FirstHome').value==='yes';return p1&amp;&amp;p2}
+function exemptionEligible(price){return document.getElementById('caseType').value==='subsale' &amp;&amp; allPurchasersEligible() &amp;&amp; document.getElementById('propertyType').value==='residential' &amp;&amp; price&gt;0 &amp;&amp; price&lt;=500000}
+function setText(id,v){document.getElementById(id).innerText=fmt(v)}
+function resetAll(){['spaLegal','spaAddon','spaSst','motStamp','nominalStamp','spaDisb','spaOtherDisb','spaOtherSst','loanLegal','loanAddon','applicantAddonResult','loanSst','loanStamp','loanNominalStamp','loanDisb','loanOtherDisb','loanOtherSst','titleExtraResult','valuationResult','extraResult','totalCost'].forEach(id=&gt;setText(id,0));document.getElementById('discountResult').innerText='- '+fmt(0);document.getElementById('emptyNote').classList.remove('hide');document.getElementById('waiverNote').classList.add('hide')}
+function toggleCase(){let sub=document.getElementById('caseType').value==='subsale';document.getElementById('spaSection').classList.toggle('hide',!sub);document.getElementById('spaResultBlock').classList.toggle('hide',!sub);document.getElementById('subsaleLoanBox').classList.toggle('hide',!sub);document.getElementById('refinanceLoanBox').classList.toggle('hide',sub);document.getElementById('firstHomeBox').classList.toggle('hide',!sub);document.getElementById('propertyLabel').innerText=sub?'Property Price':'Property Value';document.getElementById('caseBadge').innerText=sub?'Subsale Estimate':'Refinance Estimate'}
+function calculate(){let caseType=document.getElementById('caseType').value,isSub=caseType==='subsale',price=cleanNum(document.getElementById('propertyPrice').value),loan=0;if(isSub){let m=cleanNum(document.getElementById('loanMargin').value);loan=price&gt;0&amp;&amp;m&gt;0?price*m/100:0;document.getElementById('loanAmountDisplay').value=loan?Number(loan).toLocaleString('en-MY'):''}else loan=cleanNum(document.getElementById('manualLoanAmount').value);if((isSub&amp;&amp;price&lt;=0)||(!isSub&amp;&amp;loan&lt;=0)){resetAll();return}document.getElementById('emptyNote').classList.add('hide');let eligible=exemptionEligible(price);document.getElementById('waiverNote').classList.toggle('hide',!eligible);
+let valuation=0,vm=document.getElementById('valuationMode').value;if(vm==='auto')valuation=valuationAuto(price);if(vm==='manual')valuation=cleanNum(document.getElementById('valuationManual').value);
+let spaLegal=0,spaAddon=0,spaSst=0,mot=0,spaNom=0,spaDisb=0,spaOther=0,spaOtherSst=0;if(isSub){spaLegal=legalFee(price);spaAddon=getInput('spaAddonInput',1000);spaSst=(spaLegal+spaAddon)*.08;mot=eligible?0:stampDuty(price);spaNom=getInput('spaNominalInput',50);spaDisb=getInput('spaDisbInput',1450);spaOther=getInput('spaOtherInput',750);spaOtherSst=spaOther*.08}
+let loanLegal=legalFee(loan),loanAddon=getInput('loanAddonInput',1150),appAddon=document.getElementById('loanApplicantCount').value==='2'?cleanNum(document.getElementById('loanApplicantAddon').value):0,loanSst=(loanLegal+loanAddon+appAddon)*.08,loanStamp=eligible?0:loan*.005,loanNom=getInput('loanNominalInput',110),loanDisb=getInput('loanDisbInput',1360),loanOther=getInput('loanOtherInput',750),loanOtherSst=loanOther*.08,title=titleExtra(),extra=cleanNum(document.getElementById('extraCharges').value),discountPct=cleanNum(document.getElementById('discountPercent').value),professional=spaLegal+spaAddon+loanLegal+loanAddon+appAddon,discount=professional*(discountPct/100);
+let total=spaLegal+spaAddon+spaSst+mot+spaNom+spaDisb+spaOther+spaOtherSst+loanLegal+loanAddon+appAddon+loanSst+loanStamp+loanNom+loanDisb+loanOther+loanOtherSst+title+valuation+extra-discount;
+setText('spaLegal',spaLegal);setText('spaAddon',spaAddon);setText('spaSst',spaSst);setText('motStamp',mot);setText('nominalStamp',spaNom);setText('spaDisb',spaDisb);setText('spaOtherDisb',spaOther);setText('spaOtherSst',spaOtherSst);setText('loanLegal',loanLegal);setText('loanAddon',loanAddon);setText('applicantAddonResult',appAddon);setText('loanSst',loanSst);setText('loanStamp',loanStamp);setText('loanNominalStamp',loanNom);setText('loanDisb',loanDisb);setText('loanOtherDisb',loanOther);setText('loanOtherSst',loanOtherSst);setText('titleExtraResult',title);setText('valuationResult',valuation);setText('extraResult',extra);document.getElementById('discountResult').innerText='- '+fmt(discount);setText('totalCost',total);
+document.getElementById('logicNote').innerText=(eligible?'All purchasers eligible + First Home ≤ RM500k: MOT and Loan Agreement Stamp Duty 0.5% are waived. ':'Mixed purchaser / not eligible case: system will not auto-waive unless all purchasers are Malaysian + first home. ')+'Estimate only. Legal fee, SST, disbursement and nominal stamping remain subject to lawyer quotation / LHDN assessment.'}
+toggleCase();togglePurchaser2();resetAll();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+">
+      </iframe>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 <!-- Final fix: keep floating Banking logo visible but move it above top cards -->
