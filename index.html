@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPG Multi Tool - Full Integrated</title>
-      <link rel="icon" type="image/png" href="favicon.png">
+        <link rel="icon" type="image/png" href="favicon.png">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -17459,6 +17459,230 @@ toggleCase();togglePurchaser2();resetAll();
     </div>
   </div>
 </div>
+
+
+
+<!-- =========================================================
+KIKI CLEAN FINAL PATCH 2026-06-08
+- Homepage stays Black Gold EPG
+- Tool pages forced White Gold
+- Mobile smoother scroll + compact padding + fixed bottom action bar
+- Google Sheet connection status
+- Bank Matching AKPK=NO => Cannot Do / Not Eligible
+========================================================= -->
+<style id="kikiCleanFinalPatch20260608">
+:root{
+  --kg-black:#05070d;
+  --kg-black2:#111827;
+  --kg-gold:#d4af37;
+  --kg-gold2:#f6d36c;
+  --kg-soft:#fffdf7;
+  --kg-line:#ead7a1;
+  --kg-ink:#111827;
+  --kg-muted:#64748b;
+}
+/* Homepage: keep premium black-gold EPG look */
+body:not(.tool-open){background:#f7f8fc!important;}
+body:not(.tool-open) .epg-topnav,
+body:not(.tool-open) .epg-hero{
+  background:radial-gradient(circle at 70% 35%,rgba(212,175,55,.20),transparent 24%),linear-gradient(135deg,#050915,#07101f 58%,#090b12)!important;
+  color:#fff!important;
+}
+body:not(.tool-open) .epg-topnav *,
+body:not(.tool-open) .epg-hero *,
+body:not(.tool-open) .epg-brand-title,
+body:not(.tool-open) .epg-user-name{color:#fff!important;}
+body:not(.tool-open) .epg-brand-sub,
+body:not(.tool-open) .epg-team-pill,
+body:not(.tool-open) .epg-hero h1 b{color:var(--kg-gold2)!important;}
+body:not(.tool-open) .epg-category-card,
+body:not(.tool-open) .epg-tools-panel,
+body:not(.tool-open) .epg-tool{background:#fff!important;color:var(--kg-ink)!important;}
+body:not(.tool-open) .epg-category-card *,
+body:not(.tool-open) .epg-tools-panel *,
+body:not(.tool-open) .epg-tool *{color:var(--kg-ink)!important;}
+body:not(.tool-open) .epg-cat-icon{background:#07101f!important;color:var(--kg-gold2)!important;}
+/* Tool page: clean white-gold system */
+body.tool-open{
+  background:linear-gradient(180deg,#ffffff,#fffdf7)!important;
+  color:var(--kg-ink)!important;
+  overflow-x:hidden!important;
+}
+body.tool-open .container{padding:16px 20px 34px!important;max-width:1440px!important;margin:auto!important;}
+body.tool-open .section.active-section,
+body.tool-open .module-shell,
+body.tool-open .embedded-module-wrap,
+body.tool-open .page-wrap,
+body.tool-open .amort-app,
+body.tool-open .ks-wrap,
+body.tool-open .whitegold-page{
+  background:linear-gradient(180deg,#ffffff,#fffdf7)!important;
+  border:1px solid var(--kg-line)!important;
+  border-radius:24px!important;
+  box-shadow:0 14px 38px rgba(143,103,22,.08)!important;
+  color:var(--kg-ink)!important;
+}
+body.tool-open .module-topbar,
+body.tool-open .report-header,
+body.tool-open .tool-header,
+body.tool-open .section-header,
+body.tool-open .form-header,
+body.tool-open .panel-header,
+body.tool-open .card-header{
+  background:linear-gradient(135deg,#ffffff,#fff8df)!important;
+  border:1px solid var(--kg-line)!important;
+  color:var(--kg-ink)!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+body.tool-open h1,body.tool-open h2,body.tool-open h3,body.tool-open h4,
+body.tool-open p,body.tool-open label,body.tool-open span,body.tool-open div,body.tool-open td,body.tool-open th{
+  text-shadow:none!important;
+}
+body.tool-open h1,body.tool-open h2,body.tool-open h3,body.tool-open h4,body.tool-open label{color:var(--kg-ink)!important;}
+body.tool-open p,body.tool-open small,body.tool-open .desc,body.tool-open .hint{color:var(--kg-muted)!important;}
+body.tool-open input,body.tool-open select,body.tool-open textarea{
+  background:#fff!important;
+  color:var(--kg-ink)!important;
+  border:1px solid var(--kg-line)!important;
+  border-radius:12px!important;
+}
+body.tool-open button:not(.back-btn),
+body.tool-open .btn,
+body.tool-open .small-btn,
+body.tool-open input[type='button'],
+body.tool-open input[type='submit']{
+  background:linear-gradient(135deg,#fffdf7,#f6d36c)!important;
+  color:var(--kg-ink)!important;
+  border:1px solid var(--kg-gold)!important;
+  border-radius:13px!important;
+  box-shadow:0 8px 20px rgba(212,175,55,.16)!important;
+}
+body.tool-open .back-btn{
+  background:#fff!important;color:var(--kg-ink)!important;border:1px solid var(--kg-line)!important;border-radius:999px!important;
+}
+body.tool-open table{border-collapse:separate!important;border-spacing:0!important;}
+body.tool-open .table-scroll,body.tool-open .amort-table-wrap,body.tool-open .table-wrap{
+  overflow:auto!important;-webkit-overflow-scrolling:touch!important;border-radius:16px!important;
+}
+body.tool-open thead th,body.tool-open table th{
+  position:sticky;top:0;z-index:2;background:linear-gradient(135deg,#ffffff,#fff4c7)!important;color:var(--kg-ink)!important;border-color:var(--kg-line)!important;
+}
+.sheet-status-pill{
+  position:fixed;right:18px;bottom:18px;z-index:999999;border-radius:999px;padding:10px 14px;font-weight:900;font-size:12px;
+  border:1px solid var(--kg-line);background:#fff;color:var(--kg-ink);box-shadow:0 12px 28px rgba(15,23,42,.13);display:none;
+}
+.sheet-status-pill.show{display:block;}
+.sheet-status-pill.ok{border-color:#86efac;background:#f0fdf4;color:#166534;}
+.sheet-status-pill.fail{border-color:#fca5a5;background:#fef2f2;color:#991b1b;}
+.sheet-status-pill.loading{border-color:var(--kg-gold);background:#fffdf7;color:#8a5b00;}
+.bm-decision-box{margin:12px 0;padding:13px 14px;border-radius:16px;border:1px solid #fca5a5;background:#fff1f2;color:#991b1b!important;font-weight:950;line-height:1.4;}
+.bm-decision-box.good{border-color:#86efac;background:#f0fdf4;color:#166534!important;}
+@media(max-width:768px){
+  body.tool-open .container{padding:10px 10px 86px!important;}
+  body.tool-open .section.active-section,
+  body.tool-open .module-shell,
+  body.tool-open .embedded-module-wrap,
+  body.tool-open .page-wrap,
+  body.tool-open .amort-app,
+  body.tool-open .ks-wrap,
+  body.tool-open .whitegold-page{border-radius:16px!important;padding:10px!important;box-shadow:0 8px 24px rgba(143,103,22,.07)!important;}
+  body.tool-open .module-topbar{padding:10px 0 12px!important;margin-bottom:10px!important;}
+  body.tool-open .module-topbar h2{font-size:17px!important;line-height:1.2!important;}
+  body.tool-open .module-topbar p{font-size:11px!important;}
+  body.tool-open input,body.tool-open select,body.tool-open textarea{font-size:16px!important;min-height:42px!important;}
+  body.tool-open .form-grid,body.tool-open .wg-grid,body.tool-open .amort-layout,body.tool-open .summary-grid{grid-template-columns:1fr!important;}
+  body.tool-open table{min-width:760px!important;font-size:11px!important;}
+  body.tool-open td,body.tool-open th{padding:8px 7px!important;}
+  body.tool-open .action-row,
+  body.tool-open .btn-row,
+  body.tool-open .btn-group,
+  body.tool-open .table-actions,
+  body.tool-open .partner-actions{
+    position:fixed!important;left:10px!important;right:10px!important;bottom:10px!important;z-index:99998!important;
+    background:rgba(255,255,255,.94)!important;border:1px solid var(--kg-line)!important;border-radius:18px!important;
+    padding:8px!important;box-shadow:0 16px 42px rgba(15,23,42,.18)!important;backdrop-filter:blur(12px)!important;
+    display:flex!important;gap:8px!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;justify-content:flex-start!important;
+  }
+  body.tool-open .action-row button,
+  body.tool-open .btn-row button,
+  body.tool-open .btn-group button,
+  body.tool-open .table-actions button,
+  body.tool-open .partner-actions button{white-space:nowrap!important;min-width:max-content!important;padding:10px 12px!important;}
+  .sheet-status-pill{left:10px;right:10px;bottom:72px;text-align:center;}
+}
+</style>
+<script id="kikiCleanFinalPatch20260608Script">
+(function(){
+  function ensureSheetPill(){
+    let pill=document.getElementById('sheetStatusPill');
+    if(!pill){pill=document.createElement('div');pill.id='sheetStatusPill';pill.className='sheet-status-pill';document.body.appendChild(pill);}return pill;
+  }
+  window.kikiSheetStatus=function(type,msg){
+    const pill=ensureSheetPill();
+    pill.className='sheet-status-pill show '+(type||'loading');
+    pill.textContent=msg||'Checking Google Sheet connection...';
+    clearTimeout(window.__kikiSheetStatusTimer);
+    if(type==='ok') window.__kikiSheetStatusTimer=setTimeout(()=>pill.classList.remove('show'),2600);
+  };
+  function wrapKsLoad(){
+    if(typeof window.ksLoad==='function' && !window.ksLoad.__kikiWrapped){
+      const original=window.ksLoad;
+      window.ksLoad=async function(){
+        try{ window.kikiSheetStatus('loading','Connecting to Master Google Sheet...');
+          const data=await original.apply(this,arguments);
+          window.kikiSheetStatus('ok','Google Sheet connected · '+(Array.isArray(data)?data.length:0)+' rows loaded');
+          return data;
+        }catch(e){
+          window.kikiSheetStatus('fail','Google Sheet connection failed. Check Apps Script / tab name.');
+          throw e;
+        }
+      };
+      window.ksLoad.__kikiWrapped=true;
+    }
+  }
+  function injectFrameStyle(frame){
+    try{
+      const doc=frame.contentDocument||frame.contentWindow.document;
+      if(!doc || doc.getElementById('kikiFrameWhiteGold20260608')) return;
+      const st=doc.createElement('style');st.id='kikiFrameWhiteGold20260608';
+      st.textContent=`html,body{background:linear-gradient(180deg,#fff,#fffdf7)!important;color:#111827!important;}*{text-shadow:none!important}h1,h2,h3,h4,label,b,strong{color:#111827!important}p,small,.hint{color:#64748b!important}.header,.topbar,.report-header,.tool-header,.section-header{background:linear-gradient(135deg,#fff,#fff8df)!important;color:#111827!important;border:1px solid #ead7a1!important;box-shadow:none!important}button,.btn,input[type=button],input[type=submit]{background:linear-gradient(135deg,#fffdf7,#f6d36c)!important;color:#111827!important;border:1px solid #d4af37!important;border-radius:13px!important}input,select,textarea{background:#fff!important;color:#111827!important;border:1px solid #ead7a1!important}.table-wrap,.table-scroll{overflow:auto!important;-webkit-overflow-scrolling:touch!important}thead th,table th{background:linear-gradient(135deg,#fff,#fff4c7)!important;color:#111827!important;border-color:#ead7a1!important}@media(max-width:768px){body{padding:10px!important}.container,.wrap,.app{padding:10px!important}table{min-width:760px!important}.action-row,.btn-row,.btn-group{position:fixed!important;left:10px!important;right:10px!important;bottom:10px!important;z-index:99999!important;background:rgba(255,255,255,.95)!important;border:1px solid #ead7a1!important;border-radius:18px!important;padding:8px!important;display:flex!important;gap:8px!important;overflow-x:auto!important;box-shadow:0 16px 42px rgba(15,23,42,.18)!important}button{white-space:nowrap!important}}`;
+      (doc.head||doc.documentElement).appendChild(st);
+    }catch(e){}
+  }
+  function patchFrames(){document.querySelectorAll('iframe').forEach(f=>{injectFrameStyle(f); if(!f.dataset.kikiCleanFrame){f.dataset.kikiCleanFrame='1';f.addEventListener('load',()=>setTimeout(()=>injectFrameStyle(f),80));}});}
+  function patchBankMatching(){
+    const old=window.runBankMatching;
+    if(typeof old==='function' && !old.__kikiAkpkPatch){
+      window.runBankMatching=function(){
+        const selected=[...document.querySelectorAll('#bmChecks input:checked')].map(x=>String(x.value||'').toLowerCase());
+        const hasAkpk=selected.includes('akpk') || selected.includes('allow_akpk') || selected.includes('allow akpk');
+        const result=old.apply(this,arguments);
+        const host=document.getElementById('bmReasons')||document.getElementById('bmRecommended')?.parentElement;
+        if(hasAkpk){
+          const rec=document.getElementById('bmRecommended'), avoid=document.getElementById('bmAvoid'), reasons=document.getElementById('bmReasons');
+          if(rec) rec.innerHTML='<span class="bm-bank bm-avoid">Cannot Do</span><span class="bm-bank bm-avoid">Not Eligible</span>';
+          if(avoid) avoid.innerHTML='<span class="bm-bank bm-avoid">All banks blocked by AKPK rule</span>';
+          if(reasons) reasons.innerHTML='<div class="bm-decision-box">AKPK = NO means this case cannot proceed. Treat as Not Eligible / Cannot Do, not Medium Risk.</div>';
+        }else if(host && !document.querySelector('.bm-decision-box.good')){
+          // no forced message needed
+        }
+        return result;
+      };
+      window.runBankMatching.__kikiAkpkPatch=true;
+    }
+  }
+  function run(){wrapKsLoad();patchFrames();patchBankMatching();}
+  const oldOpen=window.openSection;
+  if(typeof oldOpen==='function' && !window.__kikiCleanOpenPatch20260608){
+    window.openSection=function(){const r=oldOpen.apply(this,arguments);setTimeout(run,60);setTimeout(run,350);setTimeout(run,900);return r;};
+    window.__kikiCleanOpenPatch20260608=true;
+  }
+  document.addEventListener('DOMContentLoaded',()=>{run();setTimeout(run,500);});
+  window.addEventListener('load',()=>{run();setTimeout(run,800);});
+  setInterval(run,1800);
+})();
+</script>
 
 </body>
 </html>
