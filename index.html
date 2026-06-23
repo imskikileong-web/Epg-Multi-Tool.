@@ -10005,606 +10005,89 @@ calculateJoint();
 &lt;head&gt;
 &lt;meta charset=&quot;UTF-8&quot; /&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-&lt;title&gt;Property Cost Estimator v2&lt;/title&gt;
-
+&lt;title&gt;Property Cost Estimator&lt;/title&gt;
 &lt;style&gt;
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#eef4ff;color:#172033}
-.container{max-width:1250px;margin:auto;padding:24px}
-.header{background:linear-gradient(135deg,#0b5ed7,#003b8f);color:#111827;padding:28px;border-radius:22px;margin-bottom:22px}
-.header h1{margin:0;font-size:30px}.header p{margin-top:8px;opacity:.9}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.card{background:white;border-radius:20px;padding:22px;box-shadow:0 10px 25px rgba(30,60,120,.1)}
-h2{margin:0 0 14px;color:#0b4eb3;font-size:20px}.sectionTitle{margin-top:18px}
-label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px;color:#26324a}
-input,select{width:100%;padding:13px;border:1px solid #d6e0f5;border-radius:12px;font-size:15px;background:white}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.box{background:#f5f8ff;padding:16px;border-radius:16px;margin-top:16px;border:1px solid #e3ecff}
-.resultRow{display:flex;justify-content:space-between;gap:15px;border-bottom:1px dashed #d9e2f3;padding:10px 0;font-size:14px}.resultRow strong{color:#0b4eb3;white-space:nowrap}.muted{color:#667085;font-size:12px;line-height:1.5}
-.total{margin-top:18px;background:linear-gradient(135deg,#0b5ed7,#003b8f);color:#111827;padding:18px;border-radius:18px;display:flex;justify-content:space-between;font-size:22px;font-weight:800}
-.note{margin-top:16px;background:#fff7df;color:#6a4b00;padding:14px;border-radius:14px;font-size:13px;line-height:1.5}.btn{margin-top:18px;width:100%;padding:14px;border:0;border-radius:14px;background:#0b5ed7;color:#111827;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(.95)}
-.badge{display:inline-block;padding:6px 10px;background:#e8f1ff;color:#0b4eb3;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:10px}.hide{display:none!important}
-@media(max-width:900px){.grid,.row,.row3{grid-template-columns:1fr}}
-@media print{body{background:white}.btn{display:none}.card,.header{box-shadow:none}.container{padding:0}.grid{gap:12px}.card{padding:16px}}
-
-
-/* === WHITE GOLD ALL TOOLS READABILITY PATCH === */
-:root{--epg-gold:#f6c84f;--epg-gold2:#ffe9a3;--epg-gold3:#d79a12;--epg-ink:#0f172a;--epg-muted:#64748b;--epg-line:#f2c75b;--epg-card:#fffdfa;}
-body.tool-open .module-topbar,
-body.tool-open .report-header,
-body.tool-open .strategy-header,
-body.tool-open .compare-header,
-body.tool-open .tool-header,
-body.tool-open .section-header,
-body.tool-open .form-header,
-body.tool-open .panel-header,
-body.tool-open .card-header,
-body.tool-open .bank-header,
-body.tool-open .insurance-header,
-body.tool-open .income-header{
-  background:linear-gradient(135deg,#ffffff,#fff9e8)!important;
-  color:var(--epg-ink)!important;
-  border:1px solid var(--epg-line)!important;
-  box-shadow:0 12px 28px rgba(180,119,0,.10)!important;
-}
-body.tool-open .module-topbar h1,body.tool-open .module-topbar h2,body.tool-open .module-topbar h3,
-body.tool-open .report-header h1,body.tool-open .report-header h2,
-body.tool-open .strategy-header h1,body.tool-open .strategy-header h2,
-body.tool-open .compare-header h1,body.tool-open .compare-header h2,
-body.tool-open .tool-header h1,body.tool-open .tool-header h2,
-body.tool-open .section-header h1,body.tool-open .section-header h2,
-body.tool-open .form-header h1,body.tool-open .form-header h2,
-body.tool-open .panel-header h1,body.tool-open .panel-header h2{
-  color:var(--epg-ink)!important;
-  text-shadow:none!important;
-  opacity:1!important;
-}
-body.tool-open .module-topbar p,body.tool-open .report-header p,body.tool-open .strategy-header p,body.tool-open .compare-header p,body.tool-open .tool-header p{color:var(--epg-muted)!important;opacity:1!important;}
-body.tool-open button:not(.back-btn),
-body.tool-open .btn,
-body.tool-open .btn-primary,
-body.tool-open .btn-secondary,
-body.tool-open .small-btn,
-body.tool-open .delete-btn,
-body.tool-open input[type='button'],
-body.tool-open input[type='submit']{
-  background:linear-gradient(135deg,#fff7d6,#f6c84f)!important;
-  color:#111827!important;
-  border:1px solid #d79a12!important;
-  box-shadow:0 8px 20px rgba(214,154,18,.16)!important;
-  opacity:1!important;
-  text-shadow:none!important;
-}
-body.tool-open button:not(.back-btn):hover,
-body.tool-open .btn:hover,
-body.tool-open .btn-primary:hover,
-body.tool-open .btn-secondary:hover,
-body.tool-open .small-btn:hover,
-body.tool-open .delete-btn:hover{
-  background:linear-gradient(135deg,#ffe9a3,#f6c84f)!important;
-  color:#111827!important;
-  transform:translateY(-1px);
-}
-body.tool-open table th,
-body.tool-open thead th{
-  background:linear-gradient(135deg,#ffffff,#fff8df)!important;
-  color:#0f172a!important;
-  border:1px solid #f2c75b!important;
-  text-shadow:none!important;
-  opacity:1!important;
-}
-body.tool-open .card,body.tool-open .panel,body.tool-open .box,body.tool-open .calculator-card,body.tool-open .report-box{
-  border-color:#f2c75b!important;
-}
-
-&lt;/style&gt;
-&lt;style id=&quot;kikiFinalToolThemeV6Static&quot;&gt;
-/* =========================================================
-   KIKI FINAL TOOL THEME PATCH v6
-   Scope: all tool pages / iframe srcdoc only. Homepage cover stays untouched.
-   Goal: white + gold frames, black readable text, no dark bars, clickable buttons.
-   ========================================================= */
 :root{
-  --kiki-ink:#0f172a!important;
-  --kiki-muted:#475569!important;
-  --kiki-gold:#d4af37!important;
-  --kiki-gold-2:#f6c94c!important;
-  --kiki-gold-3:#fff4c7!important;
-  --kiki-line:#e6bf4d!important;
-  --kiki-bg:#fffdf7!important;
+  --gold:#d4af37; --gold2:#f6d36c; --gold3:#fff4c7; --brown:#9a6600;
+  --ink:#111827; --muted:#64748b; --line:#e9c86e; --soft:#fffdf7;
 }
-html,body{
-  background:linear-gradient(180deg,#ffffff 0%,#fffdf7 100%)!important;
-  color:#0f172a!important;
-}
-body *:not(.watermark):not(.epg-home *):not(.epg-dashboard *):not(.epg-topnav *):not(.epg-hero *):not(.epg-main-content *){
-  color:#0f172a!important;
-  text-shadow:none!important;
-}
-.watermark{display:none!important;content:none!important;opacity:0!important;visibility:hidden!important;}
-/* Panels / cards / form blocks */
-.section, .module-shell, .embedded-module-wrap, .app, .wrap, .container, .main, .panel, .card, .box, .form-card,
-.input-card, .summary-card, .result-card, .report-box, .calculator-card, .form-section, .section-card,
-.manual-input, .customer-view, .internal-view, .view-control, .preview, .paper, .document, .pdf-content,
-#pdfContent, #report, #proposal, #output, #result, .strategy, .dropzone, .summary .card{
-  background:linear-gradient(180deg,#ffffff 0%,#fffdf7 100%)!important;
-  border-color:#e6bf4d!important;
-  color:#0f172a!important;
-  box-shadow:0 12px 30px rgba(212,175,55,.10)!important;
-}
-/* Remove dark/blue bars and convert to white-gold headers */
-.header, .topbar, .hero, .titlebar, .toolbar, .report-header, .amort-header, .table-header,
-.card-header, .section-header, .panel-header, .summary-header, .preview-header, .pdf-header,
-thead, tr.header-row, .black-bar, .dark-bar, .navy-bar, .head, .form-head,
-[style*=&quot;background:#020617&quot;], [style*=&quot;background: #020617&quot;],
-[style*=&quot;background:#07101f&quot;], [style*=&quot;background: #07101f&quot;],
-[style*=&quot;background:#0f172a&quot;], [style*=&quot;background: #0f172a&quot;],
-[style*=&quot;background:#111827&quot;], [style*=&quot;background: #111827&quot;],
-[style*=&quot;background:#000&quot;], [style*=&quot;background: #000&quot;],
-[style*=&quot;background:linear-gradient(135deg,#07101f&quot;],
-[style*=&quot;background:linear-gradient(135deg,#020617&quot;],
-[style*=&quot;background:linear-gradient(135deg,#0f172a&quot;],
-[style*=&quot;background:linear-gradient(135deg,#111827&quot;]{
-  background:linear-gradient(135deg,#ffffff 0%,#fff4c7 58%,#f6c94c 100%)!important;
-  color:#0f172a!important;
-  border:1px solid #e6bf4d!important;
-  box-shadow:0 8px 24px rgba(212,175,55,.14)!important;
-}
-.header *, .topbar *, .hero *, .titlebar *, .toolbar *, .report-header *, .amort-header *, .table-header *,
-.card-header *, .section-header *, .panel-header *, .summary-header *, .preview-header *, .pdf-header *,
-thead *, tr.header-row *, .black-bar *, .dark-bar *, .navy-bar *, .head *, .form-head *{
-  color:#0f172a!important;
-  opacity:1!important;
-  text-shadow:none!important;
-}
-/* Table headers */
-th, thead th, table th, .amort-table th{
-  background:linear-gradient(135deg,#ffffff 0%,#fff4c7 58%,#f6c94c 100%)!important;
-  color:#0f172a!important;
-  border:1px solid #e6bf4d!important;
-  opacity:1!important;
-  text-shadow:none!important;
-  font-weight:900!important;
-}
-th *, thead th *, table th *{color:#0f172a!important;opacity:1!important;}
-td{color:#0f172a!important;border-color:#f1d58a!important;}
-/* Buttons */
-button, .btn, .button, input[type=&#x27;button&#x27;], input[type=&#x27;submit&#x27;], .small-btn, .btn-primary, .btn-secondary,
-.green, .secondary, .clear, .clear-btn, .actions button, .table-actions button{
-  background:linear-gradient(135deg,#ffffff 0%,#fff1b8 52%,#f6c94c 100%)!important;
-  color:#0f172a!important;
-  border:1px solid #d4af37!important;
-  box-shadow:0 8px 20px rgba(212,175,55,.18)!important;
-  opacity:1!important;
-  filter:none!important;
-  text-shadow:none!important;
-  cursor:pointer!important;
-  pointer-events:auto!important;
-  font-weight:900!important;
-}
-button *, .btn *, .button *, .small-btn *, .btn-primary *, .btn-secondary *, .green *, .secondary *{
-  color:#0f172a!important;
-  opacity:1!important;
-  text-shadow:none!important;
-}
-button:hover, .btn:hover, .button:hover{
-  transform:translateY(-1px);
-  box-shadow:0 10px 24px rgba(212,175,55,.25)!important;
-}
-button:disabled, button[disabled], .disabled{
-  opacity:1!important;
-  filter:none!important;
-  pointer-events:auto!important;
-  cursor:pointer!important;
-}
-/* Edit/Delete action buttons must stay inside action cell and visible */
-td:last-child, th:last-child, .action, .actions, .action-cell{
-  text-align:center!important;
-  white-space:nowrap!important;
-}
-td:last-child button, .action button, .actions button, .action-cell button{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  width:42px!important;
-  min-width:42px!important;
-  height:42px!important;
-  padding:0!important;
-  margin:3px!important;
-  border-radius:12px!important;
-  vertical-align:middle!important;
-}
-/* Inputs */
-input, select, textarea{
-  background:#ffffff!important;
-  color:#0f172a!important;
-  border:1px solid #e6bf4d!important;
-  box-shadow:none!important;
-  opacity:1!important;
-}
-input::placeholder, textarea::placeholder{color:#94a3b8!important;opacity:1!important;}
-input:focus, select:focus, textarea:focus{
-  outline:none!important;
-  border-color:#d4af37!important;
-  box-shadow:0 0 0 4px rgba(212,175,55,.15)!important;
-}
-/* Links, labels, text */
-h1,h2,h3,h4,h5,h6,label,p,span,b,strong,small,div{
-  text-shadow:none!important;
-}
-label{color:#0f172a!important;font-weight:800!important;}
-/* Keep print preview clean */
-@media print{
-  body *{color:#0f172a!important;text-shadow:none!important;}
-  .watermark{display:none!important;}
-}
-&lt;/style&gt;&lt;/head&gt;
+*{box-sizing:border-box} body{margin:0;font-family:&quot;Segoe UI&quot;,Arial,sans-serif;background:linear-gradient(180deg,#fff,#fffdf7 55%,#f8f4e8);color:var(--ink);padding:10px;}
+.app{max-width:1180px;margin:0 auto;border:1px solid var(--line);border-radius:22px;padding:12px;background:rgba(255,255,255,.78);box-shadow:0 12px 34px rgba(154,102,0,.09)}
+.hero{border:1px solid var(--line);border-radius:20px;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;background:linear-gradient(135deg,#fffdf7 0%,#fff6d7 55%,#f6d36c 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.hero-left{display:flex;align-items:center;gap:12px}.mark{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--gold);background:linear-gradient(180deg,#fff,#fff0bc);font-size:24px}.hero h1{margin:0;font-size:23px;letter-spacing:-.03em}.hero p{margin:4px 0 0;font-size:13px;color:#1f2937}.back{border:1px solid var(--gold);border-radius:999px;background:linear-gradient(135deg,#fffdf7,#f6d36c);font-weight:900;padding:10px 18px;color:#111827;cursor:pointer}
+.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#fff,#fffdf7);box-shadow:0 8px 22px rgba(17,24,39,.055);padding:12px;margin-top:12px}.section-title{display:flex;align-items:center;gap:10px;margin-bottom:14px}.round-icon{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#fff8dc,#f6d36c);border:1px solid var(--line);font-size:20px}.section-title h2{margin:0;color:#9a6600;font-size:18px}.section-title p{margin:2px 0 0;color:#475569;font-size:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 16px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.req{color:#c2410c}.input-wrap{display:flex;align-items:center;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;height:42px;transition:.2s}.input-wrap:focus-within{box-shadow:0 0 0 4px rgba(212,175,55,.14)}.prefix,.suffix{height:100%;min-width:48px;display:grid;place-items:center;background:#fff8e1;color:#9a6600;font-weight:900;border-right:1px solid #efd58b;font-size:13px}.suffix{border-right:0;border-left:1px solid #efd58b}.input-wrap input,.input-wrap select{border:0;outline:0;width:100%;height:100%;padding:0 12px;font-size:14px;background:transparent;color:#111827;font-weight:700}.switch-line{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-top:14px}.toggle-block label{display:block;font-size:13px;font-weight:900;color:#9a6600;margin-bottom:8px}.toggle{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;width:100%;height:42px}.toggle button{flex:1;border:0;background:#fff;padding:9px 14px;font-weight:900;color:#9a6600;cursor:pointer}.toggle button.active{background:linear-gradient(135deg,#f6d36c,#d4af37);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}.waiver-note{display:none;align-items:center;gap:10px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(135deg,#fffdf7,#fff3c4);padding:9px 14px;margin-top:12px;max-width:520px}.waiver-note.show{display:flex}.waiver-note b{color:#9a6600}.waiver-note small{display:block;color:#475569;margin-top:2px}.btn-row{display:flex;gap:12px;justify-content:center;margin-top:14px;flex-wrap:wrap}.btn{border:1px solid var(--gold);border-radius:11px;padding:11px 24px;font-weight:950;cursor:pointer;font-size:13px;white-space:nowrap}.primary{background:linear-gradient(135deg,#f8df88,#d4af37);color:#fff;min-width:220px}.secondary{background:#fff;color:#9a6600;min-width:140px}.breakdown{padding:10px}.break-head{border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;background:linear-gradient(135deg,#fffdf7,#fff1bd,#f6d36c);padding:12px 20px;display:flex;gap:12px;align-items:center}.break-head h2{margin:0;color:#9a6600;font-size:18px}.break-head p{margin:3px 0 0;color:#334155;font-size:13px}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:0 0 14px 14px}table{width:100%;border-collapse:collapse;min-width:900px;background:#fff}th,td{border:1px solid #f0d99a;padding:10px 12px;text-align:center;font-size:13px}th{background:linear-gradient(180deg,#fffaf0,#fff4d2);color:#9a6600;font-weight:950}td:first-child{text-align:left;font-weight:700}.total-row td{background:linear-gradient(180deg,#fffaf0,#fff5d8);font-size:16px;color:#9a6600;font-weight:950}.info{color:#c58a0b;font-size:12px;margin-left:4px}.stamp-row{transition:transform .38s ease,opacity .38s ease,background .25s ease}.waived .stamp-row{background:#fffaf0;outline:1px dashed var(--gold);position:relative}.waived .stamp-row td:not(:first-child){color:#64748b;font-weight:900}.waived .stamp-row .waived-msg{display:inline-flex}.waived-msg{display:none;align-items:center;justify-content:center;gap:8px;color:#9a6600;font-weight:950}.waived-badge{border:1px solid var(--gold);border-radius:999px;padding:6px 14px;background:#fffdf7}.right-slide{display:none;position:absolute;right:-135px;top:50%;transform:translateY(-50%);font-size:12px;color:#9a6600;font-weight:900;white-space:nowrap}.waived .right-slide{display:block}.note{margin-top:14px;border:1px solid #f1d58d;border-radius:14px;background:#fffdf7;padding:12px 16px;color:#334155;font-size:13px}.actions{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:18px;flex-wrap:wrap}.actions .btn{min-width:270px!important;width:270px!important;height:54px!important;padding:0 18px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;border-radius:16px!important;font-size:14px!important;line-height:1!important;letter-spacing:.01em!important;white-space:nowrap!important;overflow:hidden!important;text-align:center!important}.outline{background:#fff;color:#9a6600}.print{background:linear-gradient(135deg,#f8df88,#d4af37);color:#fff}.zero{color:#64748b!important}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fffdf7;color:#9a6600;padding:8px 12px;font-size:12px;font-weight:900;margin-bottom:10px}
+@media(max-width:900px){body{padding:10px}.hero{align-items:flex-start}.grid{grid-template-columns:1fr}.hero h1{font-size:22px}.toggle{width:100%}.waiver-note{min-width:0;width:100%}.btn,.primary,.secondary,.outline,.print{width:100%!important;min-width:0!important}.actions .btn{width:100%!important;min-width:0!important}.right-slide{display:none!important}}
+@media print{body{background:#fff;padding:0}.app,.card{box-shadow:none}.back,.btn-row,.actions{display:none}.hero{border-radius:0}.card{page-break-inside:avoid}}
+&lt;/style&gt;
+&lt;/head&gt;
 &lt;body&gt;
-&lt;div class=&quot;container&quot;&gt;
-  &lt;div class=&quot;header&quot;&gt;
-    &lt;h1&gt;Property Cost Estimator v2&lt;/h1&gt;
-    &lt;p&gt;Subsale / Refinance Legal Cost + Stamp Duty Quick Estimate&lt;/p&gt;
+&lt;div class=&quot;app&quot; id=&quot;reportArea&quot;&gt;
+  &lt;div class=&quot;hero&quot;&gt;
+    &lt;div class=&quot;hero-left&quot;&gt;&lt;div class=&quot;mark&quot;&gt;🧾&lt;/div&gt;&lt;div&gt;&lt;h1&gt;Property Cost Estimator&lt;/h1&gt;&lt;p&gt;Subsale / refinance legal cost estimator&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;button class=&quot;back&quot; onclick=&quot;parent.goBack ? parent.goBack() : history.back()&quot;&gt;← Back&lt;/button&gt;
   &lt;/div&gt;
 
-  &lt;div class=&quot;grid&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;h2&gt;Input Details&lt;/h2&gt;
-
-      &lt;label&gt;Case Type&lt;/label&gt;
-      &lt;select id=&quot;caseType&quot; onchange=&quot;toggleCase();calculate()&quot;&gt;
-        &lt;option value=&quot;subsale&quot;&gt;Subsale Purchase&lt;/option&gt;
-        &lt;option value=&quot;refinance&quot;&gt;Refinance / Loan Only&lt;/option&gt;
-      &lt;/select&gt;
-
-      &lt;div class=&quot;box&quot;&gt;
-        &lt;h2&gt;Property / Loan Info&lt;/h2&gt;
-
-        &lt;label id=&quot;propertyLabel&quot;&gt;Property Price&lt;/label&gt;
-        &lt;input id=&quot;propertyPrice&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;
-
-        &lt;div id=&quot;subsaleLoanBox&quot; class=&quot;row&quot;&gt;
-          &lt;div&gt;
-            &lt;label&gt;Loan Margin (%)&lt;/label&gt;
-            &lt;input id=&quot;loanMargin&quot; placeholder=&quot;0&quot; oninput=&quot;calculate()&quot; /&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Auto Loan Amount&lt;/label&gt;
-            &lt;input id=&quot;loanAmountDisplay&quot; placeholder=&quot;0&quot; readonly /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;div id=&quot;refinanceLoanBox&quot; class=&quot;hide&quot;&gt;
-          &lt;label&gt;Loan Amount&lt;/label&gt;
-          &lt;input id=&quot;manualLoanAmount&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;box&quot;&gt;
-        &lt;h2&gt;Property Title Info&lt;/h2&gt;
-        &lt;div class=&quot;row3&quot;&gt;
-          &lt;div&gt;
-            &lt;label&gt;Tenure&lt;/label&gt;
-            &lt;select id=&quot;tenureType&quot; onchange=&quot;calculate()&quot;&gt;
-              &lt;option value=&quot;freehold&quot;&gt;Freehold&lt;/option&gt;
-              &lt;option value=&quot;leasehold&quot;&gt;Leasehold&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Title Status&lt;/label&gt;
-            &lt;select id=&quot;titleStatus&quot; onchange=&quot;calculate()&quot;&gt;
-              &lt;option value=&quot;individual&quot;&gt;Individual / Strata Title&lt;/option&gt;
-              &lt;option value=&quot;master&quot;&gt;Master Title&lt;/option&gt;
-              &lt;option value=&quot;assignment&quot;&gt;Assignment / No Title&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Consent Needed?&lt;/label&gt;
-            &lt;select id=&quot;consentNeeded&quot; onchange=&quot;calculate()&quot;&gt;
-              &lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;
-              &lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;p class=&quot;muted&quot;&gt;Leasehold / master title / consent case usually has extra legal work and disbursement. System will auto add estimated extra charges, but you can still override using Extra Charges.&lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;box&quot; id=&quot;spaSection&quot;&gt;
-        &lt;h2&gt;SPA / MOT Section&lt;/h2&gt;
-
-        &lt;label&gt;SPA Buyer Count&lt;/label&gt;
-        &lt;select id=&quot;buyerCount&quot; onchange=&quot;toggleBuyer2();calculate()&quot;&gt;
-          &lt;option value=&quot;1&quot;&gt;SPA 1 Person&lt;/option&gt;
-          &lt;option value=&quot;2&quot;&gt;SPA 2 Persons&lt;/option&gt;
-        &lt;/select&gt;
-
-        &lt;div class=&quot;row&quot;&gt;
-          &lt;div&gt;
-            &lt;label&gt;Buyer 1 First Home?&lt;/label&gt;
-            &lt;select id=&quot;buyer1First&quot; onchange=&quot;calculate()&quot;&gt;
-              &lt;option value=&quot;yes&quot;&gt;Yes - Waive Eligible&lt;/option&gt;
-              &lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Buyer 1 Ownership %&lt;/label&gt;
-            &lt;input id=&quot;buyer1Share&quot; value=&quot;100&quot; oninput=&quot;calculate()&quot; /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-
-        &lt;div id=&quot;buyer2Box&quot; class=&quot;row hide&quot;&gt;
-          &lt;div&gt;
-            &lt;label&gt;Buyer 2 First Home?&lt;/label&gt;
-            &lt;select id=&quot;buyer2First&quot; onchange=&quot;calculate()&quot;&gt;
-              &lt;option value=&quot;yes&quot;&gt;Yes - Waive Eligible&lt;/option&gt;
-              &lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Buyer 2 Ownership %&lt;/label&gt;
-            &lt;input id=&quot;buyer2Share&quot; value=&quot;0&quot; oninput=&quot;calculate()&quot; /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;p class=&quot;muted&quot;&gt;If First Home and property portion is within RM500,000, system will waive MOT stamp duty for that buyer&#x27;s portion. Nominal stamping cost still remains.&lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;box&quot;&gt;
-        &lt;h2&gt;Loan Section&lt;/h2&gt;
-        &lt;label&gt;Loan Applicant Count&lt;/label&gt;
-        &lt;select id=&quot;loanApplicantCount&quot; onchange=&quot;calculate()&quot;&gt;
-          &lt;option value=&quot;1&quot;&gt;Loan 1 Person&lt;/option&gt;
-          &lt;option value=&quot;2&quot;&gt;Loan 2 Persons&lt;/option&gt;
-        &lt;/select&gt;
-
-        &lt;label&gt;2nd Loan Applicant Add-On&lt;/label&gt;
-        &lt;input id=&quot;loanApplicantAddon&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;box&quot;&gt;
-        &lt;h2&gt;Valuation Fee&lt;/h2&gt;
-        &lt;div class=&quot;row&quot;&gt;
-          &lt;div&gt;
-            &lt;label&gt;Valuation Mode&lt;/label&gt;
-            &lt;select id=&quot;valuationMode&quot; onchange=&quot;calculate()&quot;&gt;
-              &lt;option value=&quot;auto&quot;&gt;Auto Calculate&lt;/option&gt;
-              &lt;option value=&quot;manual&quot;&gt;Manual Override&lt;/option&gt;
-              &lt;option value=&quot;none&quot;&gt;No Valuation Fee&lt;/option&gt;
-            &lt;/select&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Manual Valuation Fee&lt;/label&gt;
-            &lt;input id=&quot;valuationManual&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;p class=&quot;muted&quot;&gt;Auto valuation is an estimate only. Final fee depends on valuer quotation and bank panel.&lt;/p&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;box&quot;&gt;
-        &lt;h2&gt;Adjustable Fees&lt;/h2&gt;
-        &lt;div class=&quot;row&quot;&gt;
-          &lt;div&gt;
-            &lt;label&gt;Extra Charges&lt;/label&gt;
-            &lt;input id=&quot;extraCharges&quot; placeholder=&quot;0&quot; oninput=&quot;formatInput(this);calculate()&quot; /&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label&gt;Discount (%)&lt;/label&gt;
-            &lt;input id=&quot;discountPercent&quot; placeholder=&quot;0&quot; oninput=&quot;calculate()&quot; /&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;button class=&quot;btn&quot; onclick=&quot;window.print()&quot;&gt;Print / Save PDF&lt;/button&gt;
+  &lt;div class=&quot;card&quot;&gt;
+    &lt;div class=&quot;section-title&quot;&gt;&lt;div class=&quot;round-icon&quot;&gt;📋&lt;/div&gt;&lt;div&gt;&lt;h2&gt;Input Details&lt;/h2&gt;&lt;p&gt;Key in property &amp; loan information&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;grid&quot;&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Case Type&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;select id=&quot;caseType&quot; onchange=&quot;toggleCase(); calculate()&quot;&gt;&lt;option value=&quot;subsale&quot;&gt;Subsale Purchase&lt;/option&gt;&lt;option value=&quot;refinance&quot;&gt;Refinance / Loan Only&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;SPA / Property Purchase Price &lt;span class=&quot;req&quot;&gt;*&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;span class=&quot;prefix&quot;&gt;RM&lt;/span&gt;&lt;input id=&quot;spaPrice&quot; placeholder=&quot;0&quot; oninput=&quot;formatMoneyInput(this); syncLoan(); calculate()&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Margin of Financing (%) &lt;span class=&quot;req&quot;&gt;*&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;span class=&quot;prefix&quot;&gt;%&lt;/span&gt;&lt;input id=&quot;margin&quot; placeholder=&quot;90&quot; oninput=&quot;syncLoan(); calculate()&quot;&gt;&lt;span class=&quot;suffix&quot;&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Loan Amount &lt;span class=&quot;req&quot;&gt;*&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;span class=&quot;prefix&quot;&gt;RM&lt;/span&gt;&lt;input id=&quot;loanAmount&quot; placeholder=&quot;0&quot; oninput=&quot;formatMoneyInput(this); calculate()&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Loan Tenure (Year)&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;span class=&quot;prefix&quot;&gt;📅&lt;/span&gt;&lt;input id=&quot;tenure&quot; value=&quot;35&quot; oninput=&quot;calculate()&quot;&gt;&lt;span class=&quot;suffix&quot;&gt;Years&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Interest Rate (% per annum)&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;span class=&quot;prefix&quot;&gt;%&lt;/span&gt;&lt;input id=&quot;rate&quot; value=&quot;4.10&quot; oninput=&quot;calculate()&quot;&gt;&lt;span class=&quot;suffix&quot;&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Monthly Instalment&lt;/label&gt;&lt;div class=&quot;input-wrap&quot;&gt;&lt;span class=&quot;prefix&quot;&gt;RM&lt;/span&gt;&lt;input id=&quot;monthly&quot; placeholder=&quot;Auto calculate&quot; readonly&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field toggle-block&quot;&gt;&lt;label&gt;First Home Buyer &lt;span class=&quot;info&quot;&gt;ⓘ&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;toggle&quot;&gt;&lt;button type=&quot;button&quot; id=&quot;fhNo&quot; class=&quot;active&quot; onclick=&quot;setFirstHome(false)&quot;&gt;No&lt;/button&gt;&lt;button type=&quot;button&quot; id=&quot;fhYes&quot; onclick=&quot;setFirstHome(true)&quot;&gt;Yes&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
     &lt;/div&gt;
+    &lt;div class=&quot;waiver-note&quot; id=&quot;waiverNote&quot;&gt;&lt;div class=&quot;round-icon&quot; style=&quot;width:34px;height:34px;font-size:16px&quot;&gt;🛡️&lt;/div&gt;&lt;div&gt;&lt;b&gt;First Home Buyer Stamp Duty Waiver Applied&lt;/b&gt;&lt;small&gt;Stamp Duty is waived and total refreshes automatically.&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;btn-row&quot;&gt;&lt;button class=&quot;btn primary&quot; onclick=&quot;calculate()&quot;&gt;▦ CALCULATE NOW&lt;/button&gt;&lt;button class=&quot;btn secondary&quot; onclick=&quot;resetCalc()&quot;&gt;↻ RESET&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
 
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;span class=&quot;badge&quot; id=&quot;caseBadge&quot;&gt;Subsale Estimate&lt;/span&gt;
-      &lt;h2&gt;Estimated Cost Summary&lt;/h2&gt;
-
-      &lt;div id=&quot;spaResultBlock&quot;&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Legal Fee&lt;/span&gt;&lt;strong id=&quot;spaLegal&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Legal Add-On&lt;/span&gt;&lt;strong id=&quot;spaAddon&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA SST 8%&lt;/span&gt;&lt;strong id=&quot;spaSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;MOT Stamp Duty&lt;/span&gt;&lt;strong id=&quot;motStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Nominal Stamping / Adjudication&lt;/span&gt;&lt;strong id=&quot;nominalStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Disbursement&lt;/span&gt;&lt;strong id=&quot;spaDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SPA Other Disbursement&lt;/span&gt;&lt;strong id=&quot;spaOtherDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SST on Other Disbursement&lt;/span&gt;&lt;strong id=&quot;spaOtherSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-        &lt;br /&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Legal Fee&lt;/span&gt;&lt;strong id=&quot;loanLegal&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Legal Add-On&lt;/span&gt;&lt;strong id=&quot;loanAddon&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Applicant Add-On&lt;/span&gt;&lt;strong id=&quot;applicantAddonResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan SST 8%&lt;/span&gt;&lt;strong id=&quot;loanSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Stamp Duty 0.5%&lt;/span&gt;&lt;strong id=&quot;loanStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Stamping / Nominal Cost&lt;/span&gt;&lt;strong id=&quot;loanNominalStamp&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Disbursement&lt;/span&gt;&lt;strong id=&quot;loanDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Loan Other Disbursement&lt;/span&gt;&lt;strong id=&quot;loanOtherDisb&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;SST on Other Disbursement&lt;/span&gt;&lt;strong id=&quot;loanOtherSst&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-
-      &lt;br /&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Title / Consent Extra Estimate&lt;/span&gt;&lt;strong id=&quot;titleExtraResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Valuation Fee&lt;/span&gt;&lt;strong id=&quot;valuationResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Extra Charges&lt;/span&gt;&lt;strong id=&quot;extraResult&quot;&gt;RM0.00&lt;/strong&gt;&lt;/div&gt;
-      &lt;div class=&quot;resultRow&quot;&gt;&lt;span&gt;Discount&lt;/span&gt;&lt;strong id=&quot;discountResult&quot;&gt;- RM0.00&lt;/strong&gt;&lt;/div&gt;
-
-      &lt;div class=&quot;total&quot;&gt;&lt;span&gt;Total Estimate&lt;/span&gt;&lt;span id=&quot;totalCost&quot;&gt;RM0.00&lt;/span&gt;&lt;/div&gt;
-
-      &lt;div class=&quot;note&quot; id=&quot;logicNote&quot;&gt;
-        Estimate only. Final amount depends on lawyer quotation, bank package, property title, tenure, consent, number of purchasers / borrowers, SST, disbursement and stamp office assessment.
-      &lt;/div&gt;
-    &lt;/div&gt;
+  &lt;div class=&quot;card breakdown&quot; id=&quot;breakdownCard&quot;&gt;
+    &lt;div class=&quot;break-head&quot;&gt;&lt;div class=&quot;round-icon&quot;&gt;⚖️&lt;/div&gt;&lt;div&gt;&lt;h2&gt;Cost Breakdown&lt;/h2&gt;&lt;p&gt;Detailed breakdown of applicable costs&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;table-wrap&quot;&gt;&lt;table id=&quot;costTable&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Cost Items&lt;/th&gt;&lt;th&gt;SPA Legal Fees&lt;/th&gt;&lt;th&gt;Loan Documentation&lt;br&gt;Legal Fees&lt;/th&gt;&lt;th&gt;Property&lt;br&gt;Valuation Fees&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+      &lt;tr&gt;&lt;td&gt;Professional Fees &lt;span class=&quot;info&quot;&gt;ⓘ&lt;/span&gt;&lt;/td&gt;&lt;td id=&quot;spaLegal&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;loanLegal&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;valFee&quot;&gt;RM 0.00&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Supplementary Documents &lt;span class=&quot;info&quot;&gt;ⓘ&lt;/span&gt;&lt;/td&gt;&lt;td id=&quot;spaSupp&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;loanSupp&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;valSupp&quot;&gt;RM 0.00&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Disbursement &amp; Reimbursement &lt;span class=&quot;info&quot;&gt;ⓘ&lt;/span&gt;&lt;/td&gt;&lt;td id=&quot;spaDisb&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;loanDisb&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;valDisb&quot;&gt;RM 0.00&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr class=&quot;stamp-row&quot; id=&quot;stampRow&quot;&gt;&lt;td&gt;Stamp Duty &lt;span class=&quot;info&quot;&gt;ⓘ&lt;/span&gt;&lt;span class=&quot;right-slide&quot;&gt;➜ Stamp Duty waived&lt;/span&gt;&lt;/td&gt;&lt;td id=&quot;spaStamp&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;loanStamp&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;valStamp&quot;&gt;RM 0.00&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SST @ 8% &lt;span class=&quot;info&quot;&gt;ⓘ&lt;/span&gt;&lt;/td&gt;&lt;td id=&quot;spaSst&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;loanSst&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;valSst&quot;&gt;RM 0.00&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr class=&quot;total-row&quot;&gt;&lt;td&gt;TOTAL&lt;/td&gt;&lt;td id=&quot;spaTotal&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;loanTotal&quot;&gt;RM 0.00&lt;/td&gt;&lt;td id=&quot;valTotal&quot;&gt;RM 0.00&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+    &lt;div class=&quot;note&quot;&gt;&lt;b&gt;💡 Note&lt;/b&gt;&lt;br&gt;Estimate only. Final figures may vary depending on lawyer quotation, bank panel, title / consent requirement and final stamp office assessment.&lt;/div&gt;
+    &lt;div class=&quot;actions&quot;&gt;&lt;button class=&quot;btn outline&quot; onclick=&quot;exportPdf()&quot;&gt;▤ EXPORT PDF&lt;/button&gt;&lt;button class=&quot;btn print&quot; onclick=&quot;window.print()&quot;&gt;▣ PRINT&lt;/button&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;script&gt;
-function cleanNum(v){return parseFloat(String(v).replace(/,/g,&#x27;&#x27;).replace(/[^\d.]/g,&#x27;&#x27;))||0;}
-function formatMoney(num){return &#x27;RM&#x27; + Number(num||0).toLocaleString(&#x27;en-MY&#x27;,{minimumFractionDigits:2,maximumFractionDigits:2});}
-function formatInput(el){let raw=el.value.replace(/,/g,&#x27;&#x27;).replace(/[^\d.]/g,&#x27;&#x27;);if(raw===&#x27;&#x27;){el.value=&#x27;&#x27;;return;}let parts=raw.split(&#x27;.&#x27;);parts[0]=Number(parts[0]||0).toLocaleString(&#x27;en-MY&#x27;);el.value=parts.join(&#x27;.&#x27;);}
-
-function legalFee(amount){
-  if(amount&lt;=0)return 0;
-  let fee=0,balance=amount;
-  let tier=Math.min(balance,500000);fee+=tier*0.0125;balance-=tier;
-  if(balance&gt;0){tier=Math.min(balance,2000000);fee+=tier*0.01;balance-=tier;}
-  if(balance&gt;0){tier=Math.min(balance,5000000);fee+=tier*0.0075;balance-=tier;}
-  if(balance&gt;0){fee+=balance*0.005;}
-  return fee;
-}
-
-function stampDuty(price){
-  if(price&lt;=0)return 0;
-  let duty=0,balance=price;
-  let t=Math.min(balance,100000);duty+=t*0.01;balance-=t;
-  if(balance&gt;0){t=Math.min(balance,400000);duty+=t*0.02;balance-=t;}
-  if(balance&gt;0){t=Math.min(balance,500000);duty+=t*0.03;balance-=t;}
-  if(balance&gt;0){duty+=balance*0.04;}
-  return duty;
-}
-
-function motEstimate(propertyPrice){
-  const buyerCount=document.getElementById(&#x27;buyerCount&#x27;).value;
-  const b1First=document.getElementById(&#x27;buyer1First&#x27;).value;
-  const b2First=document.getElementById(&#x27;buyer2First&#x27;).value;
-  let b1Share=cleanNum(document.getElementById(&#x27;buyer1Share&#x27;).value);
-  let b2Share=cleanNum(document.getElementById(&#x27;buyer2Share&#x27;).value);
-  if(buyerCount===&#x27;1&#x27;){b1Share=100;b2Share=0;}
-  const totalShare=b1Share+b2Share;
-  if(totalShare&lt;=0)return 0;
-  b1Share=b1Share/totalShare*100;
-  b2Share=b2Share/totalShare*100;
-  const p1=propertyPrice*b1Share/100;
-  const p2=propertyPrice*b2Share/100;
-  let total=0;
-  if(!(b1First===&#x27;yes&#x27; &amp;&amp; p1&lt;=500000)) total+=stampDuty(p1);
-  if(buyerCount===&#x27;2&#x27; &amp;&amp; !(b2First===&#x27;yes&#x27; &amp;&amp; p2&lt;=500000)) total+=stampDuty(p2);
-  return total;
-}
-
-function valuationAuto(value){
-  if(value&lt;=0)return 0;
-  if(value&lt;=100000)return 300;
-  if(value&lt;=500000)return Math.max(500,value*0.0025);
-  if(value&lt;=1000000)return 1250+(value-500000)*0.002;
-  return 2250+(value-1000000)*0.0015;
-}
-
-function titleExtra(){
-  const tenure=document.getElementById(&#x27;tenureType&#x27;).value;
-  const title=document.getElementById(&#x27;titleStatus&#x27;).value;
-  const consent=document.getElementById(&#x27;consentNeeded&#x27;).value;
-  let extra=0;
-  if(tenure===&#x27;leasehold&#x27;) extra+=500;
-  if(title===&#x27;master&#x27;) extra+=500;
-  if(title===&#x27;assignment&#x27;) extra+=700;
-  if(consent===&#x27;yes&#x27;) extra+=500;
-  return extra;
-}
-
-function toggleBuyer2(){
-  const isTwo=document.getElementById(&#x27;buyerCount&#x27;).value===&#x27;2&#x27;;
-  document.getElementById(&#x27;buyer2Box&#x27;).classList.toggle(&#x27;hide&#x27;,!isTwo);
-  if(isTwo){
-    if(cleanNum(document.getElementById(&#x27;buyer1Share&#x27;).value)===100 &amp;&amp; cleanNum(document.getElementById(&#x27;buyer2Share&#x27;).value)===0){
-      document.getElementById(&#x27;buyer1Share&#x27;).value=&#x27;50&#x27;;
-      document.getElementById(&#x27;buyer2Share&#x27;).value=&#x27;50&#x27;;
-    }
-  }else{
-    document.getElementById(&#x27;buyer1Share&#x27;).value=&#x27;100&#x27;;
-    document.getElementById(&#x27;buyer2Share&#x27;).value=&#x27;0&#x27;;
-  }
-}
-
-function toggleCase(){
-  const caseType=document.getElementById(&#x27;caseType&#x27;).value;
-  const isSubsale=caseType===&#x27;subsale&#x27;;
-  document.getElementById(&#x27;spaSection&#x27;).classList.toggle(&#x27;hide&#x27;,!isSubsale);
-  document.getElementById(&#x27;spaResultBlock&#x27;).classList.toggle(&#x27;hide&#x27;,!isSubsale);
-  document.getElementById(&#x27;subsaleLoanBox&#x27;).classList.toggle(&#x27;hide&#x27;,!isSubsale);
-  document.getElementById(&#x27;refinanceLoanBox&#x27;).classList.toggle(&#x27;hide&#x27;,isSubsale);
-  document.getElementById(&#x27;propertyLabel&#x27;).innerText=isSubsale?&#x27;Property Price&#x27;:&#x27;Property Value&#x27;;
-  document.getElementById(&#x27;caseBadge&#x27;).innerText=isSubsale?&#x27;Subsale Estimate&#x27;:&#x27;Refinance Estimate&#x27;;
-}
-
+let firstHome=false;
+const $=id=&gt;document.getElementById(id);
+const clean=v=&gt;Number(String(v||&#x27;&#x27;).replace(/,/g,&#x27;&#x27;))||0;
+const money=n=&gt;&#x27;RM &#x27;+Number(n||0).toLocaleString(&#x27;en-MY&#x27;,{minimumFractionDigits:2,maximumFractionDigits:2});
+function formatMoneyInput(el){const n=clean(el.value);el.value=n?n.toLocaleString(&#x27;en-MY&#x27;):&#x27;&#x27;;}
+function legalFee(x){let fee=0,bal=x;if(bal&lt;=0)return 0;let t=Math.min(bal,500000);fee+=t*0.0125;bal-=t;if(bal&gt;0){t=Math.min(bal,7000000);fee+=t*0.01;bal-=t;}if(bal&gt;0){t=Math.min(bal,5000000);fee+=t*0.0075;bal-=t;}if(bal&gt;0)fee+=bal*0.005;return fee;}
+function spaStampDuty(p){let d=0,bal=p;if(bal&lt;=0)return 0;let t=Math.min(bal,100000);d+=t*0.01;bal-=t;if(bal&gt;0){t=Math.min(bal,400000);d+=t*0.02;bal-=t;}if(bal&gt;0){t=Math.min(bal,500000);d+=t*0.03;bal-=t;}if(bal&gt;0)d+=bal*0.04;return d;}
+function valFee(p){if(!p)return 0;let fee=Math.min(p,100000)*0.0025 + Math.max(p-100000,0)*0.002;return fee;}
+function pmt(principal,rate,years){let m=years*12,r=rate/100/12;if(!principal||!m)return 0;if(!r)return principal/m;return principal*r*Math.pow(1+r,m)/(Math.pow(1+r,m)-1)}
+function syncLoan(){const price=clean($(&#x27;spaPrice&#x27;).value), margin=clean($(&#x27;margin&#x27;).value); if(price&amp;&amp;margin&amp;&amp;document.activeElement.id!==&#x27;loanAmount&#x27;){$(&#x27;loanAmount&#x27;).value=(price*margin/100).toLocaleString(&#x27;en-MY&#x27;,{maximumFractionDigits:0});}}
+function setFirstHome(v){firstHome=v;$(&#x27;fhYes&#x27;).classList.toggle(&#x27;active&#x27;,v);$(&#x27;fhNo&#x27;).classList.toggle(&#x27;active&#x27;,!v);$(&#x27;waiverNote&#x27;).classList.toggle(&#x27;show&#x27;,v);$(&#x27;breakdownCard&#x27;).classList.toggle(&#x27;waived&#x27;,v);calculate();}
+function toggleCase(){const ref=$(&#x27;caseType&#x27;).value===&#x27;refinance&#x27;; if(ref){$(&#x27;margin&#x27;).value=&#x27;&#x27;;} calculate();}
+function setText(id,v){$(id).innerText=money(v)}
 function calculate(){
-  const caseType=document.getElementById(&#x27;caseType&#x27;).value;
-  const isSubsale=caseType===&#x27;subsale&#x27;;
-  const propertyPrice=cleanNum(document.getElementById(&#x27;propertyPrice&#x27;).value);
-  const loanMargin=cleanNum(document.getElementById(&#x27;loanMargin&#x27;).value);
-  let loanAmount=0;
-  if(isSubsale){loanAmount=propertyPrice&gt;0&amp;&amp;loanMargin&gt;0?propertyPrice*loanMargin/100:0;document.getElementById(&#x27;loanAmountDisplay&#x27;).value=loanAmount?Number(loanAmount).toLocaleString(&#x27;en-MY&#x27;):&#x27;&#x27;;}
-  else{loanAmount=cleanNum(document.getElementById(&#x27;manualLoanAmount&#x27;).value);}
-
-  const valuationMode=document.getElementById(&#x27;valuationMode&#x27;).value;
-  const valuationManual=cleanNum(document.getElementById(&#x27;valuationManual&#x27;).value);
-  let valuationFee=0;
-  if(valuationMode===&#x27;auto&#x27;) valuationFee=valuationAuto(propertyPrice);
-  if(valuationMode===&#x27;manual&#x27;) valuationFee=valuationManual;
-
-  const extraCharges=cleanNum(document.getElementById(&#x27;extraCharges&#x27;).value);
-  const discountPercent=cleanNum(document.getElementById(&#x27;discountPercent&#x27;).value);
-  const loanApplicantCount=document.getElementById(&#x27;loanApplicantCount&#x27;).value;
-  const loanApplicantAddonInput=cleanNum(document.getElementById(&#x27;loanApplicantAddon&#x27;).value);
-  const titleExtraAmount=titleExtra();
-
-  let spaLegal=0,spaAddon=0,spaSst=0,motStamp=0,nominalStamp=0,spaDisb=0,spaOtherDisb=0,spaOtherSst=0;
-  if(isSubsale){
-    spaLegal=legalFee(propertyPrice);
-    spaAddon=1000;
-    spaSst=(spaLegal+spaAddon)*0.08;
-    motStamp=motEstimate(propertyPrice);
-    nominalStamp=50;
-    spaDisb=1100;
-    spaOtherDisb=750;
-    spaOtherSst=spaOtherDisb*0.08;
-  }
-
-  const loanLegal=legalFee(loanAmount);
-  const loanAddon=1650;
-  const applicantAddon=loanApplicantCount===&#x27;2&#x27;?loanApplicantAddonInput:0;
-  const loanSst=(loanLegal+loanAddon+applicantAddon)*0.08;
-  const loanStamp=loanAmount*0.005;
-  const loanNominalStamp=110;
-  const loanDisb=1250;
-  const loanOtherDisb=750;
-  const loanOtherSst=loanOtherDisb*0.08;
-
-  const professionalFee=spaLegal+spaAddon+loanLegal+loanAddon+applicantAddon;
-  const discountAmount=professionalFee*(discountPercent/100);
-
-  const total=spaLegal+spaAddon+spaSst+motStamp+nominalStamp+spaDisb+spaOtherDisb+spaOtherSst+loanLegal+loanAddon+applicantAddon+loanSst+loanStamp+loanNominalStamp+loanDisb+loanOtherDisb+loanOtherSst+titleExtraAmount+valuationFee+extraCharges-discountAmount;
-
-  document.getElementById(&#x27;spaLegal&#x27;).innerText=formatMoney(spaLegal);
-  document.getElementById(&#x27;spaAddon&#x27;).innerText=formatMoney(spaAddon);
-  document.getElementById(&#x27;spaSst&#x27;).innerText=formatMoney(spaSst);
-  document.getElementById(&#x27;motStamp&#x27;).innerText=formatMoney(motStamp);
-  document.getElementById(&#x27;nominalStamp&#x27;).innerText=formatMoney(nominalStamp);
-  document.getElementById(&#x27;spaDisb&#x27;).innerText=formatMoney(spaDisb);
-  document.getElementById(&#x27;spaOtherDisb&#x27;).innerText=formatMoney(spaOtherDisb);
-  document.getElementById(&#x27;spaOtherSst&#x27;).innerText=formatMoney(spaOtherSst);
-  document.getElementById(&#x27;loanLegal&#x27;).innerText=formatMoney(loanLegal);
-  document.getElementById(&#x27;loanAddon&#x27;).innerText=formatMoney(loanAddon);
-  document.getElementById(&#x27;applicantAddonResult&#x27;).innerText=formatMoney(applicantAddon);
-  document.getElementById(&#x27;loanSst&#x27;).innerText=formatMoney(loanSst);
-  document.getElementById(&#x27;loanStamp&#x27;).innerText=formatMoney(loanStamp);
-  document.getElementById(&#x27;loanNominalStamp&#x27;).innerText=formatMoney(loanNominalStamp);
-  document.getElementById(&#x27;loanDisb&#x27;).innerText=formatMoney(loanDisb);
-  document.getElementById(&#x27;loanOtherDisb&#x27;).innerText=formatMoney(loanOtherDisb);
-  document.getElementById(&#x27;loanOtherSst&#x27;).innerText=formatMoney(loanOtherSst);
-  document.getElementById(&#x27;titleExtraResult&#x27;).innerText=formatMoney(titleExtraAmount);
-  document.getElementById(&#x27;valuationResult&#x27;).innerText=formatMoney(valuationFee);
-  document.getElementById(&#x27;extraResult&#x27;).innerText=formatMoney(extraCharges);
-  document.getElementById(&#x27;discountResult&#x27;).innerText=&#x27;- &#x27;+formatMoney(discountAmount);
-  document.getElementById(&#x27;totalCost&#x27;).innerText=formatMoney(total);
-
-  let note=isSubsale?&#x27;Subsale mode: First Home will waive eligible MOT stamp duty portion only. Nominal stamping and lawyer disbursement remain.&#x27;:&#x27;Refinance mode: SPA / MOT / First Home section is hidden because refinance is loan documentation only.&#x27;;
-  document.getElementById(&#x27;logicNote&#x27;).innerText=note+&#x27; Estimate only. Final fee still depends on lawyer quotation, title, consent, bank and stamp office assessment.&#x27;;
+ const caseType=$(&#x27;caseType&#x27;).value, isRef=caseType===&#x27;refinance&#x27;; const price=clean($(&#x27;spaPrice&#x27;).value), loan=clean($(&#x27;loanAmount&#x27;).value); const tenure=clean($(&#x27;tenure&#x27;).value), rate=clean($(&#x27;rate&#x27;).value); $(&#x27;monthly&#x27;).value=pmt(loan,rate,tenure)?pmt(loan,rate,tenure).toLocaleString(&#x27;en-MY&#x27;,{minimumFractionDigits:2,maximumFractionDigits:2}):&#x27;&#x27;;
+ let spaLegal=isRef?0:legalFee(price), spaSupp=isRef?0:(spaLegal*0.20), spaDisb=isRef?0:(price?1300:0), spaStamp=isRef?0:spaStampDuty(price);
+ let loanLegal=legalFee(loan), loanSupp=loan?(loanLegal*0.20):0, loanDisb=loan?1800:0, loanStamp=loan*0.005;
+ let vFee=isRef?0:valFee(price), vSupp=0, vDisb=isRef?0:(price?400:0), vStamp=0;
+ if(firstHome){spaStamp=0;loanStamp=0;vStamp=0;$(&#x27;spaStamp&#x27;).innerHTML=&#x27;&lt;span class=&quot;waived-msg&quot;&gt;&lt;span class=&quot;waived-badge&quot;&gt;WAIVED&lt;/span&gt;&lt;/span&gt;&#x27;;$(&#x27;loanStamp&#x27;).innerHTML=&#x27;&lt;span class=&quot;waived-msg&quot;&gt;&lt;span class=&quot;waived-badge&quot;&gt;WAIVED&lt;/span&gt;&lt;/span&gt;&#x27;;$(&#x27;valStamp&#x27;).innerHTML=&#x27;&lt;span class=&quot;waived-msg&quot;&gt;&lt;span class=&quot;waived-badge&quot;&gt;WAIVED&lt;/span&gt;&lt;/span&gt;&#x27;;}else{setText(&#x27;spaStamp&#x27;,spaStamp);setText(&#x27;loanStamp&#x27;,loanStamp);setText(&#x27;valStamp&#x27;,vStamp);}
+ const spaSst=(spaLegal+spaSupp+spaDisb)*0.08, loanSst=(loanLegal+loanSupp+loanDisb)*0.08, vSst=(vFee+vSupp+vDisb)*0.08;
+ setText(&#x27;spaLegal&#x27;,spaLegal);setText(&#x27;spaSupp&#x27;,spaSupp);setText(&#x27;spaDisb&#x27;,spaDisb);setText(&#x27;spaSst&#x27;,spaSst);setText(&#x27;spaTotal&#x27;,spaLegal+spaSupp+spaDisb+spaStamp+spaSst);
+ setText(&#x27;loanLegal&#x27;,loanLegal);setText(&#x27;loanSupp&#x27;,loanSupp);setText(&#x27;loanDisb&#x27;,loanDisb);setText(&#x27;loanSst&#x27;,loanSst);setText(&#x27;loanTotal&#x27;,loanLegal+loanSupp+loanDisb+loanStamp+loanSst);
+ setText(&#x27;valFee&#x27;,vFee);setText(&#x27;valSupp&#x27;,vSupp);setText(&#x27;valDisb&#x27;,vDisb);setText(&#x27;valSst&#x27;,vSst);setText(&#x27;valTotal&#x27;,vFee+vSupp+vDisb+vStamp+vSst);
 }
-
-toggleCase();toggleBuyer2();calculate();
+function resetCalc(){[&#x27;spaPrice&#x27;,&#x27;margin&#x27;,&#x27;loanAmount&#x27;,&#x27;monthly&#x27;].forEach(id=&gt;$(id).value=&#x27;&#x27;);$(&#x27;tenure&#x27;).value=&#x27;35&#x27;;$(&#x27;rate&#x27;).value=&#x27;4.10&#x27;;setFirstHome(false);calculate();}
+function exportPdf(){window.print();}
+calculate();
 &lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-"></iframe>
+&lt;/html&gt;"></iframe>
         </div>
     </div>
 
