@@ -3755,6 +3755,7 @@ body.epg-locked .bank-policy-fullscreen{
   color:#cbd5e1!important;
   font-size:11px;
   line-height:1.35;
+  white-space:pre-line;
 }
 .epg-lock-card{
   position:relative;
@@ -4921,7 +4922,7 @@ gap:16px;
             &lt;div class=&quot;monthly-row&quot;&gt;
               &lt;input id=&quot;currentMonthly&quot; placeholder=&quot;e.g. 2,573&quot; oninput=&quot;formatInput(this)&quot; /&gt;
             &lt;/div&gt;
-            &lt;div class=&quot;micro&quot;&gt;This amount is used to calculate total repayment over the remaining tenure.&lt;/div&gt;
+            &lt;div class=&quot;micro&quot;&gt;This amount is only used for Plan B (maintain monthly payment / pay extra). Current loan interest is auto-calculated from outstanding, rate and tenure.&lt;/div&gt;
           &lt;/div&gt;
 
           &lt;div class=&quot;actions&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;calculateBtn&quot; type=&quot;button&quot;&gt;Calculate&lt;/button&gt;&lt;button class=&quot;ghost&quot; id=&quot;pdfBtn&quot; type=&quot;button&quot;&gt;PDF&lt;/button&gt;&lt;/div&gt;
@@ -5099,15 +5100,20 @@ function showNotice(message){
 function calculate(){
   try{
     showNotice(&#x27;&#x27;);
+    const notices = [];
 
     const outstanding = val(&#x27;outstanding&#x27;);
     const currentMonthly = val(&#x27;currentMonthly&#x27;);
     const currentRate = raw($(&#x27;currentRate&#x27;)?.value);
     const years = val(&#x27;remainingYears&#x27;);
 
-    if(!outstanding || !currentMonthly || !years){
-      showNotice(&#x27;Please fill in Outstanding Balance, Current Monthly Commitment and Balance Tenure first.&#x27;);
+    if(!outstanding || !currentRate || !years){
+      showNotice(&#x27;Please fill in Outstanding Balance, Interest Rate and Balance Tenure first.&#x27;);
       return;
+    }
+
+    if(outstanding &lt; 300000){
+      notices.push(&#x27;⚠️ Policy Reminder: Based on current bank policies, refinance cases with loan amount below RM300k are generally more difficult to get approved. Please check bank acceptance before submission.&#x27;);
     }
 
     const cost = calcCost(outstanding);
@@ -5116,10 +5122,18 @@ function calculate(){
     if($(&#x27;refiCostSummary&#x27;)) $(&#x27;refiCostSummary&#x27;).textContent = money(cost.totalCost);
     $(&#x27;curLoan&#x27;).textContent = money(outstanding);
     $(&#x27;curRate&#x27;).textContent = (currentRate || 0).toFixed(2) + &#x27;%&#x27;;
-    $(&#x27;curMonthly&#x27;).textContent = money(currentMonthly);
     $(&#x27;curTenure&#x27;).textContent = years + &#x27; years&#x27;;
-    const currentTotalPaid = currentMonthly * 12 * years;
+
+    // Correct refinance base comparison:
+    // Current loan interest must be calculated from Outstanding Balance + Current Rate + Remaining Tenure.
+    // Do NOT use the customer's actual current monthly commitment to calculate current interest,
+    // because the actual monthly may include extra payment, MRTA, rounding, or bank-specific charges.
+    const currentStandardMonthly = pmt(outstanding, currentRate, years);
+    const currentTotalPaid = currentStandardMonthly * 12 * years;
     const currentTotalInterest = Math.max(currentTotalPaid - outstanding, 0);
+    const maintainMonthly = currentMonthly || currentStandardMonthly;
+
+    $(&#x27;curMonthly&#x27;).textContent = money(currentStandardMonthly);
     $(&#x27;curTotalPaid&#x27;).textContent = money(currentTotalPaid);
     if($(&#x27;curTotalInterest&#x27;)) $(&#x27;curTotalInterest&#x27;).textContent = money(currentTotalInterest);
 
@@ -5133,17 +5147,17 @@ function calculate(){
       const treatment = p.mode === &#x27;zero&#x27; ? &#x27;Zero Moving Cost&#x27; : p.mode === &#x27;cash&#x27; ? &#x27;Pay By Cash&#x27; : &#x27;Finance Into Loan&#x27;;
 
       let displayMonthly = standardMonthly;
-      let saving = currentMonthly - standardMonthly;
+      let saving = currentStandardMonthly - standardMonthly;
       let interest = totalInterest(loanUsed,p.rate,years);
       let newMonths = years * 12;
       let tenureSavedMonths = 0;
 
       if(p.plan === &#x27;B&#x27;){
-        displayMonthly = currentMonthly;
+        displayMonthly = maintainMonthly;
         saving = 0;
-        newMonths = monthsToFullySettle(loanUsed,p.rate,currentMonthly);
+        newMonths = monthsToFullySettle(loanUsed,p.rate,maintainMonthly);
         tenureSavedMonths = isFinite(newMonths) ? Math.max((years * 12) - newMonths, 0) : 0;
-        interest = isFinite(newMonths) ? Math.max((currentMonthly * newMonths) - loanUsed, 0) : 0;
+        interest = isFinite(newMonths) ? Math.max((maintainMonthly * newMonths) - loanUsed, 0) : 0;
       }
 
       const interestSaved = currentTotalInterest - interest;
@@ -5158,7 +5172,7 @@ function calculate(){
       if($(`loan-${i}`)) $(`loan-${i}`).textContent = money(loanUsed);
       if($(`treat-${i}`)) $(`treat-${i}`).textContent = treatment;
       if($(`monthly-${i}`)) $(`monthly-${i}`).textContent = money(displayMonthly);
-      if($(`saving-${i}`)) $(`saving-${i}`).textContent = p.plan === &#x27;B&#x27; ? money(Math.max(currentMonthly - standardMonthly, 0)) : money(saving);
+      if($(`saving-${i}`)) $(`saving-${i}`).textContent = p.plan === &#x27;B&#x27; ? money(Math.max(maintainMonthly - standardMonthly, 0)) : money(saving);
       if($(`cash-${i}`)) $(`cash-${i}`).textContent = money(cash);
       if($(`newTenure-${i}`)) $(`newTenure-${i}`).textContent = p.plan === &#x27;B&#x27; ? formatTenureFromMonths(newMonths) : years + &#x27; years&#x27;;
       if($(`tenureSave-${i}`)) $(`tenureSave-${i}`).textContent = p.plan === &#x27;B&#x27; ? formatTenureFromMonths(tenureSavedMonths) : &#x27;0 years&#x27;;
@@ -5174,6 +5188,14 @@ function calculate(){
 
     if(bestIndex &gt;= 0 &amp;&amp; $(`pkg-${bestIndex}`)){
       $(`pkg-${bestIndex}`).classList.add(&#x27;best-pkg&#x27;);
+    }
+
+    if(currentMonthly &amp;&amp; Math.abs(currentMonthly - currentStandardMonthly) &gt; 1){
+      notices.push(&#x27;Note: Current Monthly Commitment is treated as Plan B maintain-payment amount only. Current loan interest is calculated using the standard PMT from outstanding balance, current rate and remaining tenure.&#x27;);
+    }
+
+    if(notices.length){
+      showNotice(notices.join(&#x27;\n\n&#x27;));
     }
   }catch(err){
     console.error(err);
