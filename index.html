@@ -4882,7 +4882,11 @@ gap:16px;
 
     body{padding:0!important;}
     .page{max-width:1580px!important;}
-  &lt;/style&gt;
+  
+
+/* Quotation export button */
+#pdfBtn{background:#071a44!important;color:#fff!important;border-color:#071a44!important;}
+&lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div class=&quot;page&quot;&gt;
@@ -4925,7 +4929,20 @@ gap:16px;
             &lt;div class=&quot;micro&quot;&gt;This amount is only used for Plan B (maintain monthly payment / pay extra). Current loan interest is auto-calculated from outstanding, rate and tenure.&lt;/div&gt;
           &lt;/div&gt;
 
-          &lt;div class=&quot;actions&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;calculateBtn&quot; type=&quot;button&quot;&gt;Calculate&lt;/button&gt;&lt;button class=&quot;ghost&quot; id=&quot;pdfBtn&quot; type=&quot;button&quot;&gt;PDF&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;loan-section-title&quot;&gt;Refinance Package Rates&lt;/div&gt;
+          &lt;div class=&quot;grid2&quot;&gt;
+            &lt;div class=&quot;input-card&quot;&gt;
+              &lt;label&gt;Zero Moving Cost Rate (%)&lt;/label&gt;
+              &lt;input id=&quot;zeroRate&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;3.90&quot; placeholder=&quot;e.g. 3.90&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;input-card&quot;&gt;
+              &lt;label&gt;Cash / Finance Legal Rate (%)&lt;/label&gt;
+              &lt;input id=&quot;cashFinanceRate&quot; type=&quot;number&quot; step=&quot;0.01&quot; value=&quot;3.55&quot; placeholder=&quot;e.g. 3.55&quot; /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;micro&quot; style=&quot;margin:6px 0 12px;color:#64748b;font-size:11px;&quot;&gt;You may change these rates before calculating. Package 1 uses Zero Moving Cost Rate; Package 2 and 3 use Cash / Finance Legal Rate.&lt;/div&gt;
+
+          &lt;div class=&quot;actions&quot;&gt;&lt;button class=&quot;primary&quot; id=&quot;calculateBtn&quot; type=&quot;button&quot;&gt;Calculate&lt;/button&gt;&lt;button class=&quot;ghost&quot; id=&quot;pdfBtn&quot; type=&quot;button&quot;&gt;Quotation PDF&lt;/button&gt;&lt;/div&gt;
           &lt;div class=&quot;notice-box&quot; id=&quot;noticeBox&quot;&gt;&lt;/div&gt;
 
           &lt;section class=&quot;cost-pay-card&quot;&gt;
@@ -4975,6 +4992,16 @@ const packages = [
   { name:&#x27;Package 3B&#x27;, type:&#x27;Legal Fees, Stamp Duty &amp; Valuation fees to be financed into the loan&#x27;, rate:3.55, mode:&#x27;finance&#x27;, plan:&#x27;B&#x27; }
 ];
 
+function applyPackageRates(){
+  const zeroRate = raw($('zeroRate')?.value) || 3.90;
+  const cashFinanceRate = raw($('cashFinanceRate')?.value) || 3.55;
+  packages.forEach((p,i)=&gt;{
+    p.rate = p.mode === 'zero' ? zeroRate : cashFinanceRate;
+    const rateEl = $('rate-' + i);
+    if(rateEl) rateEl.textContent = p.rate.toFixed(2) + '%';
+  });
+}
+
 const $ = id =&gt; document.getElementById(id);
 const raw = v =&gt; Number(String(v||&#x27;&#x27;).replace(/,/g,&#x27;&#x27;)) || 0;
 const val = id =&gt; raw($(id)?.value);
@@ -5008,6 +5035,29 @@ function monthsToFullySettle(principal, annualRate, monthlyPayment){
   if(r === 0) return Math.ceil(principal / monthlyPayment);
   if(monthlyPayment &lt;= principal * r) return Infinity;
   return Math.ceil(-Math.log(1 - (principal * r / monthlyPayment)) / Math.log(1 + r));
+}
+
+function payoffSummary(principal, annualRate, monthlyPayment){
+  const r = annualRate / 100 / 12;
+  if(!principal || !monthlyPayment) return {months:0,totalPaid:0,interest:0};
+  if(r &gt; 0 &amp;&amp; monthlyPayment &lt;= principal * r) return {months:Infinity,totalPaid:Infinity,interest:Infinity};
+
+  let balance = principal;
+  let months = 0;
+  let totalPaid = 0;
+  const safetyLimit = 1200;
+
+  while(balance &gt; 0.01 &amp;&amp; months &lt; safetyLimit){
+    const interest = balance * r;
+    const normalPayment = balance + interest;
+    const payment = Math.min(monthlyPayment, normalPayment);
+    totalPaid += payment;
+    balance = balance + interest - payment;
+    months++;
+  }
+
+  if(months &gt;= safetyLimit) return {months:Infinity,totalPaid:Infinity,interest:Infinity};
+  return {months,totalPaid,interest:Math.max(totalPaid - principal, 0)};
 }
 
 function formatTenureFromMonths(months){
@@ -5053,7 +5103,7 @@ function build(){
       &lt;div class=&quot;pkg-title&quot;&gt;${p.name}&lt;/div&gt;
       &lt;div class=&quot;pkg-sub&quot;&gt;${p.type} · Plan ${p.plan}&lt;/div&gt;
 
-      &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Interest Rate&lt;/span&gt;&lt;b&gt;${p.rate.toFixed(2)}%&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Interest Rate&lt;/span&gt;&lt;b id=&quot;rate-${i}&quot;&gt;${p.rate.toFixed(2)}%&lt;/b&gt;&lt;/div&gt;
       &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Loan Amount Used&lt;/span&gt;&lt;b id=&quot;loan-${i}&quot;&gt;RM0.00&lt;/b&gt;&lt;/div&gt;
       &lt;div class=&quot;line&quot;&gt;&lt;span&gt;Cost Treatment&lt;/span&gt;&lt;b id=&quot;treat-${i}&quot;&gt;-&lt;/b&gt;&lt;/div&gt;
 
@@ -5124,16 +5174,16 @@ function calculate(){
     $(&#x27;curRate&#x27;).textContent = (currentRate || 0).toFixed(2) + &#x27;%&#x27;;
     $(&#x27;curTenure&#x27;).textContent = years + &#x27; years&#x27;;
 
-    // Correct refinance base comparison:
-    // Current loan interest must be calculated from Outstanding Balance + Current Rate + Remaining Tenure.
-    // Do NOT use the customer's actual current monthly commitment to calculate current interest,
-    // because the actual monthly may include extra payment, MRTA, rounding, or bank-specific charges.
+    // Customer quotation base comparison:
+    // If Current Monthly Commitment is keyed in, use it for Existing Loan total repayment.
+    // If blank, fall back to standard PMT from outstanding + current rate + remaining tenure.
     const currentStandardMonthly = pmt(outstanding, currentRate, years);
-    const currentTotalPaid = currentStandardMonthly * 12 * years;
+    const currentDisplayMonthly = currentMonthly || currentStandardMonthly;
+    const currentTotalPaid = currentDisplayMonthly * 12 * years;
     const currentTotalInterest = Math.max(currentTotalPaid - outstanding, 0);
-    const maintainMonthly = currentMonthly || currentStandardMonthly;
+    const maintainMonthly = currentDisplayMonthly;
 
-    $(&#x27;curMonthly&#x27;).textContent = money(currentStandardMonthly);
+    $(&#x27;curMonthly&#x27;).textContent = money(currentDisplayMonthly);
     $(&#x27;curTotalPaid&#x27;).textContent = money(currentTotalPaid);
     if($(&#x27;curTotalInterest&#x27;)) $(&#x27;curTotalInterest&#x27;).textContent = money(currentTotalInterest);
 
@@ -5155,9 +5205,10 @@ function calculate(){
       if(p.plan === &#x27;B&#x27;){
         displayMonthly = maintainMonthly;
         saving = 0;
-        newMonths = monthsToFullySettle(loanUsed,p.rate,maintainMonthly);
+        const payoff = payoffSummary(loanUsed,p.rate,maintainMonthly);
+        newMonths = payoff.months;
         tenureSavedMonths = isFinite(newMonths) ? Math.max((years * 12) - newMonths, 0) : 0;
-        interest = isFinite(newMonths) ? Math.max((maintainMonthly * newMonths) - loanUsed, 0) : 0;
+        interest = payoff.interest;
       }
 
       const interestSaved = currentTotalInterest - interest;
@@ -5191,7 +5242,7 @@ function calculate(){
     }
 
     if(currentMonthly &amp;&amp; Math.abs(currentMonthly - currentStandardMonthly) &gt; 1){
-      notices.push(&#x27;Note: Current Monthly Commitment is treated as Plan B maintain-payment amount only. Current loan interest is calculated using the standard PMT from outstanding balance, current rate and remaining tenure.&#x27;);
+      notices.push(&#x27;Note: Existing Loan total repayment is based on the Current Monthly Commitment you keyed in. If this amount includes MRTA, extra payment or bank charges, the comparison will follow the customer actual payment.&#x27;);
     }
 
     if(notices.length){
@@ -5231,6 +5282,128 @@ function resetResults(){
   });
 }
 
+
+
+function computeQuotationData(){
+  const outstanding = val(&#x27;outstanding&#x27;);
+  const currentMonthly = val(&#x27;currentMonthly&#x27;);
+  const currentRate = raw($(&#x27;currentRate&#x27;)?.value);
+  const years = val(&#x27;remainingYears&#x27;);
+  if(!outstanding || !currentRate || !years){
+    showNotice(&#x27;Please fill in Outstanding Balance, Interest Rate and Balance Tenure first.&#x27;);
+    return null;
+  }
+  const cost = calcCost(outstanding);
+  const currentStandardMonthly = pmt(outstanding, currentRate, years);
+  const currentDisplayMonthly = currentMonthly || currentStandardMonthly;
+  const currentMonths = years * 12;
+  const currentTotalPaid = currentDisplayMonthly * currentMonths;
+  const currentTotalInterest = Math.max(currentTotalPaid - outstanding, 0);
+  const rows = [];
+  packages.forEach((p,i)=&gt;{
+    const loanUsed = p.mode === &#x27;finance&#x27; ? outstanding + cost.totalCost : outstanding;
+    const standardMonthly = pmt(loanUsed,p.rate,years);
+    let displayMonthly = standardMonthly;
+    let months = years * 12;
+    let interest = totalInterest(loanUsed,p.rate,years);
+    if(p.plan === &#x27;B&#x27;){
+      displayMonthly = currentDisplayMonthly;
+      const payoff = payoffSummary(loanUsed,p.rate,currentDisplayMonthly);
+      months = payoff.months;
+      interest = payoff.interest;
+    }
+    const totalPaid = isFinite(months) ? displayMonthly * months : Infinity;
+    rows.push({
+      index:i+1,
+      name:p.name,
+      type:p.type,
+      mode:p.mode,
+      plan:p.plan,
+      rate:p.rate,
+      loan:loanUsed,
+      monthly:displayMonthly,
+      months,
+      totalPaid,
+      interest,
+      interestSaved: currentTotalInterest - interest,
+      tenureSaved: isFinite(months) ? Math.max(currentMonths - months,0) : 0
+    });
+  });
+  const planBRows = rows.filter(r=&gt;r.plan===&#x27;B&#x27; &amp;&amp; isFinite(r.months));
+  const bestTenure = planBRows.length ? planBRows.reduce((a,b)=&gt; a.months &lt; b.months ? a : b) : rows[0];
+  const bestMonthly = rows.filter(r=&gt;r.plan===&#x27;A&#x27;).reduce((a,b)=&gt; a.monthly &lt; b.monthly ? a : b);
+  const bestInterest = rows.reduce((a,b)=&gt; a.interestSaved &gt; b.interestSaved ? a : b);
+  return {outstanding,currentRate,years,currentMonthly:currentDisplayMonthly,currentTotalPaid,currentTotalInterest,cost,rows,bestTenure,bestMonthly,bestInterest};
+}
+
+function qMoney(n, dashZero){
+  if(!isFinite(n)) return &#x27;-&#x27;;
+  if(dashZero &amp;&amp; Math.abs(n) &lt; 0.005) return &#x27;-&#x27;;
+  return &#x27;RM &#x27; + Number(n||0).toLocaleString(&#x27;en-MY&#x27;,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function qNum(n){ return Number(n||0).toLocaleString(&#x27;en-MY&#x27;,{maximumFractionDigits:0}); }
+function qTenure(months){
+  if(!isFinite(months)) return &#x27;NOT ENOUGH PAYMENT&#x27;;
+  const y = Math.floor(months/12), m = months%12;
+  if(m===0) return y + &#x27; YEARS&#x27;;
+  return y + &#x27; YEARS &#x27; + m + &#x27; MONTH&#x27;;
+}
+function qSaveMonths(months){ return &#x27;SAVE &#x27; + Math.max(0,Math.round(months||0)) + &#x27; MONTH COMMITMENT&#x27;; }
+function rowClass(r){ if(r.mode===&#x27;zero&#x27;) return &#x27;zero&#x27;; if(r.mode===&#x27;cash&#x27;) return &#x27;cash&#x27;; if(r.mode===&#x27;finance&#x27;) return &#x27;finance&#x27;; return &#x27;&#x27;; }
+function optionTitle(r){
+  if(r.mode===&#x27;zero&#x27;) return &#x27;ZERO MOVING COST PACKAGE&lt;br&gt;&lt;span&gt;(BANK WILL &lt;b&gt;FULLY ABSORB&lt;/b&gt; THE LEGAL FEES COSTS)&lt;/span&gt;&#x27;;
+  if(r.mode===&#x27;cash&#x27;) return &#x27;LEGAL FEES, STAMP DUTY &amp; VALUATION FEES TO BE &lt;b&gt;PAID BY CASH&lt;/b&gt;&lt;br&gt;&lt;span&gt;&#x27; + qMoney(computeQuotationData().cost.totalCost) + &#x27;&lt;/span&gt;&#x27;;
+  return &#x27;LEGAL FEES, STAMP DUTY &amp; VALUATION FEES TO BE &lt;b&gt;FINANCED INTO THE LOAN&lt;/b&gt;&lt;br&gt;&lt;span&gt;&#x27; + qMoney(computeQuotationData().cost.totalCost) + &#x27;&lt;/span&gt;&#x27;;
+}
+function exportQuotationPDF(){
+  calculate();
+  const d = computeQuotationData();
+  if(!d) return;
+  const rZeroA=d.rows.find(r=&gt;r.mode===&#x27;zero&#x27;&amp;&amp;r.plan===&#x27;A&#x27;), rZeroB=d.rows.find(r=&gt;r.mode===&#x27;zero&#x27;&amp;&amp;r.plan===&#x27;B&#x27;);
+  const rCashA=d.rows.find(r=&gt;r.mode===&#x27;cash&#x27;&amp;&amp;r.plan===&#x27;A&#x27;), rCashB=d.rows.find(r=&gt;r.mode===&#x27;cash&#x27;&amp;&amp;r.plan===&#x27;B&#x27;);
+  const rFinA=d.rows.find(r=&gt;r.mode===&#x27;finance&#x27;&amp;&amp;r.plan===&#x27;A&#x27;), rFinB=d.rows.find(r=&gt;r.mode===&#x27;finance&#x27;&amp;&amp;r.plan===&#x27;B&#x27;);
+  const currentMonths=d.years*12;
+  const totalPotentialSave = Math.max(0,d.bestInterest.interestSaved);
+  const html = `&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Loan Refinance Comparison&lt;/title&gt;&lt;style&gt;
+    @page{size:A4 landscape;margin:6mm}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#06122f;background:white}.sheet{width:125%;padding:3px 3px 0;transform:scale(.80);transform-origin:top left}h1{font-size:34px;letter-spacing:.4px;margin:0 0 6px;color:#091634;border-bottom:3px solid #0b285e;width:58%;line-height:1.03}.topline{display:grid;grid-template-columns:58% 36%;gap:4%;align-items:start;margin-bottom:6px}.info{border:1px solid #ccc;padding:8px 18px;min-height:100px;font-size:14px}.info-row{display:grid;grid-template-columns:46% 54%;margin:0 0 7px;font-weight:700}.info-row span:last-child{font-weight:400}.info small{display:block;font-size:12px;font-weight:400}.savebox{border:2px solid #0b285e;font-size:15px}.savebox .line{display:grid;grid-template-columns:54% 46%;border-bottom:1px solid #b9b9b9}.savebox .line div{padding:9px 12px}.savebox .line div:first-child{font-weight:800}.savebox .line div:last-child{text-align:center}.savebox .red{color:red;font-weight:900;font-size:20px}.savebox .yellow{background:linear-gradient(90deg,#fff8bc,#fff0a3);text-align:center;color:red;font-weight:900;font-size:18px;padding:9px}.main{width:100%;border-collapse:collapse;font-size:13px}.main th{background:#08265a;color:white;border:1px solid #6f7c97;padding:7px 6px;text-align:center;font-weight:900}.main td{border:1px solid #a9a9a9;padding:7px 8px;text-align:center;font-weight:700}.main td:first-child{text-align:left}.current td{background:linear-gradient(90deg,#ffe77b,#fff0ad)}.zero td{background:#eef9ed}.cash td{background:#fff0ef}.finance td{background:#f3f0ff}.main .opt{width:23%;font-weight:900}.main .opt span{font-weight:500}.main b{color:#001d85}.purple{color:#7b2cff!important}.neg{color:red!important}.summary-title{margin:8px 0 0;background:#0b3673;color:white;display:inline-block;padding:5px 24px;font-size:16px;font-weight:900;clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%)}.summary{border-collapse:collapse;width:100%;font-size:12px}.summary td{border:1px solid #c6c6c6;padding:7px 12px}.sum-grid{display:grid;grid-template-columns:46px 1fr;align-items:center;gap:8px}.bigicon{font-size:34px}.sum-title{font-weight:900}.sum-val{font-size:17px;color:#07923a;font-weight:900;margin-top:4px}.note{border:1px solid #ddd;border-top:0;padding:7px;font-size:10.5px;line-height:1.35}@media print{.sheet{padding:0;transform:scale(.80);transform-origin:top left;width:125%}button{display:none}}
+  &lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;sheet&quot;&gt;
+    &lt;h1&gt;LOAN REFINANCE COMPARISON&lt;/h1&gt;
+    &lt;div class=&quot;topline&quot;&gt;&lt;div class=&quot;info&quot;&gt;
+      &lt;div class=&quot;info-row&quot;&gt;&lt;span&gt;Current Outstanding Loan&lt;/span&gt;&lt;span&gt;${qMoney(d.outstanding)} @ ${d.currentRate.toFixed(2)}%&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;info-row&quot;&gt;&lt;span&gt;Estimated Refinance Costs&lt;small&gt;(Legal Fees, Stamp Duty &amp; Valuation)&lt;/small&gt;&lt;/span&gt;&lt;span&gt;${qMoney(d.cost.totalCost)}&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;info-row&quot;&gt;&lt;span&gt;Current Loan Under&lt;/span&gt;&lt;span&gt;-&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;info-row&quot;&gt;&lt;span&gt;New Loan Under&lt;/span&gt;&lt;span&gt;-&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;info-row&quot;&gt;&lt;span&gt;Current SPA Name Under&lt;/span&gt;&lt;span&gt;-&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;&lt;div class=&quot;savebox&quot;&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;div&gt;TOTAL POTENTIAL SAVE&lt;/div&gt;&lt;div class=&quot;red&quot;&gt;${qMoney(totalPotentialSave)}&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;div&gt;TENURE FROM&lt;/div&gt;&lt;div&gt;${qTenure(currentMonths)}&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;line&quot;&gt;&lt;div&gt;TO&lt;/div&gt;&lt;div&gt;${qTenure(d.bestTenure.months)}&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;yellow&quot;&gt;${qSaveMonths(d.bestTenure.tenureSaved)}&lt;/div&gt;
+    &lt;/div&gt;&lt;/div&gt;
+    &lt;table class=&quot;main&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;REFINANCE OPTION&lt;/th&gt;&lt;th&gt;LOAN AMOUNT&lt;br&gt;(RM)&lt;/th&gt;&lt;th&gt;INTEREST RATE&lt;br&gt;(% P.A.)&lt;/th&gt;&lt;th&gt;MONTHLY&lt;br&gt;INSTALMENT (RM)&lt;/th&gt;&lt;th&gt;LOAN TENURE&lt;/th&gt;&lt;th&gt;TOTAL LOAN TO BE PAID OVER&lt;br&gt;REMAINING LOAN TENURE (RM)&lt;/th&gt;&lt;th&gt;TOTAL INTEREST&lt;br&gt;SAVINGS (RM)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;
+      &lt;tr class=&quot;current&quot;&gt;&lt;td class=&quot;opt&quot;&gt;1. &amp;nbsp; CURRENT BANK PACKAGE&lt;/td&gt;&lt;td&gt;${qNum(d.outstanding)}&lt;/td&gt;&lt;td&gt;${d.currentRate.toFixed(2)}%&lt;/td&gt;&lt;td&gt;${qNum(d.currentMonthly)}&lt;/td&gt;&lt;td&gt;${qTenure(currentMonths)}&lt;/td&gt;&lt;td&gt;-&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      ${quoteGroup(2,rZeroA,rZeroB)}${quoteGroup(3,rCashA,rCashB)}${quoteGroup(4,rFinA,rFinB)}
+    &lt;/tbody&gt;&lt;/table&gt;
+    &lt;div class=&quot;summary-title&quot;&gt;SUMMARY&lt;/div&gt;
+    &lt;table class=&quot;summary&quot;&gt;&lt;tr&gt;
+      &lt;td&gt;&lt;div class=&quot;sum-grid&quot;&gt;&lt;div class=&quot;bigicon&quot;&gt;✅&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;sum-title&quot;&gt;Best Monthly Instalment (Lowest)&lt;/div&gt;&lt;div&gt;${d.bestMonthly.mode===&#x27;cash&#x27;?&#x27;Cash Payment Option&#x27;:d.bestMonthly.type}&lt;/div&gt;&lt;div class=&quot;sum-val&quot;&gt;${qMoney(d.bestMonthly.monthly)} / month (${qTenure(d.bestMonthly.months).toLowerCase()})&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;div class=&quot;sum-grid&quot;&gt;&lt;div class=&quot;bigicon&quot;&gt;💰&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;sum-title&quot;&gt;Lowest Total Payment (Shortest Tenure)&lt;/div&gt;&lt;div&gt;${d.bestTenure.mode===&#x27;cash&#x27;?&#x27;Cash Payment Option&#x27;:d.bestTenure.type}&lt;/div&gt;&lt;div class=&quot;sum-val&quot;&gt;${qMoney(d.bestTenure.totalPaid)} (${qTenure(d.bestTenure.months).toLowerCase()})&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;div class=&quot;sum-grid&quot;&gt;&lt;div class=&quot;bigicon&quot;&gt;📊&lt;/div&gt;&lt;div&gt;&lt;div class=&quot;sum-title&quot;&gt;Maximum Interest Savings&lt;/div&gt;&lt;div&gt;${d.bestInterest.type}&lt;/div&gt;&lt;div class=&quot;sum-val&quot;&gt;${qMoney(d.bestInterest.interestSaved)}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;/tr&gt;&lt;/table&gt;
+    &lt;div class=&quot;note&quot;&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;br&gt;• All figures are estimated for reference only and subject to bank&#x27;s final approval.&lt;br&gt;• Interest rate is subject to change without prior notice.&lt;br&gt;• Actual figures may vary depending on bank, loan tenure, interest rate and other factors.&lt;/div&gt;
+    &lt;script&gt;setTimeout(()=&gt;{window.print()},300)&lt;\/script&gt;
+  &lt;/div&gt;&lt;/body&gt;&lt;/html&gt;`;
+  const w = window.open(&#x27;&#x27;, &#x27;_blank&#x27;);
+  if(!w){ showNotice(&#x27;Popup blocked. Please allow popups to export quotation.&#x27;); return; }
+  w.document.open(); w.document.write(html); w.document.close();
+}
+function quoteGroup(num,a,b){
+  const rowspan = `&lt;td class=&quot;opt&quot; rowspan=&quot;2&quot;&gt;${num}. &amp;nbsp; ${optionTitle(a)}&lt;/td&gt;&lt;td rowspan=&quot;2&quot;&gt;${qNum(a.loan)}&lt;/td&gt;`;
+  const cls = rowClass(a);
+  return `&lt;tr class=&quot;${cls}&quot;&gt;${rowspan}&lt;td&gt;${a.rate.toFixed(2)}%&lt;/td&gt;&lt;td&gt;${qNum(a.monthly)}&lt;/td&gt;&lt;td&gt;${qTenure(a.months)}&lt;/td&gt;&lt;td&gt;${qMoney(a.interest)}&lt;/td&gt;&lt;td class=&quot;${a.interestSaved&lt;0?&#x27;neg&#x27;:&#x27;&#x27;}&quot;&gt;${qMoney(a.interestSaved)}&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr class=&quot;${cls}&quot;&gt;&lt;td&gt;${b.rate.toFixed(2)}%&lt;/td&gt;&lt;td class=&quot;purple&quot;&gt;${qNum(b.monthly)}&lt;/td&gt;&lt;td class=&quot;purple&quot;&gt;${qTenure(b.months)}&lt;/td&gt;&lt;td&gt;${qMoney(b.interest)}&lt;/td&gt;&lt;td class=&quot;${b.interestSaved&lt;0?&#x27;neg&#x27;:&#x27;&#x27;}&quot;&gt;${qMoney(b.interestSaved)}&lt;/td&gt;&lt;/tr&gt;`;
+}
+
 function initApp(){
   build();
   resetResults();
@@ -5240,7 +5413,7 @@ function initApp(){
   if(calcBtn) calcBtn.addEventListener(&#x27;click&#x27;, calculate);
 
   const pdfBtn = $(&#x27;pdfBtn&#x27;);
-  if(pdfBtn) pdfBtn.addEventListener(&#x27;click&#x27;, () =&gt; window.print());
+  if(pdfBtn) pdfBtn.addEventListener(&#x27;click&#x27;, exportQuotationPDF);
 
   document.addEventListener(&#x27;keydown&#x27;,e=&gt;{ if(e.key===&#x27;Escape&#x27;){ if(parent &amp;&amp; parent.goBack){parent.goBack()}else{history.back()} } });
 }
@@ -17756,6 +17929,296 @@ body.tool-open thead th,body.tool-open table th{
   document.addEventListener('click',()=>setTimeout(scan,150),true);
   document.addEventListener('focusin',()=>setTimeout(scan,60),true);
   setInterval(scan,2500);
+})();
+</script>
+
+
+<!-- =========================================================
+     Refinance Quotation Template Selector v3
+     Template A = existing report
+     Template B = new professional comparison design
+     Paste-in location: before </body>
+========================================================= -->
+<script id="refinance-template-selector-v3">
+(function(){
+  function fmtMoney(n){
+    n = Number(n || 0);
+    if(!isFinite(n)) return '-';
+    return 'RM' + n.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function fmtMoneySpace(n){
+    n = Number(n || 0);
+    if(!isFinite(n)) return '-';
+    return 'RM ' + n.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function fmtWhole(n){
+    n = Number(n || 0);
+    if(!isFinite(n)) return '-';
+    return 'RM' + n.toLocaleString('en-MY',{maximumFractionDigits:0});
+  }
+  function safeRate(n){
+    n = Number(n || 0);
+    return isFinite(n) ? n.toFixed(2) : '0.00';
+  }
+  function getFrame(){
+    return document.getElementById('refinanceSonFrame');
+  }
+  function buildModal(doc){
+    if(doc.getElementById('refiTplModalV3')) return doc.getElementById('refiTplModalV3');
+    var modal = doc.createElement('div');
+    modal.id = 'refiTplModalV3';
+    modal.innerHTML = `
+      <style id="refiTplModalV3Style">
+        #refiTplModalV3{display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(15,23,42,.48);backdrop-filter:blur(6px);align-items:center;justify-content:center;font-family:Inter,Segoe UI,Arial,sans-serif;}
+        #refiTplModalV3.show{display:flex;}
+        #refiTplModalV3 .tpl-panel{width:min(560px,92vw);background:linear-gradient(180deg,#ffffff,#fffdf8);border:1px solid #ead7a1;border-radius:26px;padding:24px;box-shadow:0 34px 90px rgba(15,23,42,.28);}
+        #refiTplModalV3 h2{margin:0 0 7px;color:#16120a;font-size:24px;letter-spacing:-.3px;}
+        #refiTplModalV3 p{margin:0 0 18px;color:#667085;font-size:13px;font-weight:700;line-height:1.45;}
+        #refiTplModalV3 .tpl-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+        #refiTplModalV3 .tpl-choice{border:1px solid #dfbd62!important;border-radius:20px!important;padding:18px!important;background:linear-gradient(180deg,#fff,#fff8df)!important;color:#111827!important;text-align:left!important;cursor:pointer!important;box-shadow:0 12px 28px rgba(143,103,22,.09)!important;transition:.18s ease!important;}
+        #refiTplModalV3 .tpl-choice:hover{transform:translateY(-2px)!important;box-shadow:0 16px 34px rgba(143,103,22,.14)!important;}
+        #refiTplModalV3 .tpl-choice b{display:block;font-size:18px;margin-bottom:7px;color:#0b285e;}
+        #refiTplModalV3 .tpl-choice span{font-size:12px;color:#667085;font-weight:800;line-height:1.4;}
+        #refiTplModalV3 .tpl-close{margin-top:14px;width:100%;border-radius:999px!important;padding:12px!important;background:#fff!important;border:1px solid #ead7a1!important;color:#8f6716!important;font-weight:950!important;}
+        @media(max-width:560px){#refiTplModalV3 .tpl-grid{grid-template-columns:1fr;}#refiTplModalV3 .tpl-panel{padding:18px;border-radius:22px;}}
+      </style>
+      <div class="tpl-panel">
+        <h2>Choose Quotation Template</h2>
+        <p>Select the report design before printing or saving as PDF.</p>
+        <div class="tpl-grid">
+          <button type="button" class="tpl-choice" id="refiTplA"><b>Template A</b><span>Current / old report table style</span></button>
+          <button type="button" class="tpl-choice" id="refiTplB"><b>Template B</b><span>Professional comparison design</span></button>
+        </div>
+        <button type="button" class="tpl-close" id="refiTplClose">Cancel</button>
+      </div>`;
+    doc.body.appendChild(modal);
+    return modal;
+  }
+  function openPrintWindow(win, html){
+    var w = win.open('', '_blank');
+    if(!w){ win.alert('Popup blocked. Please allow popup to print quotation.'); return; }
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
+  }
+  function exportTemplateB(win){
+    if(typeof win.calculate === 'function') win.calculate();
+    if(typeof win.computeQuotationData !== 'function'){
+      win.alert('Quotation data function not found.');
+      return;
+    }
+    var d = win.computeQuotationData();
+    if(!d) return;
+    var rows = Array.isArray(d.rows) ? d.rows : [];
+    var cash = rows.find(function(r){return r.mode === 'cash' && r.plan === 'A';}) || rows.find(function(r){return r.mode === 'cash';});
+    var finance = rows.find(function(r){return r.mode === 'finance' && r.plan === 'A';}) || rows.find(function(r){return r.mode === 'finance';});
+    if(!cash || !finance){ win.alert('Cash / finance package data not found.'); return; }
+    var years = Number(d.years || 0);
+    var legalCost = d.cost && isFinite(Number(d.cost.totalCost)) ? Number(d.cost.totalCost) : Math.max(0, Number(finance.loan || 0) - Number(d.outstanding || 0));
+    var html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Refinance Comparison</title>
+<style>
+  @page{size:A4 landscape;margin:7mm;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#111827;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .sheet{width:100%;padding:4px 6px 0;}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;border-bottom:2px solid #0b285e;padding-bottom:10px;}
+  .title h1{margin:0;color:#08234d;font-size:32px;letter-spacing:.5px;line-height:1;}
+  .title p{margin:6px 0 0;color:#64748b;font-size:14px;font-style:italic;}
+  .logo{text-align:right;color:#08234d;font-weight:900;font-size:20px;line-height:1.02;letter-spacing:.3px;}
+  .logo span{display:block;color:#b8860b;font-size:10px;letter-spacing:2.6px;margin-top:4px;}
+  .topbar{display:grid;grid-template-columns:150px repeat(6,1fr);border:1px solid #d8e0ea;border-radius:10px;overflow:hidden;margin-bottom:16px;}
+  .top-left{background:#08234d;color:#fff;padding:15px;font-weight:900;font-size:18px;line-height:1.12;display:flex;align-items:center;justify-content:center;text-align:center;}
+  .metric{padding:11px 8px;text-align:center;border-left:1px solid #d8e0ea;min-height:70px;display:flex;flex-direction:column;justify-content:center;}
+  .metric small{display:block;color:#475569;font-size:11px;margin-bottom:6px;font-weight:700;}
+  .metric b{font-size:15px;color:#111827;}
+  .metric.dark{background:#08234d;color:#fff;}
+  .metric.dark small{color:#fff;}
+  .metric.dark b{color:#f6c443;font-size:17px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch;}
+  .card{border:1px solid #d8e0ea;border-radius:13px;overflow:hidden;background:#fff;min-height:420px;}
+  .card-head{padding:13px 16px;color:#fff;font-weight:900;font-size:18px;display:flex;gap:11px;align-items:center;min-height:62px;line-height:1.1;}
+  .blue{background:#08234d;}.gold{background:#c89525;}.green{background:#08713d;}
+  .num{width:32px;height:32px;min-width:32px;border-radius:50%;background:#fff;color:#08234d;display:grid;place-items:center;font-weight:900;}
+  .row{display:grid;grid-template-columns:1.05fr 1fr;gap:10px;padding:10px 16px;border-bottom:1px solid #eef2f7;align-items:center;}
+  .row span{color:#334155;font-size:13px;}
+  .row b{text-align:right;font-size:14px;color:#111827;}
+  .big b{font-size:22px;color:#08234d;}
+  .goldtext b{color:#b8860b;}.greentext b{color:#08713d;}.red b{color:#e00000;}
+  .save{background:#eef9ef;font-weight:900;}
+  .save span,.save b{color:#08713d!important;}
+  .footer-note{font-size:11px;color:#64748b;text-align:center;margin-top:10px;font-style:italic;}
+  .x{color:#e00000!important;font-size:18px!important;}
+  @media print{body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}.sheet{padding:0;}button{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="header">
+    <div class="title"><h1>REFINANCE COMPARISON</h1><p>Compare Your Options & Save More</p></div>
+    <div class="logo">IDEAL<br>MORTGAGE SPECIALIST<span>YOUR FINANCING PARTNER</span></div>
+  </div>
+
+  <div class="topbar">
+    <div class="top-left">EXISTING<br>LOAN</div>
+    <div class="metric"><small>Loan Amount</small><b>${fmtWhole(d.outstanding)}</b></div>
+    <div class="metric"><small>Interest Rate</small><b>${safeRate(d.currentRate)}% p.a.</b></div>
+    <div class="metric"><small>Tenure</small><b>${years} Years</b></div>
+    <div class="metric"><small>Monthly Instalment</small><b>${fmtMoney(d.currentMonthly)}</b></div>
+    <div class="metric"><small>Total Remaining Payment</small><b>${fmtMoney(d.currentTotalPaid)}</b></div>
+    <div class="metric dark"><small>Total Interest Payable</small><b>${fmtMoney(d.currentTotalInterest)}</b></div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-head blue"><div class="num">1</div>EXISTING LOAN</div>
+      <div class="row"><span>Loan Amount</span><b>${fmtWhole(d.outstanding)}</b></div>
+      <div class="row"><span>Interest Rate</span><b>${safeRate(d.currentRate)}% p.a.</b></div>
+      <div class="row"><span>Tenure</span><b>${years} Years</b></div>
+      <div class="row big"><span>Monthly Instalment</span><b>${fmtMoney(d.currentMonthly)}</b></div>
+      <div class="row"><span>Total Payment</span><b>${fmtMoney(d.currentTotalPaid)}</b></div>
+      <div class="row red"><span>Total Interest</span><b>${fmtMoney(d.currentTotalInterest)}</b></div>
+      <div class="row"><span>Interest Saved</span><b>-</b></div>
+      <div class="row"><span>Upfront Cost</span><b>-</b></div>
+      <div class="row"><span>Finish Earlier</span><b>-</b></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head gold"><div class="num">2</div>LEGAL FEES PAID BY CASH</div>
+      <div class="row"><span>Loan Amount</span><b>${fmtWhole(cash.loan)}</b></div>
+      <div class="row"><span>Interest Rate</span><b>${safeRate(cash.rate)}% p.a.</b></div>
+      <div class="row"><span>Tenure</span><b>${years} Years</b></div>
+      <div class="row big goldtext"><span>Monthly Instalment</span><b>${fmtMoney(cash.monthly)}</b></div>
+      <div class="row"><span>Total Payment</span><b>${fmtMoney(cash.totalPaid)}</b></div>
+      <div class="row greentext"><span>Total Interest</span><b>${fmtMoney(cash.interest)}</b></div>
+      <div class="row save"><span>Interest Saved</span><b>${fmtMoney(cash.interestSaved)}</b></div>
+      <div class="row red"><span>Upfront Cost (Legal Fees)</span><b>${fmtMoneySpace(legalCost)}</b></div>
+      <div class="row"><span>Finish Earlier</span><b><span class="x">×</span> Same Tenure</b></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head green"><div class="num">3</div>FINANCE LEGAL FEES INTO LOAN</div>
+      <div class="row"><span>Loan Amount</span><b>${fmtWhole(finance.loan)}</b></div>
+      <div class="row"><span>Interest Rate</span><b>${safeRate(finance.rate)}% p.a.</b></div>
+      <div class="row"><span>Tenure</span><b>${years} Years</b></div>
+      <div class="row big greentext"><span>Monthly Instalment</span><b>${fmtMoney(finance.monthly)}</b></div>
+      <div class="row"><span>Total Payment</span><b>${fmtMoney(finance.totalPaid)}</b></div>
+      <div class="row greentext"><span>Total Interest</span><b>${fmtMoney(finance.interest)}</b></div>
+      <div class="row save"><span>Interest Saved</span><b>${fmtMoney(finance.interestSaved)}</b></div>
+      <div class="row"><span>Upfront Cost</span><b>RM0.00</b></div>
+      <div class="row"><span>Finish Earlier</span><b><span class="x">×</span> Same Tenure</b></div>
+    </div>
+  </div>
+  <div class="footer-note">Figures are estimates only and subject to bank final approval. Legal fees may vary according to the appointed solicitor.</div>
+</div>
+<script>setTimeout(function(){window.focus();window.print();},350);<\/script>
+</body>
+</html>`;
+    openPrintWindow(win, html);
+  }
+  function initRefiTemplateSelector(){
+    var frame = getFrame();
+    if(!frame) return;
+    var doc, win;
+    try{ doc = frame.contentDocument; win = frame.contentWindow; }catch(e){ return; }
+    if(!doc || !win || !doc.body) return;
+    if(win.__refiTemplateSelectorV3Ready) return;
+    var btn = doc.getElementById('pdfBtn');
+    if(!btn) return;
+    win.__refiTemplateSelectorV3Ready = true;
+    var modal = buildModal(doc);
+    var oldExport = typeof win.exportQuotationPDF === 'function' ? win.exportQuotationPDF.bind(win) : null;
+    function showChoice(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      if(typeof win.calculate === 'function') win.calculate();
+      modal.classList.add('show');
+    }
+    function closeChoice(){ modal.classList.remove('show'); }
+    var newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    newBtn.addEventListener('click', showChoice);
+    doc.getElementById('refiTplA').onclick = function(){ closeChoice(); if(oldExport) oldExport(); };
+    doc.getElementById('refiTplB').onclick = function(){ closeChoice(); exportTemplateB(win); };
+    doc.getElementById('refiTplClose').onclick = closeChoice;
+    modal.addEventListener('click', function(e){ if(e.target === modal) closeChoice(); });
+  }
+  function scheduleInit(){
+    setTimeout(initRefiTemplateSelector,100);
+    setTimeout(initRefiTemplateSelector,500);
+    setTimeout(initRefiTemplateSelector,1200);
+  }
+  window.addEventListener('load', scheduleInit);
+  window.addEventListener('pageshow', scheduleInit);
+  document.addEventListener('click', scheduleInit, true);
+  scheduleInit();
+})();
+</script>
+
+
+
+<!-- =========================================================
+     Refinance Rate Sync Patch v3.1
+     Purpose: Package rates follow the left input fields live.
+     - Zero Moving Cost uses #zeroRate
+     - Legal by Cash + Finance Legal uses #cashFinanceRate
+     - No fixed-rate calculation when user keys a rate
+========================================================= -->
+<script id="refinance-rate-sync-v3-1">
+(function(){
+  function attachRateSync(){
+    var frame = document.getElementById('refinanceSonFrame');
+    if(!frame) return;
+    var win, doc;
+    try{ win = frame.contentWindow; doc = frame.contentDocument; }catch(e){ return; }
+    if(!win || !doc || !doc.body) return;
+
+    // Make sure computeQuotationData always pulls the latest rate inputs first.
+    if(typeof win.computeQuotationData === 'function' && !win.__refiComputeRateSyncedV31){
+      var oldCompute = win.computeQuotationData.bind(win);
+      win.computeQuotationData = function(){
+        if(typeof win.applyPackageRates === 'function') win.applyPackageRates();
+        return oldCompute();
+      };
+      win.__refiComputeRateSyncedV31 = true;
+    }
+
+    // Update cards immediately when typing rate / amount / tenure / monthly.
+    if(!win.__refiRateInputSyncedV31){
+      ['outstanding','currentRate','remainingYears','currentMonthly','zeroRate','cashFinanceRate'].forEach(function(id){
+        var el = doc.getElementById(id);
+        if(!el) return;
+        var handler = function(){
+          try{
+            if(typeof win.applyPackageRates === 'function') win.applyPackageRates();
+            if(typeof win.calculate === 'function') win.calculate();
+          }catch(e){}
+        };
+        el.addEventListener('input', handler);
+        el.addEventListener('change', handler);
+      });
+      win.__refiRateInputSyncedV31 = true;
+    }
+
+    // One initial refresh after opening the refinance page.
+    try{
+      if(typeof win.applyPackageRates === 'function') win.applyPackageRates();
+      if(typeof win.calculate === 'function') win.calculate();
+    }catch(e){}
+  }
+
+  function schedule(){
+    setTimeout(attachRateSync,100);
+    setTimeout(attachRateSync,500);
+    setTimeout(attachRateSync,1200);
+  }
+  window.addEventListener('load', schedule);
+  window.addEventListener('pageshow', schedule);
+  document.addEventListener('click', schedule, true);
+  document.addEventListener('focusin', schedule, true);
+  schedule();
 })();
 </script>
 </body>
