@@ -5174,14 +5174,17 @@ function calculate(){
     $(&#x27;curRate&#x27;).textContent = (currentRate || 0).toFixed(2) + &#x27;%&#x27;;
     $(&#x27;curTenure&#x27;).textContent = years + &#x27; years&#x27;;
 
-    // Customer quotation base comparison:
-    // If Current Monthly Commitment is keyed in, use it for Existing Loan total repayment.
-    // If blank, fall back to standard PMT from outstanding + current rate + remaining tenure.
+    // Existing-loan comparison must always be calculated from outstanding balance,
+    // current interest rate and remaining tenure. The manually keyed Current Monthly
+    // Commitment is used only for Plan B (maintain payment / pay extra).
     const currentStandardMonthly = pmt(outstanding, currentRate, years);
-    const currentDisplayMonthly = currentMonthly || currentStandardMonthly;
-    const currentTotalPaid = currentDisplayMonthly * 12 * years;
+    const currentDisplayMonthly = currentStandardMonthly;
+    const currentTotalPaid = currentStandardMonthly * 12 * years;
     const currentTotalInterest = Math.max(currentTotalPaid - outstanding, 0);
-    const maintainMonthly = currentDisplayMonthly;
+    // Plan B must use a payment that can actually amortise the loan. If the manually
+    // keyed commitment is lower than the calculated existing instalment, fall back to
+    // the calculated existing instalment instead of producing an impossible payoff.
+    const maintainMonthly = Math.max(currentMonthly || 0, currentStandardMonthly);
 
     $(&#x27;curMonthly&#x27;).textContent = money(currentDisplayMonthly);
     $(&#x27;curTotalPaid&#x27;).textContent = money(currentTotalPaid);
@@ -5203,9 +5206,11 @@ function calculate(){
       let tenureSavedMonths = 0;
 
       if(p.plan === &#x27;B&#x27;){
-        displayMonthly = maintainMonthly;
+        // A Plan B payment cannot be below the new package's minimum instalment.
+        // Use the higher of the valid existing instalment and the package instalment.
+        displayMonthly = Math.max(maintainMonthly, standardMonthly);
         saving = 0;
-        const payoff = payoffSummary(loanUsed,p.rate,maintainMonthly);
+        const payoff = payoffSummary(loanUsed,p.rate,displayMonthly);
         newMonths = payoff.months;
         tenureSavedMonths = isFinite(newMonths) ? Math.max((years * 12) - newMonths, 0) : 0;
         interest = payoff.interest;
@@ -5223,7 +5228,7 @@ function calculate(){
       if($(`loan-${i}`)) $(`loan-${i}`).textContent = money(loanUsed);
       if($(`treat-${i}`)) $(`treat-${i}`).textContent = treatment;
       if($(`monthly-${i}`)) $(`monthly-${i}`).textContent = money(displayMonthly);
-      if($(`saving-${i}`)) $(`saving-${i}`).textContent = p.plan === &#x27;B&#x27; ? money(Math.max(maintainMonthly - standardMonthly, 0)) : money(saving);
+      if($(`saving-${i}`)) $(`saving-${i}`).textContent = p.plan === &#x27;B&#x27; ? money(Math.max(displayMonthly - standardMonthly, 0)) : money(saving);
       if($(`cash-${i}`)) $(`cash-${i}`).textContent = money(cash);
       if($(`newTenure-${i}`)) $(`newTenure-${i}`).textContent = p.plan === &#x27;B&#x27; ? formatTenureFromMonths(newMonths) : years + &#x27; years&#x27;;
       if($(`tenureSave-${i}`)) $(`tenureSave-${i}`).textContent = p.plan === &#x27;B&#x27; ? formatTenureFromMonths(tenureSavedMonths) : &#x27;0 years&#x27;;
@@ -5242,7 +5247,7 @@ function calculate(){
     }
 
     if(currentMonthly &amp;&amp; Math.abs(currentMonthly - currentStandardMonthly) &gt; 1){
-      notices.push(&#x27;Note: Existing Loan total repayment is based on the Current Monthly Commitment you keyed in. If this amount includes MRTA, extra payment or bank charges, the comparison will follow the customer actual payment.&#x27;);
+      notices.push(&#x27;Note: Current Monthly Commitment is used only for Plan B. Existing-loan total repayment and total interest are calculated from outstanding balance, current rate and remaining tenure.&#x27;);
     }
 
     if(notices.length){
@@ -5295,9 +5300,10 @@ function computeQuotationData(){
   }
   const cost = calcCost(outstanding);
   const currentStandardMonthly = pmt(outstanding, currentRate, years);
-  const currentDisplayMonthly = currentMonthly || currentStandardMonthly;
+  const currentDisplayMonthly = currentStandardMonthly;
+  const maintainMonthly = Math.max(currentMonthly || 0, currentStandardMonthly);
   const currentMonths = years * 12;
-  const currentTotalPaid = currentDisplayMonthly * currentMonths;
+  const currentTotalPaid = currentStandardMonthly * currentMonths;
   const currentTotalInterest = Math.max(currentTotalPaid - outstanding, 0);
   const rows = [];
   packages.forEach((p,i)=&gt;{
@@ -5307,8 +5313,8 @@ function computeQuotationData(){
     let months = years * 12;
     let interest = totalInterest(loanUsed,p.rate,years);
     if(p.plan === &#x27;B&#x27;){
-      displayMonthly = currentDisplayMonthly;
-      const payoff = payoffSummary(loanUsed,p.rate,currentDisplayMonthly);
+      displayMonthly = Math.max(maintainMonthly, standardMonthly);
+      const payoff = payoffSummary(loanUsed,p.rate,displayMonthly);
       months = payoff.months;
       interest = payoff.interest;
     }
@@ -5333,7 +5339,7 @@ function computeQuotationData(){
   const bestTenure = planBRows.length ? planBRows.reduce((a,b)=&gt; a.months &lt; b.months ? a : b) : rows[0];
   const bestMonthly = rows.filter(r=&gt;r.plan===&#x27;A&#x27;).reduce((a,b)=&gt; a.monthly &lt; b.monthly ? a : b);
   const bestInterest = rows.reduce((a,b)=&gt; a.interestSaved &gt; b.interestSaved ? a : b);
-  return {outstanding,currentRate,years,currentMonthly:currentDisplayMonthly,currentTotalPaid,currentTotalInterest,cost,rows,bestTenure,bestMonthly,bestInterest};
+  return {outstanding,currentRate,years,currentMonthly:currentDisplayMonthly,maintainMonthly,currentTotalPaid,currentTotalInterest,cost,rows,bestTenure,bestMonthly,bestInterest};
 }
 
 function qMoney(n, dashZero){
